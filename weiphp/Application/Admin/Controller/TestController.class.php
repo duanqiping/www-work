@@ -15,6 +15,6 @@ class TestController extends Controller
 {
     public function test()
     {
-        $this->display('public/base');
+        $this->display('public/base');//test
     }
 }

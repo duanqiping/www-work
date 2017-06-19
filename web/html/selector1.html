@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>基本jquery选择器</title>
+</head>
+<body>
+<div id="container">Hello</div>
+<div class="php">Kang</div>
+<div class="php">PHP</div>
+
+<script src="../js/jquery-1.12.4.js"></script>
+<script>
+    //通配符选择器
+    console.log($('*'));
+    //常用选择 某个元素下所有
+    console.log($('body > *'));
+    //ID选择器
+    console.log($('#container'));
+    //类选择器
+    console.log($('.php'));
+    //元素选择器
+    console.log($('div'));
+</script>
+</body>
+</html>

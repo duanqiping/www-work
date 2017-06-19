@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <title>充值</title>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #efeff4;
+    }
+    /*支付方式*/
+
+    .paymethod > ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: .9rem;
+    }
+
+    .paymethod > ul > li {
+        /*height: 2rem;*/
+        /*line-height: 2rem;*/
+        border-top: 1px solid #c8c7cc;
+        border-bottom: 1px solid #c8c7cc;
+        margin-top: .5rem;
+        padding: .4rem 1rem;
+        background-color: white;
+    }
+
+    .paymethod > ul > li > div {
+        display: table;
+        width: 100%;
+    }
+
+    .paymethod > ul > li > div .icon {
+        display: table-cell;
+        width: 2rem;
+        /*height: 1rem;*/
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+
+    .paymethod > ul > li > div .icon.selected {
+        background-image:url('../img/icon_selected.png');
+        background-size: 50% auto;
+        background-position: right;
+    }
+
+    .paymethod > ul > li > div .icon.no-selected {
+        background-image:url('../img/icon_noselected.png');
+        background-size: 50% auto;
+        background-position: right;
+    }
+
+    .paymethod > ul > li > div .title {
+        display: table-cell;
+    }
+
+    .paymethod > ul > li > div input {
+        /*display: table-cell;*/
+        text-align: right;
+        border: 0;
+        font-size: .8rem;
+        padding-bottom: .2rem;
+        width: 100%;
+    }
+    .paymethod > ul > li > div input:active:focus:hover:visited{
+        border: 0;
+    }
+    /*充值button*/
+
+    .recharge-btn {
+        padding: 0.5rem 1rem;
+    }
+
+    .recharge-btn > button {
+        width: 100%;
+        height: 2rem;
+        background-color: #61b517;
+        color: white;
+        font-size: 0.8rem;
+        border: 0;
+        border-radius: 4px;
+    }
+    /*说明*/
+
+    .explanation {
+        color: #808080;
+    }
+
+    .explanation > ul {
+        list-style-type: none;
+        padding: 0 0.8rem;
+        font-size: 0.7rem;
+    }
+
+    .explanation > ul > li {
+        padding-top: 0.7rem;
+    }
+
+    </style>
+</head>
+
+<body>
+    <!-- 支付方式 -->
+    <div class="paymethod">
+        <ul>
+            <li class="cell">
+                <div>
+                    <span class="icon" style="background-image:url('../img/icon_alipay.png');"></span>
+                    <label class="title">支付宝</label>
+                    <span class="icon selected"/>
+                </div>
+            </li>
+
+            <li class="cell">
+                <div>
+                    <span class="icon" style="background-image:url('../img/icon_wechat.png');"></span>
+                    <label class="title">微信</label>
+                    <span class="icon no-selected" />
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <label class="title">充值金额</label>
+                    <div style="display:table-cell;">
+                        <input id="money" type="number" placeholder="请输入充值金额">
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="recharge-btn">
+        <button>充值</button>
+    </div>
+    <!-- 说明 -->
+    <!-- <div class="explanation">
+        <ul>
+            <li>
+                1. 促销期间，首次充值1000元以上，可获最高100元红包。
+            </li>
+            <li>
+                2. 促销时间：截止到2015年10月31日，城市限上海。
+            </li>
+            <li>
+                3. 红包限用于【找材猫】上购买辅材。
+            </li>
+        </ul>
+    </div> -->
+    <script type="text/javascript" src="../js/zepto.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/WebJSBridge.js"></script>
+    <script type="text/javascript">
+    (function($) {
+        var moneyChange = function() {
+            var money = parseFloat($(this).val());
+            // console.info(money.toFixed(2));
+            if (money) {
+                $(this).val(money.toFixed(2));
+            } else {
+                $(this).val('');
+            }
+
+        }
+
+        var index = 0;
+
+        $('.paymethod li.cell ').on('click',function(event) {
+
+            var cell = $('span.selected');
+            cell.removeClass('selected');
+            cell.addClass('no-selected');
+
+            $(this).find('.no-selected').removeClass('no-selected').addClass('selected');
+            index = $(this).index();
+        });
+
+        $('#money').on('change', moneyChange);
+        // $('#money').on('keyup',moneyChange);
+
+        $('.recharge-btn > button').on('click', function() {
+            var money = $('#money').val();
+            if (!money) {
+                money = 0;
+            };
+            WebJSBridge.recharge(parseFloat(money).toFixed(2) + '');//为了兼容以前版本
+            WebJSBridge.recharge2(parseFloat(money).toFixed(2) + '',index);
+        });
+    })($);
+    </script>
+</body>
+
+</html>

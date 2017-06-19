@@ -1,0 +1,54 @@
+[{
+		"ID": "1",
+		"name": "釉面砖粘结剂",
+		"model": "20kg/包",
+		"rate": "1",
+		"goods_id": 1059
+	}, {
+		"ID": "2",
+		"name": "瓷砖粘结剂",
+		"model": "20kg/包",
+		"rate": "1",
+		"goods_id": 1059
+	},
+  {
+		"ID": "3",
+		"name": "玻化砖粘结剂",
+		"model": "20kg/包",
+		"rate": "1",
+		"goods_id": 4864
+	},
+  {
+		"ID": "4",
+		"name": "防水涂料 101",
+		"model": "东方雨虹18kg",
+		"rate": "1",
+		"goods_id": 4877
+	}, {
+		"ID": "5",
+		"name": "防水涂料 101",
+		"model": "东方雨虹9kg",
+		"rate": "1",
+		"goods_id": 4878
+	}, {
+		"ID": "6",
+		"name": "填缝剂",
+		"model": "2kg/包",
+		"rate": "1",
+		"goods_id": 2071
+	}, {
+		"ID": "7",
+		"name": "十字架",
+		"model": "2mm 100个/包",
+		"rate": "1",
+		"goods_id": 5588
+	}, {
+		"ID": "8",
+		"name": "毛巾",
+		"model": "",
+		"rate": "1",
+		"goods_id": 5647
+	}
+
+
+]

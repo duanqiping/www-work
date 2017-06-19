@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width initial-scale=1, maxinum-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+	<title>推荐奖励</title>
+	<style type="text/css">
+	body {
+		background-color: #f43442;
+		margin: 0;
+		padding: 0;
+	}
+
+	/*邀请码*/
+	.invitation-code {
+		width: 100%;
+	}
+
+	/*说明*/
+	.explanation {
+		color: #ffffff;
+	}
+
+	.explanation > ul {
+		list-style-type: none;;
+		padding: 0 1.5rem;
+		font-family: "Helvetica";
+		font-size: 15px;
+	}
+
+	.explanation > ul > li {
+		padding-top: 0.7rem;
+	}
+
+	/*分享按钮*/
+	.share-btn {
+		padding: 10px 68px;
+	}
+
+	.share-btn > button {
+		width: 100%;
+		height: 44px;
+		background-color: #ffed7d;
+		color: #f43442;
+		font-size: 18px;
+		border: 0;
+		border-radius:20px;
+	}
+	/*显示邀请码的label*/
+	label {
+		font-size: 38px;
+		font-weight: bold;
+		font-family: "Arial";
+		color: #ffffff;
+	}
+	</style>
+</head>
+
+<body>
+       <!-- 邀请码 -->
+   	<div style="position: relative;" class="invitation-code" >
+		<img src="../img/邀请有奖.png" width="100%" height="auto" / >
+		<div style="position: absolute;width: 100%; top: 37%;text-align: center" >
+	    	<label></label>
+		</div>
+    </div>
+
+    <!-- 说明 -->
+    <div class="explanation">
+    	<ul>
+    		<li>
+    			1. 使用你的邀请码注册的朋友，将立刻得到高级工程会员资格。
+    		</li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+    </div>
+    <!-- 分享 -->
+    <div class="share-btn">
+    	<button> 推荐给您的朋友</button>
+    </div>
+
+    <script type="text/javascript" src="../js/zepto.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/WebJSBridge.js"></script>
+    <script type="text/javascript">
+    (function($) {
+
+        var invitationCode = $_GET['invitationCode'];
+
+        if (invitationCode != undefined) {
+            $('.invitation-code label')[0].innerHTML = invitationCode;
+
+             $('.share-btn>button').on('touchstart', function() {
+                $(this).css('opacity','.8');
+             });
+             $('.share-btn>button').on('touchend', function() {
+                $(this).css('opacity','1');
+             });
+
+            $('.share-btn>button').on('click', function() {
+                WebJSBridge.share("找材猫",'装修材料一站式采购，注册时记得输入会员邀请码 ' + invitationCode,'http://www.pcw365.com/pcwstore.html');
+            });
+        };
+
+    })($);
+    </script>
+
+</body>
+</html>

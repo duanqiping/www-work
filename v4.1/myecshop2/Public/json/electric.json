@@ -1,0 +1,184 @@
+[{
+	"ID": "1",
+	"name": "电线1.5 红",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 1213
+}, {
+	"ID": "2",
+	"name": "电线1.5 蓝",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 1215
+}, {
+	"ID": "3",
+	"name": "电线1.5 白",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 6269
+}, {
+	"ID": "4",
+	"name": "电线2.5 红",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 1220
+}, {
+	"ID": "5",
+	"name": "电线2.5 蓝",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 1222
+}, {
+	"ID": "6",
+	"name": "电线2.5 双色",
+	"model": "100米/卷",
+	"rate": "1",
+	"goods_id": 1224
+}, {
+	"ID": "7",
+	"name": "电线4.0 红",
+	"model": "米",
+	"rate": "1",
+	"goods_id": 6517
+},
+  {
+	"ID": "8",
+	"name": "电线4.0 蓝",
+	"model": "米",
+	"rate": "1",
+	"goods_id": 6518
+},
+  {
+	"ID": "9",
+	"name": "电线4.0 双色",
+	"model": "米",
+	"rate": "1",
+	"goods_id": 6518
+}, {
+	"ID": "10",
+	"name": "网线",
+	"model": "50米/卷",
+	"rate": "1",
+	"goods_id": 6504
+}, {
+	"ID": "11",
+	"name": "视频线",
+	"model": "50米/卷",
+	"rate": "1",
+	"goods_id": 6457
+}, {
+	"ID": "12",
+	"name": "电话线",
+	"model": "50米/卷",
+	"rate": "1",
+	"goods_id": 6458
+}, {
+	"ID": "13",
+	"name": "电工胶",
+	"model": "D25",
+	"rate": "1",
+	"goods_id": 1772
+}, {
+	"ID": "14",
+	"name": "PVC电线管",
+	"model": " 3米/根  D20轻型",
+	"rate": "1",
+	"goods_id": 1860,
+	"goods_id2": 1861
+
+}, {
+	"ID": "15",
+	"name": "U迫码",
+	"model": "",
+	"rate": "1",
+	"goods_id": 6422,
+	"goods_id2": 8751
+}, {
+	"ID": "16",
+	"name": "杯梳",
+	"model": "",
+	"rate": "1",
+	"goods_id": 6265,
+	"goods_id2": 6266
+}, {
+	"ID": "17",
+	"name": "梳杰",
+	"model": "红",
+	"rate": "1",
+	"goods_id": 6267,
+	"goods_id2": 6268
+}, {
+	"ID": "18",
+	"name": "八角灯头箱",
+	"model": "红",
+	"rate": "1",
+	"goods_id": 6455
+}, {
+	"ID": "19",
+	"name": "八角灯头盒盖板",
+	"model": "",
+	"rate": "1",
+	"goods_id": 8752
+}, {
+	"ID": "20",
+	"name": "86 胶暗箱",
+	"model": "",
+	"rate": "1",
+	"goods_id": 4087,
+	"goods_id2": 6389
+}, {
+	"ID": "21",
+	"name": "方刚弹簧",
+	"model": "",
+	"rate": "1",
+	"goods_id": 4096
+}, {
+	"ID": "22",
+	"name": "蛇皮袋",
+	"model": "50个/包",
+	"rate": "1",
+	"goods_id": 1369
+}, {
+	"ID": "23",
+	"name": "铁锹",
+	"model": "",
+	"rate": "1",
+	"goods_id": 6323
+}, {
+	"ID": "24",
+	"name": "断路器 63A",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7840
+}, {
+	"ID": "25",
+	"name": "断路器 40A",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7838
+}, {
+	"ID": "26",
+	"name": "断路器 25A",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7863
+}, {
+	"ID": "27",
+	"name": "断路器 20A",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7862
+}, {
+	"ID": "28",
+	"name": "断路器 16A",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7861
+}, {
+	"ID": "29",
+	"name": "配电箱",
+	"model": "",
+	"rate": "1",
+	"goods_id": 7968,
+	"goods_id2": 7969
+}]

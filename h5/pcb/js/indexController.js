@@ -1,0 +1,97 @@
+angular.module('myApp', []).controller('CustomerListCtrl', function($scope) {
+    $scope.shop = [{
+        user_id: 43,
+        shop_sn: 293465,
+        tel: "18657776577",
+        name: "包飞",
+        pc_company: "圣晏建材",
+        area: "宝山、嘉定、普陀、静安、黄浦、虹口、杨浦、闸北、闵行、浦东",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 85,
+        shop_sn: 476881,
+        tel: "13022149192",
+        name: "崔谱祥",
+        pc_company: "谱烨建材",
+        area: "青浦、松江、闵行（黄浦江西）、徐汇、长宁",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 96,
+        shop_sn: 597419,
+        tel: "15001909095",
+        name: "崔稳坐",
+        pc_company: "诚信建材",
+        area: "宝山、嘉定、普陀、静安、黄埔、虹口、杨浦",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 86,
+        shop_sn: 340950,
+        tel: "13621879877",
+        name: "崔玉科",
+        pc_company: "邑科建材",
+        area: "浦东、闵行、杨浦",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 94,
+        shop_sn: 353557,
+        tel: "15026514243",
+        name: "葛乐乐",
+        pc_company: "乐乐建材",
+        area: "宝山、嘉定、普陀、静安、黄埔、虹口、杨浦",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 88,
+        shop_sn: 968336,
+        tel: "13681765532",
+        name: "钟恩尼",
+        pc_company: "禹风建材",
+        area: "宝山、嘉定、普陀、静安、黄埔、虹口、杨浦",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 87,
+        shop_sn: 572675,
+        tel: "18721557638",
+        name: "周明祥",
+        pc_company: "冯昌建材",
+        area: "青浦、松江、闵行（黄浦江西）、徐汇、长宁",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 101,
+        shop_sn: 195442,
+        tel: "18621771461",
+        name: "张利军",
+        pc_company: "傲翎建材",
+        area: "松江、青浦、闵行、嘉定，奉贤，长宁",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 97,
+        shop_sn: 387051,
+        tel: "15921240530",
+        name: "汪千义",
+        pc_company: "千义建材",
+        area: "奉贤",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }, {
+        user_id: 105,
+        shop_sn: 482064,
+        tel: "13916100069",
+        name: "黄云飞",
+        pc_company: "含丽实业",
+        area: "浦东、松江、闵行、宝山、杨浦、闸北",
+        rate: 4,
+        header: "http://www.sdssd.com.xxx"
+    }];
+
+    $scope.openProductList = function(item) {
+        WebJSBridge.openProductList(item.user_id);
+    }
+})

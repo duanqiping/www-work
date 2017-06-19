@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta content="width=device-width initial-scale=1, maxinum-scale=1" name="viewport">
+        <title>运费说明</title>
+
+        <script type="text/javascript" src="../js/zepto.min.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            $(function(){
+                expand('far');
+                expand('rise');
+                expand('additional');
+                expand('additional_other');
+
+                // $(".message .title").click(function(a,b,c,d) {
+                //     console.log(a,b,c,d);
+                // });
+            });
+
+            function expand(head) {
+                var div_rise = $("#div_"+head);
+
+                $("#"+head).on('click', function(e){
+
+
+                    if (div_rise.css('display')=='none') {
+                        div_rise.show();
+
+                        $("body,html").scrollTop($("#"+head).offset().top-10);
+                        $("#img_arrow_"+head).attr("src","../img/ic_arrow_top.png");
+                    } else if (div_rise.css('display')=='block') {
+                        div_rise.hide();
+                        $("#img_arrow_"+head).attr("src","../img/ic_arrow_bottom.png");
+                    }
+                });
+            }
+        </script>
+
+        <style type="text/css">
+            body {
+                background-color: #f4f4f4;
+                margin: 0px;
+                padding: 0px
+            }
+
+            .main {
+               background-color: #ffffff;
+               padding-left: 15px;
+               padding-right: 15px;
+               margin-top: 10px;
+            }
+
+            .title {
+                height: 54px;
+                line-height: 54px;
+            }
+            /*.title img {
+                vertical-align: middle;
+            }*/
+            .title span {
+                color: #000000;
+                font-size: 23px;
+                padding-left: 10px;
+            }
+
+            .describe {
+                padding-top: 18px;
+                padding-bottom:18px;
+            }
+            .describe span {
+                color: #ff7e00;
+                font-size: 15px;
+                line-height: 150%;
+            }
+
+            .table {
+                width: 100%;
+                border: solid 1px #cccccc;
+                border-collapse: collapse;
+            }
+            .table th { 
+                border: solid 1px #cccccc;
+                font-size: 15px;
+                color: #000000;
+                padding: 15px 0px 15px 0px;
+                line-height: 150%;
+                font-weight: normal;
+            }
+            .table tr:first-child {
+                background-color: #f4f4f4;
+            }
+            .table tr:first-child span {
+                font-size: 16px;
+                color: #000000;
+            }
+
+            .message {
+                background-color: #ffffff;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .line {
+                width: 100%;
+                height: 2px;
+                border-top: 1px solid #dddddd;
+                clear: both;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="main">
+            <div class="title">
+                <img src="../img/ic_logistics.png" style="height:20px;">
+                <span>上海站运费说明</span>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="describe">
+                <span>
+                    <li>不符合免费配送标准的订单，在下单前系统将自动提示或自动计算运费，支付时同商品总金额一起支付</li>
+                </span>
+            </div>
+
+
+            <div style="padding-bottom:18px">
+                <table class="table">
+                    <tr>
+                        <th width="50%"><span>订单金额</span></th>
+                        <th width="50%"><span>运费说明</span></th>
+                    </tr>
+                    <tr>
+                        <th>补差价</th>
+                        <th>无费用</th>
+                    </tr>
+					                    <tr>
+                        <th>主材商城</th>
+                        <th>运费需与供应商沟通</th>
+                    </tr>
+                    <tr>
+                        <th>订单满488元<br>(辅材类)</th>
+                        <th>免运费和搬楼费</th>
+                    </tr>
+                    <tr>
+                        <th>订单满600元<br>(水泥黄沙砖、板材类)</th>
+                        <th>免运费和搬楼费</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="height:39px; line-height:39px; padding-left:15px">
+            <span style="font-size:13px; color:#666666">运费计算标准</span>
+        </div>
+
+        <div class="message">
+            <div class="title" id="far">
+                <img src="../img/ic_far.png" style="margin-bottom:-2px;height:25px;">
+                <span>超远配送区域</span>
+                <img id="img_arrow_far" src="../img/ic_arrow_bottom.png" style="padding-top:22.5px; float:right;height:10px;">
+            </div>
+
+            <div id="div_far" style="display:none">
+                <div class="line"></div>
+                <div class="describe">
+                   <span>
+                        <li>配送距离超过外环范围，或其他超远区域将产生额外的超远配送费</li>
+                    </span>
+                </div>
+
+                <div style="padding-bottom:18px">
+                    <table class="table">
+                        <tr>
+                            <th width="50%"><span>城区(区域)</span></th>
+                            <th width="50%"><span>运费价格</span></th>
+                        </tr>
+                        <tr>
+                            <th>上海(朱家角、南汇临港<br>奉贤海湾、或超外环范围较远）</th>
+                            <th>200元/单.车</th>
+                        </tr>
+                        <tr>
+                            <th>上海(崇明三岛)</th>
+                            <th>350元/单.车</th>
+                        </tr>
+						<tr>
+                            <th>上海(金山)</th>
+                            <th>300元/单.车</th>
+                        </tr>
+                        <tr>
+                            <th>上海(其他区域)</th>
+                            <th>免运费</th>
+                        </tr>
+<!--                         <tr>
+                            <th>昆山-花桥镇</th>
+                            <th>免运费</th>
+                        </tr>
+                        <tr>
+                            <th>昆山-其他区域</th>
+                            <th>300元</th>
+                        </tr> -->
+                        <tr>
+                            <th>其它城市</th>
+                            <th>根据具体城市而定</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="message" style="margin-top:10px">
+            <div class="title" id="rise">
+                <img src="../img/ic_rise.png" style="margin-bottom:-5px;height:25px;">
+                <span>不足起订金额</span>
+                <img id="img_arrow_rise" src="../img/ic_arrow_bottom.png" style="padding-top:22.5px; float:right;height:10px;">
+            </div>
+
+            <div id="div_rise" style="display:none">
+                <div class="line"></div>
+
+                <div class="describe">
+                    <span>
+                        <li>水泥黄沙砖、板材、德丽斯板材类</li>
+                    </span>
+                </div>
+
+                <div style="padding-bottom:0px">
+                    <table class="table">
+                        <tr>
+                            <th width="33.3%"><span>城区(区域)</span></th>
+                            <th width="33.3%"><span>起订金额</span></th>
+                            <th width="33.3%"><span>不足起订金额</span></th>
+                        </tr>
+                        <tr>
+                            <th>水泥黄沙类、<br>板材类、德丽斯板材类</th>
+                            <th>600元</th>
+                            <th>100元</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="describe">
+                    <span>
+                        <li>其它商品（除上面的商品之外）</li>
+                    </span>
+                </div>
+
+                <div style="padding-bottom:18px">
+                    <table class="table">
+                        <tr>
+                            <th width="33.3%"><span>城区(区域)</span></th>
+                            <th width="33.3%"><span>起订金额</span></th>
+                            <th width="33.3%"><span>不足起订金额</span></th>
+                        </tr>
+                        <tr>
+                            <th>其它商品</th>
+                            <th>488元</th>
+                            <th>50元</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="message" style="margin-top:10px; margin-bottom:10px">
+            <div class="title" id="additional">
+                <img src="../img/ic_additional.png" style="margin-bottom:-2px;height:25px;">
+                <span>额外费用说明</span>
+                <img id="img_arrow_additional" src="../img/ic_arrow_bottom.png" style="padding-top:22.5px; float:right;height:10px;">
+            </div>
+
+            <div id="div_additional" style="display:none">
+                <div class="line"></div>
+				
+				                <div class="describe">
+                    <span>
+                        <li>如车不能进，货到楼梯口距离超过50米，或六层以上不能使用电梯等，将产生额外费用</li>
+                    </span>
+                </div>
+
+                <div style="padding-top:18px; padding-bottom:18px">
+                    <table class="table">
+                        <tr>
+                            <th width="50%"><span>送货范围</span></th>
+                            <th width="50%"><span>费用说明</span></th>
+                        </tr>
+                        <tr>
+                            <th>六层以上，不能使用电梯<br>或板材、管件不能切割</th>
+                            <th>根据现场实际情况而定</th>
+                        </tr>
+
+                        <tr>
+                            <th>地下一层、复式二层</th>
+                            <th>按地上二层、三层计</th>
+                        </tr>
+                        <tr>
+                            <th>板材类<br>超远距离短驳费&ge;50米</th>
+                            <th>1元/张（捆）每百米</th>
+                        </tr>
+						                        <tr>
+                            <th>水泥黄沙、粉剂类<br>超远距离短驳费&ge;50米</th>
+                            <th>1元/包 每百米</th>
+                        </tr>
+												                        <tr>
+                            <th>砖、砌块类<br>超远距离短驳费&ge;50米</th>
+                            <th>0.1-0.3元/块 每百米</th>
+                        </tr>
+												                        <tr>
+                            <th>找平施工<br>超远距离短驳费&ge;50米</th>
+                            <th>4元/每平方米 每百米</th>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+		
+		<div class="message" style="margin-top:10px; margin-bottom:10px">
+            <div class="title" id="additional_other">
+                <img src="../img/other_city.png" style="margin-bottom:-2px;height:25px;">
+                <span>其他城市运费说明</span>
+                <img id="img_arrow_additional_other" src="../img/ic_arrow_bottom.png" style="padding-top:22.5px; float:right;height:10px;">
+            </div>
+
+            <div id="div_additional_other" style="display:none">
+                <div class="line"></div>
+				
+				                <div class="describe">
+                    <span>
+                        <li>上海以外城市，如无特别说明，参照上海标准，客服与您最终确认</li>
+                    </span>
+                </div>
+
+                <div style="padding-top:18px; padding-bottom:18px">
+                    <table class="table">
+                        <tr>
+                            <th width="50%"><span>送货范围</span></th>
+                            <th width="50%"><span>费用说明</span></th>
+                        </tr>
+                        <tr>
+                            <th>辅材：已开通配送的城市</th>
+                            <th>参照上海标准，客服与您最终确认</th>
+                        </tr>
+
+                        <tr>
+                            <th>主材商城，配送范围需与供应商沟通</th>
+                            <th>运费需与供应商沟通</th>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		
+    
+
+    </body>
+</html>

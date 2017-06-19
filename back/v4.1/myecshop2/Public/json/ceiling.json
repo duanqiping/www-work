@@ -1,0 +1,37 @@
+[{
+	"ID": "1",
+	"name": "木方",
+	"model": "",
+	"rate": "1",
+	"goods_id": 27451
+}, {
+	"ID": "2",
+	"name": "细木工板",
+	"model": "",
+	"rate": "1",
+	"goods_id": 8202
+}, {
+	"ID": "3",
+	"name": "石膏板",
+	"model": "",
+	"rate": "1",
+	"goods_id": 8182
+}, {
+	"ID": "4",
+	"name": "铁钉",
+	"model": "400g/包",
+	"rate": "1",
+	"goods_id": 8315
+}, {
+	"ID": "5",
+	"name": "枪钉",
+	"model": "5000支/盒",
+	"rate": "1",
+	"goods_id": 8231
+}, {
+	"ID": "6",
+	"name": "干壁钉",
+	"model": "550g/盒",
+	"rate": "1",
+	"goods_id": 8291
+}]

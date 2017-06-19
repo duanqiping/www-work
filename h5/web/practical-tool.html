@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <title>实用工具</title>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .paymethod > ul {
+        margin: 0;
+        padding: 0;
+        padding-top: .5rem;
+        background-color: white;
+   }
+
+    .paymethod > ul > li {
+        display: table ;
+        list-style-type: none;
+        padding:.3rem 0;
+        width:100%;
+    }
+    .paymethod > ul .line-hr {
+        color:#f4f4f4;
+    }
+
+    /* li 下的div */
+    .paymethod > ul > li > div {
+        display: table-cell;
+    }
+    .paymethod > ul > li > .div-img {
+        width:20%;
+        float:left;
+    }
+    .paymethod > ul > li > .div-text {
+        width:60%;
+        float:left;
+    }
+     .paymethod > ul > li > .div-btn {
+        width:20%;
+        float:right;
+    }
+
+    /* div 里 */
+    .paymethod > ul > li > div .icon {
+        display: table-cell;
+        margin-left:.6rem;
+        width: 2rem;
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+
+    .paymethod > ul > li > div .title{
+        font-size:.8rem;
+        color:#000000;
+    }
+    .paymethod > ul > li > div .desc {
+        font-size:.6rem;
+        color:#999999;
+    }
+
+    .paymethod > ul > li >div .downLoad-btn {
+        margin-top:.5rem;
+        margin-right: .5rem;
+        padding: .2rem .6rem;
+        color:#00acff;
+        font-size:.6rem;
+        border-radius:.2rem;
+        border:1px solid #00acff;
+        background-color:white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="paymethod">
+        <ul>
+
+<!--             <li>
+                <div class="div-img">
+                    <img class="icon" src="../img/mini_CAD.png" alt="">
+                </div>
+                <div class="div-text">
+                    <lable class="title">迷你CAD</lable>
+                    </br>
+                    <lable class="desc">超快、超小的多功能CAD工具</lable>
+                </div>
+                <div class="div-btn">
+                <button class="downLoad-btn" value="694545123">下载</button>
+                </div>
+            </li>
+            <hr class="line-hr"> -->
+
+            <li>
+                <div class="div-img">
+                    <img class="icon" src="../img/icon_CAD.png" alt="">
+                </div>
+                <div class="div-text">
+                    <lable class="title">CAD 迷你看图</lable>
+                    </br>
+                    <lable class="desc">看装修CAD图超好用的工具</lable>
+                </div>
+                <div class="div-btn">
+                <button class="downLoad-btn" value="694545123">下载</button>
+                </div>
+            </li>
+            <hr class="line-hr">
+
+            <li>
+                <div class="div-img">
+                    <img class="icon" src="../img/icon_mini.png" alt="">
+                </div>
+                <div class="div-text">
+                    <lable class="title">迷你测量工具</lable>
+                    </br>
+                    <lable class="desc">装修现场用的多种测量工具</lable>
+                </div>
+                <div class="div-btn">
+                <button class="downLoad-btn" value="938008987">下载</button>
+                </div>
+            </li>
+<!--             <hr class="line-hr">
+ -->
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../js/zepto.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/WebJSBridge.js"></script>
+    <script type="text/javascript">
+
+    (function($) {
+        $('.downLoad-btn').on('click', function(e) {
+            var identifier = $(this).val();
+            WebJSBridge.openAppStore(identifier);
+        });
+    })($);
+    </script>
+</body>
+
+</html>

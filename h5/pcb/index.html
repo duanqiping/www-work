@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <script src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/interface.js"></script>
+    <script src="js/indexController.js"></script>
+    <!--<link rel="stylesheet" href="css/share.css">-->
+    <title>水泥黄沙砖</title>
+    <style>
+        html, body {
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+
+ <div ng-app="myApp" ng-controller="CustomerListCtrl" style="background-color: #fff;width: 100%;">
+            <div style="border-bottom: 10px solid #f7f7fa" ng-repeat="item in shop"
+             ng-click="openProductList(item)" >
+                        <div style="float: left;border-right: 1px solid #f7f7fa;width: 20%;display: table;margin-top: 20px">
+                            <div style="text-align: center;display: table-cell;vertical-align: middle;">
+                                    <div style="height: 110px;width: 80px;display: block;margin: 0 auto">
+                                        <!--<img src="/img/icon_header_two.png" style="height:60px;width:60px;;display: block;margin: 0 auto"/>-->
+                                        <img src="img/shop_header.png" style="height:60px;width:60px;;display: block;margin: 0 auto"/>
+                                        <img src="img/shop_ation.png" style="height:20px;width:20px;display: block;margin:-20px 30% 0 70%;"/>
+                                        <img ng-repeat="x in [0,1,2,3,4]"  ng-src="{{x<item.rate?'img/shop_orange.png':'img/shop_gray.png'}}" style="width: 10px;height: 10px;margin-top: 10px;margin-right: 1px">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div style="display: table;padding: 6px;width:70%;">
+                                   <div style="float: left;width: 100%;display: table-cell;">
+                                       <p style="float: left;">
+                                           <span ng-bind="item.pc_company" style="font-size: 15px;"></span>
+                                       </p>
+                                       <p style="float: right;width: 70px;border-radius: 2px;background-color: #ff8a00;text-align: center;">
+                                           <span style="color: #fff;font-size: 10px;display: block;padding: 4px">担保交易</span>
+                                       </p>
+                                   </div>
+
+                                   <div style="float: left;width: 100%;display: table-cell;margin-top: -15px">
+                                       <!-- <p style="float: left;">
+                                           <span style="color: #666;font-size:13px;display: table">配送区域：</span>
+                                       </p> -->
+                                       <p style="">
+                                           <span  ng-bind="'配送区域：'+item.area" style="color: #666;display: table;font-size: 13px;line-height: 1.5"></span>
+                                       </p>
+                                   </div>
+
+                                   <div style="float: left;width: 100%;display: table-cell;margin-top: -15px">
+                                       <p style="float: left;margin-right: 30px">
+                                           <img src="img/shop_name.png" style="width: 20px;height: 20px;display: inline;float: left">
+                                           <span style="margin-left: 8px;color: #999;white-space: normal;font-size: 13px" ng-bind="item.name"></span>
+                                       </p>
+                                       <p style="float: left">
+                                           <img src="img/shop_tel.png" style="width: 20px;height: 20px;display: inline;float: left">
+                                           <a style="margin-left: 8px;white-space: normal;text-decoration:none;color: #999;font-size: 13px" href="{{'tel:'+item.tel}}" ng-click="$event.stopPropagation();" ng-bind="item.tel"></a>
+                                       </p>
+                                   </div>
+
+                        </div>
+               </div>
+          </div>
+
+
+</body>
+</html>

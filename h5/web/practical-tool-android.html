@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <title>实用工具</title>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #efeff4;
+    }
+
+    .paymethod > ul {
+        margin: 0;
+        padding: 0;
+        margin-top:.5rem;
+   }
+
+    .paymethod > ul > li {
+        display: table ;
+        list-style-type: none;
+/*         border-bottom: 1px solid #c8c7cc;
+ */        padding:.3rem 0;
+        width:100%;
+    }
+    .paymethod > ul .line-hr {
+        color:#c8c7cc;
+        margin-left:.6rem;
+    }
+
+    /* li 下的div */
+    .paymethod > ul > li > div {
+        display: table-cell;
+    }
+    .paymethod > ul > li > .div-img {
+        width:20%;
+        float:left;
+    }
+    .paymethod > ul > li > .div-text {
+        width:62%;
+        float:left;
+    }
+     .paymethod > ul > li > .div-btn {
+        width:18%;
+        float:right;
+    }
+
+    /* div 里 */
+    .paymethod > ul > li > div .icon {
+        display: table-cell;
+        margin-left:.6rem;
+        width: 2rem;
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+
+    .paymethod > ul > li > div .title{
+        font-size:.8rem;
+        color:#000000;
+    }
+    .paymethod > ul > li > div .desc {
+        font-size:.6rem;
+        color:#7B7B7B;
+/*         padding-right:.5rem;
+ */    }
+
+    .paymethod > ul > li >div .downLoad-btn {
+        margin-top:.5rem;
+        margin-right: .2rem;
+        color:#19A1E8;
+        font-size:.6rem;
+        border-radius:.2rem;
+        border:1px solid #19A1E8;
+        background-color:white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="paymethod">
+        <ul>
+            <li>
+                <div class="div-img">
+                    <img class="icon" src="../img/icon_CAD.png" alt="">
+                </div>
+                <div class="div-text">
+                    <lable class="title">CAD 迷你看图</lable>
+                    </br>
+                    <lable class="desc">看装修CAD图超好用的工具</lable>
+                </div>
+                <div class="div-btn">
+                <button class="downLoad-btn" value="0">下载</button>
+                </div>
+            </li>
+            <hr class="line-hr">
+
+            <li>
+                <div class="div-img">
+                    <img class="icon" src="../img/icon_mini.png" alt="">
+                </div>
+                <div class="div-text">
+                    <lable class="title">迷你测量工具</lable>
+                    </br>
+                    <lable class="desc">装修现场用的多种测量工具</lable>
+                </div>
+                <div class="div-btn">
+                <button class="downLoad-btn" value="1">下载</button>
+                </div>
+            </li>
+            <hr class="line-hr">
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../js/zepto.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/WebJSBridge.js"></script>
+    <script type="text/javascript">
+
+    (function($) {
+       
+        var tools = [{packageName:"com.oda_cad",url:"http://www.aec188.com/download/CADView.apk"}, {packageName:"com.minitools",url:"http://cad.pcw365.com/download/Minitools.apk"}];
+
+        $('.downLoad-btn').forEach(function (btn) {
+            var identifier = btn.value;
+            btn.innerHTML = WebJSBridge.isInstall(tools[identifier].packageName) ? "打开" : "下载";
+        });
+
+        $('.downLoad-btn').on('click', function(e) {
+            var identifier = $(this).val();
+            WebJSBridge.download( tools[identifier].packageName,tools[identifier].url);
+        });
+    })($);
+    </script>
+</body>
+
+</html>

@@ -91,7 +91,11 @@ class UserController extends BaseController{
             $user = new UserModel();
 
             //检查用户是否注册
-            if($user->reg($data)){
+            if($user_id = $user->reg($data)){
+
+                var_dump($user_id);
+                exit();
+                $row = $user->where(array('account'=>$mobile))->field('user_id')->find();
 
                 //把验证短息清空
                 setcookie('remuser',$data['mobile'],time()+14*24*3600);

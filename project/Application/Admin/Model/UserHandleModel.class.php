@@ -53,11 +53,9 @@ abstract class UserHandleModel extends Model
         {
             $condition['account'] =  $account;
             $count = $this->table($this->tableName)->where($condition)->count();
-//            echo $this->_sql();
-//            var_dump($count);
-//            exit();
-            if($count>0) return false;//已经注册
-            else return true;//未注册
+
+            if($count>0) return true;//已经注册
+            else return false;//未注册
         }
         else{
             return 'admin';

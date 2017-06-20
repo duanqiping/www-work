@@ -6,6 +6,11 @@
  * Time: 10:36
  */
 
+function sendMessage($mobile,$message)
+{
+    return true;
+}
+
 //生成随机字符串
 function random($length = 6 , $numeric = 0) {
     PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
@@ -88,6 +93,13 @@ function ch_urlencode($data) {
 function sendSuccess($data) {
     $response = ch_json_encode($data);
     exit($response);
+}
+
+//检查前端post的数据是否合法
+function checkData($b,$msg)
+{
+    if($b) return true;
+    else sendError($msg);
 }
 
 //code 0:正常消息，1：debug信息

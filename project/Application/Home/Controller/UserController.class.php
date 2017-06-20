@@ -18,9 +18,6 @@ class UserController extends Controller{
     //普通用户注册 获取验证吗
     public function getCheckCode($mobile,$type)
     {
-        var_dump(date(NOW_TIME));
-        exit();
-
         $mobile = is_mobile_legal($mobile);
         checkData( ($type==1 || $type == 2),'type值非法' );
 

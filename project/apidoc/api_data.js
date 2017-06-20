@@ -57,8 +57,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "home/user/checkAccount",
-    "title": "用户注册 账号检测",
+    "url": "home/user/getCheckCode",
+    "title": "用户注册 获取验证码",
     "version": "1.0.0",
     "group": "user",
     "parameter": {
@@ -70,6 +70,13 @@ define({ "api": [
             "optional": false,
             "field": "mobile",
             "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>type=1注册 type=2忘记密码</p>"
           }
         ]
       }
@@ -78,7 +85,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "\"17701804872\"",
+          "content": "\"验证码发送成功\"",
           "type": "json"
         }
       ]
@@ -94,6 +101,6 @@ define({ "api": [
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
-    "name": "GetHomeUserCheckaccount"
+    "name": "GetHomeUserGetcheckcode"
   }
 ] });

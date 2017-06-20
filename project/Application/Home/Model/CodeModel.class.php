@@ -18,8 +18,8 @@ class CodeModel extends Model
             'mobile' => $mobile,
             'code' => $checkcode,
             'ip' => $_SERVER['REMOTE_ADDR'],
-            'createAt' => date("Y-m-d H:i:s",NOW_TIME),
-            'expireAt' => date("Y-m-d H:i:s",NOW_TIME+30*60),
+            'createAt' => timeChange(NOW_TIME),
+            'expireAt' => timeChange(NOW_TIME+30*60),
         );
         return $this->add($data);
     }

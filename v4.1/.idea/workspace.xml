@@ -28,23 +28,24 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myecshop2/Conf/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.3076923" vertical-offset="0" max-vertical-offset="780">
+            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="780">
               <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexAction.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexAction.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myecshop2/Lib/Action/User/IndexAction.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8851114" vertical-offset="1645" max-vertical-offset="9300">
-              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.641026" vertical-offset="3428" max-vertical-offset="7680">
+              <caret line="217" column="20" selection-start-line="217" selection-start-column="20" selection-end-line="217" selection-end-column="20" />
               <folding>
-                <element signature="e#2789#3329#0#PHP" expanded="false" />
+                <element signature="n#getCheckCode#0;n#IndexAction#0;n#!!top" expanded="false" />
                 <element signature="e#3583#3886#0#PHP" expanded="false" />
                 <element signature="e#4215#5178#0#PHP" expanded="false" />
                 <element signature="e#4975#5178#0#PHP" expanded="false" />
+                <element signature="e#6006#6294#0#PHP" expanded="false" />
                 <marker date="1497864596064" expanded="true" signature="961:1021" placeholder="select temp_..ecs_temp_buyers..." />
                 <marker date="1497864596064" expanded="true" signature="2601:2725" placeholder="select code,..ecs_temp_checkcode..." />
                 <marker date="1497864596064" expanded="true" signature="3155:3242" placeholder="update ecs_t..." />
@@ -53,6 +54,18 @@
                 <marker date="1497864596064" expanded="true" signature="9089:9196" placeholder="delete from ..." />
                 <marker date="1497864596064" expanded="true" signature="12627:12704" placeholder="update ecs_t..." />
                 <marker date="1497864596064" expanded="true" signature="13857:13898" placeholder="delete from ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TempBuyersModel.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/myecshop2/Lib/Model/TempBuyersModel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.66822976" vertical-offset="2880" max-vertical-offset="4710">
+              <caret line="115" column="42" selection-start-line="115" selection-start-column="42" selection-end-line="115" selection-end-column="42" />
+              <folding>
+                <marker date="1497864596070" expanded="true" signature="3975:4044" placeholder="select count..ecs_temp_buyers..." />
               </folding>
             </state>
           </provider>
@@ -256,7 +269,7 @@
     <option name="totallyTimeSpent" value="6988000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1932" height="1042" extended-state="1" />
+    <frame x="-11" y="-11" width="1932" height="1042" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -296,9 +309,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.278125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +335,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -622,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myecshop2/Lib/Model/TempBuyersModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myecshop2/Common/city.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -674,7 +680,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myecshop2/Conf/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3076923" vertical-offset="0" max-vertical-offset="780">
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="780">
           <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="52" />
           <folding />
         </state>
@@ -682,13 +688,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myecshop2/Lib/Action/User/IndexAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8851114" vertical-offset="1645" max-vertical-offset="9300">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.641026" vertical-offset="3428" max-vertical-offset="7680">
+          <caret line="217" column="20" selection-start-line="217" selection-start-column="20" selection-end-line="217" selection-end-column="20" />
           <folding>
-            <element signature="e#2789#3329#0#PHP" expanded="false" />
+            <element signature="n#getCheckCode#0;n#IndexAction#0;n#!!top" expanded="false" />
             <element signature="e#3583#3886#0#PHP" expanded="false" />
             <element signature="e#4215#5178#0#PHP" expanded="false" />
             <element signature="e#4975#5178#0#PHP" expanded="false" />
+            <element signature="e#6006#6294#0#PHP" expanded="false" />
             <marker date="1497864596064" expanded="true" signature="961:1021" placeholder="select temp_..ecs_temp_buyers..." />
             <marker date="1497864596064" expanded="true" signature="2601:2725" placeholder="select code,..ecs_temp_checkcode..." />
             <marker date="1497864596064" expanded="true" signature="3155:3242" placeholder="update ecs_t..." />
@@ -697,6 +704,16 @@
             <marker date="1497864596064" expanded="true" signature="9089:9196" placeholder="delete from ..." />
             <marker date="1497864596064" expanded="true" signature="12627:12704" placeholder="update ecs_t..." />
             <marker date="1497864596064" expanded="true" signature="13857:13898" placeholder="delete from ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myecshop2/Lib/Model/TempBuyersModel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66822976" vertical-offset="2880" max-vertical-offset="4710">
+          <caret line="115" column="42" selection-start-line="115" selection-start-column="42" selection-end-line="115" selection-end-column="42" />
+          <folding>
+            <marker date="1497864596070" expanded="true" signature="3975:4044" placeholder="select count..ecs_temp_buyers..." />
           </folding>
         </state>
       </provider>

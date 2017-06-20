@@ -62,6 +62,28 @@ abstract class UserHandleModel extends Model
         }
     }
 
+    public function reg($data)
+    {
+//        if($this->getSingleInfo(array('temp_buyers_mobile'=>$data['temp_buyers_mobile']),'temp_buyers_id')){
+        if($this->table($this->tableName)->where(array('account'=>$data['account']))->count()){
+            return false;
+        }
+
+        $data['passwd'] = md5($data['passwd']);
+        $data['nick'] = $data['account'];
+        $data['is_check'] = 1;
+        $data['sex'] = 1;
+        $data['register_time'] = timeChange(NOW_TIME);
+
+        $b = $this->add($data);
+        if(!$b)
+        {
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     //保存用户信息
     private  function autoLogin($user,$falg) {
 

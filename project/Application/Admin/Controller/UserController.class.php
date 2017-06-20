@@ -1,8 +1,45 @@
 <?php
 namespace Admin\Controller;
+
+use Admin\Model\UserHandleModel;
 use Think\Controller;
 class UserController extends Controller {
-    public function index(){
-    }
 
+    //登录
+    public function login($flag='',$account='',$passwd='')
+    {
+
+        if(IS_POST) {
+            $use = UserHandleModel::getInstance($flag);
+            if(! $res = $use->login($account,$passwd,$flag))
+            {
+                $this->assign('error_info','账号或密码有误');
+                $this->display('public/login');
+            }
+            else
+            {
+                $this->assign('name',$res['name']);
+                $this->display('index/index');
+            }
+        }else{
+            $this->display('public/login');
+        }
+    }
+    
+    /**
+     * 用户退出
+    */
+    public function logout(){
+
+        if(is_login()){
+            $use = UserHandleModel::getInstance(session('user'));
+            $use->logout();
+
+            session('[destroy]');
+//            $this->success('退出成功！', U('index/index'));
+            $this->display('public/login');
+        } else {
+            $this->display('public/login');
+        }
+    }
 }

@@ -1,9 +1,0 @@
-[ 2017-06-14T16:56:14+08:00 ] ::1 /project/home/index/index.html
-INFO: [ app_init ] --START--
-INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
-INFO: [ app_init ] --END-- [ RunTime:0.000819s ]
-INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001409s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.001532s ]
-ERR: 无法加载控制器:Home
-

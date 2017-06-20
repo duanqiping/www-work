@@ -1,7 +1,7 @@
 {
-  "name": "赛道项目"
+  "name": "赛道",
   "version": "1.0.0",
   "description": "",
-  "title": "赛道项目API",
+  "title": "赛道API",
   "url" : "http://192.168.0.115/project/"
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>赛道项目管理平台</title>
+    <title>学校赛道项目管理平台</title>
     <link rel="stylesheet" type="text/css" href="__CSS__/login.css?v={:SITE_VERSION}" media="all">
     <link rel="stylesheet" type="text/css" href="__CSS__/{$Think.config.COLOR_STYLE}.css?v={:SITE_VERSION}" media="all">
 </head>
@@ -12,20 +12,18 @@
     <!-- 主体 -->
     <div class="login-body">
         <div class="login-main pr">
-            <form action="{:U('login')}" method="post" class="login-form">
+            <form action="{:U('user/login')}" method="post" class="login-form">
                 <h3 class="welcome"><i class="login-logo"></i>赛道项目管理平台</h3>
                 <div id="itemBox" class="item-box">
                     <div>
-
                     <label>选择身份</label>
                     <select name="flag">
-                        <option value="1">系统管理员</option>
-                        <option value="2">代理商</option>
-                        <option value="3">客户</option>
                         <option value="4">老师</option>
+                        <option value="3">客户</option>
+                        <option value="2">代理商</option>
+                        <option value="1">系统管理员</option>
                     </select>
                         <br/><br/>
-                    <!--</form>-->
                     </div>
                     <div class="item">
                         <i class="icon-login-user"></i>

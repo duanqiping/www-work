@@ -14,13 +14,5 @@ class UserModel extends UserHandleModel
 {
     protected $tableName = 'USER';
 
-//    public function login($account,$passwd)
-//    {
-//        $condition['account'] = $account;
-//        $res = $this->table($this->tableName)->where($condition)->field('name,passwd')->find();
-//
-//        if($res['passwd'] == md5($passwd)) return $res;
-//        else return false;
-//    }
-//
+
 }

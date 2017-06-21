@@ -14,7 +14,7 @@ use Think\Controller;
 
 class UserController extends BaseController{
 
-    //普通用户注册 获取验证吗
+    //普通用户注册 获取验证吗....
     public function getCheckCode($mobile,$type)
     {
         $this->C_regCheck($mobile,$type);

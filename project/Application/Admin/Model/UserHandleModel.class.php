@@ -80,7 +80,7 @@ abstract class UserHandleModel extends Model
         {
             return false;
         }else {
-            return true;
+            return $b;
         }
     }
 

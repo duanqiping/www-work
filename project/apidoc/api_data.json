@@ -57,6 +57,61 @@
   },
   {
     "type": "get",
+    "url": "home/user/CheckCode",
+    "title": "用户注册 校验验证码",
+    "version": "1.0.0",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>type=1注册 type=2忘记密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "checkcode",
+            "description": "<p>验证码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n  \"msg\": \"验证码校验通过\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n \"msg\": \"手机号未获取验证码\",\n \"code\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "user",
+    "name": "GetHomeUserCheckcode"
+  },
+  {
+    "type": "get",
     "url": "home/user/getCheckCode",
     "title": "用户注册 获取验证码",
     "version": "1.0.0",
@@ -85,7 +140,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "\"验证码发送成功\"",
+          "content": "{\n  \"msg\": \"验证码发送成功\"\n}",
           "type": "json"
         }
       ]
@@ -102,5 +157,60 @@
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
     "name": "GetHomeUserGetcheckcode"
+  },
+  {
+    "type": "get",
+    "url": "home/user/reg",
+    "title": "用户注册",
+    "version": "1.0.0",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "passwd",
+            "description": "<p>密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>1男 2女</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n \"user_id\": \"8\",\n \"account\": \"17701804870\",\n \"nick\": \"17701804870\",\n \"img\": \"\",\n \"email\": \"\",\n \"sex\": \"1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n\"msg\": \"用户注册失败\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "user",
+    "name": "GetHomeUserReg"
   }
 ]

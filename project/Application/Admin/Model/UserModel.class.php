@@ -14,6 +14,15 @@ class UserModel extends UserHandleModel
 {
     protected $tableName = 'USER';
 
+    protected $user_field = 'user_id,account,nick,img,email,sex';
+
+    //获取用户信息
+    public function getUserInfo($user_id)
+    {
+        $condition['user_id'] = $user_id;
+        $row = $this->where($condition)->field($this->user_field)->find();
+        return $row;
+    }
 
     //注册检测 账号
     public function regCheck($mobile,$type)

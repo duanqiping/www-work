@@ -60,7 +60,7 @@ class UserController extends BaseController{
         }
     }
 
-    //校验验证码
+    //普通用户注册 校验验证码
     public function CheckCode($mobile,$type,$checkcode)
     {
         $this->C_regCheck($mobile,$type);
@@ -76,41 +76,34 @@ class UserController extends BaseController{
         }
     }
 
+    //注册
     public function reg()
     {
         if(IS_POST)
         {
             $mobile = $data['account'] = trim($_POST['mobile']);
             $passwd = $data['passwd'] = $_POST['passwd'];
-            $checkcode = trim($_POST['checkcode']);
-
+            $sex = $data['sex'] = $_POST['sex'];
 
             is_mobile_legal($mobile);
             if(strlen($passwd)<6)  sendError('密码长度不能少于6位');
+            if($sex !=1 && $sex !=2)  sendError('sex值非法');
 
             $user = new UserModel();
 
             //检查用户是否注册
             if($user_id = $user->reg($data)){
 
-                var_dump($user_id);
-                exit();
-                $row = $user->where(array('account'=>$mobile))->field('user_id')->find();
-
-                //把验证短息清空
                 setcookie('remuser',$data['mobile'],time()+14*24*3600);
 
                 //记录到登录表
-                $useronline = M('TempUseronline');
-                $data_online = array('online_buyers_id'=>$data_info['temp_buyers_id'],'active_time'=>time());
+                $useronline = M('UserOnline');
+                $data_online = array('user_id'=>$user_id,'addr'=>$_SERVER['SERVER_ADDR'],'active_time'=>time());
                 $useronline->add($data_online);
 
-
+                $user_info  = $user->getUserInfo($user_id);
                 //注册成功 返回一些用户信息
-                $response = array('success'=>'true','data'=>$data_info);
-                $response = ch_json_encode($response);
-                echo($response);
-
+                sendSuccess($user_info);
             }
             else{
                 sendError('用户注册失败');

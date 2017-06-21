@@ -36,7 +36,7 @@ function is_login()
 //验证手机号码是否规范
 function is_mobile_legal($mobile)
 {
-    if(!$res=preg_match("/^1[34578][0-9]{9}$/i",$mobile,$res)) sendError($msg = '手机号码不规范');//不规范
+    if(!$res=preg_match("/^1[34578][0-9]{9}$/i",$mobile,$res)) sendError('手机号码不规范');//不规范
     return $mobile;//规范
 }
 
@@ -96,6 +96,7 @@ function ch_urlencode($data) {
 }
 
 function sendSuccess($data) {
+    if(is_string($data)) $data = array('msg'=>$data);
     $response = ch_json_encode($data);
     exit($response);
 }
@@ -108,12 +109,13 @@ function checkData($b,$msg)
 }
 
 //code 0:正常消息，1：debug信息
-
-function sendError($msg,$code = 0) {
+function sendError($msg) {
+    $code = APP_DEBUG?1:0;
     header('HTTP/1.1 400 Unauthorized', true, 400);//一般错误
-    exit(ch_json_encode(array('msg'=>$msg,'code'=>intval($code))));
+    exit(ch_json_encode(array('msg'=>$msg,'code'=>$code)));
 }
-function sendServerError($msg,$code) {
+function sendServerError($msg) {
+    $code = APP_DEBUG?1:0;
     header('HTTP/1.1 400 Unauthorized', true, 500);//服务器错误
-    exit(ch_json_encode(array('msg'=>$msg,'code'=>intval($code))));
+    exit(ch_json_encode(array('msg'=>$msg,'code'=>$code)));
 }

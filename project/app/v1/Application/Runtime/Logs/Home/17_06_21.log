@@ -1,0 +1,1359 @@
+[ 2017-06-21T14:58:56+08:00 ] ::1 /project/app/v1/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:05:46+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=1770180487&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:06:49+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=1770180487&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:06:56+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804872&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:10:50+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804872&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:11:32+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804872&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:14:24+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804872&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.030000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804872' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804872' AND `expireAt` > 1498029264 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='17701804872' and createAt between '1497942864' and '1498029264' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804872','0000','192.168.0.115','2017-06-21 15:14:24','2017-06-21 15:44:24') [ RunTime:0.026000s ]
+
+[ 2017-06-21T15:15:00+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804871&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804871' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:15:13+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804870&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804870' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:15:20+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804874&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804874' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:15:50+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=1770180487&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:15:56+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804875&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804875' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804875' AND `expireAt` > 1498029356 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+SQL: select count(*) as num from code where mobile='17701804875' and createAt between '1497942956' and '1498029356' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804875','0000','192.168.0.115','2017-06-21 15:15:56','2017-06-21 15:45:56') [ RunTime:0.044000s ]
+
+[ 2017-06-21T15:16:12+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804875&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804875' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:16:52+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: sex C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 87 行.
+
+[ 2017-06-21T15:17:02+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T15:18:22+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804875' LIMIT 1   [ RunTime:0.001000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('17701804875','00b7691d86d96aebd21dd9e138f90840',1,'17701804875',1,'2017-06-21 15:18:22') [ RunTime:0.039000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 98 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.002000s ]
+SQL: INSERT INTO `user_online` (`user_id`,`addr`,`active_time`) VALUES (9,'192.168.0.115',1498029502) [ RunTime:0.057000s ]
+SQL: SELECT `user_id`,`account`,`nick`,`img`,`email`,`sex` FROM `user` WHERE `user_id` = 9 LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:25:36+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18611111111
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18611111111' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:25:45+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18611111111
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18611111111' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18611111111' AND `expireAt` > 1498029945 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+SQL: select count(*) as num from code where mobile='18611111111' and createAt between '1497943545' and '1498029945' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18611111111','0000','192.168.0.110','2017-06-21 15:25:45','2017-06-21 15:55:45') [ RunTime:0.032000s ]
+
+[ 2017-06-21T15:25:47+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18611111111
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18611111111' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:26:58+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18611111111
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18611111111' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18611111111' AND `expireAt` > 1498030017 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498030017 WHERE `id` = 6259 [ RunTime:0.031000s ]
+SQL: select count(*) as num from code where mobile='18611111111' and createAt between '1497943617' and '1498030017' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18611111111','0000','192.168.0.110','2017-06-21 15:26:57','2017-06-21 15:56:57') [ RunTime:0.024000s ]
+
+[ 2017-06-21T15:28:36+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T15:31:06+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804875&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804875' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:38:10+08:00 ] ::1 /project/app/v1/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 模板不存在:./Application/Home/View/Index/index.html
+
+[ 2017-06-21T15:39:49+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:41:34+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:44:17+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:45:40+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:47:02+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804875&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804875' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:47:10+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804876&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804876' AND `expireAt` > 1498031230 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='17701804876' and createAt between '1497944830' and '1498031230' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804876','0000','192.168.0.115','2017-06-21 15:47:10','2017-06-21 16:17:10') [ RunTime:0.025000s ]
+
+[ 2017-06-21T15:47:26+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804876&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:47:36+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('17701804876','00b7691d86d96aebd21dd9e138f90840',1,'17701804876',1,'2017-06-21 15:47:36') [ RunTime:0.039000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 98 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.003000s ]
+ERR: 非法数据对象！:[active_tim=>1498031256]
+
+[ 2017-06-21T15:48:07+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+
+[ 2017-06-21T15:49:38+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:49:56+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('17701804876','00b7691d86d96aebd21dd9e138f90840',1,'17701804876',1,'2017-06-21 15:49:56') [ RunTime:0.065000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 98 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.009000s ]
+ERR: 非法数据对象！:[active_tim=>1498031396]
+
+[ 2017-06-21T15:50:03+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T15:50:07+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+
+[ 2017-06-21T15:50:19+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T15:50:21+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T15:53:11+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.027000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:53:25+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('17701804876','00b7691d86d96aebd21dd9e138f90840',1,'17701804876',1,'2017-06-21 15:53:25') [ RunTime:0.054000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 98 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.008000s ]
+ERR: 非法数据对象！:[active_tim=>1498031605]
+
+[ 2017-06-21T15:54:14+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T15:54:21+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498031661 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497945261' and '1498031661' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 15:54:21','2017-06-21 16:24:21') [ RunTime:0.038000s ]
+
+[ 2017-06-21T15:55:21+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.006000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498031721 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498031721 WHERE `id` = 6262 [ RunTime:0.033000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497945321' and '1498031721' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 15:55:21','2017-06-21 16:25:21') [ RunTime:0.023000s ]
+
+[ 2017-06-21T15:55:26+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.009000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:55:29+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:55:30+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T15:58:24+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:00:40+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:05:27+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.008000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.007000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.007000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498032327 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498032327 WHERE `id` = 6263 [ RunTime:0.040000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497945927' and '1498032327' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:05:27','2017-06-21 16:35:27') [ RunTime:0.021000s ]
+
+[ 2017-06-21T16:05:29+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:05:51+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.013000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:05:59+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:06:27+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498032387 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498032387 WHERE `id` = 6264 [ RunTime:0.027000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497945987' and '1498032387' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:06:27','2017-06-21 16:36:27') [ RunTime:0.022000s ]
+
+[ 2017-06-21T16:06:31+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:10:05+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.011000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:10:15+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:11:49+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804877&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.015000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804877' AND `expireAt` > 1498032709 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='17701804877' and createAt between '1497946309' and '1498032709' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804877','0000','192.168.0.115','2017-06-21 16:11:49','2017-06-21 16:41:49') [ RunTime:0.043000s ]
+
+[ 2017-06-21T16:12:04+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:12:55+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804877&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804877' AND `expireAt` > 1498032774 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498032774 WHERE `id` = 6266 [ RunTime:0.039000s ]
+SQL: select count(*) as num from code where mobile='17701804877' and createAt between '1497946374' and '1498032774' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804877','0000','192.168.0.115','2017-06-21 16:12:54','2017-06-21 16:42:54') [ RunTime:0.041000s ]
+
+[ 2017-06-21T16:12:58+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804877&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804877' AND `expireAt` > 1498032777 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498032777 WHERE `id` = 6267 [ RunTime:0.038000s ]
+SQL: select count(*) as num from code where mobile='17701804877' and createAt between '1497946377' and '1498032777' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804877','0000','192.168.0.115','2017-06-21 16:12:57','2017-06-21 16:42:57') [ RunTime:0.023000s ]
+
+[ 2017-06-21T16:13:56+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:14:01+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498032841 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498032841 WHERE `id` = 6265 [ RunTime:0.027000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497946441' and '1498032841' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:14:01','2017-06-21 16:44:01') [ RunTime:0.022000s ]
+
+[ 2017-06-21T16:14:03+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:15:55+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:16:49+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:18:16+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804877&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804877' AND `expireAt` > 1498033095 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498033095 WHERE `id` = 6268 [ RunTime:0.050000s ]
+SQL: select count(*) as num from code where mobile='17701804877' and createAt between '1497946695' and '1498033095' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804877','0000','192.168.0.115','2017-06-21 16:18:15','2017-06-21 16:48:15') [ RunTime:0.025000s ]
+
+[ 2017-06-21T16:18:19+08:00 ] 192.168.0.115 /project/app/v1/home/user/getCheckCode?mobile=17701804877&type=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '17701804877' AND `expireAt` > 1498033099 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498033099 WHERE `id` = 6270 [ RunTime:0.033000s ]
+SQL: select count(*) as num from code where mobile='17701804877' and createAt between '1497946699' and '1498033099' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('17701804877','0000','192.168.0.115','2017-06-21 16:18:19','2017-06-21 16:48:19') [ RunTime:0.022000s ]
+
+[ 2017-06-21T16:18:29+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498033109 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498033109 WHERE `id` = 6269 [ RunTime:0.028000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497946709' and '1498033109' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:18:29','2017-06-21 16:48:29') [ RunTime:0.026000s ]
+
+[ 2017-06-21T16:18:31+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T16:19:36+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.017000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:22:03+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.017000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498033323 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498033323 WHERE `id` = 6272 [ RunTime:0.030000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497946923' and '1498033323' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:22:03','2017-06-21 16:52:03') [ RunTime:0.021000s ]
+
+[ 2017-06-21T16:22:18+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-06-21T16:32:40+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+
+[ 2017-06-21T16:45:25+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18629013794
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18629013794' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18629013794' AND `expireAt` > 1498034725 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498034725 WHERE `id` = 6254 [ RunTime:0.035000s ]
+SQL: select count(*) as num from code where mobile='18629013794' and createAt between '1497948325' and '1498034725' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18629013794','0000','192.168.0.110','2017-06-21 16:45:25','2017-06-21 17:15:25') [ RunTime:0.021000s ]
+
+[ 2017-06-21T16:45:31+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18629013794
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18629013794' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:48:09+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:48:11+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498034891 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498034891 WHERE `id` = 6273 [ RunTime:0.031000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497948491' and '1498034891' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:48:11','2017-06-21 17:18:11') [ RunTime:0.022000s ]
+
+[ 2017-06-21T16:48:13+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:48:17+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:48:30+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:49:25+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498034964 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498034964 WHERE `id` = 6275 [ RunTime:0.023000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497948564' and '1498034964' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:49:24','2017-06-21 17:19:24') [ RunTime:0.021000s ]
+
+[ 2017-06-21T16:49:27+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:49:36+08:00 ] 192.168.0.110 /project/app/v1/home/user/reg?sex=2&passwd=123123
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T16:54:02+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498035242 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498035242 WHERE `id` = 6276 [ RunTime:0.045000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497948842' and '1498035242' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 16:54:02','2017-06-21 17:24:02') [ RunTime:0.020000s ]
+
+[ 2017-06-21T16:54:03+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T17:05:09+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498035909 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498035909 WHERE `id` = 6277 [ RunTime:0.033000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497949509' and '1498035909' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 17:05:09','2017-06-21 17:35:09') [ RunTime:0.022000s ]
+
+[ 2017-06-21T17:05:12+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:05:20+08:00 ] 192.168.0.110 /project/app/v1/home/user/reg?sex=2&passwd=123123&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:06:58+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498036018 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498036018 WHERE `id` = 6278 [ RunTime:0.026000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497949618' and '1498036018' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 17:06:58','2017-06-21 17:36:58') [ RunTime:0.023000s ]
+
+[ 2017-06-21T17:07:00+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:07:07+08:00 ] 192.168.0.110 /project/app/v1/home/user/reg?sex=1&passwd=123123&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 86 行.
+NOTIC: [8] Undefined index: passwd C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 87 行.
+NOTIC: [8] Undefined index: sex C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 88 行.
+
+[ 2017-06-21T17:10:35+08:00 ] 192.168.0.115 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804876' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:13:45+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.003000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000000' AND `expireAt` > 1498036425 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498036425 WHERE `id` = 6279 [ RunTime:0.026000s ]
+SQL: select count(*) as num from code where mobile='18600000000' and createAt between '1497950025' and '1498036425' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000000','0000','192.168.0.110','2017-06-21 17:13:45','2017-06-21 17:43:45') [ RunTime:0.028000s ]
+
+[ 2017-06-21T17:13:47+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:13:53+08:00 ] 192.168.0.110 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.001000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('18600000000','4297f44b13955235245b2497399d7a93',1,'18600000000',1,'2017-06-21 17:13:53') [ RunTime:0.024000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 99 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.004000s ]
+SQL: INSERT INTO `user_online` (`user_id`,`addr`,`active_time`) VALUES (15,'192.168.0.115',1498036433) [ RunTime:0.023000s ]
+SQL: SELECT `user_id`,`account`,`nick`,`img`,`email`,`sex` FROM `user` WHERE `user_id` = 15 LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:14:33+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000000' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T17:14:38+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000001
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.005000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000001' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000001' AND `expireAt` > 1498036478 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='18600000001' and createAt between '1497950078' and '1498036478' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000001','0000','192.168.0.110','2017-06-21 17:14:38','2017-06-21 17:44:38') [ RunTime:0.029000s ]
+
+[ 2017-06-21T17:14:41+08:00 ] 192.168.0.110 /project/app/v1/home/user/CheckCode?type=1&checkcode=0000&mobile=18600000001
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000001' LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:14:46+08:00 ] 192.168.0.110 /project/app/v1/home/user/reg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000001' LIMIT 1   [ RunTime:0.000000s ]
+SQL: INSERT INTO `user` (`account`,`passwd`,`sex`,`nick`,`is_check`,`register_time`) VALUES ('18600000001','e10adc3949ba59abbe56e057f20f883e',1,'18600000001',1,'2017-06-21 17:14:46') [ RunTime:0.024000s ]
+NOTIC: [8] Undefined index: mobile C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 99 行.
+SQL: SHOW COLUMNS FROM `user_online` [ RunTime:0.002000s ]
+SQL: INSERT INTO `user_online` (`user_id`,`addr`,`active_time`) VALUES (16,'192.168.0.115',1498036486) [ RunTime:0.055000s ]
+SQL: SELECT `user_id`,`account`,`nick`,`img`,`email`,`sex` FROM `user` WHERE `user_id` = 16 LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:37:06+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: http_response_header C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 67 行.
+
+[ 2017-06-21T17:37:27+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:38:42+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-06-21T17:41:55+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T17:42:28+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000001
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000001' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2017-06-21T17:42:33+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000002
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.004000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000002' LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000002' AND `expireAt` > 1498038153 ORDER BY id desc LIMIT 1   [ RunTime:0.000000s ]
+SQL: select count(*) as num from code where mobile='18600000002' and createAt between '1497951753' and '1498038153' [ RunTime:0.001000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000002','0000','192.168.0.110','2017-06-21 17:42:33','2017-06-21 18:12:33') [ RunTime:0.038000s ]
+
+[ 2017-06-21T17:46:41+08:00 ] 192.168.0.110 /project/app/v1/home/user/getCheckCode?type=1&mobile=18600000002
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '18600000002' LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `code` [ RunTime:0.002000s ]
+SQL: SELECT `id`,`mobile`,`code` FROM `code` WHERE `mobile` = '18600000002' AND `expireAt` > 1498038401 ORDER BY id desc LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: createAt C:\wamp\www\project\app\v1\Application\Home\Controller\UserController.class.php 第 29 行.
+SQL: UPDATE `code` SET `isUse`=1,`usingAt`=1498038401 WHERE `id` = 6282 [ RunTime:0.035000s ]
+SQL: select count(*) as num from code where mobile='18600000002' and createAt between '1497952001' and '1498038401' [ RunTime:0.000000s ]
+SQL: INSERT INTO `code` (`mobile`,`code`,`ip`,`createAt`,`expireAt`) VALUES ('18600000002','0000','192.168.0.110','2017-06-21 17:46:41','2017-06-21 18:16:41') [ RunTime:0.022000s ]
+
+[ 2017-06-21T17:49:55+08:00 ] 192.168.0.115 /project/app/v1/home/user/CheckCode?mobile=17701804877&type=1&checkcode=0000
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\project\app\v1\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `USER` [ RunTime:0.002000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `USER` WHERE `account` = '17701804877' LIMIT 1   [ RunTime:0.000000s ]
+

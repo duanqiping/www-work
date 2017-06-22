@@ -9,6 +9,7 @@
 namespace Home\Controller;
 
 use Admin\Model\UserModel;
+use Common\Model\Aes\AesModel;
 use Home\Model\CodeModel;
 use Think\Controller;
 
@@ -113,5 +114,16 @@ class UserController extends BaseController{
         }
 
 
+    }
+
+    //test
+    public function test()
+    {
+        $str1 = AesModel::encode('11345');
+
+        $str2 = AesModel::decode($str1);
+
+        print_r($str1);
+        print_r($str2);
     }
 } 

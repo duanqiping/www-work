@@ -1,5 +1,5 @@
  /**
- * @api {get} home/user/getCheckCode 用户注册 获取验证码
+ * @api {get} v1/home/user/getCheckCode 用户注册 获取验证码
  * @apiVersion 1.0.0
 
  * @apiGroup user
@@ -19,7 +19,7 @@
  **/
 
  /**
-  * @api {get} home/user/CheckCode 用户注册 校验验证码
+  * @api {get} v1/home/user/CheckCode 用户注册 校验验证码
   * @apiVersion 1.0.0
 
   * @apiGroup user
@@ -40,7 +40,7 @@
   **/
 
  /**
-  * @api {get} home/user/reg 用户注册
+  * @api {post} v1/home/user/reg 用户注册
   * @apiVersion 1.0.0
 
   * @apiGroup user

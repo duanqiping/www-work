@@ -57,7 +57,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "home/user/CheckCode",
+    "url": "v1/home/user/CheckCode",
     "title": "用户注册 校验验证码",
     "version": "1.0.0",
     "group": "user",
@@ -108,11 +108,11 @@ define({ "api": [
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
-    "name": "GetHomeUserCheckcode"
+    "name": "GetV1HomeUserCheckcode"
   },
   {
     "type": "get",
-    "url": "home/user/getCheckCode",
+    "url": "v1/home/user/getCheckCode",
     "title": "用户注册 获取验证码",
     "version": "1.0.0",
     "group": "user",
@@ -156,11 +156,11 @@ define({ "api": [
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
-    "name": "GetHomeUserGetcheckcode"
+    "name": "GetV1HomeUserGetcheckcode"
   },
   {
-    "type": "get",
-    "url": "home/user/reg",
+    "type": "post",
+    "url": "v1/home/user/reg",
     "title": "用户注册",
     "version": "1.0.0",
     "group": "user",
@@ -211,6 +211,6 @@ define({ "api": [
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
-    "name": "GetHomeUserReg"
+    "name": "PostV1HomeUserReg"
   }
 ] });

@@ -8,6 +8,12 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+//手动设置 Session 的生存期一天
+$lifeTime = 24 * 3600 * 7;
+session_set_cookie_params($lifeTime);
+// 开启session
+session_start();
+
 
 // 应用入口文件
 header("Content-type: application/json; charset=utf-8");

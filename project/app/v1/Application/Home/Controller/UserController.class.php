@@ -176,6 +176,53 @@ class UserController extends BaseController{
         sendSuccess('退出成功');
     }
 
+    //上传头像 和 修改信息
+    public function modifyInfo()
+    {
+        import('ORG.Tool.UpHeadTool');
+        $data = $_POST;
+
+        $uid = $_SESSION['temp_buyers_id'];
+
+        $user = new TempBuyersModel();
+        $user->is_login();
+
+        //  上传头像
+        $uptool = new UpHeadTool();
+        $ori_img = $uptool->up('ori_img', $_SESSION['temp_buyers_mobile']);
+
+        if (!$ori_img) {
+            $error = $uptool->getErr();
+            if ($error != 0) {
+                $response = array("success" => "false", "error" => array("msg" => $error, 'code' => 4101));
+                $response = ch_json_encode($response);
+                exit($response);
+            }
+
+        }
+        if ($ori_img) {
+            $data['photo'] = str_replace('Guest/', '', $ori_img);
+        }
+
+        if ($user->updateInfo($data, $_SESSION['temp_buyers_id']) !== false) //更新用户信息
+        {
+            $info = $user->getSingleInfo(array('temp_buyers_id'=>$uid),'temp_buyers_id,temp_buyers_mobile,nick,photo,info,invitation_person,invitation');
+            $info['photo'] = NROOT . '/Guest/' . $info['photo'];
+            $info['vip'] = $info['invitation_person']>0?1:0;//是否是vip 通过invitation 判断
+
+            $response = array('success' => 'true', 'data' => $info);
+            $response = ch_json_encode($response);
+            exit($response);
+
+        } else {
+            $msg = '修改个人资料失败';
+            $response = array("success" => "false", "error" => array("msg" => $msg, 'code' => 4100));
+            $response = ch_json_encode($response);
+            exit($response);
+
+        }
+    }
+
     //test
     public function test()
     {

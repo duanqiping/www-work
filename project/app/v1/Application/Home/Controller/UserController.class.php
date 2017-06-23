@@ -124,6 +124,58 @@ class UserController extends BaseController{
 
     }
 
+    //登陆
+    public function login()
+    {
+        $mobile = $_POST['mobile'];
+        $passwd = $_POST['passwd'];
+
+        is_mobile_legal($mobile);
+
+        if(empty($passwd)) sendError('密码不能为空');
+
+        $user = new UserModel();
+        $res = $user->where(array('account'=>$mobile))->field($user->user_field = $user->user_field.',passwd')->find();
+
+        if($res['passwd'] != md5($passwd)) sendError('用户名密码不匹配');
+        if(!$res['is_check']) sendError('用户已经被屏蔽');
+
+        $_SESSION = $res;
+        setcookie('remuser',$mobile,time()+14*24*3600);
+
+        //记录到登录表
+        //判断登陆表是否有记录
+        $useronline = M('UserOnline');
+        $condition['user_id'] = $res['user_id'];
+
+        $sql = "select count(*) as count from user_online WHERE user_id='{$res['user_id']}'";
+        $count_res = $user->query($sql);
+
+        if($count_res[0]['count'])
+        {
+            /** 修改下登录时间*/
+            $sql2 = 'update user_online set active_time='.NOW_TIME.' where user_id='.$res['user_id'];
+            $useronline->execute($sql2);
+        }
+        else
+        {
+            /** 插入一条记录*/
+            $time = NOW_TIME;
+            $sql3 = "insert into user_online (user_id,addr,active_time) VALUES ('{$res['user_id']}','{$_SERVER['SERVER_ADDR']}','$time')";
+            $user->execute($sql3);
+
+        }
+        unset($res['passwd']);
+        sendSuccess($res);
+    }
+
+    //退出
+    public function logout()
+    {
+        session_destroy();//清空session
+        sendSuccess('退出成功');
+    }
+
     //test
     public function test()
     {

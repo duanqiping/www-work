@@ -14,7 +14,7 @@ class UserModel extends Model
 {
     protected $tableName = 'USER';
 
-    protected $user_field = 'user_id,account,nick,img,email,sex';
+    public  $user_field = 'user_id,is_check,account,nick,img,email,sex';
 
     //获取用户信息
     public function getUserInfo($user_id)
@@ -72,9 +72,9 @@ class UserModel extends Model
         }
     }
 
+    //注册
     public function reg($data)
     {
-//        if($this->getSingleInfo(array('temp_buyers_mobile'=>$data['temp_buyers_mobile']),'temp_buyers_id')){
         if($this->table($this->tableName)->where(array('account'=>$data['account']))->count()){
             return false;
         }

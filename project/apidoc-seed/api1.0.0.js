@@ -52,6 +52,7 @@
   * @apiSuccessExample {json} 成功返回结果:
   *{
   *  "user_id": "8",
+  *  "is_check": "1",
   *  "account": "17701804870",
   *  "nick": "17701804870",
   *  "img": "",
@@ -65,3 +66,38 @@
   *}
   **/
 
+ /**
+  * @api {post} v1/home/user/login 登陆
+  * @apiVersion 1.0.0
+
+  * @apiGroup user
+
+  *@apiParam {String} mobile 手机号
+  *@apiParam {String} passwd 密码
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+  *  "user_id": "8",
+  *  "is_check": "1",
+  *  "account": "17701804870",
+  *  "nick": "17701804870",
+  *  "img": "",
+  *  "email": "",
+  *  "sex": "1"
+*}
+  * @apiErrorExample {json} 失败返回结果：
+  *{
+  * "msg": "用户名密码不匹配",
+  *  "code": 1
+  *}
+  **/
+
+ /**
+  * @api {get} v1/home/user/logout 退出
+  * @apiVersion 1.0.0
+  * @apiGroup user
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+ *   "msg": "退出成功"
+*}
+  **/

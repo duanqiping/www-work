@@ -30,12 +30,8 @@ abstract class UserHandleModel extends Model
         $condition['account'] = $account;
         $res = $this->table($this->tableName)->where($condition)->field('name,passwd,account')->find();
 
-//        echo $this->_sql();
-//        exit();
-
-
         if($res['passwd'] == md5($passwd)){
-            $this->autoLogin($res,$flag);
+            $this->autoLogin($res,$flag);//保存用户信息到session
             return $res;
         }
         else return false;

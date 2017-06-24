@@ -40,7 +40,7 @@ class UserController extends Controller {
     */
     public function logout(){
 
-        if(is_login()){
+        if(IsLogin()){
             $use = UserHandleModel::getInstance(session('user'));
             $use->logout();
 

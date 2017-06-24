@@ -10,6 +10,11 @@ function sendMessage($mobile,$message)
 {
     return true;
 }
+function IsLogin()
+{
+    if($_SESSION['user']) return true;
+    else return false;
+}
 
 //生成随机字符串
 function random($length = 6 , $numeric = 0) {

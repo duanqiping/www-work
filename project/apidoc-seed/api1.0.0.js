@@ -101,3 +101,47 @@
  *   "msg": "退出成功"
 *}
   **/
+
+ /**
+  * @api {post} v1/home/user/uploadImg 上传头像
+  * @apiVersion 1.0.0
+
+  * @apiGroup user
+
+  *@apiParam {file} img 头像
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+  *   "msg": "http:\\/\\/192.168.0.118\\/Guest\\/upload\\/photo\\/17701804876\\/17701804876head.png"
+ *}
+  * @apiErrorExample {json} 失败返回结果：
+  *{
+  * "msg": "上传失败",
+  *  "code": 1
+  *}
+  **/
+
+ /**
+  * @api {post} v1/home/user/modifyInfo 修改信息
+  * @apiVersion 1.0.0
+
+  * @apiGroup user
+
+  *@apiParam {string} nick 昵称
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+   * "user_id": "14",
+   * "is_check": "1",
+   * "account": "17701804876",
+   * "nick": "段齐平22",
+   * "img": "http:\\/\\/192.168.0.118\\/Guest\\/upload\\/photo\\/17701804876\\/17701804876head.png",
+   * "email": "",
+   * "sex": "1"
+*}
+  * @apiErrorExample {json} 失败返回结果：
+  *{
+  * "msg": "修改个人资料失败",
+  *  "code": 1
+  *}
+  **/

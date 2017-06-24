@@ -3,4 +3,8 @@ pcwsee
 weiphp
 project/Application/Runtime
 v4.1
+*.log
+*.xml
+project/app/v1/log.txt
+tpgdxt
 

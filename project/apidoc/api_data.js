@@ -227,6 +227,47 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "v1/home/user/modifyInfo",
+    "title": "修改信息",
+    "version": "1.0.0",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "nick",
+            "description": "<p>昵称</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n\"user_id\": \"14\",\n\"is_check\": \"1\",\n\"account\": \"17701804876\",\n\"nick\": \"段齐平22\",\n\"img\": \"http:\\\\/\\\\/192.168.0.118\\\\/Guest\\\\/upload\\\\/photo\\\\/17701804876\\\\/17701804876head.png\",\n\"email\": \"\",\n\"sex\": \"1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n\"msg\": \"修改个人资料失败\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "user",
+    "name": "PostV1HomeUserModifyinfo"
+  },
+  {
+    "type": "post",
     "url": "v1/home/user/reg",
     "title": "用户注册",
     "version": "1.0.0",
@@ -279,5 +320,46 @@ define({ "api": [
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "user",
     "name": "PostV1HomeUserReg"
+  },
+  {
+    "type": "post",
+    "url": "v1/home/user/uploadImg",
+    "title": "上传头像",
+    "version": "1.0.0",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "file",
+            "optional": false,
+            "field": "img",
+            "description": "<p>头像</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n  \"msg\": \"http:\\\\/\\\\/192.168.0.118\\\\/Guest\\\\/upload\\\\/photo\\\\/17701804876\\\\/17701804876head.png\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n\"msg\": \"上传失败\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "user",
+    "name": "PostV1HomeUserUploadimg"
   }
 ] });

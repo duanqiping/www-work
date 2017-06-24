@@ -21,6 +21,9 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 ini_set("display_errors", "On");//显示所有错误信息  Off为屏蔽所有错误信息
 
 define('ROOT',str_replace('\\','/',dirname(dirname(__FILE__))) . '/');
+define('MROOT',dirname(ROOT).'/../');
+
+define('NROOT','http://'.$_SERVER['HTTP_HOST'].'/');
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',true);

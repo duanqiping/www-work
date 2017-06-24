@@ -11,6 +11,7 @@ namespace Home\Controller;
 use Home\Model\UserModel;
 use Common\Model\Aes\AesModel;
 use Home\Model\CodeModel;
+use Org\Tool\UpHeadTool;
 use Think\Controller;
 
 class UserController extends BaseController{
@@ -64,13 +65,6 @@ class UserController extends BaseController{
     //普通用户注册 校验验证码
     public function CheckCode($mobile,$type,$checkcode)
     {
-
-//        foreach ($_SERVER as $key => $value)
-//        {
-//            file_put_contents('log.txt',$key.'-'.$value."\n", FILE_APPEND);
-//        }
-
-
         //注册检测 账号
         $this->C_regCheck($mobile,$type);
 
@@ -141,6 +135,7 @@ class UserController extends BaseController{
         if(!$res['is_check']) sendError('用户已经被屏蔽');
 
         $_SESSION = $res;
+        unset($_SESSION['passwd']);
         setcookie('remuser',$mobile,time()+14*24*3600);
 
         //记录到登录表
@@ -176,61 +171,68 @@ class UserController extends BaseController{
         sendSuccess('退出成功');
     }
 
-    //上传头像 和 修改信息
-    public function modifyInfo()
+    //上传头像
+    public function uploadImg()
     {
-        import('ORG.Tool.UpHeadTool');
-        $data = $_POST;
-
-        $uid = $_SESSION['temp_buyers_id'];
-
-        $user = new TempBuyersModel();
-        $user->is_login();
-
-        //  上传头像
+        is_login();
         $uptool = new UpHeadTool();
-        $ori_img = $uptool->up('ori_img', $_SESSION['temp_buyers_mobile']);
+        $ori_img = $uptool->up('img', $_SESSION['account']);
 
         if (!$ori_img) {
             $error = $uptool->getErr();
             if ($error != 0) {
-                $response = array("success" => "false", "error" => array("msg" => $error, 'code' => 4101));
-                $response = ch_json_encode($response);
-                exit($response);
+                sendError($error);
             }
-
+            else{
+                sendError('请选择要上传的头像');
+            }
         }
-        if ($ori_img) {
-            $data['photo'] = str_replace('Guest/', '', $ori_img);
+        else {
+//            $ori_img = str_replace('Guest/', '', $ori_img);
+            $ori_img = NROOT.$ori_img;
+            sendSuccess($ori_img);
         }
 
-        if ($user->updateInfo($data, $_SESSION['temp_buyers_id']) !== false) //更新用户信息
+    }
+
+    //修改信息
+    public function modifyInfo()
+    {
+        is_login();
+
+        if(IS_POST)
         {
-            $info = $user->getSingleInfo(array('temp_buyers_id'=>$uid),'temp_buyers_id,temp_buyers_mobile,nick,photo,info,invitation_person,invitation');
-            $info['photo'] = NROOT . '/Guest/' . $info['photo'];
-            $info['vip'] = $info['invitation_person']>0?1:0;//是否是vip 通过invitation 判断
+            $data = $_POST;
+            $user = new UserModel();
+            if ($user->where(array('user_id'=>session('user_id')))->save($data)) //更新用户信息
+            {
+                $condition['user_id'] = session('user_id');
+                $info = $user->where($condition)->field($user->user_field)->find();
 
-            $response = array('success' => 'true', 'data' => $info);
-            $response = ch_json_encode($response);
-            exit($response);
+                $info['img'] = NROOT.'Guest/'.$info['img'];
 
-        } else {
-            $msg = '修改个人资料失败';
-            $response = array("success" => "false", "error" => array("msg" => $msg, 'code' => 4100));
-            $response = ch_json_encode($response);
-            exit($response);
-
+                sendSuccess($info);
+            } else {
+                sendError('修改个人资料失败');
+            }
         }
+        else
+        {
+            sendError('参数传输方式有无');
+        }
+
+
     }
 
     //test
     public function test()
     {
-        $str1 = AesModel::encode('11345');
-
-        $str2 = AesModel::decode($str1);
-
-        print_r($str1);
-        print_r($str2);
+//        $str1 = AesModel::encode('11345');
+//
+//        $str2 = AesModel::decode($str1);
+//
+//        print_r($str1);
+//        print_r($str2);
+        print_r($_SERVER);
     }
 } 

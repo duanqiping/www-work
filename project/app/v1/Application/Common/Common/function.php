@@ -30,8 +30,8 @@ function random($length = 6 , $numeric = 0) {
 //用户是否已经登陆
 function is_login()
 {
-    if(session('user')) return true;
-    else return false;
+    if($_SESSION['user_id']) return true;
+    else sendError('你还没有登录');
 }
 //验证手机号码是否规范
 function is_mobile_legal($mobile)

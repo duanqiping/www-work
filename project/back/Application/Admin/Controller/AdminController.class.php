@@ -17,8 +17,6 @@ class AdminController extends Controller {
     //添加管理员
     public function add()
     {
-//        print_r($_SERVER);
-//        exit();
         //超级管理员登陆
         if((IsLogin())  && ($_SESSION['user']['level'] == 1))
         {

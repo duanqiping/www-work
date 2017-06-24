@@ -8,12 +8,12 @@
 
 namespace Admin\Model;
 
-
 use Think\Model;
 
 //用户handle类
 abstract class UserHandleModel extends Model
 {
+
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
         array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),
@@ -28,6 +28,7 @@ abstract class UserHandleModel extends Model
 //        array ('last_login_time', 'getTime', self::MODEL_UPDATE,'callback'),
 //        array ('last_login_ip', 'getIp', self::MODEL_UPDATE,'callback'),
     );
+
     static public function  getInstance($type)
     {
         if($type == 1) return new AdminModel();//系统用户
@@ -89,27 +90,6 @@ abstract class UserHandleModel extends Model
         }
     }
 
-    //用户注册
-    public function reg($data)
-    {
-        if($this->table($this->tableName)->where(array('account'=>$data['account']))->count()){
-            return false;
-        }
-
-        $data['passwd'] = md5($data['passwd']);
-        $data['nick'] = $data['account'];
-        $data['is_check'] = 1;
-        $data['sex'] = 1;
-        $data['register_time'] = timeChange(NOW_TIME);
-
-        $b = $this->add($data);
-        if(!$b)
-        {
-            return false;
-        }else {
-            return $b;
-        }
-    }
 
     //保存用户信息
     protected  function autoLogin($user,$falg) {

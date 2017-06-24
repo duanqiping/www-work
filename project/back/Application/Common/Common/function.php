@@ -26,13 +26,6 @@ function random($length = 6 , $numeric = 0) {
     }
     return $hash;
 }
-
-//用户是否已经登陆
-function is_login()
-{
-    if(session('user')) return true;
-    else return false;
-}
 //验证手机号码是否规范
 function is_mobile_legal($mobile)
 {

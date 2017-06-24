@@ -11,18 +11,27 @@ class UserController extends Controller {
 
         if(IS_POST) {
             $use = UserHandleModel::getInstance($flag);
-            if(! $res = $use->login($account,$passwd,$flag))
+            if($use == false)
             {
-                $this->assign('error_info','账号或密码有误');
-                $this->display('public/login');
+//                $this->assign('error_info','非法操作');
+//                $this->display('public/login');
+                exit('false');
+            }
+            else if(! $res = $use->login($account,$passwd,$flag))
+            {
+//                $this->assign('error_info','账号或密码有误');
+//                $this->display('public/login');
+                exit('账号或密码有误');
             }
             else
             {
-                $this->assign('name',$res['name']);
-                $this->display('index/index');
+//                $this->assign('name',$res['name']);
+//                $this->display('index/index');
+                exit('success');
             }
         }else{
-            $this->display('public/login');
+//            $this->display('public/login');
+            exit('去登陆');
         }
     }
     

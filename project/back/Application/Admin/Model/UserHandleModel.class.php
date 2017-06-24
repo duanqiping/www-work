@@ -19,9 +19,15 @@ abstract class UserHandleModel extends Model
         if($type == 1) return new AdminModel();//系统用户
         else if($type == 2) return new AgentModel();//代理商
         else if($type == 3) return new CustomerModel();//客户
-        else if($type == 4) return new TeacherModel();//客户
-        else return new UserModel();//普通用户
+        else if($type == 4) return new TeacherModel();//老师
+        else return false;//非法操作
 
+    }
+    public function add($data)
+    {
+        print_r($data);
+        exit();
+        return true;
     }
 
     //用户登录
@@ -58,9 +64,9 @@ abstract class UserHandleModel extends Model
         }
     }
 
+    //用户注册
     public function reg($data)
     {
-//        if($this->getSingleInfo(array('temp_buyers_mobile'=>$data['temp_buyers_mobile']),'temp_buyers_id')){
         if($this->table($this->tableName)->where(array('account'=>$data['account']))->count()){
             return false;
         }
@@ -81,15 +87,15 @@ abstract class UserHandleModel extends Model
     }
 
     //保存用户信息
-    private  function autoLogin($user,$falg) {
-
+    protected  function autoLogin($user,$falg) {
         /* 更新登录信息 */
         /* 记录登录SESSION和COOKIES */
-        $user = array (
+        $info = array (
             'flag' => $falg,
             'name' => $user ['name'],
             'account' => $user ['account'],
+            'level' => $user['level']?$user['level']:0//管理等级
         );
-        session ( 'user', $user);//用户 分系统用户 供应商等
+        $_SESSION['user'] = $info;//用户 分系统用户 供应商等
     }
 }

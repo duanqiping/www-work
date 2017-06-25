@@ -13,6 +13,10 @@ use Think\Model;
 //用户handle类
 abstract class UserHandleModel extends Model
 {
+    const ADMIN = 1;
+    const AGENT = 2;
+    const CUSTOMER = 3;
+    const TEACHER = 4;
 
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
@@ -31,12 +35,16 @@ abstract class UserHandleModel extends Model
 
     static public function  getInstance($type)
     {
-        if($type == 1) return new AdminModel();//系统用户
-        else if($type == 2) return new AgentModel();//代理商
-        else if($type == 3) return new CustomerModel();//客户
-        else if($type == 4) return new TeacherModel();//老师
-        else return false;//非法操作
-
+        switch ($type){
+            case self::ADMIN:
+                return new AdminModel();//系统用户
+            case self::AGENT:
+                return new AgentModel();//代理商
+            case self::CUSTOMER:
+                return new CustomerModel();//客户
+            case self::TEACHER:
+                return new TeacherModel();//老师
+        }
     }
     public function register($data)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Model\UserHandleModel;
+use Admin\Model\ConsumerHandleModel;
 use Think\Controller;
 class UserController extends Controller {
 
@@ -10,7 +10,7 @@ class UserController extends Controller {
     {
 
         if(IS_POST) {
-            $use = UserHandleModel::getInstance($flag);
+            $use = ConsumerHandleModel::getInstance($flag);
             if($use == false)
             {
 //                $this->assign('error_info','非法操作');
@@ -40,15 +40,19 @@ class UserController extends Controller {
     */
     public function logout(){
 
+//        echo "nimei";
+//        exit();
         if(IsLogin()){
-            $use = UserHandleModel::getInstance(session('user'));
+            $use = ConsumerHandleModel::getInstance(1);
             $use->logout();
 
             session('[destroy]');
+            exit('success');
 //            $this->success('退出成功！', U('index/index'));
-            $this->display('public/login');
+//            $this->display('public/login');
         } else {
-            $this->display('public/login');
+            exit('fail');
+//            $this->display('public/login');
         }
     }
 }

@@ -136,7 +136,7 @@ class UserController extends BaseController{
 
         $_SESSION = $res;
         unset($_SESSION['passwd']);
-        setcookie('remuser',$mobile,time()+14*24*3600);
+//        setcookie('remuser',$mobile,time()+14*24*3600);
 
         //记录到登录表
         //判断登陆表是否有记录

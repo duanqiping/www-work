@@ -11,24 +11,12 @@ namespace Admin\Model;
 use Think\Model;
 
 //用户handle类
-abstract class UserHandleModel extends Model
+abstract class ConsumerHandleModel extends Model
 {
     const ADMIN = 1;
     const AGENT = 2;
     const CUSTOMER = 3;
     const TEACHER = 4;
-
-    protected $_validate = array(
-        array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
-        array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),
-        array ('account', '', '该账号已被使用', self::EXISTS_VALIDATE, 'unique'),
-    );
-    /* 用户模型自动完成 */
-    protected $_auto = array (
-        array ('passwd', 'md5', self::MODEL_BOTH, 'function'),
-        array ('add_time', 'getTime', self::MODEL_INSERT,'callback'),//只能是当前模型的方法
-        array ('is_audit', '1', self::MODEL_INSERT),
-    );
 
     static public function  getInstance($type)
     {
@@ -41,6 +29,8 @@ abstract class UserHandleModel extends Model
                 return new CustomerModel();//客户
             case self::TEACHER:
                 return new TeacherModel();//老师
+            default:
+                return false;
         }
     }
     public function register($data)
@@ -58,10 +48,15 @@ abstract class UserHandleModel extends Model
     //用户登录
     public function login($account,$passwd,$flag)
     {
+        if(! in_array($flag,array(self::ADMIN,self::AGENT,self::CUSTOMER,self::TEACHER))){
+            $this->error = 'flag值只能是1-4整数';
+            return false;
+        }
+
         $condition['account'] = $account;
 
-        if($flag==1) $fields = 'name,passwd,account,level';
-        else $fields = 'name,passwd,account';
+        if($flag==self::ADMIN) $fields = 'name,passwd,account,level,grade';
+        else $fields = 'name,passwd,account,grade';
 
         $res = $this->table($this->tableName)->where($condition)->field($fields)->find();
 
@@ -112,7 +107,8 @@ abstract class UserHandleModel extends Model
             'flag' => $falg,
             'name' => $user ['name'],
             'account' => $user ['account'],
-            'level' => $user['level']?$user['level']:0//管理等级
+            'level' => $user['level']?$user['level']:0,//管理员等级
+            'grade' => $user['grade'],//用户等级
         );
         $_SESSION['user'] = $info;//用户 分系统用户 供应商等
     }

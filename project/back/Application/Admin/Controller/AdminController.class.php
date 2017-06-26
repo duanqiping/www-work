@@ -9,26 +9,24 @@
 namespace Admin\Controller;
 
 
-use Admin\Model\UserHandleModel;
-use Think\Controller;
+use Admin\Model\ConsumerHandleModel;
+//use Think\Controller;
 
-class AdminController extends Controller {
+class AdminController extends ConsumerConroller {
 
     //添加管理员
     public function add()
     {
-        //超级管理员登陆
-        if((IsLogin())  && ($_SESSION['user']['level'] == 1))
+        if($this->getPower($_SESSION['user']['level']==1))
         {
-            $admin = UserHandleModel::getInstance($type = 1);
-            $uid = $admin->register($_POST);
-            if (0 < $uid) { // 注册成功
+            $flag = 1;
+            $data = $_POST;
+            $result = $this->register($flag,$data);
+            if($result === true) {
                 exit('用户添加成功');
-//                $this->success ( '用户添加成功！', U ( 'index' ) );
-            } else { // 注册失败，显示错误信息
-//                $this->error ( '用户添加失败！' );
-                exit($admin->getError());
-                exit('用户添加失败');
+            }
+            else{
+                exit($result);
             }
         }
         else
@@ -40,9 +38,34 @@ class AdminController extends Controller {
     //获取管理员列表
     public function getList()
     {
-        $admin = UserHandleModel::getInstance($type = 1);
-        $info = $admin->getList();
-        print_r($info);
-        exit();
+        if($this->getPower($_SESSION['user']['level']==1))
+        {
+            $info = $this->consumerList($flag = 1);
+            print_r($info);
+            exit();
+        }
+        else
+        {
+            exit('该操作只能管理员');
+        }
     }
+
+    //删除管理员信息
+    public function delete($id)
+    {
+        if((IsLogin())  && ($_SESSION['user']['level'] > 0))
+        {
+            $admin = ConsumerHandleModel::getInstance($type = 1);
+            $info = $admin->where(array('admin_id'=>$id))->field('level')->find();
+            if($info['level'] == 1) exit('不准对超级管理员执行该操作');
+            $b = $admin->where(array('admin_id'=>$id))->delete();
+            if($b) exit('删除成功');
+            else exit('删除失败');
+        }
+        else
+        {
+            exit('该操作只能超级管理员');
+        }
+    }
+
 } 

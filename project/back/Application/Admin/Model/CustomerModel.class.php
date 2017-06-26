@@ -9,7 +9,7 @@
 namespace Admin\Model;
 
 
-class CustomerModel extends UserHandleModel
+class CustomerModel extends ConsumerHandleModel
 {
     protected $tableName = 'customer';
 

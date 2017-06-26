@@ -9,6 +9,6 @@
 namespace Admin\Model;
 
 
-class TeacherModel extends UserHandleModel{
+class TeacherModel extends ConsumerHandleModel{
     protected $tableName = 'teacher';
 } 

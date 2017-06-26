@@ -38,7 +38,7 @@ function is_mobile_legal($mobile)
     return $mobile;//规范
 }
 
-function timeChange($time)
+function timeChange($time = NOW_TIME)
 {
     return date("Y-m-d H:i:s",$time);
 }

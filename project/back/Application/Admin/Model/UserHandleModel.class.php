@@ -26,11 +26,8 @@ abstract class UserHandleModel extends Model
     /* 用户模型自动完成 */
     protected $_auto = array (
         array ('passwd', 'md5', self::MODEL_BOTH, 'function'),
-        array ('add_time', 'getTime', self::MODEL_INSERT,'callback'),
+        array ('add_time', 'getTime', self::MODEL_INSERT,'callback'),//只能是当前模型的方法
         array ('is_audit', '1', self::MODEL_INSERT),
-
-//        array ('last_login_time', 'getTime', self::MODEL_UPDATE,'callback'),
-//        array ('last_login_ip', 'getIp', self::MODEL_UPDATE,'callback'),
     );
 
     static public function  getInstance($type)
@@ -48,8 +45,6 @@ abstract class UserHandleModel extends Model
     }
     public function register($data)
     {
-//        print_r($data);
-//        exit();
         /* 添加用户 */
         if ($this->create ( $data )) {
             $uid = $this->table($this->tableName)->add ();
@@ -123,10 +118,10 @@ abstract class UserHandleModel extends Model
     }
 
 //    //自定义 自动添加函数
-//    function getTime()
-//    {
-//        return timeChange(NOW_TIME);
-//    }
+    function getTime()
+    {
+        return timeChange(NOW_TIME);
+    }
 //    //获取ip
 //    function getIp()
 //    {

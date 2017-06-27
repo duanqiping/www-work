@@ -142,8 +142,8 @@ class UpHeadTool {
     */
     protected function mk_dir($mobile) {
         //$dir = ROOT . 'data/images/' . date('Ym/d');
-        $dir = MROOT . 'Guest/upload/photo/'.$mobile;
-
+//        $dir = MROOT . 'Guest/upload/photo/'.$mobile;
+        $dir = MROOT.'public/guest/upload/photo/'.$mobile;
         if(is_dir($dir) || mkdir($dir,0777,true)) {
             return $dir;
         } else {

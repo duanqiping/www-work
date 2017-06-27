@@ -136,7 +136,7 @@ class UserController extends BaseController{
 
         $_SESSION = $res;
         unset($_SESSION['passwd']);
-//        setcookie('remuser',$mobile,time()+14*24*3600);
+        setcookie('remuser',$mobile,time()+14*24*3600);
 
         //记录到登录表
         //判断登陆表是否有记录
@@ -161,6 +161,7 @@ class UserController extends BaseController{
 
         }
         unset($res['passwd']);
+        $res['img'] = NROOT.$res['img'];
         sendSuccess($res);
     }
 
@@ -188,7 +189,8 @@ class UserController extends BaseController{
             }
         }
         else {
-//            $ori_img = str_replace('Guest/', '', $ori_img);
+            $user = new UserModel();
+            $user->where(array('user_id'=>session('user_id')))->save(array('img'=>$ori_img));
             $ori_img = NROOT.$ori_img;
             sendSuccess($ori_img);
         }
@@ -209,7 +211,7 @@ class UserController extends BaseController{
                 $condition['user_id'] = session('user_id');
                 $info = $user->where($condition)->field($user->user_field)->find();
 
-                $info['img'] = NROOT.'Guest/'.$info['img'];
+                $info['img'] = NROOT.$info['img'];
 
                 sendSuccess($info);
             } else {

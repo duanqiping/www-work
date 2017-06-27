@@ -29,13 +29,22 @@ class UserModel extends Model
     {
         //要获取注册验证码
         if (1 == $type) {
-            if ($this->checkAccount($mobile,'home')) return '用户已注册';
+            if ($this->checkAccount($mobile)) return '用户已注册';
         }
         //要获取忘记密码验证码
         else{
-            if (!$this->checkAccount($mobile,'home')) return '用户不存在';
+            if (!$this->checkAccount($mobile)) return '用户不存在';
         }
         return null;
+    }
+    //检查用户账号
+    public function checkAccount($account)
+    {
+        $condition['account'] =  $account;
+        $count = $this->table($this->tableName)->where($condition)->count();
+
+        if($count>0) return true;//已经注册
+        else return false;//未注册
     }
 
     //用户登录

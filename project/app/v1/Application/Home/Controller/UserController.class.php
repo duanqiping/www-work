@@ -96,16 +96,8 @@ class UserController extends BaseController{
 
             //检查用户是否注册
             if($user_id = $user->reg($data)){
-
                 setcookie('remuser',$data['mobile'],time()+14*24*3600);
-
-                //记录到登录表
-                $useronline = M('UserOnline');
-                $data_online = array('user_id'=>$user_id,'addr'=>$_SERVER['SERVER_ADDR'],'active_time'=>time());
-                if(! $useronline->add($data_online)) sendServerError('插入失败');
-
                 $user_info  = $user->getUserInfo($user_id);
-                //注册成功 返回一些用户信息
                 sendSuccess($user_info);
             }
             else{
@@ -129,39 +121,12 @@ class UserController extends BaseController{
         if(empty($passwd)) sendError('密码不能为空');
 
         $user = new UserModel();
-        $res = $user->where(array('account'=>$mobile))->field($user->user_field = $user->user_field.',passwd')->find();
-
-        if($res['passwd'] != md5($passwd)) sendError('用户名密码不匹配');
-        if(!$res['is_check']) sendError('用户已经被屏蔽');
-
-        $_SESSION = $res;
-        unset($_SESSION['passwd']);
+        $res = $user->login($mobile,$passwd);
+        if(!$res){
+            sendError($user->getError());
+        }
         setcookie('remuser',$mobile,time()+14*24*3600);
 
-        //记录到登录表
-        //判断登陆表是否有记录
-        $useronline = M('UserOnline');
-        $condition['user_id'] = $res['user_id'];
-
-        $sql = "select count(*) as count from user_online WHERE user_id='{$res['user_id']}'";
-        $count_res = $user->query($sql);
-
-        if($count_res[0]['count'])
-        {
-            /** 修改下登录时间*/
-            $sql2 = 'update user_online set active_time='.NOW_TIME.' where user_id='.$res['user_id'];
-            $useronline->execute($sql2);
-        }
-        else
-        {
-            /** 插入一条记录*/
-            $time = NOW_TIME;
-            $sql3 = "insert into user_online (user_id,addr,active_time) VALUES ('{$res['user_id']}','{$_SERVER['SERVER_ADDR']}','$time')";
-            $user->execute($sql3);
-
-        }
-        unset($res['passwd']);
-        $res['img'] = NROOT.$res['img'];
         sendSuccess($res);
     }
 

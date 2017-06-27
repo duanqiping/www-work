@@ -39,16 +39,29 @@ class UserModel extends Model
     }
 
     //用户登录
-    public function login($account,$passwd,$flag)
+    public function login($account,$passwd)
     {
         $condition['account'] = $account;
-        $res = $this->table($this->tableName)->where($condition)->field('name,passwd,account')->find();
-
+        $res = $this->table($this->tableName)->where($condition)->field($this->user_field.',passwd')->find();
+        if(!$res)
+        {
+            $this->error = '账号不存在';
+            return false;
+        }
+        if(!$res['is_check']){
+            $this->error = '用户已经被屏蔽';
+            return false;
+        }
         if($res['passwd'] == md5($passwd)){
-            $this->autoLogin($res,$flag);
+            unset($res['passwd']);
+            $res['img'] = NROOT.$res['img'];
+            $this->autoLogin($res);
             return $res;
         }
-        else return false;
+        else{
+            $this->error = '账号或密码有误';
+            return false;
+        }
     }
 
     //退出
@@ -56,22 +69,6 @@ class UserModel extends Model
     {
         session ( 'user', null );
     }
-    //检查用户账号
-    public function checkAccount($account,$from)
-    {
-        if($from == 'home')
-        {
-            $condition['account'] =  $account;
-            $count = $this->table($this->tableName)->where($condition)->count();
-
-            if($count>0) return true;//已经注册
-            else return false;//未注册
-        }
-        else{
-            return 'admin';
-        }
-    }
-
     //注册
     public function reg($data)
     {
@@ -95,15 +92,22 @@ class UserModel extends Model
     }
 
     //保存用户信息
-    private  function autoLogin($user,$falg) {
+    private  function autoLogin($info) {
 
         /* 更新登录信息 */
         /* 记录登录SESSION和COOKIES */
-        $user = array (
-            'flag' => $falg,
-            'name' => $user ['name'],
-            'account' => $user ['account'],
+
+        /* 更新登录信息 */
+        $data = array (
+            'login_count' => array (
+                'exp',
+                '`login_count`+1'
+            ),
+            'last_login_time' => timeChange(NOW_TIME),
+            'last_login_ip' => get_client_ip ( 0 )//0字串 1整数
         );
-        session ( 'user', $user);//用户 分系统用户 供应商等
+        $this->where(array('account'=>$info ['account']))->save ( $data );
+
+        $_SESSION = $info;
     }
 }

@@ -21,7 +21,7 @@ class AdminModel extends ConsumerHandleModel
     /* 用户模型自动完成 */
     protected $_auto = array (
         array ('passwd', 'md5', self::MODEL_BOTH, 'function'),
-        array ('add_time', 'getTime', self::MODEL_INSERT,'callback'),//只能是当前模型的方法
+        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
         array ('is_audit', '1', self::MODEL_INSERT),
     );
     

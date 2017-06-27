@@ -40,11 +40,6 @@ function is_mobile_legal($mobile)
     return $mobile;//规范
 }
 
-function timeChange($time)
-{
-    return date("Y-m-d H:i:s",$time);
-}
-
 //过滤掉英文单双引号
 function is_scalar_if($arr)
 {

@@ -80,7 +80,7 @@ class UserModel extends Model
         $data['nick'] = $data['account'];
         $data['is_check'] = 1;
         $data['sex'] = 1;
-        $data['register_time'] = timeChange(NOW_TIME);
+        $data['register_time'] = NOW_TIME;
 
         $b = $this->add($data);
         if(!$b)
@@ -103,7 +103,7 @@ class UserModel extends Model
                 'exp',
                 '`login_count`+1'
             ),
-            'last_login_time' => timeChange(NOW_TIME),
+            'last_login_time' => NOW_TIME,
             'last_login_ip' => get_client_ip ( 0 )//0字串 1整数
         );
         $this->where(array('account'=>$info ['account']))->save ( $data );

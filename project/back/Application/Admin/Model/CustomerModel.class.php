@@ -24,6 +24,17 @@ class CustomerModel extends ConsumerHandleModel
         array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
     );
 
+    public function getList()
+    {
+        $condition['is_show'] = 1;
+        $info = $this->where($condition)
+            ->field('customer_id,account,name,agent_id,customer_addr,score_table,description,last_login_time,last_login_ip')
+            ->order('agent_id desc')
+            ->select();
+        return  $info ;
+    }
+
+    //完善数据
     public function makeData($data)
     {
         //生成自己的code
@@ -38,41 +49,86 @@ class CustomerModel extends ConsumerHandleModel
             }
         }
         $data['code'] = $code;
-        $data['device_tabel'] =  $device_table= 'device_'.$code;
-        $b = $this->createDeviceTable($device_table = 'device_7484');
+        $data['score_table'] =  $score_table= 'score_'.$code;
+        $data['rank_y_table'] =  $rank_y_table= 'rank_y_'.$code;
+        $data['rank_m_table'] =  $rank_m_table= 'rank_m_'.$code;
+        $data['rank_w_table'] =  $rank_w_table= 'rank_w_'.$code;
+
+//        print_r($data);
+//        exit();
+
+        $b = $this->createScoreAndRankTable($score_table,$rank_y_table,$rank_m_table,$rank_w_table);
         if(!$b){
-            $this->error = '设备表创建失败';
+            $this->error = '服务器错误';
+            $sql1 = "DROP TABLE IF EXISTS $score_table";
+            $sql2 = "DROP TABLE IF EXISTS $rank_y_table";
+            $sql3 = "DROP TABLE IF EXISTS $rank_m_table";
+            $sql4 = "DROP TABLE IF EXISTS $rank_w_table";
+            $this->execute($sql1);
+            $this->execute($sql2);
+            $this->execute($sql3);
+            $this->execute($sql4);
             return false;
         }else{
             return $data;
         }
     }
-    private function createDeviceTable($table)
+
+    private function createScoreAndRankTable($score_table,$rank_y_table,$rank_m_table,$rank_w_table)
     {
-        $sql = "CREATE TABLE IF NOT EXISTS $table (
-                        customer_id int(11) NOT NULL AUTO_INCREMENT,
-                      code char(6) NOT NULL DEFAULT '0' COMMENT '系统生成唯一编码',
-                      name varchar(50) NOT NULL DEFAULT '' COMMENT '客户名称',
-                      account char(11) NOT NULL DEFAULT '' COMMENT '客户账号',
-                      passwd char(32) NOT NULL DEFAULT '' COMMENT '客户密码',
-                      agent_id int(11) NOT NULL DEFAULT '0' COMMENT '客户归属',
-                      customer_addr varchar(200) NOT NULL DEFAULT '' COMMENT '地址',
-                      customer_mobile int(11) NOT NULL DEFAULT '0' COMMENT '联系号码',
-                      device_num int(11) NOT NULL DEFAULT '0' COMMENT '设备数量',
-                      grade tinyint(4) NOT NULL DEFAULT '3' COMMENT '用户级别',
-                      score_table varchar(30) NOT NULL DEFAULT '' COMMENT '对应成绩表',
-                      sort_table varchar(30) NOT NULL DEFAULT '' COMMENT '对应成绩排行表',
-                      description varchar(50) NOT NULL DEFAULT '' COMMENT '赛道种类',
-                      is_show tinyint(4) NOT NULL DEFAULT '1' COMMENT '0屏蔽 1开启',
-                      last_login_time timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次登陆时间',
-                      last_login_ip varchar(30) NOT NULL DEFAULT '' COMMENT '最后一次登陆ip',
-                      login_count int(11) NOT NULL DEFAULT '0' COMMENT '登陆次数',
-                      PRIMARY KEY (customer_id)
+        $sql = "CREATE TABLE IF NOT EXISTS $score_table (
+                      score_id bigint(20) NOT NULL AUTO_INCREMENT,
+                      user_id int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+                      begin_time int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+                      end_time int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+                      time int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+                      add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+                      length int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+                      cycles int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
+                      customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+                      mode tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+                      PRIMARY KEY (score_id)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
                 ";
-        $b = $this->execute($sql);
-        if($b === false) return false;
-        else return true;
+        $sql2 = "CREATE TABLE IF NOT EXISTS $rank_y_table (
+                      rank_id int(11) NOT NULL AUTO_INCREMENT,
+                      user_id int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+                      customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+                      score_id int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+                      cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+                      time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+                      add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+                      PRIMARY KEY (rank_id)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+                ";
+        $sql3 = "CREATE TABLE IF NOT EXISTS $rank_m_table (
+                      rank_id int(11) NOT NULL AUTO_INCREMENT,
+                      user_id int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+                      customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+                      score_id int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+                      cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+                      time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+                      add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+                      PRIMARY KEY (rank_id)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+                ";
+        $sql4 = "CREATE TABLE IF NOT EXISTS $rank_w_table (
+                      rank_id int(11) NOT NULL AUTO_INCREMENT,
+                      user_id int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+                      customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+                      score_id int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+                      cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+                      time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+                      add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+                      PRIMARY KEY (rank_id)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+                ";
 
+        $b = $this->execute($sql);
+        $b2 = $this->execute($sql2);
+        $b3 = $this->execute($sql3);
+        $b4 = $this->execute($sql4);
+        if($b === false || $b2===false || $b3 === false || $b4===false) return false;
+        else return true;
     }
 }

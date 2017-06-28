@@ -45,6 +45,14 @@ abstract class ConsumerHandleModel extends Model
 
     }
 
+    public function delete($id)
+    {
+        $condition[$this->getPk()] = $id;
+        $b = $this->table($this->tableName)->where($condition)->setField('is_show',0);
+        if($b) return true;
+        else return false;
+    }
+
     //用户登录
     public function login($account,$passwd)
     {
@@ -63,20 +71,20 @@ abstract class ConsumerHandleModel extends Model
     }
 
     //检查用户账号
-    public function checkAccount($account,$from)
-    {
-        if($from == 'home')
-        {
-            $condition['account'] =  $account;
-            $count = $this->table($this->tableName)->where($condition)->count();
-
-            if($count>0) return true;//已经注册
-            else return false;//未注册
-        }
-        else{
-            return 'admin';
-        }
-    }
+//    public function checkAccount($account,$from)
+//    {
+//        if($from == 'home')
+//        {
+//            $condition['account'] =  $account;
+//            $count = $this->table($this->tableName)->where($condition)->count();
+//
+//            if($count>0) return true;//已经注册
+//            else return false;//未注册
+//        }
+//        else{
+//            return 'admin';
+//        }
+//    }
 
 
     //保存用户信息
@@ -101,6 +109,10 @@ abstract class ConsumerHandleModel extends Model
             'table' => $this->tableName,
         );
         $_SESSION['user'] = $info;//用户 分系统用户 供应商等
+    }
+    public function makeData($data)
+    {
+        return $data;
     }
 
 //    //自定义 自动添加函数

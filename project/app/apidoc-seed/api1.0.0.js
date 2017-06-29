@@ -145,3 +145,79 @@
   *  "code": 1
   *}
   **/
+
+ /**
+  * @api {get} v1/home/rank/location 客户地理位置信息
+  * @apiVersion 1.0.0
+
+  * @apiGroup rank
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *[
+  *{
+  *    "customer_id": "15",
+  *    "name": "维也纳酒店",
+  *    "longitude_y": "121.5072970945",
+  *    "latitude_x": "30.9051522416"
+  *},
+  *{
+  *    "customer_id": "16",
+  *    "name": "东奉大酒店",
+  *    "longitude_y": "121.5045397836",
+  *    "latitude_x": "30.9080152914"
+  *}
+  *]
+  **/
+
+ /**
+  * @api {get} v1/home/rank/nearby 最近的一个客户
+  * @apiVersion 1.0.0
+
+  * @apiGroup rank
+  *
+  * @apiParam {String} latitude_x 纬度
+  * @apiParam {String} longitude_y 经度
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+  *    "customer_id": "16",
+  *    "name": "东奉大酒店",
+  *    "longitude_y": "121.5045397836",
+  *    "latitude_x": "30.9080152914"
+  *}
+  **/
+
+ /**
+  * @api {get} v1/home/rank/rank 成绩排行
+  * @apiVersion 1.0.0
+
+  * @apiGroup rank
+  *
+  * @apiParam {String} customer_id 客户id
+  * @apiParam {String} cycles 圈数
+  * @apiParam {String} flag week(当周)month(当月)year(当年)
+  * @apiParam {String} page 页数
+  * @apiParam {String} pageSize 每页大小
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *[
+  *{
+  *    "rank_id": "10",
+  *    "user_id": "222",
+  *    "customer_id": "14",
+  *    "score_id": "36",
+  *    "cycles": "1",
+  *    "time": "222",
+  *    "add_time": "1498654279"
+  *},
+  *{
+  *    "rank_id": "8",
+  *    "user_id": "111",
+  *    "customer_id": "14",
+  *    "score_id": "34",
+  *    "cycles": "1",
+  *    "time": "1231548",
+  *    "add_time": "1498395075"
+  *}
+  *]
+  **/

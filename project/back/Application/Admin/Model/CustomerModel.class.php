@@ -49,33 +49,21 @@ class CustomerModel extends ConsumerHandleModel
             }
         }
         $data['code'] = $code;
-        $data['score_table'] =  $score_table= 'score_'.$code;
-        $data['rank_y_table'] =  $rank_y_table= 'rank_y_'.$code;
-        $data['rank_m_table'] =  $rank_m_table= 'rank_m_'.$code;
-        $data['rank_w_table'] =  $rank_w_table= 'rank_w_'.$code;
-
-//        print_r($data);
-//        exit();
-
-        $b = $this->createScoreAndRankTable($score_table,$rank_y_table,$rank_m_table,$rank_w_table);
-        if(!$b){
-            $this->error = '服务器错误';
-            $sql1 = "DROP TABLE IF EXISTS $score_table";
-            $sql2 = "DROP TABLE IF EXISTS $rank_y_table";
-            $sql3 = "DROP TABLE IF EXISTS $rank_m_table";
-            $sql4 = "DROP TABLE IF EXISTS $rank_w_table";
-            $this->execute($sql1);
-            $this->execute($sql2);
-            $this->execute($sql3);
-            $this->execute($sql4);
-            return false;
-        }else{
-            return $data;
-        }
+        $data['score_table'] =  $score_table= 'z_score_'.$code;
+        $data['rank_y_table'] =  $rank_y_table= 'z_rank_y_'.$code;
+        $data['rank_m_table'] =  $rank_m_table= 'z_rank_m_'.$code;
+        $data['rank_w_table'] =  $rank_w_table= 'z_rank_w_'.$code;
+        return $data;
     }
 
-    private function createScoreAndRankTable($score_table,$rank_y_table,$rank_m_table,$rank_w_table)
+
+    public function createScoreAndRankTable($data)
     {
+        $score_table = $data['score_table'];
+        $rank_y_table = $data['rank_y_table'];
+        $rank_m_table = $data['rank_m_table'];
+        $rank_w_table = $data['rank_w_table'];
+
         $sql = "CREATE TABLE IF NOT EXISTS $score_table (
                       score_id bigint(20) NOT NULL AUTO_INCREMENT,
                       user_id int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
@@ -128,7 +116,18 @@ class CustomerModel extends ConsumerHandleModel
         $b2 = $this->execute($sql2);
         $b3 = $this->execute($sql3);
         $b4 = $this->execute($sql4);
-        if($b === false || $b2===false || $b3 === false || $b4===false) return false;
+        if($b === false || $b2===false || $b3 === false || $b4===false){
+            $this->error = '服务器错误';
+            $sql1 = "DROP TABLE IF EXISTS $score_table";
+            $sql2 = "DROP TABLE IF EXISTS $rank_y_table";
+            $sql3 = "DROP TABLE IF EXISTS $rank_m_table";
+            $sql4 = "DROP TABLE IF EXISTS $rank_w_table";
+            $this->execute($sql1);
+            $this->execute($sql2);
+            $this->execute($sql3);
+            $this->execute($sql4);
+            return false;
+        }
         else return true;
     }
 }

@@ -23,8 +23,8 @@ define({ "api": [
     "url": "",
     "version": "0.0.0",
     "filename": "apidoc-seed/doc/main.js",
-    "group": "C__wamp_www_project_apidoc_seed_doc_main_js",
-    "groupTitle": "C__wamp_www_project_apidoc_seed_doc_main_js",
+    "group": "C__wamp_www_project_app_apidoc_seed_doc_main_js",
+    "groupTitle": "C__wamp_www_project_app_apidoc_seed_doc_main_js",
     "name": ""
   },
   {
@@ -51,9 +51,127 @@ define({ "api": [
     "url": "",
     "version": "0.0.0",
     "filename": "apidoc-seed/template/main.js",
-    "group": "C__wamp_www_project_apidoc_seed_template_main_js",
-    "groupTitle": "C__wamp_www_project_apidoc_seed_template_main_js",
+    "group": "C__wamp_www_project_app_apidoc_seed_template_main_js",
+    "groupTitle": "C__wamp_www_project_app_apidoc_seed_template_main_js",
     "name": ""
+  },
+  {
+    "type": "get",
+    "url": "v1/home/rank/location",
+    "title": "客户地理位置信息",
+    "version": "1.0.0",
+    "group": "rank",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "[\n{\n   \"customer_id\": \"15\",\n   \"name\": \"维也纳酒店\",\n   \"longitude_y\": \"121.5072970945\",\n   \"latitude_x\": \"30.9051522416\"\n},\n{\n   \"customer_id\": \"16\",\n   \"name\": \"东奉大酒店\",\n   \"longitude_y\": \"121.5045397836\",\n   \"latitude_x\": \"30.9080152914\"\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "rank",
+    "name": "GetV1HomeRankLocation"
+  },
+  {
+    "type": "get",
+    "url": "v1/home/rank/nearby",
+    "title": "最近的一个客户",
+    "version": "1.0.0",
+    "group": "rank",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latitude_x",
+            "description": "<p>纬度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "longitude_y",
+            "description": "<p>经度</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n   \"customer_id\": \"16\",\n   \"name\": \"东奉大酒店\",\n   \"longitude_y\": \"121.5045397836\",\n   \"latitude_x\": \"30.9080152914\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "rank",
+    "name": "GetV1HomeRankNearby"
+  },
+  {
+    "type": "get",
+    "url": "v1/home/rank/rank",
+    "title": "成绩排行",
+    "version": "1.0.0",
+    "group": "rank",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "cycles",
+            "description": "<p>圈数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "flag",
+            "description": "<p>week(当周)month(当月)year(当年)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页大小</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "[\n{\n   \"rank_id\": \"10\",\n   \"user_id\": \"222\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"36\",\n   \"cycles\": \"1\",\n   \"time\": \"222\",\n   \"add_time\": \"1498654279\"\n},\n{\n   \"rank_id\": \"8\",\n   \"user_id\": \"111\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"34\",\n   \"cycles\": \"1\",\n   \"time\": \"1231548\",\n   \"add_time\": \"1498395075\"\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "rank",
+    "name": "GetV1HomeRankRank"
   },
   {
     "type": "get",

@@ -14,7 +14,7 @@ class Map
     private static $EARTH_RADIUS = 6378.137;//地球半径,单位千米
 
     protected $customer = array();//客户信息
-    protected $length = 0;//最短距离
+    protected $length = array();//最短距离
 
     private static function rad($d)
     {
@@ -33,8 +33,8 @@ class Map
     {
         for($i=0,$len=count($data);$i<$len;$i++)
         {
-            $lat2 = $data['latitude_x'];
-            $lng2 = $data['longitude_y'];
+            $lat2 = $data[$i]['latitude_x'];
+            $lng2 = $data[$i]['longitude_y'];
 
             $radLat1 = self::rad($lat1);
             $radLat2 = self::rad($lat2);
@@ -48,7 +48,7 @@ class Map
 
             if($this->length == 0 || $this->length > $s){
                 $this->customer = $data[$i];
-                $this->length = $s;
+                $this->length[] = $s;
             }
         }
         return $this->customer;

@@ -16,13 +16,22 @@ use Think\Controller;
 
 class RankController extends Controller{
 
+    protected $cycles = array(1,2,3,4,5);
     //获取客户信息
     protected function customerInfo()
     {
         $customer = M('customer');
+        $map['is_show'] = 1;
         $map['longitude_y'] = array('GT',0);
         $map['latitude_x'] = array('GT',0);
-        $res = $customer->where($map)->field('customer_id,name,longitude_y,latitude_x')->select();
+        $res = $customer->where($map)->field('customer_id,name,length,longitude_y,latitude_x')->select();
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            if($res[$i]['length'] == 200) $this->cycles = array(2,4,6,8,10);
+            else $this->cycles = array(1,2,3,4,5);
+            $res[$i]['cycles'] = $this->cycles;
+        }
+
         return $res;
     }
 

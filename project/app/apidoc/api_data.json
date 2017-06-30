@@ -65,7 +65,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "[\n{\n   \"customer_id\": \"15\",\n   \"name\": \"维也纳酒店\",\n   \"longitude_y\": \"121.5072970945\",\n   \"latitude_x\": \"30.9051522416\"\n},\n{\n   \"customer_id\": \"16\",\n   \"name\": \"东奉大酒店\",\n   \"longitude_y\": \"121.5045397836\",\n   \"latitude_x\": \"30.9080152914\"\n}\n]",
+          "content": "[\n{\n   \"customer_id\": \"15\",\n   \"name\": \"维也纳酒店\",\n   \"length\": \"400\",\n   \"longitude_y\": \"121.5072970945\",\n   \"latitude_x\": \"30.9051522416\"\n   \"cycles\": [\n         \"1\",\n         \"2\",\n         \"3\",\n         \"4\",\n         \"5\"\n     ]\n},\n{\n   \"customer_id\": \"16\",\n   \"name\": \"东奉大酒店\",\n   \"length\": \"200\",\n   \"longitude_y\": \"121.5045397836\",\n   \"latitude_x\": \"30.9080152914\"\n   *    \"cycles\": [\n         \"2\",\n         \"4\",\n         \"6\",\n         \"8\",\n         \"10\"\n     ]\n}\n]",
           "type": "json"
         }
       ]

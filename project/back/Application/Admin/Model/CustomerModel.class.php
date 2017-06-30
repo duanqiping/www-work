@@ -75,7 +75,13 @@ class CustomerModel extends ConsumerHandleModel
                       cycles int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
                       customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
                       mode tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
-                      PRIMARY KEY (score_id)
+                      flag int(11) NOT NULL DEFAULT '0' COMMENT '一次成绩的标志',
+                      PRIMARY KEY (score_id),
+                      KEY user_id (user_id),
+                      KEY time (time),
+                      KEY customer_id (customer_id),
+                      KEY add_time (add_time),
+                      KEY flag (flag)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
                 ";
         $sql2 = "CREATE TABLE IF NOT EXISTS $rank_y_table (
@@ -86,7 +92,15 @@ class CustomerModel extends ConsumerHandleModel
                       cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
                       time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
                       add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-                      PRIMARY KEY (rank_id)
+                      length int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+                      PRIMARY KEY (rank_id),
+                      KEY user_id (user_id),
+                      KEY customer_id (customer_id),
+                      KEY score_id (score_id),
+                      KEY cycles (cycles),
+                      KEY time (time),
+                      KEY add_time (add_time),
+                      KEY length (length)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
                 ";
         $sql3 = "CREATE TABLE IF NOT EXISTS $rank_m_table (
@@ -97,7 +111,15 @@ class CustomerModel extends ConsumerHandleModel
                       cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
                       time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
                       add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-                      PRIMARY KEY (rank_id)
+                      length int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+                      PRIMARY KEY (rank_id),
+                      KEY user_id (user_id),
+                      KEY customer_id (customer_id),
+                      KEY score_id (score_id),
+                      KEY cycles (cycles),
+                      KEY time (time),
+                      KEY add_time (add_time),
+                      KEY length (length)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
                 ";
         $sql4 = "CREATE TABLE IF NOT EXISTS $rank_w_table (
@@ -108,7 +130,15 @@ class CustomerModel extends ConsumerHandleModel
                       cycles tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
                       time int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
                       add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-                      PRIMARY KEY (rank_id)
+                      length int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+                      PRIMARY KEY (rank_id),
+                      KEY user_id (user_id),
+                      KEY customer_id (customer_id),
+                      KEY score_id (score_id),
+                      KEY cycles (cycles),
+                      KEY time (time),
+                      KEY add_time (add_time),
+                      KEY length (length)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
                 ";
 

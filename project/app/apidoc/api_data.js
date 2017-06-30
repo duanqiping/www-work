@@ -134,7 +134,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "cycles",
-            "description": "<p>圈数</p>"
+            "description": "<p>圈数或马拉松标志(1四分之一 2半程 3全程)</p>"
           },
           {
             "group": "Parameter",
@@ -142,6 +142,14 @@ define({ "api": [
             "optional": false,
             "field": "flag",
             "description": "<p>week(当周)month(当月)year(当年)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "defaultValue": "1",
+            "description": "<p>1圈数2马拉松</p>"
           },
           {
             "group": "Parameter",

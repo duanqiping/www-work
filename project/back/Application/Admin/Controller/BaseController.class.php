@@ -23,6 +23,16 @@ class BaseController extends Controller
         return  ConsumerHandleModel::getInstance($flag);
     }
 
+    //是否为管理员登陆
+    protected  function isAdminLogin()
+    {
+        if($_SESSION['user']['level']>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //获取用户标志
     public function getFlag()
     {
@@ -45,8 +55,6 @@ class BaseController extends Controller
      */
     public function getPower()
     {
-//        var_dump( $_SESSION['user']['table']);
-//        exit();
         switch($_SESSION['user']['table'])
         {
             case 'admin'://超级管理员

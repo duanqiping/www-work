@@ -13,6 +13,9 @@ class AdminModel extends ConsumerHandleModel
 {
     protected $tableName = 'admin';
 
+    protected $power = '';//权限
+    protected $level = 1;//管理员级别 1超级管理员 2普通管理员
+
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
         array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),
@@ -24,6 +27,21 @@ class AdminModel extends ConsumerHandleModel
         array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
         array ('is_audit', '1', self::MODEL_INSERT),
     );
+
+    //权限控制 只能是超级管理员才能对普通管理员进行操作
+    public function powerControl()
+    {
+        $this->level = $_SESSION['user']['level'];
+
+        if($this->level == 1)
+        {
+            return true;//添加管理员
+        }
+        else{
+            $this->error = '该操作只能由超级管理员进行';
+            return false;
+        }
+    }
     
     public function getList()
     {
@@ -33,5 +51,27 @@ class AdminModel extends ConsumerHandleModel
             ->order('admin_id desc')
             ->select();
         return $info;
+    }
+
+    //添加用户 管理员 代理商 客户
+    public function addConsumer(ConsumerHandleModel $consumerHandleModel,$data)
+    {
+        /* 添加用户 */
+        if ($consumerHandleModel->create ( $data )) {
+            $uid = $consumerHandleModel->table($consumerHandleModel->tableName)->add ();
+
+            if($consumerHandleModel instanceof CustomerModel){
+                //创建关联表（成绩表、排行表）
+                if(!$consumerHandleModel->createScoreAndRankTable($data))
+                {
+                    $consumerHandleModel->where(array('customer_id'=>$uid))->delete();
+                    return false;
+                }
+            }
+
+            return $uid ? $uid : 0; // 0-未知错误，大于0-注册成功
+        } else {
+            return $this->getError (); // 错误详情见自动验证注释
+        }
     }
 }

@@ -210,8 +210,9 @@
   * @apiGroup rank
   *
   * @apiParam {String} customer_id 客户id
-  * @apiParam {String} cycles 圈数
+  * @apiParam {String} cycles 圈数或马拉松标志(1四分之一 2半程 3全程)
   * @apiParam {String} flag week(当周)month(当月)year(当年)
+  * @apiParam {String} type=1 1圈数2马拉松
   * @apiParam {String} page 页数
   * @apiParam {String} pageSize 每页大小
 

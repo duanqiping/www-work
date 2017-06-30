@@ -63,9 +63,10 @@ class RankController extends Controller{
         $page = trim($_GET['page']);
         $pageSize = trim($_GET['pageSize']);
         $flag = trim($_GET['flag']);
+        $type = trim($_GET['type'])?trim($_GET['type']):1;
 
         $rank = new RankModel();
-        $data = $rank->getRank($customer_id,$cycles,$flag,$page,$pageSize);
+        $data = $rank->getRank($customer_id,$cycles,$flag,$type,$page,$pageSize);
 
         sendSuccess($data);
     }

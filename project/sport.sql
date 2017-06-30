@@ -73,11 +73,11 @@ CREATE TABLE `admin` (
   `is_audit` tinyint(4) NOT NULL DEFAULT '0' COMMENT '审核状态 0未审核 1已审核',
   `login_count` int(11) NOT NULL DEFAULT '0' COMMENT '登陆次数',
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`admin_id`,`account`,`name`,`passwd`,`add_time`,`is_show`,`last_login_time`,`last_login_ip`,`level`,`grade`,`is_audit`,`login_count`) values (1,'17701804871','admin','45569ff57e980b3412ac5a21b7e5bd68',1482894847,1,1498641207,'192.168.0.118',1,1,1,17),(16,'17701804870','test','00b7691d86d96aebd21dd9e138f90840',1498619647,1,0,'',2,1,1,0),(17,'17701804872','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(18,'17701804873','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(21,'17701804876','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,0,0),(24,'17701804879','test9','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(25,'17701804800','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,2147483647,'192.168.0.118',2,1,1,1),(26,'17701804801','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(27,'17701804807','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(28,'17701804802','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(29,'17701804000','test','00b7691d86d96aebd21dd9e138f90840',1498792447,1,0,'',2,1,1,0);
+insert  into `admin`(`admin_id`,`account`,`name`,`passwd`,`add_time`,`is_show`,`last_login_time`,`last_login_ip`,`level`,`grade`,`is_audit`,`login_count`) values (1,'17701804871','admin','45569ff57e980b3412ac5a21b7e5bd68',1482894847,1,1498802926,'192.168.0.118',1,1,1,21),(16,'17701804870','test','00b7691d86d96aebd21dd9e138f90840',1498619647,1,0,'',2,1,1,0),(17,'17701804872','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(18,'17701804873','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(21,'17701804876','test','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,0,0),(24,'17701804879','test9','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(25,'17701804800','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,2147483647,'192.168.0.118',2,1,1,1),(26,'17701804801','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(27,'17701804807','test5','00b7691d86d96aebd21dd9e138f90840',1484795647,1,0,'',2,1,1,0),(28,'17701804802','test','00b7691d86d96aebd21dd9e138f90840',1484795647,0,0,'',2,1,1,0),(29,'17701804000','test','00b7691d86d96aebd21dd9e138f90840',1498792447,1,0,'',2,1,1,0),(30,'17701804878','管理员','00b7691d86d96aebd21dd9e138f90840',1498801032,1,1498801067,'192.168.0.118',2,1,1,1),(31,'17701804880','管理员2','00b7691d86d96aebd21dd9e138f90840',1498801088,1,0,'',2,1,1,0),(32,'','','',0,1,0,'',0,1,0,0);
 
 /*Table structure for table `agent` */
 
@@ -145,17 +145,20 @@ CREATE TABLE `customer` (
   `rank_m_table` varchar(30) NOT NULL DEFAULT '' COMMENT '月成绩排行榜',
   `rank_w_table` varchar(30) NOT NULL DEFAULT '' COMMENT '周成绩排行榜',
   `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1跑步 2骑行',
+  `length` int(11) NOT NULL DEFAULT '400' COMMENT '跑道长度',
   `is_show` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0屏蔽 1开启',
   `add_time` int(11) NOT NULL DEFAULT '0',
   `last_login_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后一次登陆时间',
   `last_login_ip` varchar(30) NOT NULL DEFAULT '' COMMENT '最后一次登陆ip',
   `login_count` int(11) NOT NULL DEFAULT '0' COMMENT '登陆次数',
+  `longitude_y` varchar(50) NOT NULL DEFAULT '' COMMENT '经度',
+  `latitude_x` varchar(50) NOT NULL DEFAULT '' COMMENT '维度',
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customer` */
 
-insert  into `customer`(`customer_id`,`code`,`name`,`account`,`passwd`,`agent_id`,`customer_addr`,`customer_mobile`,`device_num`,`grade`,`score_table`,`rank_y_table`,`rank_m_table`,`rank_w_table`,`type`,`is_show`,`add_time`,`last_login_time`,`last_login_ip`,`login_count`) values (14,'03947','杭州大学','17701800004','00b7691d86d96aebd21dd9e138f90840',1,'杭州市中心',0,3,3,'score_03947','rank_y_03947','rank_m_03947','rank_w_03947',1,1,1498641422,0,'',0);
+insert  into `customer`(`customer_id`,`code`,`name`,`account`,`passwd`,`agent_id`,`customer_addr`,`customer_mobile`,`device_num`,`grade`,`score_table`,`rank_y_table`,`rank_m_table`,`rank_w_table`,`type`,`length`,`is_show`,`add_time`,`last_login_time`,`last_login_ip`,`login_count`,`longitude_y`,`latitude_x`) values (25,'42001','上海交通大学','17701800000','00b7691d86d96aebd21dd9e138f90840',1,'上海市',0,1,3,'z_score_42001','z_rank_y_42001','z_rank_m_42001','z_rank_w_42001',1,400,1,1498737342,0,'',0,'121.4451735741','31.0292955073'),(26,'38596','华东师范大学','17701800001','00b7691d86d96aebd21dd9e138f90840',1,'上海市',0,1,3,'z_score_38596','z_rank_y_38596','z_rank_m_38596','z_rank_w_38596',1,200,1,1498737428,0,'',0,'121.4130756826','31.2327466049'),(27,'64113','上海师范大学','17701800002','00b7691d86d96aebd21dd9e138f90840',1,'上海市',0,1,3,'z_score_64113','z_rank_y_64113','z_rank_m_64113','z_rank_w_64113',1,400,1,1498737534,0,'',0,'121.4231968672','31.1675712034'),(28,'09182','上海科技大学','17701800003','00b7691d86d96aebd21dd9e138f90840',1,'上海市',0,1,3,'z_score_09182','z_rank_y_09182','z_rank_m_09182','z_rank_w_09182',1,800,1,1498802288,0,'',0,'121.5983467890','31.1847018865'),(30,'19738','上海科技大学2','17701800004','00b7691d86d96aebd21dd9e138f90840',1,'上海市',0,1,3,'z_score_19738','z_rank_y_19738','z_rank_m_19738','z_rank_w_19738',1,800,1,1498826394,0,'',0,'121.5983467890','31.1847018865');
 
 /*Table structure for table `device` */
 
@@ -191,11 +194,11 @@ CREATE TABLE `device_ms` (
 
 insert  into `device_ms`(`device_ms_id`,`ms_code`,`agent_id`,`customer_id`,`time`,`status`,`detail`) values (1,'1120',1,1,2147483647,1,'{\"1\":{\"expire_time\":60,\"target\":2},\"2\":{\"expire_time\":80,\"target\":3},\"3\":{\"expire_time\":100,\"target\":1}}'),(2,'',0,0,0,1,'');
 
-/*Table structure for table `rank_m_03947` */
+/*Table structure for table `rank_marathon` */
 
-DROP TABLE IF EXISTS `rank_m_03947`;
+DROP TABLE IF EXISTS `rank_marathon`;
 
-CREATE TABLE `rank_m_03947` (
+CREATE TABLE `rank_marathon` (
   `rank_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
   `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
@@ -203,72 +206,20 @@ CREATE TABLE `rank_m_03947` (
   `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
   `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
   `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+  PRIMARY KEY (`rank_id`),
+  KEY `user_id` (`user_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `score_id` (`score_id`),
+  KEY `cycles` (`cycles`),
+  KEY `time` (`time`),
+  KEY `add_time` (`add_time`),
+  KEY `length` (`length`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-/*Data for the table `rank_m_03947` */
+/*Data for the table `rank_marathon` */
 
-insert  into `rank_m_03947`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (4,111,14,30,1,1231548,1498655418);
-
-/*Table structure for table `rank_w_03947` */
-
-DROP TABLE IF EXISTS `rank_w_03947`;
-
-CREATE TABLE `rank_w_03947` (
-  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
-  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
-  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
-  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
-  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
-  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-
-/*Data for the table `rank_w_03947` */
-
-insert  into `rank_w_03947`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (7,111,14,30,1,1231548,1498308675),(8,111,14,34,1,1231548,1498395075);
-
-/*Table structure for table `rank_y_03947` */
-
-DROP TABLE IF EXISTS `rank_y_03947`;
-
-CREATE TABLE `rank_y_03947` (
-  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
-  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
-  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
-  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
-  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
-  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-
-/*Data for the table `rank_y_03947` */
-
-insert  into `rank_y_03947`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (8,111,14,30,1,1231548,1498655418);
-
-/*Table structure for table `score_03947` */
-
-DROP TABLE IF EXISTS `score_03947`;
-
-CREATE TABLE `score_03947` (
-  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
-  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
-  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
-  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
-  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
-  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
-  `cycles` int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
-  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
-  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
-  PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
-
-/*Data for the table `score_03947` */
-
-insert  into `score_03947`(`score_id`,`user_id`,`begin_time`,`end_time`,`time`,`add_time`,`length`,`cycles`,`customer_id`,`mode`) values (1,111,123256,123456,1231548,0,100,5,14,1),(2,111,123256,123456,1231548,0,100,1,14,1),(3,111,123256,123456,1231548,0,100,1,14,1),(4,111,123256,123456,1231548,0,100,1,14,1),(5,111,123256,123456,1231548,0,100,1,14,1),(6,111,123256,123456,1231548,0,100,1,14,1),(7,111,123256,123456,1231548,0,100,1,14,1),(8,111,123256,123456,1231548,0,100,1,14,1),(9,111,123256,123456,1231548,0,100,1,14,1),(10,111,123256,123456,1231548,0,100,1,14,1),(11,111,123256,123456,1231548,0,100,1,14,1),(12,111,123256,123456,1231548,0,100,1,14,1),(13,111,123256,123456,1231548,0,100,1,14,1),(14,111,123256,123456,1231548,0,100,1,14,1),(15,111,123256,123456,1231548,0,100,1,14,1),(16,111,123256,123456,1231548,0,100,1,14,1),(17,111,123256,123456,1231548,0,100,1,14,1),(18,111,123256,123456,1231548,0,100,1,14,1),(19,111,123256,123456,1231548,0,100,1,14,1),(20,111,123256,123456,1231548,0,100,1,14,1),(21,111,123256,123456,1231548,0,100,1,14,1),(22,111,123256,123456,1231548,0,100,1,14,1),(23,111,123256,123456,1231548,0,100,1,14,1),(24,111,123256,123456,1231548,0,100,1,14,1),(25,111,123256,123456,1231548,0,100,1,14,1),(26,111,123256,123456,1231548,0,100,1,14,1),(27,111,123256,123456,1231548,0,100,1,14,1),(28,111,123256,123456,1231548,0,100,1,14,1),(29,111,123256,123456,1231548,0,100,1,14,1),(30,111,123256,123456,1231548,0,100,1,14,1),(31,111,123256,123456,1231548,0,100,1,14,1),(32,111,123256,123456,1231548,0,100,1,14,1),(33,111,123256,123456,1231548,0,100,1,14,1),(34,111,123256,123456,1231548,0,100,1,14,1),(35,111,123256,123456,1231548,0,100,1,14,1);
+insert  into `rank_marathon`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`,`length`) values (1,0,0,0,0,0,0,0);
 
 /*Table structure for table `teacher` */
 
@@ -326,7 +277,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`is_check`,`account`,`passwd`,`nick`,`img`,`email`,`qq`,`weixin`,`sex`,`height`,`weight`,`register_time`,`school`,`school_num`,`dept`,`class`,`studentId`,`type`,`customer_id`,`last_login_time`,`last_login_ip`,`login_count`) values (1,1,'17701804871','e10adc3949ba59abbe56e057f20f883e','齐平','','pksanwei@163.com',827068977,'fiosah',1,0,0,0,'',0,'','',0,0,0,2147483647,'192.168.0.118',1),(14,1,'17701804876','00b7691d86d96aebd21dd9e138f90840','段齐平22','public/guest/upload/photo/17701804876/17701804876head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(15,1,'18600000000','4297f44b13955235245b2497399d7a93','18600000000','public/guest/upload/photo/18600000000/18600000000head.jpg','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,1498643399,'192.168.0.100',5),(16,1,'18600000001','e10adc3949ba59abbe56e057f20f883e','18600000001','','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(17,1,'18600000003','4297f44b13955235245b2497399d7a93','18600000003','public/guest/upload/photo/18600000003/18600000003head.jpg','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,1498643147,'192.168.0.100',6),(18,1,'17701804875','00b7691d86d96aebd21dd9e138f90840','17701804875','public/guest/upload/photo/17701804875/17701804875head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(19,1,'17701804878','00b7691d86d96aebd21dd9e138f90840','17701804878','public/guest/upload/photo/17701804878/17701804878head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,2147483647,'192.168.0.118',2);
+insert  into `user`(`user_id`,`is_check`,`account`,`passwd`,`nick`,`img`,`email`,`qq`,`weixin`,`sex`,`height`,`weight`,`register_time`,`school`,`school_num`,`dept`,`class`,`studentId`,`type`,`customer_id`,`last_login_time`,`last_login_ip`,`login_count`) values (1,1,'17701804871','e10adc3949ba59abbe56e057f20f883e','齐平','','pksanwei@163.com',827068977,'fiosah',1,0,0,0,'',0,'','',0,0,0,2147483647,'192.168.0.118',1),(14,1,'17701804876','00b7691d86d96aebd21dd9e138f90840','段齐平22','public/guest/upload/photo/17701804876/17701804876head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(15,1,'18600000000','4297f44b13955235245b2497399d7a93','18600000000','public/guest/upload/photo/18600000000/18600000000head.jpg','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,1498804304,'192.168.0.110',89),(16,1,'18600000001','e10adc3949ba59abbe56e057f20f883e','18600000001','','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(17,1,'18600000003','4297f44b13955235245b2497399d7a93','18600000003','public/guest/upload/photo/18600000003/18600000003head.jpg','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,1498705190,'192.168.0.106',8),(18,1,'17701804875','00b7691d86d96aebd21dd9e138f90840','17701804875','public/guest/upload/photo/17701804875/17701804875head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,0,'',0),(19,1,'17701804878','00b7691d86d96aebd21dd9e138f90840','17701804878','public/guest/upload/photo/17701804878/17701804878head.png','',0,'',1,0,0,2147483647,'',0,'','',0,0,0,2147483647,'192.168.0.118',2);
 
 /*Table structure for table `user_online` */
 
@@ -343,6 +294,420 @@ CREATE TABLE `user_online` (
 /*Data for the table `user_online` */
 
 insert  into `user_online`(`online_id`,`user_id`,`addr`,`active_time`) values (1,4,'192.168.0.115',1498011996),(2,7,'192.168.0.115',1498013119),(3,8,'192.168.0.115',1498013573),(4,9,'192.168.0.115',1498029502),(6,14,'192.168.0.115',1498530905),(7,15,'192.168.0.115',1498528836),(8,16,'192.168.0.115',1498036486),(10,1,'192.168.0.108',1498538929),(11,17,'192.168.0.118',1498528821),(12,18,'192.168.0.118',1498528592),(13,19,'192.168.0.118',1498538783);
+
+/*Table structure for table `z_rank_m_09182` */
+
+DROP TABLE IF EXISTS `z_rank_m_09182`;
+
+CREATE TABLE `z_rank_m_09182` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+  PRIMARY KEY (`rank_id`),
+  KEY `user_id` (`user_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `score_id` (`score_id`),
+  KEY `cycles` (`cycles`),
+  KEY `time` (`time`),
+  KEY `add_time` (`add_time`),
+  KEY `length` (`length`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_m_09182` */
+
+/*Table structure for table `z_rank_m_19738` */
+
+DROP TABLE IF EXISTS `z_rank_m_19738`;
+
+CREATE TABLE `z_rank_m_19738` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+  PRIMARY KEY (`rank_id`),
+  KEY `user_id` (`user_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `score_id` (`score_id`),
+  KEY `cycles` (`cycles`),
+  KEY `time` (`time`),
+  KEY `add_time` (`add_time`),
+  KEY `length` (`length`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_m_19738` */
+
+insert  into `z_rank_m_19738`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`,`length`) values (1,15,30,4,4,400,1498828147,34400),(2,15,30,5,5,500,1498828413,43000),(3,15,30,6,6,600,1498828435,51700),(4,15,30,7,1,50,1498828472,400),(5,15,30,8,2,100,1498828481,800),(6,15,30,9,3,150,1498828490,1200),(7,15,30,13,7,650,1498828773,52100);
+
+/*Table structure for table `z_rank_m_38596` */
+
+DROP TABLE IF EXISTS `z_rank_m_38596`;
+
+CREATE TABLE `z_rank_m_38596` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_m_38596` */
+
+/*Table structure for table `z_rank_m_42001` */
+
+DROP TABLE IF EXISTS `z_rank_m_42001`;
+
+CREATE TABLE `z_rank_m_42001` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_m_42001` */
+
+insert  into `z_rank_m_42001`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (1,1,25,1,1,200,1498738085),(2,1,25,3,2,420,1498738140),(3,1,25,4,3,666,1498738145),(4,1,25,5,4,1099,1498738152),(5,1,25,6,5,2000,1498738170),(6,15,25,7,1,20,1498738226),(7,15,25,8,2,55,1498738230),(8,15,25,9,3,200,1498738243),(9,15,25,10,4,290,1498738248);
+
+/*Table structure for table `z_rank_m_64113` */
+
+DROP TABLE IF EXISTS `z_rank_m_64113`;
+
+CREATE TABLE `z_rank_m_64113` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_m_64113` */
+
+/*Table structure for table `z_rank_w_09182` */
+
+DROP TABLE IF EXISTS `z_rank_w_09182`;
+
+CREATE TABLE `z_rank_w_09182` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_w_09182` */
+
+/*Table structure for table `z_rank_w_19738` */
+
+DROP TABLE IF EXISTS `z_rank_w_19738`;
+
+CREATE TABLE `z_rank_w_19738` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+  PRIMARY KEY (`rank_id`),
+  KEY `user_id` (`user_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `score_id` (`score_id`),
+  KEY `cycles` (`cycles`),
+  KEY `time` (`time`),
+  KEY `add_time` (`add_time`),
+  KEY `length` (`length`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_w_19738` */
+
+insert  into `z_rank_w_19738`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`,`length`) values (1,15,30,4,4,400,1498828147,34400),(2,15,30,5,5,500,1498828413,43000),(3,15,30,6,6,600,1498828435,51700),(4,15,30,7,1,50,1498828472,400),(5,15,30,8,2,100,1498828481,800),(6,15,30,9,3,150,1498828490,1200),(7,15,30,13,7,650,1498828773,52100);
+
+/*Table structure for table `z_rank_w_38596` */
+
+DROP TABLE IF EXISTS `z_rank_w_38596`;
+
+CREATE TABLE `z_rank_w_38596` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_w_38596` */
+
+/*Table structure for table `z_rank_w_42001` */
+
+DROP TABLE IF EXISTS `z_rank_w_42001`;
+
+CREATE TABLE `z_rank_w_42001` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_w_42001` */
+
+insert  into `z_rank_w_42001`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (1,1,25,1,1,200,1498738085),(2,1,25,3,2,333,1498738140),(3,1,25,4,3,444,1498738145),(4,1,25,5,4,888,1498738152),(5,1,25,6,5,2000,1498738170),(6,15,25,7,1,20,1498738226),(7,15,25,8,2,55,1498738230),(8,15,25,9,3,345,1498738243),(9,15,25,10,4,543,1498738248),(10,1,25,11,127,11120,1498738800);
+
+/*Table structure for table `z_rank_w_64113` */
+
+DROP TABLE IF EXISTS `z_rank_w_64113`;
+
+CREATE TABLE `z_rank_w_64113` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_w_64113` */
+
+/*Table structure for table `z_rank_y_09182` */
+
+DROP TABLE IF EXISTS `z_rank_y_09182`;
+
+CREATE TABLE `z_rank_y_09182` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_y_09182` */
+
+/*Table structure for table `z_rank_y_19738` */
+
+DROP TABLE IF EXISTS `z_rank_y_19738`;
+
+CREATE TABLE `z_rank_y_19738` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '长度',
+  PRIMARY KEY (`rank_id`),
+  KEY `user_id` (`user_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `score_id` (`score_id`),
+  KEY `cycles` (`cycles`),
+  KEY `time` (`time`),
+  KEY `add_time` (`add_time`),
+  KEY `length` (`length`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_y_19738` */
+
+insert  into `z_rank_y_19738`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`,`length`) values (1,15,30,4,4,400,1498828147,34400),(2,15,30,5,5,500,1498828413,43000),(3,15,30,6,6,600,1498828435,51700),(4,15,30,7,1,50,1498828472,400),(5,15,30,8,2,100,1498828481,800),(6,15,30,9,3,150,1498828490,1200),(7,15,30,13,7,650,1498828773,52100);
+
+/*Table structure for table `z_rank_y_38596` */
+
+DROP TABLE IF EXISTS `z_rank_y_38596`;
+
+CREATE TABLE `z_rank_y_38596` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_y_38596` */
+
+/*Table structure for table `z_rank_y_42001` */
+
+DROP TABLE IF EXISTS `z_rank_y_42001`;
+
+CREATE TABLE `z_rank_y_42001` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_y_42001` */
+
+insert  into `z_rank_y_42001`(`rank_id`,`user_id`,`customer_id`,`score_id`,`cycles`,`time`,`add_time`) values (1,1,25,1,1,432,1498738085),(2,1,25,3,2,565,1498738140),(3,1,25,4,3,777,1498738145),(4,1,25,5,4,888,1498738152),(5,1,25,6,5,2000,1498738170),(6,15,25,7,1,20,1498738226),(7,15,25,8,2,55,1498738230),(8,15,25,9,3,789,1498738243),(9,15,25,10,4,2004,1498738248);
+
+/*Table structure for table `z_rank_y_64113` */
+
+DROP TABLE IF EXISTS `z_rank_y_64113`;
+
+CREATE TABLE `z_rank_y_64113` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `score_id` int(11) NOT NULL DEFAULT '0' COMMENT '成绩id',
+  `cycles` tinyint(4) NOT NULL DEFAULT '0' COMMENT '圈数',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_rank_y_64113` */
+
+/*Table structure for table `z_score_09182` */
+
+DROP TABLE IF EXISTS `z_score_09182`;
+
+CREATE TABLE `z_score_09182` (
+  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+  `flag` int(11) NOT NULL DEFAULT '0' COMMENT '一次成绩的标志',
+  PRIMARY KEY (`score_id`),
+  KEY `user_id` (`user_id`),
+  KEY `time` (`time`),
+  KEY `customer_id` (`customer_id`),
+  KEY `add_time` (`add_time`),
+  KEY `flag` (`flag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_score_09182` */
+
+/*Table structure for table `z_score_19738` */
+
+DROP TABLE IF EXISTS `z_score_19738`;
+
+CREATE TABLE `z_score_19738` (
+  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+  `cycles` int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+  `flag` int(11) NOT NULL DEFAULT '0' COMMENT '一次成绩的标志',
+  PRIMARY KEY (`score_id`),
+  KEY `user_id` (`user_id`),
+  KEY `time` (`time`),
+  KEY `customer_id` (`customer_id`),
+  KEY `add_time` (`add_time`),
+  KEY `flag` (`flag`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_score_19738` */
+
+insert  into `z_score_19738`(`score_id`,`user_id`,`begin_time`,`end_time`,`time`,`add_time`,`length`,`cycles`,`customer_id`,`mode`,`flag`) values (1,15,1232564,12345690,200,0,8600,0,30,1,11235),(2,15,1232564,12345690,200,0,8600,0,30,1,11235),(3,15,1232564,12345690,200,0,8600,0,30,1,11235),(4,15,1232564,12345690,200,0,8600,0,30,1,11235),(5,15,1232564,12345690,200,0,8600,0,30,1,11235),(6,15,1232564,12345690,200,0,8600,0,30,1,11235),(7,15,1232564,12345690,100,0,8600,0,30,1,11236),(8,15,1232564,12345690,100,0,8600,0,30,1,11236),(9,15,1232564,12345690,100,0,8600,0,30,1,11236),(10,15,1232564,12345690,100,0,8600,0,30,1,11236),(11,15,1232564,12345690,100,0,8650,0,30,1,11236),(12,15,1232564,12345690,100,0,8650,0,30,1,11236),(13,15,1232564,12345690,50,0,400,0,30,1,11236),(14,15,1232564,12345690,50,0,400,0,30,1,11237),(15,15,1232564,12345690,50,0,400,0,30,1,11237),(16,15,1232564,12345690,50,0,400,0,30,1,11237);
+
+/*Table structure for table `z_score_38596` */
+
+DROP TABLE IF EXISTS `z_score_38596`;
+
+CREATE TABLE `z_score_38596` (
+  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+  `cycles` int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+  PRIMARY KEY (`score_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_score_38596` */
+
+/*Table structure for table `z_score_42001` */
+
+DROP TABLE IF EXISTS `z_score_42001`;
+
+CREATE TABLE `z_score_42001` (
+  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+  `cycles` int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+  PRIMARY KEY (`score_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_score_42001` */
+
+insert  into `z_score_42001`(`score_id`,`user_id`,`begin_time`,`end_time`,`time`,`add_time`,`length`,`cycles`,`customer_id`,`mode`) values (1,1,1232564,12345690,200,0,100,1,25,1),(2,1,1232564,12345690,200,0,100,1,25,1),(3,1,1232564,12345690,200,0,100,2,25,1),(4,1,1232564,12345690,200,0,100,3,25,1),(5,1,1232564,12345690,200,0,100,4,25,1),(6,1,1232564,12345690,2000,0,100,5,25,1),(7,15,1232564,12345690,20,0,860,1,25,1),(8,15,1232564,12345690,20,0,860,2,25,1),(9,15,1232564,12345690,200,0,8600,3,25,1),(10,15,1232564,12345690,200,0,8600,4,25,1),(11,15,1232564,12345690,200,0,8600,4,25,1);
+
+/*Table structure for table `z_score_64113` */
+
+DROP TABLE IF EXISTS `z_score_64113`;
+
+CREATE TABLE `z_score_64113` (
+  `score_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `begin_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `time` int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
+  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
+  `length` int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
+  `cycles` int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
+  `customer_id` int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
+  `mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
+  PRIMARY KEY (`score_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `z_score_64113` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

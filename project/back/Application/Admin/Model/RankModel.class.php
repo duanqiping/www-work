@@ -82,7 +82,14 @@ class RankModel extends Model
                     return false;
                 }
             }else if($res && $res['time'] > $all_time){//更新
-                $b2 = $this->table($tableName)->where(array('rank_id'=>$res['rank_id']))->save(array('time'=>$all_time,'length'=>$all_length));
+                $updata = array(
+                    'score_id' =>$data['score_id'],
+                    'time'=>$all_time,
+                    'length'=>$all_length
+                );
+                $b2 = $this->table($tableName)
+                    ->where(array('rank_id'=>$res['rank_id']))
+                    ->save($updata);
                 if(!$b2) {
                     return false;
                 }

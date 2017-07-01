@@ -63,12 +63,21 @@ class RankController extends Controller{
         $page = trim($_GET['page']);
         $pageSize = trim($_GET['pageSize']);
         $flag = trim($_GET['flag']);
-        $type = trim($_GET['type'])?trim($_GET['type']):1;
 
         $rank = new RankModel();
-        $data = $rank->getRank($customer_id,$cycles,$flag,$type,$page,$pageSize);
+        $data = $rank->getRank($customer_id,$cycles,$flag,$page,$pageSize);
 
         sendSuccess($data);
+    }
+    public function marathonRank()
+    {
+        $customer_id = trim($_GET['customer_id']);
+        $flag = trim($_GET['flag'])?trim($_GET['flag']):1;
+        $page = trim($_GET['page']);
+        $pageSize = trim($_GET['pageSize']);
+
+        $rank = new RankModel();
+        $data = $rank->getMarathonRank($customer_id,$flag,$page,$pageSize);
     }
 
 } 

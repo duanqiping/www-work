@@ -72,7 +72,6 @@ class CustomerModel extends ConsumerHandleModel
                       time int(11) NOT NULL DEFAULT '0' COMMENT '比赛耗时',
                       add_time int(11) NOT NULL DEFAULT '0' COMMENT '生成时间',
                       length int(11) NOT NULL DEFAULT '0' COMMENT '跑步长度',
-                      cycles int(11) NOT NULL DEFAULT '0' COMMENT '比赛圈数',
                       customer_id int(11) NOT NULL DEFAULT '0' COMMENT '客户id',
                       mode tinyint(4) NOT NULL DEFAULT '0' COMMENT '成绩类型：1训练 2考试 3比赛',
                       flag int(11) NOT NULL DEFAULT '0' COMMENT '一次成绩的标志',
@@ -82,7 +81,7 @@ class CustomerModel extends ConsumerHandleModel
                       KEY customer_id (customer_id),
                       KEY add_time (add_time),
                       KEY flag (flag)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+                    ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
                 ";
         $sql2 = "CREATE TABLE IF NOT EXISTS $rank_y_table (
                       rank_id int(11) NOT NULL AUTO_INCREMENT,

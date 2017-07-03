@@ -225,6 +225,8 @@
   *    "cycles": "1",
   *    "time": "222",
   *    "add_time": "1498654279"
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *     "nick": "18600000000"
   *},
   *{
   *    "rank_id": "8",
@@ -233,7 +235,9 @@
   *    "score_id": "34",
   *    "cycles": "1",
   *    "time": "1231548",
-  *    "add_time": "1498395075"
+  *    "add_time": "1498395075",
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *     "nick": "18600000000"
   *}
   *]
   **/
@@ -259,7 +263,9 @@
   *    "cycles": "26",
   *    "time": "500",
   *    "add_time": "1498874744",
-  *    "length": "4000"
+  *    "length": "4000",
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *      "nick": "18600000000"
   *}，
   * {
   *    "rank_id": "4",
@@ -270,6 +276,8 @@
   *    "time": "50",
   *    "add_time": "1498874744",
   *    "length": "4000"
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *      "nick": "18600000000"
   *}，
   *]
   **/
@@ -294,6 +302,8 @@
   *    "time": "5",
   *    "add_time": "1498874744",
   *    "length": "400"
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *      "nick": "18600000000"
   *}，
   * {
   *    "rank_id": "4",
@@ -303,6 +313,8 @@
   *    "time": "50",
   *    "add_time": "1498874744",
   *    "length": "400"
+  *    "img": "http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg",
+  *      "nick": "18600000000"
   *}，
   *]
   **/

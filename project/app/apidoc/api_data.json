@@ -118,7 +118,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"500\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\"\n}，\n]",
+          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"500\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\",\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n     \"nick\": \"18600000000\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\"\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n     \"nick\": \"18600000000\"\n}，\n]",
           "type": "json"
         }
       ]
@@ -217,7 +217,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "[\n{\n   \"rank_id\": \"10\",\n   \"user_id\": \"222\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"36\",\n   \"cycles\": \"1\",\n   \"time\": \"222\",\n   \"add_time\": \"1498654279\"\n},\n{\n   \"rank_id\": \"8\",\n   \"user_id\": \"111\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"34\",\n   \"cycles\": \"1\",\n   \"time\": \"1231548\",\n   \"add_time\": \"1498395075\"\n}\n]",
+          "content": "[\n{\n   \"rank_id\": \"10\",\n   \"user_id\": \"222\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"36\",\n   \"cycles\": \"1\",\n   \"time\": \"222\",\n   \"add_time\": \"1498654279\"\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n    \"nick\": \"18600000000\"\n},\n{\n   \"rank_id\": \"8\",\n   \"user_id\": \"111\",\n   \"customer_id\": \"14\",\n   \"score_id\": \"34\",\n   \"cycles\": \"1\",\n   \"time\": \"1231548\",\n   \"add_time\": \"1498395075\",\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n    \"nick\": \"18600000000\"\n}\n]",
           "type": "json"
         }
       ]
@@ -263,7 +263,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"5\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n}，\n]",
+          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"5\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n     \"nick\": \"18600000000\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n   \"img\": \"http://192.168.0.118/project/public/guest/upload/photo/18600000000/18600000000head.jpg\",\n     \"nick\": \"18600000000\"\n}，\n]",
           "type": "json"
         }
       ]

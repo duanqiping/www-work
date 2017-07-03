@@ -37,6 +37,7 @@ class UserModel extends Model
         }
         return null;
     }
+
     //检查用户账号
     public function checkAccount($account)
     {
@@ -98,6 +99,19 @@ class UserModel extends Model
         }else {
             return $b;
         }
+    }
+
+    //排行表中获取用户信息
+    public function getUserInfoFromRank($res)
+    {
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            $condition_user['user_id'] = $res[$i]['user_id'];
+            $userInfo = $this->where($condition_user)->field('nick,img')->find();
+            $res[$i]['img'] = NROOT.$userInfo['img'];
+            $res[$i]['nick'] = $userInfo['nick'];
+        }
+        return $res;
     }
 
     //保存用户信息

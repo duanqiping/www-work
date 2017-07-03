@@ -9,6 +9,7 @@
 namespace Home\Model;
 
 
+//use Admin\Model\UserModel;
 use Think\Model;
 
 class RankModel extends Model{
@@ -45,11 +46,11 @@ class RankModel extends Model{
 
         $sql = "select * from $rank_table WHERE cycles='$cycles' AND ".$time_con. " order by time limit $offset,$pageSize";
         $rankInfo = $this->query($sql);
+        if(!$rankInfo) return array();
 
-
+        $user = new UserModel();
+        $rankInfo = $user->getUserInfoFromRank($rankInfo);
         return $rankInfo;
-//        print_r($rankInfo);
-//        exit();
     }
 
     //马拉松排行
@@ -81,11 +82,10 @@ class RankModel extends Model{
             ->limit($offset,$pageSize)
             ->select();
 
-//        echo $this->_sql();
-//        exit();
-//        print_r($res);
-//        exit();
+        if(!$res) return array();
 
+        $user = new UserModel();
+        $res = $user->getUserInfoFromRank($res);
         return $res;
     }
 
@@ -100,6 +100,11 @@ class RankModel extends Model{
 
         $condition['customer_id'] = $customer_id;
         $res = $this->where($condition)->field('*')->order('time')->limit($offset,$pageSize)->select();
+
+        if(!$res) return array();
+
+        $user = new UserModel();
+        $res = $user->getUserInfoFromRank($res);
 
         return $res;
     }

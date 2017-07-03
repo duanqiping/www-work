@@ -56,7 +56,7 @@ class CustomerModel extends ConsumerHandleModel
         return $data;
     }
 
-
+    //创建成绩表和排行表
     public function createScoreAndRankTable($data)
     {
         $score_table = $data['score_table'];
@@ -158,5 +158,29 @@ class CustomerModel extends ConsumerHandleModel
             return false;
         }
         else return true;
+    }
+
+    //删除一个客户及其关联表
+    public function deleteCustomerInfo($customer_id)
+    {
+        $condition['customer_id'] = $customer_id;
+
+
+        $res = $this->where($condition)->field('score_table,rank_y_table,rank_m_table,rank_w_table')->find();
+
+        foreach($res as $v){
+            $sql = "DROP TABLE IF EXISTS $v";
+            $b = $this->execute($sql);
+        }
+
+//        $b = $this->where('customer_id=25')->delete();
+        $sql = "delete from customer WHERE customer_id='$customer_id'";
+        $b = $this->execute($sql);
+        if(!$b){
+            exit('服务器错误1');
+        }
+//        echo $this->_sql();
+//        print_r($res);
+        return true;
     }
 }

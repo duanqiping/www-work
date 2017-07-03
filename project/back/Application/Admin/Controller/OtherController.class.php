@@ -11,11 +11,27 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class OtherController extends Controller{
+class OtherController extends BaseController{
 
     //彻底删除一个客户及想关联表
     public function deleteCustomer()
     {
+
         $customer_id = $_GET['customer_id'];
+
+        $flag = $_POST['flag']=3;
+
+        //权限判断
+        if(!$this->isAdminLogin()){
+            exit('该操作只能由管理员进行');
+        }
+
+        $consumer = $this->getInstance($flag);
+        $b = $consumer->deleteCustomerInfo($customer_id);
+        if(!$b){
+            exit('fail');
+        }else{
+            echo "success";
+        }
     }
 } 

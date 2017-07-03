@@ -85,7 +85,8 @@ class RankModel extends Model
                 $updata = array(
                     'score_id' =>$data['score_id'],
                     'time'=>$all_time,
-                    'length'=>$all_length
+                    'length'=>$all_length,
+                    'add_time'=>NOW_TIME
                 );
                 $b2 = $this->table($tableName)
                     ->where(array('rank_id'=>$res['rank_id']))
@@ -128,6 +129,7 @@ class RankModel extends Model
                     'score_id' => $data['score_id'],
                     'time' => $all_time,
                     'length' => $all_length,
+                    'add_time' => NOW_TIME,
                 );
                 $b2 = $this->table($v)->where(array('rank_id'=>$res1['rank_id']))->save($updata_info);
                 if(!$b2) {
@@ -164,7 +166,7 @@ class RankModel extends Model
             if($data['time']<$res['time']){
                 $b = $this->table($tableName)
                     ->where(array('rank_id'=>$res['rank_id']))
-                    ->save(array('time'=>$data['time'],'score_id'=>$data['score_id']));
+                    ->save(array('time'=>$data['time'],'score_id'=>$data['score_id'],'add_time'=>NOW_TIME));
                 if(!$b){
                     return false;
                 }

@@ -76,6 +76,59 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "v1/home/rank/marathonRank",
+    "title": "马拉松成绩排行",
+    "version": "1.0.0",
+    "group": "rank",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "flag",
+            "description": "<p>1四分之一马拉松2半程马拉松3全程马拉松</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页大小</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"500\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"cycles\": \"26\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"4000\"\n}，\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "rank",
+    "name": "GetV1HomeRankMarathonrank"
+  },
+  {
+    "type": "get",
     "url": "v1/home/rank/nearby",
     "title": "最近的一个客户",
     "version": "1.0.0",
@@ -116,7 +169,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "v1/home/rank/rank",
-    "title": "成绩排行",
+    "title": "周月年成绩排行",
     "version": "1.0.0",
     "group": "rank",
     "parameter": {
@@ -134,7 +187,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "cycles",
-            "description": "<p>圈数或马拉松标志(1四分之一 2半程 3全程)</p>"
+            "description": "<p>圈数</p>"
           },
           {
             "group": "Parameter",
@@ -142,14 +195,6 @@ define({ "api": [
             "optional": false,
             "field": "flag",
             "description": "<p>week(当周)month(当月)year(当年)</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "type",
-            "defaultValue": "1",
-            "description": "<p>1圈数2马拉松</p>"
           },
           {
             "group": "Parameter",
@@ -180,6 +225,52 @@ define({ "api": [
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "rank",
     "name": "GetV1HomeRankRank"
+  },
+  {
+    "type": "get",
+    "url": "v1/home/rank/singleRank",
+    "title": "个人最佳成绩排行",
+    "version": "1.0.0",
+    "group": "rank",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页大小</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "[\n{\n   \"rank_id\": \"3\",\n   \"user_id\": \"15\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"5\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n}，\n{\n   \"rank_id\": \"4\",\n   \"user_id\": \"16\",\n   \"customer_id\": \"30\",\n   \"score_id\": \"23\",\n   \"time\": \"50\",\n   \"add_time\": \"1498874744\",\n   \"length\": \"400\"\n}，\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "rank",
+    "name": "GetV1HomeRankSinglerank"
   },
   {
     "type": "get",

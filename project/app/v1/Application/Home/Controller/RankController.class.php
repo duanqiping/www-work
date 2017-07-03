@@ -69,6 +69,8 @@ class RankController extends Controller{
 
         sendSuccess($data);
     }
+
+    //获取马拉松排行
     public function marathonRank()
     {
         $customer_id = trim($_GET['customer_id']);
@@ -78,6 +80,21 @@ class RankController extends Controller{
 
         $rank = new RankModel();
         $data = $rank->getMarathonRank($customer_id,$flag,$page,$pageSize);
+
+        sendSuccess($data);
+    }
+
+    //个人最佳成绩排行
+    public function singleRank()
+    {
+        $customer_id = trim($_GET['customer_id']);
+        $page = trim($_GET['page']);
+        $pageSize = trim($_GET['pageSize']);
+
+        $rank = new RankModel('rank_singe');
+        $data = $rank->getSingleRank($customer_id,$page,$pageSize);
+
+        sendSuccess($data);
     }
 
 } 

@@ -204,15 +204,14 @@
   **/
 
  /**
-  * @api {get} v1/home/rank/rank 成绩排行
+  * @api {get} v1/home/rank/rank 周月年成绩排行
   * @apiVersion 1.0.0
 
   * @apiGroup rank
   *
   * @apiParam {String} customer_id 客户id
-  * @apiParam {String} cycles 圈数或马拉松标志(1四分之一 2半程 3全程)
+  * @apiParam {String} cycles 圈数
   * @apiParam {String} flag week(当周)month(当月)year(当年)
-  * @apiParam {String} type=1 1圈数2马拉松
   * @apiParam {String} page 页数
   * @apiParam {String} pageSize 每页大小
 
@@ -236,5 +235,74 @@
   *    "time": "1231548",
   *    "add_time": "1498395075"
   *}
+  *]
+  **/
+
+ /**
+  * @api {get} v1/home/rank/marathonRank 马拉松成绩排行
+  * @apiVersion 1.0.0
+
+  * @apiGroup rank
+  *
+  * @apiParam {String} customer_id 客户id
+  * @apiParam {String} flag 1四分之一马拉松2半程马拉松3全程马拉松
+  * @apiParam {String} page 页数
+  * @apiParam {String} pageSize 每页大小
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *[
+  *{
+  *    "rank_id": "3",
+  *    "user_id": "15",
+  *    "customer_id": "30",
+  *    "score_id": "23",
+  *    "cycles": "26",
+  *    "time": "500",
+  *    "add_time": "1498874744",
+  *    "length": "4000"
+  *}，
+  * {
+  *    "rank_id": "4",
+  *    "user_id": "16",
+  *    "customer_id": "30",
+  *    "score_id": "23",
+  *    "cycles": "26",
+  *    "time": "50",
+  *    "add_time": "1498874744",
+  *    "length": "4000"
+  *}，
+  *]
+  **/
+
+ /**
+  * @api {get} v1/home/rank/singleRank 个人最佳成绩排行
+  * @apiVersion 1.0.0
+
+  * @apiGroup rank
+  *
+  * @apiParam {String} customer_id 客户id
+  * @apiParam {String} page 页数
+  * @apiParam {String} pageSize 每页大小
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *[
+  *{
+  *    "rank_id": "3",
+  *    "user_id": "15",
+  *    "customer_id": "30",
+  *    "score_id": "23",
+  *    "time": "5",
+  *    "add_time": "1498874744",
+  *    "length": "400"
+  *}，
+  * {
+  *    "rank_id": "4",
+  *    "user_id": "16",
+  *    "customer_id": "30",
+  *    "score_id": "23",
+  *    "time": "50",
+  *    "add_time": "1498874744",
+  *    "length": "400"
+  *}，
   *]
   **/

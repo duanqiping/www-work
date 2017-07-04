@@ -13,6 +13,11 @@ use Admin\Model\ScoreModel;
 
 class CustomerController extends BaseController
 {
+    //添加老师
+    public function addTeacher()
+    {
+
+    }
 
     //录入成绩
     public function add()

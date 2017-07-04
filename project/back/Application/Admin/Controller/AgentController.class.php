@@ -8,9 +8,18 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\DeviceMsModel;
 use Think\Controller;
 class AgentController extends BaseController
 {
+    //查询设备 所有设备 正常设备 损坏设备
+    public function getDevice($flag,$agent_id)
+    {
+        $deviceMs = new DeviceMsModel();
+        $res = $deviceMs->getDeviceInfo($flag,$agent_id);
+        print_r($res);
+    }
+
     //test
     public function test()
     {

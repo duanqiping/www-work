@@ -33,25 +33,26 @@ abstract class ConsumerHandleModel extends Model
                 return false;
         }
     }
-    public function register($data)
-    {
-        /* 添加用户 */
-        if ($this->create ( $data )) {
-            $uid = $this->table($this->tableName)->add ();
-            return $uid ? $uid : 0; // 0-未知错误，大于0-注册成功
-        } else {
-            return $this->getError (); // 错误详情见自动验证注释
-        }
 
-    }
+//    public function register($data)
+//    {
+//        /* 添加用户 */
+//        if ($this->create ( $data )) {
+//            $uid = $this->table($this->tableName)->add ();
+//            return $uid ? $uid : 0; // 0-未知错误，大于0-注册成功
+//        } else {
+//            return $this->getError (); // 错误详情见自动验证注释
+//        }
+//
+//    }
 
-    public function delete($id)
-    {
-        $condition[$this->getPk()] = $id;
-        $b = $this->table($this->tableName)->where($condition)->setField('is_show',0);
-        if($b) return true;
-        else return false;
-    }
+//    public function delete($id)
+//    {
+//        $condition[$this->getPk()] = $id;
+//        $b = $this->table($this->tableName)->where($condition)->setField('is_show',0);
+//        if($b) return true;
+//        else return false;
+//    }
 
     //用户登录
     public function login($account,$passwd)

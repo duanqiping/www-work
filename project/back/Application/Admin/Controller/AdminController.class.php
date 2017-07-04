@@ -65,5 +65,20 @@ class AdminController extends BaseController {
         }
     }
 
+    //获取用户列表
+    public function getList($flag)
+    {
+        //权限判断
+        if(!$this->isAdminLogin()){
+            exit('该操作只能由管理员进行');
+        }
+
+        $consumer = $this->getInstance($flag);
+        $info = $consumer->getList();
+
+        print_r($info);
+        exit();
+    }
+
 
 }

@@ -9,6 +9,10 @@
 	
 	$db = $m->runoob->col;
 	
+	MongoDB::createCollection('mmm');
+	
+	//$db->createCollection('mmm'); 
+	
 	
 	$doc = array(
 		"name" => "MongoDB",

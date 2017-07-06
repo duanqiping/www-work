@@ -4,7 +4,6 @@ namespace Admin\Controller;
 
 use Admin\Model\MonModel;
 use Think\Controller;
-use Think\Db\Driver\Mongo;
 
 class IndexController extends Controller
 {

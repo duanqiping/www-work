@@ -13,10 +13,9 @@ use Think\Model\MongoModel;
 
 class MonModel extends MongoModel{
 
-    protected $dbName='runoob';//（要连接的数据库名称）
+    protected $dbName='score';//（要连接的数据库名称）
 
-    protected $trueTableName = 'col';//数据表名
-//    protected $tableName = 'col';//数据表名
+//    protected $trueTableName = 'col';//数据表名
 
     protected $connection = array(
         'db_type' => 'mongo',
@@ -29,6 +28,7 @@ class MonModel extends MongoModel{
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
+    //$name 真实的数据表名
     public function __construct($name)
     {
         parent::__construct($name);

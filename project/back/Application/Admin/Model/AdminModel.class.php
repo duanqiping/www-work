@@ -62,7 +62,7 @@ class AdminModel extends ConsumerHandleModel
 
             if($consumerHandleModel instanceof CustomerModel){
                 //创建关联表（成绩表、排行表）
-                if(!$consumerHandleModel->createScoreAndRankTable($data))
+                if(!$consumerHandleModel->createScoreAndRankTable2($data))
                 {
                     $consumerHandleModel->where(array('customer_id'=>$uid))->delete();
                     return false;

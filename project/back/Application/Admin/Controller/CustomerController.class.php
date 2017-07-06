@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 
 
+use Admin\Model\CustomerModel;
 use Admin\Model\ScoreModel;
 
 class CustomerController extends BaseController
@@ -22,8 +23,11 @@ class CustomerController extends BaseController
     //录入成绩
     public function add()
     {
+        $customer = new CustomerModel();
+        $rankInfo = $customer->test($_POST);
+
         $score = new ScoreModel();
-        $b = $score->insert($_POST);
+        $b = $score->insert($_POST,$rankInfo);
         if($b){
             exit('success');
         }else{

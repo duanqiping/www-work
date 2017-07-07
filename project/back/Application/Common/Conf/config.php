@@ -12,5 +12,5 @@ return array(
     'MODULE_DENY_LIST'      =>  array('Common','Runtime','Api'),
 
     // 加载扩展配置文件
-    'LOAD_EXT_CONFIG' => 'db',
+    'LOAD_EXT_CONFIG' => 'db,mongodb',
 );

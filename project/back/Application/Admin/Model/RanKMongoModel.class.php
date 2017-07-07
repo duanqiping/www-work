@@ -19,6 +19,8 @@ class RanKMongoModel extends MongoModel{
 
     protected $trueTableName = '';
 
+//    protected $connection = 'DB_CONFIG1';
+
     protected $connection = array(
         'db_type' => 'mongo',
         'db_user' => '',//用户名(没有留空)
@@ -28,13 +30,6 @@ class RanKMongoModel extends MongoModel{
     );
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
-
-//    //$name 真实的数据表名
-//    public function __construct($name)
-//    {
-//        parent::__construct($name);
-//        $this->trueTableName=$name;//要连接的那个集合（表）控制器里传过来
-//    }
 
     public function dealWithSolve($table_info,$data,$length,$scoreInfo)
     {
@@ -90,10 +85,6 @@ class RanKMongoModel extends MongoModel{
         //全程 半程 四分之一程
         $array_marathon = array(floor($this->marathon/$length),floor($this->marathon/(2*$length)),floor($this->marathon/(4*$length)) );
 
-//        $cycles = 26;
-//        echo "hello";
-//        exit();
-
         if(in_array($cycles,$array_marathon))
         {
             $condition['user_id'] = $data['user_id'];
@@ -101,8 +92,6 @@ class RanKMongoModel extends MongoModel{
             $res = $this->table($tableName)->where($condition)->field('time')->find();
 
             if(!$res) {
-//                echo "nihao";
-//                exit();
                 $b1 = $this->table($tableName)->add($add_info);//插入
                 if(!$b1) {
                     return false;
@@ -123,10 +112,6 @@ class RanKMongoModel extends MongoModel{
             }else{
                 return true;
             }
-//            $condition2['user_id'] = $data['user_id'];
-//            $res = $this->table($tableName)->where($condition2)->field('time')->find();
-//            print_r($res);
-//            exit();
         }
         return true;
     }
@@ -147,43 +132,38 @@ class RanKMongoModel extends MongoModel{
 
             $res =$this->table($v)->where($condition)->field('time,add_time')->select();
 
-//            echo date('Y',$time);
-//            exit();
-
+            //查询是否有当年当月当周记录
             $info = array();
             foreach($res as $k1=>$v1){
                 if($k == 'rank_y_table'){
-                    if(date('Y',$res[$k1]['add_time'])==date('Y',$time))
-                    {
-                        $info = $res[$k1];
-                        break;
-                    }
+                    if(date('Y',$res[$k1]['add_time'])==date('Y',$time)){$info = $res[$k1];}//当年
                 }else if($k == 'rank_m_table'){
-
+                    if(date('Y-m',$res[$k1]['add_time'])==date('Y-m',$time)){$info = $res[$k1];}//当年、当月
                 }else{
-                    
+                    if(date('Y-W',$res[$k1]['add_time'])==date('Y-W',$time)){$info = $res[$k1];}//当年、当周
                 }
-
+                if($info) break;
             }
-//
-            echo $this->_sql();
-            print_r($res);
-            exit();
-//
+
 //            //rank_y_table排行表插入条件：1没有该用户记录 2圈数不一样 3不在同年或同月或同周范围内
 //            $sql_query1 =   "select time from $v WHERE user_id='{$data['user_id']}' AND cycles='$cycles' AND ".$time_con;
 //            $res1 = $this->query($sql_query1);
-//            print_r($res1);
-//            exit();
 //            $res1 = $res1[0];
 
-            if(!$res) {
+            if(!$info) {
+                if($k == 'rank_y_table'){
+                    $add_info['time_q'] = date('Y',NOW_TIME);
+                }else if($k == 'rank_m_table'){
+                    $add_info['time_q'] = date('Y-m',NOW_TIME);
+                }else{
+                    $add_info['time_q'] = date('Y-W',NOW_TIME);
+                }
                 $b1 = $this->table($v)->add($add_info);//插入
 
                 if(!$b1) {
                     return false;
                 }//打印日志1
-            }else if($res['time'] > $all_time){
+            }else if($info['time'] > $all_time){
                 //更新
                 $updata_info = array(
                     'score_id' => $data['score_id'],
@@ -191,7 +171,7 @@ class RanKMongoModel extends MongoModel{
                     'length' => $all_length,
                     'add_time' => NOW_TIME,
                 );
-                $b2 = $this->table($v)->where(array('rank_id'=>$res['_id']))->save($updata_info);
+                $b2 = $this->table($v)->where(array('_id'=>$info['_id']))->save($updata_info);
                 if(!$b2) {
                     return false;
                 }

@@ -108,7 +108,9 @@ class UserModel extends Model
         {
             $condition_user['user_id'] = $res[$i]['user_id'];
             $userInfo = $this->where($condition_user)->field('nick,img')->find();
-            $res[$i]['img'] = NROOT.$userInfo['img'];
+            if($userInfo['img']) $res[$i]['img'] = NROOT.$userInfo['img'];
+            else $res[$i]['img'] = null;
+
             $res[$i]['nick'] = $userInfo['nick'];
         }
         return $res;

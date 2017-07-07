@@ -11,6 +11,7 @@ namespace Home\Controller;
 
 use Home\Model\Map;
 use Home\Model\RankModel;
+use Home\Model\RankMongoModel;
 use Think\Controller;
 
 
@@ -64,7 +65,8 @@ class RankController extends Controller{
         $pageSize = trim($_GET['pageSize']);
         $flag = trim($_GET['flag']);
 
-        $rank = new RankModel();
+//        $rank = new RankModel();
+        $rank = new RankMongoModel();
         $data = $rank->getRank($customer_id,$cycles,$flag,$page,$pageSize);
 
         sendSuccess($data);
@@ -73,12 +75,15 @@ class RankController extends Controller{
     //获取马拉松排行
     public function marathonRank()
     {
+
         $customer_id = trim($_GET['customer_id']);
         $flag = trim($_GET['flag'])?trim($_GET['flag']):1;
         $page = trim($_GET['page']);
         $pageSize = trim($_GET['pageSize']);
 
-        $rank = new RankModel();
+//        $rank = new RankModel();
+//        $data = $rank->getMarathonRank($customer_id,$flag,$page,$pageSize);
+        $rank = new RankMongoModel();
         $data = $rank->getMarathonRank($customer_id,$flag,$page,$pageSize);
 
         sendSuccess($data);
@@ -91,7 +96,8 @@ class RankController extends Controller{
         $page = trim($_GET['page']);
         $pageSize = trim($_GET['pageSize']);
 
-        $rank = new RankModel('rank_singe');
+//        $rank = new RankModel('rank_singe');
+        $rank = new RankMongoModel();
         $data = $rank->getSingleRank($customer_id,$page,$pageSize);
 
         sendSuccess($data);

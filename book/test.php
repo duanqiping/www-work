@@ -18,12 +18,13 @@
 		}else if($flag == 'month'){
 			return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
 		}else{
-			return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),date("d")-date("w")+1-7,date("Y"))) ;//本周起始时间
+			//return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),date("d")-date("w")+1-7,date("Y"))) ;//本周起始时间
+			return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
 		}
 	}
 	
-	echo $time=strtotime(rankChoiceRule('year')),"\n";
-	echo $time=strtotime(rankChoiceRule('month')),"\n";
+	//echo $time=strtotime(rankChoiceRule('year')),"\n";
+	//echo $time=strtotime(rankChoiceRule('month')),"\n";
 	echo $time=strtotime(rankChoiceRule('week')),"\n";
 	
 	

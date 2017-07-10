@@ -21,6 +21,8 @@ define('APP_PATH','./Application/');
 //define('BIND_MODULE','Admin');
 //define('BUILD_CONTROLLER_LIST','Index,UserLogic.class,Menu');
 
+date_default_timezone_set("Asia/Shanghai");
+
 // 网站根路径设置
 define ( 'SITE_PATH', dirname ( __FILE__ ) );
 

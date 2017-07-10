@@ -19,15 +19,15 @@ class RanKMongoModel extends MongoModel{
 
     protected $trueTableName = '';
 
-//    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG1';
 
-    protected $connection = array(
-        'db_type' => 'mongo',
-        'db_user' => '',//用户名(没有留空)
-        'db_pwd' => '',//密码（没有留空）
-        'db_host' => '127.0.0.1',//数据库地址
-        'db_port' => '27017',//数据库端口 默认27017
-    );
+//    protected $connection = array(
+//        'db_type' => 'mongo',
+//        'db_user' => '',//用户名(没有留空)
+//        'db_pwd' => '',//密码（没有留空）
+//        'db_host' => '127.0.0.1',//数据库地址
+//        'db_port' => '27017',//数据库端口 默认27017
+//    );
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
@@ -119,7 +119,6 @@ class RanKMongoModel extends MongoModel{
     //周月年成绩录入
     private function dateSolve($cycles,$all_time,$all_length,$table_info,$data,$add_info)
     {
-        $time = NOW_TIME;
         foreach($table_info as $k=>$v)
         {
 //            if($k == 'rank_y_table') $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time))";
@@ -127,43 +126,35 @@ class RanKMongoModel extends MongoModel{
 //            //同一周中可能月份不同
 //            else $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time))  AND WEEK(FROM_UNIXTIME($time)) = WEEK(FROM_UNIXTIME(add_time))";
 
-            $condition['user_id'] = $data['user_id'];
-            $condition['cycles'] = $cycles;
-
-            $res =$this->table($v)->where($condition)->field('time,add_time')->select();
+            $k = 'rank_w_table';
+            $v = 'z_rank_w_34695';
 
             //查询是否有当年当月当周记录
-            $info = array();
-            foreach($res as $k1=>$v1){
-                if($k == 'rank_y_table'){
-                    if(date('Y',$res[$k1]['add_time'])==date('Y',$time)){$info = $res[$k1];}//当年
-                }else if($k == 'rank_m_table'){
-                    if(date('Y-m',$res[$k1]['add_time'])==date('Y-m',$time)){$info = $res[$k1];}//当年、当月
-                }else{
-                    if(date('Y-W',$res[$k1]['add_time'])==date('Y-W',$time)){$info = $res[$k1];}//当年、当周
-                }
-                if($info) break;
+            if($k == 'rank_y_table'){
+                $timeflag = 'year';
+            }else if($k == 'rank_m_table'){
+                $timeflag = 'month';
+            }else{
+                $timeflag = 'week';
             }
 
-//            //rank_y_table排行表插入条件：1没有该用户记录 2圈数不一样 3不在同年或同月或同周范围内
-//            $sql_query1 =   "select time from $v WHERE user_id='{$data['user_id']}' AND cycles='$cycles' AND ".$time_con;
-//            $res1 = $this->query($sql_query1);
-//            $res1 = $res1[0];
+            $condition['user_id'] = $data['user_id'];
+            $condition['cycles'] = $cycles;
+            $condition['add_time'] = array('gt',strtotime($this->rankChoiceRule($timeflag)));
 
-            if(!$info) {
-                if($k == 'rank_y_table'){
-                    $add_info['time_q'] = date('Y',NOW_TIME);
-                }else if($k == 'rank_m_table'){
-                    $add_info['time_q'] = date('Y-m',NOW_TIME);
-                }else{
-                    $add_info['time_q'] = date('Y-W',NOW_TIME);
-                }
+            $res =$this->table($v)->where($condition)->field('time,add_time')->find();
+
+//            echo $this->_sql();
+//            print_r($res);
+//            exit();
+
+            //rank_y_table排行表插入条件：1没有该用户记录 2圈数不一样 3不在同年或同月或同周范围内
+            if(!$res) {
                 $b1 = $this->table($v)->add($add_info);//插入
-
                 if(!$b1) {
                     return false;
                 }//打印日志1
-            }else if($info['time'] > $all_time){
+            }else if($res['time'] > $all_time){
                 //更新
                 $updata_info = array(
                     'score_id' => $data['score_id'],
@@ -171,7 +162,7 @@ class RanKMongoModel extends MongoModel{
                     'length' => $all_length,
                     'add_time' => NOW_TIME,
                 );
-                $b2 = $this->table($v)->where(array('_id'=>$info['_id']))->save($updata_info);
+                $b2 = $this->table($v)->where(array('_id'=>$res['_id']))->save($updata_info);
                 if(!$b2) {
                     return false;
                 }
@@ -217,9 +208,18 @@ class RanKMongoModel extends MongoModel{
                 }
             }
         }
-//        $res = $this->table($tableName)->where($condition)->field('time')->find();
-//        print_r($res);
-//        exit();
         return true;
+    }
+
+    //时间判断
+    function rankChoiceRule($flag)
+    {
+        if($flag == 'year'){
+            return  date("Y-m-d H:i:s",mktime(0,0,0,1,1,date("Y", time()))) ;//本年起始时间
+        }else if($flag == 'month'){
+            return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
+        }else{
+            return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
+        }
     }
 } 

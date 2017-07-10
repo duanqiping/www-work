@@ -17,13 +17,15 @@ class RankMongoModel extends MongoModel{
 
     protected $trueTableName = '';
 
-    protected $connection = array(
-        'db_type' => 'mongo',
-        'db_user' => '',//用户名(没有留空)
-        'db_pwd' => '',//密码（没有留空）
-        'db_host' => '127.0.0.1',//数据库地址
-        'db_port' => '27017',//数据库端口 默认27017
-    );
+    protected $connection = 'DB_CONFIG1';
+
+//    protected $connection = array(
+//        'db_type' => 'mongo',
+//        'db_user' => '',//用户名(没有留空)
+//        'db_pwd' => '',//密码（没有留空）
+//        'db_host' => '127.0.0.1',//数据库地址
+//        'db_port' => '27017',//数据库端口 默认27017
+//    );
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
@@ -37,18 +39,12 @@ class RankMongoModel extends MongoModel{
         $offset = ($page-1)*$pageSize;
 
         if($flag == 'year'){
-//            $time_con = "YEAR(CURDATE()) = YEAR(FROM_UNIXTIME(add_time))";
-            $condition['time_q'] = date('Y',NOW_TIME);
             $field = 'rank_y_table';
         }
         else if($flag == 'month'){
-//            $time_con = "YEAR(CURDATE()) = YEAR(FROM_UNIXTIME(add_time)) AND MONTH(CURDATE()) = MONTH(FROM_UNIXTIME(add_time))";
-            $condition['time_q'] = date('Y-m',NOW_TIME);
             $field = 'rank_m_table';
         }
         else{
-//            $time_con = "YEAR(CURDATE()) = YEAR(FROM_UNIXTIME(add_time)) AND WEEK(CURDATE()) = WEEK(FROM_UNIXTIME(add_time))";
-            $condition['time_q'] = date('Y-W',NOW_TIME);
             $field = 'rank_w_table';
         }
 
@@ -57,12 +53,8 @@ class RankMongoModel extends MongoModel{
 
         $rank_table = $res[$field];
 
-//        $sql = "select * from $rank_table WHERE cycles='$cycles' AND ".$time_con. " order by time limit $offset,$pageSize";
-//        $rankInfo = $this->query($sql);
-
-
-
         $condition['cycles'] = intval($cycles);
+        $condition['add_time'] = array('gt',intval(strtotime($this->rankChoiceRule($flag))));
         $rankInfo = $this->table($rank_table)
             ->where($condition)
             ->field('user_id,customer_id,score_id,cycles,time,add_time,length')
@@ -74,7 +66,7 @@ class RankMongoModel extends MongoModel{
         $rankInfo = array_values($rankInfo);
 
 //        echo $this->_sql();
-//        print_r($res);
+//        print_r($rankInfo);
 //        exit();
 
         $user = new UserModel();
@@ -149,6 +141,18 @@ class RankMongoModel extends MongoModel{
         $res = $user->getUserInfoFromRank($res);
 
         return $res;
+    }
+
+    //时间判断
+    private function rankChoiceRule($flag)
+    {
+        if($flag == 'year'){
+            return  date("Y-m-d H:i:s",mktime(0,0,0,1,1,date("Y", time()))) ;//本年起始时间
+        }else if($flag == 'month'){
+            return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
+        }else{
+            return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
+        }
     }
 
 } 

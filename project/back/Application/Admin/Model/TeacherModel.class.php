@@ -13,6 +13,8 @@ class TeacherModel extends ConsumerHandleModel
 {
     protected $tableName = 'teacher';
 
+    protected $custom_fields = 'teacher_id id,name,passwd,account,grade';
+
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
         array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),

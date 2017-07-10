@@ -13,6 +13,8 @@ class CustomerModel extends ConsumerHandleModel
 {
     protected $tableName = 'customer';
 
+    protected $custom_fields = 'customer_id id,name,passwd,account,grade';
+
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
         array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),
@@ -56,27 +58,32 @@ class CustomerModel extends ConsumerHandleModel
         return $data;
     }
 
-    //
-    public function test($data)
+    //客户概述信息
+    public function mainInfo()
     {
-        $customerModel = M('customer');
-        $res = $customerModel
-            ->where(array('customer_id'=>$data['customer_id']))
-            ->field('score_table,rank_y_table,rank_m_table,rank_w_table,length')
-            ->find();
+        //用户量
+        $user = new UserModel();
+        $condition['customer_id'] = $_SESSION['user']['id'];
+        $count = $user->where($condition)->count();
 
-//        $data['add_time'] = NOW_TIME;
-//        $b = $this->table($res['score_table'])->add($data);
-//        if(!$b){
-//            $this->error = '成绩导入失败';
-//            return false;
-//        }
+        //累计最长距离
+        $res_length = $user->where($condition)->field('length')->order('length desc')->limit(1)->select();
+        $max_length = $res_length[0]['length'];
 
-        //更新用户表的累计长度
-        $sql = "update user set length=length+'{$data['length']}' WHERE user_id='{$data['user_id']}'";
-        $this->execute($sql);
+        //活跃用户量
+        $condition['length'] = array('gt',30000);
+        $count_active = $user->where($condition)->count();
 
-        return $res;
+        $data = array();
+        $data['count'] = $count;
+        $data['max_length'] = round($max_length/1000,2);
+        $data['count_active'] = $count_active;
+//        print_r($max_length);
+////        echo $user->_sql();
+//        print_r($count);
+//        exit();
+        return $data;
+
     }
 
     //创建成绩表和排行表

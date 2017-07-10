@@ -13,6 +13,8 @@ use Think\Model;
 //用户handle类
 abstract class ConsumerHandleModel extends Model
 {
+    protected $custom_fields='';
+
     const ADMIN = 1;
     const AGENT = 2;
     const CUSTOMER = 3;
@@ -34,35 +36,11 @@ abstract class ConsumerHandleModel extends Model
         }
     }
 
-//    public function register($data)
-//    {
-//        /* 添加用户 */
-//        if ($this->create ( $data )) {
-//            $uid = $this->table($this->tableName)->add ();
-//            return $uid ? $uid : 0; // 0-未知错误，大于0-注册成功
-//        } else {
-//            return $this->getError (); // 错误详情见自动验证注释
-//        }
-//
-//    }
-
-//    public function delete($id)
-//    {
-//        $condition[$this->getPk()] = $id;
-//        $b = $this->table($this->tableName)->where($condition)->setField('is_show',0);
-//        if($b) return true;
-//        else return false;
-//    }
-
     //用户登录
     public function login($account,$passwd)
     {
         $condition['account'] = $account;
-
-        if($this->tableName=='admin') $fields = 'name,passwd,account,level,grade';
-        else $fields = 'name,passwd,account,grade';
-
-        $res = $this->table($this->tableName)->where($condition)->field($fields)->find();
+        $res = $this->table($this->tableName)->where($condition)->field($this->custom_fields)->find();
 
         if($res['passwd'] == md5($passwd)){
             $this->autoLogin($res);//保存用户信息到session
@@ -103,6 +81,7 @@ abstract class ConsumerHandleModel extends Model
 
         /* 记录登录SESSION和COOKIES */
         $info = array (
+            'id' => $user ['id'],
             'name' => $user ['name'],
             'account' => $user ['account'],
             'level' => $user['level']?$user['level']:0,//管理员等级

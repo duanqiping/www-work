@@ -222,4 +222,22 @@ class RanKMongoModel extends MongoModel{
             return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
         }
     }
+
+    //获取单圈最佳成绩
+    public function bestScore()
+    {
+        $tableName = 'rank_single';
+        $condition['customer_id'] = $_SESSION['user']['id'];
+
+//        $minScore  = $this->table($tableName)->where($condition)->min('time');
+        $min_res  = $this->table($tableName)->where($condition)->field('time')->order('time')->limit(1)->select();
+        $min_res = array_values($min_res);
+        $minScore = $min_res[0]['time'];
+//        echo $this->_sql();
+//        print_r($minScore);
+//        exit();
+        return $minScore;
+//        print_r($minScore);
+//        exit();
+    }
 } 

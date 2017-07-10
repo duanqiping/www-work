@@ -23,21 +23,21 @@ class ConsumerController extends BaseController
             }
             else if(! $res = $consumer->login($account,$passwd,$flag))
             {
-//                $this->assign('error_info','账号或密码有误');
-//                $this->display('public/login');
-                exit('账号或密码有误');
+                $this->assign('error_info','账号或密码有误');
+                $this->display('public/login');
+//                exit('账号或密码有误');
             }
             else
             {
-                print_r($res);
-                print_r($_SESSION);
-//                $this->assign('name',$res['name']);
-//                $this->display('index/index');
-//                exit('success');
+//                print_r($res);
+//                print_r($_SESSION);
+                $this->assign('name',$res['name']);
+                $this->display('index/index');
+                exit('success');
             }
         }else{
-//            $this->display('public/login');
-            exit('去登陆');
+            $this->display('public/login');
+//            exit('去登陆');
         }
     }
 
@@ -48,9 +48,9 @@ class ConsumerController extends BaseController
             session ( 'user', null );
 
             session('[destroy]');
-            exit('success');
+//            exit('success');
 //            $this->success('退出成功！', U('index/index'));
-//            $this->display('public/login');
+            $this->display('public/login');
         } else {
             exit('fail');
 //            $this->display('public/login');

@@ -16,6 +16,8 @@ class AdminModel extends ConsumerHandleModel
     protected $power = '';//权限
     protected $level = 1;//管理员级别 1超级管理员 2普通管理员
 
+    protected $custom_fields = 'admin_id id,name,passwd,account,level,grade';
+
     protected $_validate = array(
         array ('name', '1,16', '昵称不能太长', self::EXISTS_VALIDATE, 'length'),
         array('account','/^1[34578][0-9]{9}$/i','请正确填写手机号码','0','regex',1),

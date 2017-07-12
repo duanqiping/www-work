@@ -1,0 +1,31 @@
+<extend name="Public/base_customer" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title">
+            <h2>新增老师</h2>
+        </div>
+
+        <form id="formid"  name= "myform" method = 'post'  action = 'add2'>
+            用户名：<input type="text"  name="name" ><br/>
+            账号：<input type="text"  name="account" ><br/>
+            密码：<input type="password" name="passwd" ><br/>
+            确认密码：<input type="password" name="repasswd" ><br/>
+            系别：<input type="text" name="dept" ><br/>
+            班级：<input type="text" name="class" ><br/>
+            <input type="submit" value="确认"   />
+            <input type="reset" value="取消"   />
+        </form>
+        <span style="color: red">{$error_info}</span>
+
+    </div>
+
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

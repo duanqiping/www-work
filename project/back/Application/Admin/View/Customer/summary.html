@@ -1,0 +1,77 @@
+<extend name="Public/base_customer" />
+
+<block name="body">
+<div class="main">
+<!-- MAIN CONTENT -->
+<div class="main-content">
+<div class="container-fluid">
+<!-- OVERVIEW -->
+<div class="panel panel-headline">
+    <!--<div class="panel-heading">-->
+    <!--<h3 class="panel-title">Weekly Overview</h3>-->
+    <!--<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>-->
+    <!--</div>-->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="fa fa-download"></i></span>
+                    <p>
+                        <span class="number">用户量</span>
+                        <span class="title">{$user.count}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+                    <p>
+                        <span class="number">活跃用户量</span>
+                        <span class="title">{$user.count_active}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <p>
+                        <span class="number">单圈最佳</span>
+                        <span class="title">{$best} 秒</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                    <p>
+                        <span class="number">累计最长距离</span>
+                        <span class="title">{$user.max_length} km</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OVERVIEW -->
+
+<div>
+    <span class="title">上海交通大学(闵行校区)</span><br/>
+    <span class="title">注册时间：2017/07/08 11:40:51</span><br/>
+    <span class="title">注册账号：17701800001</span><br/>
+    <span class="title">联系方式：17701800001</span><br/>
+    <span class="title">注册地址：上海市、某某区</span><br/>
+</div>
+
+</div>
+</div>
+<!-- END MAIN CONTENT -->
+</div>
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

@@ -8,7 +8,9 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\AgentModel;
 use Admin\Model\DeviceMsModel;
+use Admin\Model\DeviceOrderModel;
 use Think\Controller;
 class AgentController extends BaseController
 {
@@ -18,6 +20,23 @@ class AgentController extends BaseController
         $deviceMs = new DeviceMsModel();
         $res = $deviceMs->getDeviceInfo($flag,$agent_id);
         print_r($res);
+    }
+
+    //未处理工单
+    public function outHand()
+    {
+        $agent = new DeviceOrderModel();
+        $res = $agent->_list($type = 1);
+
+        $this->assign('_list',$res);
+        $this->display();
+    }
+    public function deal()
+    {
+        $id = trim($_GET['id']);
+//        $info = $_GET;
+        print_r($id);
+        exit();
     }
 
     //test

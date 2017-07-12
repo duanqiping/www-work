@@ -1,0 +1,36 @@
+<extend name="Public/base_customer" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title">
+            <h2>设备管理</h2>
+        </div>
+
+        <span style="color: #0000cc">设备运行状态：</span><span>{$status_info}</span><br/>
+
+        <form id="formid"  name= "myform" method = 'post'  action = '__URL__/report'>
+
+            <h4>故障描述</h4>
+            <div>
+                <textarea rows="3" cols="20" name="desc">
+
+                </textarea>
+            </div>
+            <div>
+                <input type="submit" value="障碍报修"   />
+            </div>
+            <span style="color: red">{$info}</span>
+        </form>
+        <!--<a href="{:U('customer/report')}" style="color: #660000">障碍报修</a><br/>-->
+
+    </div>
+
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

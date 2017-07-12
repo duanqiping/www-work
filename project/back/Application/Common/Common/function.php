@@ -93,6 +93,12 @@ function ch_urlencode($data) {
     return $data;
 }
 
+//生成订单订单号
+function get_order_sn($id){
+    $sn = date('ymdHis').str_pad($id,6,"0",STR_PAD_LEFT).substr(microtime(),2,4);
+    return $sn;
+}
+
 function sendSuccess($data) {
     if(is_string($data)) $data = array('msg'=>$data);
     $response = ch_json_encode($data);

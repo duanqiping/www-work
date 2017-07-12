@@ -389,6 +389,7 @@ ul.notifications > li {
       -ms-transform: rotate(0deg);
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg); }
+
     .sidebar .nav > li > a .badge {
       font-weight: 400;
       background-color: #F9354C; }

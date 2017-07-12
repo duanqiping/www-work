@@ -65,23 +65,25 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="{:U('customer/index')}" class="active"><i class="lnr lnr-home"></i> <span>学校概述</span></a></li>
-
-                    <li><a href="#" class=""><i class="lnr lnr-chart-bars"></i> <span>用户管理</span></a></li>
+                    <li><a href="{:U('customer/summary')}" class="active"><i class="lnr lnr-home"></i> <span>学校概述</span></a></li>
+                    <li><a href="{:U('customer/info')}" class=""><i class="lnr lnr-chart-bars"></i> <span>用户管理</span></a></li>
                     <li><a href="#" class=""><i class="lnr lnr-cog"></i> <span>成绩管理</span></a></li>
                     <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>排行榜</span></a></li>
 
                     <li><a href="#" class=""><i class="lnr lnr-dice"></i> <span>考试/赛事</span></a></li>
-                    <li>
-                        <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>设备管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-                        <div id="subPages" class="collapse ">
-                            <ul class="nav">
-                                <li><a href="#" class="">待处理的工单</a></li>
-                                <li><a href="#" class="">处理中的工单</a></li>
-                                <li><a href="#" class="">已处理的工单</a></li>
-                            </ul>
-                        </div>
-                    </li>
+
+                    <li><a href="{:U('customer/device')}" class=""><i class="lnr lnr-file-empty"></i> <span>设备管理</span></a></li>
+
+                    <!--<li>-->
+                        <!--<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>设备管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>-->
+                        <!--<div id="subPages" class="collapse ">-->
+                            <!--<ul class="nav">-->
+                                <!--<li><a href="#" class="">障碍报销</a></li>-->
+                                <!--<li><a href="#" class="">处理中的工单</a></li>-->
+                                <!--<li><a href="#" class="">已处理的工单</a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
             </nav>
         </div>
@@ -91,11 +93,6 @@
     <block name="body"> </block>
 
     <div class="clearfix"></div>
-    <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-        </div>
-    </footer>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
@@ -105,6 +102,8 @@
 <script src="__VENDOR__/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 <script src="__VENDOR__/chartist/js/chartist.min.js"></script>
 <script src="__JS__/klorofil-common.js"></script>
+
+<script type="text/javascript" src="__JS__/common.js?v={:SITE_VERSION}"></script>
 <script>
     $(function() {
         var data, options;

@@ -10,13 +10,40 @@ namespace Admin\Controller;
 
 
 use Admin\Model\CustomerModel;
+use Admin\Model\DeviceOrderModel;
 use Admin\Model\RanKMongoModel;
 use Admin\Model\ScoreModel;
+use Admin\Model\TeacherModel;
 
 class CustomerController extends BaseController
 {
+    //工单状态
+    protected function status()
+    {
+        $deviceorder = new DeviceOrderModel();
+        $status_info = $deviceorder->searchOrderSn();
+        return $status_info;
+    }
+
+    //录入成绩
+    public function add()
+    {
+        $customer = new CustomerModel();
+        $rankInfo = $customer->where(array('customer_id'=>$_POST['customer_id']))
+            ->field('score_table,rank_y_table,rank_m_table,rank_w_table,length')
+            ->find();
+
+        $score = new ScoreModel();
+        $b = $score->insert($_POST,$rankInfo);
+        if($b){
+            exit('success');
+        }else{
+            exit('fail');
+        }
+    }
+
     //概述主页 用户量 活跃用户量 单圈最佳 累计最长距离
-    public function index()
+    public function summary()
     {
         $customer = new CustomerModel();
         $data = $customer->mainInfo();//用户量 活跃量 累计最长距离
@@ -31,30 +58,90 @@ class CustomerController extends BaseController
         $this->display();
     }
 
+    //用户信息列表
+    public function info()
+    {
+
+        $teacher = new TeacherModel();
+        $res = $teacher->_list();
+
+        $this->assign('_list',$res);
+
+        $this->display();
+    }
+
     //添加老师
-    public function addTeacher()
+    public function add2()
     {
-
-    }
-
-    //录入成绩
-    public function add()
-    {
-        $customer = new CustomerModel();
-        $rankInfo = $customer->test($_POST);
-
-        $score = new ScoreModel();
-        $b = $score->insert($_POST,$rankInfo);
-        if($b){
-            exit('success');
+        if(!$_POST){
+            $this->display();
         }else{
-            exit('fail');
+            if($_POST['passwd'] != $_POST['repasswd'])
+            {
+                $this->assign('error_info','两次密码不一致');
+                $this->display();
+
+            }
+//            echo "<pre>";
+//            print_r($_POST);
+//            echo "</pre>";
+//            exit();
+//            echo "add2";
+            $teacher = new TeacherModel();
+            $uid = $teacher->addTeacher($_POST);
+            if($uid){
+                $teacher = new TeacherModel();
+                $res = $teacher->_list();
+
+                $this->assign('_list',$res);
+                $this->display('info');
+            }else{
+                $this->assign('error_info',$teacher->getError());
+                $this->display();
+            }
+
+            exit();
         }
+
     }
 
-    //查询成绩
-    public function getScore($customer_id)
+    //设备管理主页
+    public function device()
     {
+        $status_info = $this->status();
+        $this->assign('status_info',$status_info['info']);
+        $this->display();
+    }
+
+    //设备报修
+    public function report()
+    {
+        $desc = trim($_POST['desc']);
+        $status_info = $this->status();
+
+        $this->assign('status_info',$status_info['info']);
+
+
+        if(!$desc){
+            $this->assign('info','请描述一下故障');
+            $this->display('device');
+            exit();
+        }
+
+        if($status_info['status'] == 1 || $status_info['status'] == 2){
+            $this->assign('info','设备已申请报修');
+            $this->display('device');
+            exit();
+        }
+
+        $deviceorder = new DeviceOrderModel();
+        if(!$deviceorder->insertData($desc)){
+            $this->assign('info',$deviceorder->getError());
+            $this->display('device');
+        }else{
+            $this->assign('status_info','设备故障待处理');
+            $this->display('device');
+        }
 
     }
 } 

@@ -26,6 +26,8 @@ class CustomerModel extends ConsumerHandleModel
         array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
     );
 
+    //获取客户信息
+
     public function getList()
     {
         $condition['is_show'] = 1;

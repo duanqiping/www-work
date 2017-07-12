@@ -32,8 +32,17 @@ class ConsumerController extends BaseController
 //                print_r($res);
 //                print_r($_SESSION);
                 $this->assign('name',$res['name']);
-                $this->display('index/index');
-                exit('success');
+                if($flag ==1){
+                    $this->display('admin/index');
+                }else if($flag ==2){
+                    $this->display('agent/index');
+                }else if($flag ==3){
+                    $this->display('customer/index');
+                }else{
+                    $this->display('teacher/index');
+                }
+
+//                exit('success');
             }
         }else{
             $this->display('public/login');

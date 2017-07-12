@@ -24,7 +24,22 @@ class TeacherModel extends ConsumerHandleModel
     protected $_auto = array (
         array ('passwd', 'md5', self::MODEL_BOTH, 'function'),
         array ('add_time', 'time', self::MODEL_INSERT,'function'),//只能是当前模型的方法
+        array ('grade', '4', self::MODEL_INSERT),//只能是当前模型的方法
     );
+    //添加老师 客户
+    public function addTeacher($data)
+    {
+        $data['customer_id'] = $_SESSION['user']['id'];
+
+        if($this->create($data)){
+            $uid = $this->add();
+            return $uid;
+        }else{
+            return false;
+        }
+//        print_r($data);
+//        exit();
+    }
 
     //完善数据
     public function makeData($data)
@@ -38,5 +53,22 @@ class TeacherModel extends ConsumerHandleModel
         }else{
             return $data;
         }
+    }
+
+    //老师列表
+    public function _list()
+    {
+        $res = $this->where(array('customer_id'=>$_SESSION['user']['id']))
+            ->field('teacher_id id,name,dept,class,last_login_time,last_login_ip,login_count,is_show')
+            ->order('add_time desc')
+            ->select();
+        $user = new UserModel();
+        for($i=0,$len=count($res);$i<$len;$i++){
+            $count = $user->where(array('teacher_id'=>$res[$i]['id']))->count();
+            $res[$i]['count'] = $count;
+        }
+
+        return $res;
+
     }
 } 

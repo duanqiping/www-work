@@ -1,0 +1,66 @@
+<extend name="Public/base_customer" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title">
+            <h2>用户列表</h2>
+        </div>
+        <div class="cf">
+            <div class="fl">
+                <a class="btn" href="{:U('customer/add2')}">新 增</a>
+                <button class="btn ajax-post" url="{:U('changeStatus?method=resumeUser')}" target-form="ids">启 用</button>
+                <button class="btn ajax-post" url="{:U('changeStatus?method=forbidUser')}" target-form="ids">禁 用</button>
+                <button class="btn ajax-post confirm" url="{:U('changeStatus?method=deleteUser')}" target-form="ids">删 除</button>
+            </div>
+
+        </div>
+        <!-- 数据列表 -->
+        <div class="data-table table-striped">
+            <table class="" style="border-collapse:separate; border-spacing:60px 10px;">
+                <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">UID</th>
+                    <th class="">昵称</th>
+                    <th class="">系别</th>
+                    <th class="">班级</th>
+                    <th class="">登录次数</th>
+                    <th class="">最后登录时间</th>
+                    <th class="">最后登录IP</th>
+                    <th class="">状态</th>
+                    <th class="">班级学生</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                            <td>{$vo.id} </td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.dept}</td>
+                            <td>{$vo.class}</td>
+                            <td>{$vo.login_count}</td>
+                            <td>{$vo.last_login_time}</td>
+                            <td>{$vo.last_login_ip}</td>
+                            <td>{$vo['is_show']?'正常':'禁用'}</td>
+                            <td>{$vo['count']}<a href="">查看详情</a></td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                </notempty>
+                </tbody>
+
+            </table>
+        </div>
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

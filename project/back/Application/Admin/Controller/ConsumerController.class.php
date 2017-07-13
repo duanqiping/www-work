@@ -61,8 +61,8 @@ class ConsumerController extends BaseController
 //            $this->success('退出成功！', U('index/index'));
             $this->display('public/login');
         } else {
-            exit('fail');
-//            $this->display('public/login');
+//            exit('fail');
+            $this->display('public/login');
         }
     }
 

@@ -37,7 +37,7 @@
                             <td>{$vo.customer_addr}</td>
                             <td>{$vo.customer_desc}</td>
                             <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
-                            <td><a href="{:U('agent/deal',array('id' => $vo['id']))}">点击受理</a></td>
+                            <td><a href="{:U('agent/deal',array('id' => $vo['id'],'order_sn'=>$vo['order_sn'],'customer_desc'=>$vo['customer_desc']))}">点击受理</a></td>
                         </tr>
                     </volist>
                     <else/>

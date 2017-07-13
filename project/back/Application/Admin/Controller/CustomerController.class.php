@@ -70,6 +70,37 @@ class CustomerController extends BaseController
         $this->display();
     }
 
+    //排行表
+    public function rank()
+    {
+//        print_r($_SESSION);
+//        exit();
+        $page = 1;
+        $pageSize = 10;
+        $flag = 'single';
+        $customer_id = $_SESSION['user']['id'];
+
+        $rank = new RankMongoModel();
+        $data = $rank->getSingleRank($customer_id,$page,$pageSize);
+
+//        print_r($data);
+//        exit();
+
+        $this->assign('_list',$data);
+        $this->display();
+    }
+
+    //考试、比赛
+    public function contest()
+    {
+        $this->display();
+    }
+
+    public function score()
+    {
+        $this->display();
+    }
+
     //添加老师
     public function add2()
     {
@@ -108,8 +139,13 @@ class CustomerController extends BaseController
     //设备管理主页
     public function device()
     {
+        $agent = new DeviceOrderModel();
+        $res = $agent->_list($type = 1);
+
         $status_info = $this->status();
         $this->assign('status_info',$status_info['info']);
+        $this->assign('_list',$res);
+
         $this->display();
     }
 

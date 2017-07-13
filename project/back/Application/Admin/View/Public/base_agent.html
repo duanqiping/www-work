@@ -71,8 +71,8 @@
                     <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>工单管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages" class="collapse ">
                         <ul class="nav">
-                            <li><a href="{:U('agent/outHand')}" class="">待处理的工单</a></li>
-                            <li><a href="#" class="">处理中的工单</a></li>
+                            <li><a href="{:U('agent/outHand',array('type'=>1))}" class="">待处理的工单</a></li>
+                            <li><a href="{:U('agent/inHand',array('type'=>2))}" class="">处理中的工单</a></li>
                             <li><a href="#" class="">已处理的工单</a></li>
                             <li><a href="#" class="">已完成的工单</a></li>
                         </ul>

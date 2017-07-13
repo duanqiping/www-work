@@ -240,4 +240,35 @@ class RanKMongoModel extends MongoModel{
 //        print_r($minScore);
 //        exit();
     }
+
+    //获取单圈最佳成绩排行
+    public function getSingleRank($customer_id,$page,$pageSize)
+    {
+        if(($page<1)||($pageSize<1)){
+            $page = 1;
+            $pageSize = 20;
+        }
+        $offset = ($page-1)*$pageSize;
+
+        $condition['customer_id'] = $customer_id;
+        $res = $this->table('rank_single')
+            ->where($condition)
+            ->field('user_id,customer_id,score_id,time,add_time,length')
+            ->order('time')
+            ->limit($offset,$pageSize)
+            ->select();
+//
+//        print_r($res);
+//        exit();
+//        echo $this->_sql();
+//        exit();
+
+        if(!$res) return array();
+        $res = array_values($res);
+
+        $user = new UserModel();
+        $res = $user->getUserInfoFromRank($res);
+
+        return $res;
+    }
 } 

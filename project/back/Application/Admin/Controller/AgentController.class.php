@@ -22,21 +22,64 @@ class AgentController extends BaseController
         print_r($res);
     }
 
+   //工单列表
+    protected  function hand($type)
+    {
+        $agent = new DeviceOrderModel();
+        $res = $agent->_list($type);
+
+        return $res;
+
+    }
+
     //未处理工单
     public function outHand()
     {
-        $agent = new DeviceOrderModel();
-        $res = $agent->_list($type = 1);
+//        print_r($_GET);
+//        exit();
+        $res = $this->hand($_GET['type']);
 
         $this->assign('_list',$res);
-        $this->display();
+        $this->display('outHand');
     }
+
+    //未处理工单
+    public function inHand()
+    {
+        $res = $this->hand($_GET['type']);
+
+        $this->assign('_list',$res);
+        $this->display('inHand');
+    }
+
     public function deal()
     {
-        $id = trim($_GET['id']);
+        if($_GET){
+            $data = $_GET;
+//            var_dump($data);
+//            exit();
+            $this->assign('data',$data);
+            $this->display();
+        }else if($_POST){
+            $data = $_POST;
+//            var_dump($data);
+//            exit();
+            $deviceorder = new DeviceOrderModel();
+            $result = $deviceorder->updateData($data);
+            if($result){
+                $res = $this->hand($type=2);
+                $this->assign('_list',$res);
+                $this->display('inHand');
+            }else{
+                $res = $this->hand($type=1);
+                $this->assign('_list',$res);
+                $this->display('outHand');
+            }
+        }
+
 //        $info = $_GET;
-        print_r($id);
-        exit();
+//        print_r($id);
+//        exit();
     }
 
     //test

@@ -47,6 +47,38 @@ class DeviceOrderModel extends Model{
 
     }
 
+    //更新工单为处理中
+    public function updateData($data)
+    {
+        $agent = new AgentModel();
+        $condition['agent_id'] = $_SESSION['user']['id'];
+        $agent_data = $agent->where($condition)->field('agent_id,name,agent_mobile')->find();
+//        echo $agent->_sql();
+//
+//        print_r($agent_data);
+//        print_r($_SESSION);
+        $update_data = array(
+            'agent_id'=>$agent_data['agent_id'],
+            'agent_name'=>$agent_data['name'],
+            'agent_mobile'=>$agent_data['agent_mobile'],
+            'accept_time'=>NOW_TIME,
+            'agent_desc'=>$data['desc'],
+            'status'=>2,
+        );
+
+        $condition_device['device_order_id']=$data['id'];
+        $b = $this->where($condition_device)->save($update_data);
+//        echo $this->_sql();
+//        exit();
+        if(!$b){
+            return false;
+        }else{
+            return true;
+        }
+
+        exit();
+    }
+
     //查看是否有待处理或处理中的工单
     public function searchOrderSn()
     {
@@ -71,13 +103,29 @@ class DeviceOrderModel extends Model{
         }
     }
 
-    //工单列表 $type=1 待处理 2处理中 3处理完成
+    //工单列表 $type=1 待处理 2处理中 3处理完成 4客户确认完成
     public function _list($type)
     {
+        if($type == 1){
+            $condition['status'] = 1;
+            $field = 'device_order_id id,order_sn,status,customer_name,customer_mobile,customer_addr,customer_desc,add_time';
+            $order = 'add_time desc';
+        }else if($type == 2){
+            $condition['status'] = 2;
+            $field = 'device_order_id id,order_sn,status,customer_name,customer_mobile,customer_addr,customer_desc,add_time,'.
+                'agent_name,agent_mobile,accept_time,agent_desc';
+            $order = 'accept_time desc';
+        }else if($type == 3){
+            $field = '';
+            $order = '';
+        }else{
+            $field = '';
+            $order = '';
+        }
         $condition['status'] = $type;
         $res = $this->where($condition)
-            ->field('device_order_id id,order_sn,status,customer_name,customer_mobile,customer_addr,customer_desc,add_time')
-            ->order('add_time desc')
+            ->field($field)
+            ->order($order)
             ->select();
 //        echo $this->_sql();
 //        print_r($res);

@@ -1,31 +1,9 @@
-<extend name="Public/base_customer" />
+<extend name="Public/base_agent" />
 
 <block name="body">
     <div class="main">
         <div class="main-title">
-            <h2>设备管理</h2>
-        </div>
-
-        <span style="color: #0000cc">设备运行状态：</span><span>{$status_info}</span><br/>
-
-        <form id="formid"  name= "myform" method = 'post'  action = '__URL__/report'>
-
-            <h4>故障描述</h4>
-            <div>
-                <textarea rows="3" cols="20" name="desc">
-
-                </textarea>
-            </div>
-            <div>
-                <input type="submit" value="障碍报修"   />
-            </div>
-            <span style="color: red">{$info}</span>
-        </form>
-
-        <br/>
-        <div>
-            <span>待处理的工单</span>&nbsp&nbsp&nbsp&nbsp <span>处理中的工单</span>&nbsp&nbsp&nbsp&nbsp
-            <span>处理完成的工单</span>&nbsp&nbsp&nbsp&nbsp<span>确认完成的工单</span>
+            <h2>处理中工单列表</h2>
         </div>
 
         <!-- 数据列表 -->
@@ -36,8 +14,16 @@
                     <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                     <th class="">UID</th>
                     <th class="">工单号</th>
+                    <th class="">工单状态</th>
+                    <th class="">客户名称</th>
+                    <th class="">客户联系方式</th>
+                    <th class="">客户联系地址</th>
                     <th class="">客户描述</th>
                     <th class="">生成时间</th>
+                    <th class="">代理商</th>
+                    <th class="">代理商联系电话</th>
+                    <th class="">代理商受理时间</th>
+                    <th class="">代理商预计处理时间</th>
                 </tr>
                 </thead>
 
@@ -48,8 +34,17 @@
                             <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
                             <td>{$vo.id} </td>
                             <td>{$vo.order_sn}</td>
+                            <td>{$vo['status']==1?'待处理':'其他错误'}</td>
+                            <td>{$vo.customer_name}</td>
+                            <td>{$vo.customer_mobile}</td>
+                            <td>{$vo.customer_addr}</td>
                             <td>{$vo.customer_desc}</td>
                             <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
+
+                            <td>{$vo.agent_name}</td>
+                            <td>{$vo.agent_mobile}</td>
+                            <td>{$vo.accept_time|date="Y-m-d H:m:s",###}</td>
+                            <td>{$vo.agent_desc}</td>
                         </tr>
                     </volist>
                     <else/>
@@ -59,10 +54,7 @@
 
             </table>
         </div>
-        <!--<a href="{:U('customer/report')}" style="color: #660000">障碍报修</a><br/>-->
-
     </div>
-
 </block>
 
 <block name="script">

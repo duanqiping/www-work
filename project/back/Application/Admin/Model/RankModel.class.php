@@ -11,6 +11,8 @@ namespace Admin\Model;
 
 use Think\Model;
 
+/** 该model 已经废除使用
+*/
 class RankModel extends Model
 {
     protected $marathon = 42195;//全程马拉松

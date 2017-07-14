@@ -8,10 +8,30 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\ScoreModel;
 use Think\Controller;
+use Admin\Model\CustomerModel;
+use Admin\Model\RanKMongoModel;
 
 class ConsumerController extends BaseController
 {
+    //首页信息
+    protected function homeInfo($type)
+    {
+        $data = array();
+        $customer = new CustomerModel();
+        $data_user = $customer->mainInfo();//用户量 活跃量 累计最长距离
+        $score = new ScoreModel();
+        $data_score = $score->UserInfo();
+
+        $data = array_merge($data,$data_user);
+
+//        $rank = new RanKMongoModel();
+//        $best = $rank->bestScore();
+
+        return $data;
+    }
+
     //登录...你好呀
     public function login($flag='',$account='',$passwd='')
     {
@@ -29,9 +49,13 @@ class ConsumerController extends BaseController
             }
             else
             {
-//                print_r($res);
+                $data = $this->homeInfo($flag);
+//                print_r($data);
+//                exit();
+
 //                print_r($_SESSION);
-                $this->assign('name',$res['name']);
+                $this->assign('data',$data);
+//                $this->assign('name',$res['name']);
                 if($flag ==1){
                     $this->display('admin/index');
                 }else if($flag ==2){

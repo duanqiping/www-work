@@ -20,13 +20,6 @@ class ScoreModel extends MongoModel{
 
     protected $connection = 'DB_CONFIG1';
 
-//    protected $connection = array(
-//        'db_type' => 'mongo',
-//        'db_user' => '',//用户名(没有留空)
-//        'db_pwd' => '',//密码（没有留空）
-//        'db_host' => '127.0.0.1',//数据库地址
-//        'db_port' => '27017',//数据库端口 默认27017
-//    );
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
@@ -34,6 +27,10 @@ class ScoreModel extends MongoModel{
 //
 //        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
 //    );
+//    public function getTableName()
+//    {
+//
+//    }
 
     //录入成绩
     public function insert($data,$rankInfo)
@@ -68,6 +65,44 @@ class ScoreModel extends MongoModel{
         $rankModel = new RanKMongoModel();
         $rankModel->dealWithSolve($rankInfo,$data,$length,$scoreInfo);
         return true;
+
+    }
+
+    //活跃用户量(暂定 往上推一个月 平均每天跑了100米)
+    //每天活跃量 (暂定 上一天有多少人跑步)
+    //月跑步公里数 （上个月总公里数）
+    //用户时间段统计 （上个月 上午8-10  晚上6-11点）
+    //持续运动量（一个月 有20天都在跑，平均每天运动量400米）
+    public function UserInfo()
+    {
+        $customer = new CustomerModel();
+        $res_customer = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('score_table')->find();
+        $score_table = $res_customer['score_table'];
+
+
+        //活跃用户量
+        $begin_time = strtotime(date('Y-m-01 00:00:00',strtotime('-1 month')));
+        $end_time = strtotime(date("Y-m-d 23:59:59", strtotime(-date('d').'day')));
+
+        $condition['add_time'] = array('gt',$begin_time);
+        $condition['add_time'] = array('lt',$end_time);
+//        $count = $this->table($score_table)->where($condition)->group('user_id')->count();
+//        $count = $this->table($score_table)->where($condition)->group('user_id')->field('user_id')->select();
+
+//        $sql  = "db.{$score_table}.find({'user_id':'16'},{'user_id':1,'add_time':1}).toArray()";
+        $sql  = 'db.'."$score_table".'.find({"add_time":{"$gt":'."$begin_time".'},"add_time":{"$lt":'."$end_time".'}},'.
+            '{"user_id":1,"add_time":1}).toArray()';
+//        echo $sql;
+//        exit();
+        $res = $this->mongoCode($sql);
+//        $res = $this->table($score_table)->where(array('user_id'=>'16'))->field('user_id,add_time')->select();
+
+        echo $this->_sql();
+        var_dump($res);
+        exit();
+
+        print_r($count);
+        exit();
 
     }
 }

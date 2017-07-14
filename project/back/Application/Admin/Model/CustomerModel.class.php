@@ -73,13 +73,13 @@ class CustomerModel extends ConsumerHandleModel
         $max_length = $res_length[0]['length'];
 
         //活跃用户量
-        $condition['length'] = array('gt',30000);
-        $count_active = $user->where($condition)->count();
+//        $condition['length'] = array('gt',30000);
+//        $count_active = $user->where($condition)->count();
 
         $data = array();
         $data['count'] = $count;
         $data['max_length'] = round($max_length/1000,2);
-        $data['count_active'] = $count_active;
+//        $data['count_active'] = $count_active;
 //        print_r($max_length);
 ////        echo $user->_sql();
 //        print_r($count);

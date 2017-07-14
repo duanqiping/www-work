@@ -27,6 +27,10 @@
 	//echo $time=strtotime(rankChoiceRule('month')),"\n";
 	echo $time=strtotime(rankChoiceRule('week')),"\n";
 	
+	$begin_time = date('Y-m-01 00:00:00',strtotime('-1 month'));
+	$end_time = date("Y-m-d 23:59:59", strtotime(-date('d').'day'));
+	echo $begin_time;
+	echo $end_time;
 	
 		
 	

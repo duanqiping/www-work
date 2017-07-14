@@ -2,7 +2,42 @@
 
 <block name="body">
     <div class="main">
-
+        <div>
+            <span class="number">总用户数量：</span>
+            <span class="title">{$data.count}</span>
+        </div>
+        <div>
+            <span class="number">活跃用户数量</span>
+            <span class="title">{$user.count_active}</span>
+        </div>
+        <div>
+            <span class="number">单圈最佳</span>
+            <span class="title">{$best} 秒</span>
+        </div>
+        <div>
+            <span class="number">累计最长距离：</span>
+            <span class="title">{$data.max_length} km</span>
+        </div>
+        <div>
+            <span class="number">每天活跃量</span>
+            <span class="title">{$user.max_length} km</span>
+        </div>
+        <div>
+            <span class="number">月跑步公里数</span>
+            <span class="title">{$user.max_length} km</span>
+        </div>
+        <div>
+            <span class="number">用户时间段统计</span>
+            <span class="title">{$user.max_length} km</span>
+        </div>
+        <div>
+            <span class="number">持续运动量</span>
+            <span class="title">{$user.max_length} km</span>
+        </div>
+        <div>
+            <span class="number">消息推送有天赋的运动员</span>
+            <span class="title">{$user.max_length} km</span>
+        </div>
     </div>
 </block>
 

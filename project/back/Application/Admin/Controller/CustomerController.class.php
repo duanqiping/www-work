@@ -17,6 +17,17 @@ use Admin\Model\TeacherModel;
 
 class CustomerController extends BaseController
 {
+    //首页信息
+    protected function homeInfo()
+    {
+        $data = array();
+        $customer = new CustomerModel();
+        $data = $customer->mainInfo();//用户量 活跃量 累计最长距离
+
+        $rank = new RanKMongoModel();
+        $best = $rank->bestScore();
+    }
+
     //工单状态
     protected function status()
     {

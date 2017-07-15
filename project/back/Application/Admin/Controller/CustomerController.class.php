@@ -17,17 +17,6 @@ use Admin\Model\TeacherModel;
 
 class CustomerController extends BaseController
 {
-    //首页信息
-    protected function homeInfo()
-    {
-        $data = array();
-        $customer = new CustomerModel();
-        $data = $customer->mainInfo();//用户量 活跃量 累计最长距离
-
-        $rank = new RanKMongoModel();
-        $best = $rank->bestScore();
-    }
-
     //工单状态
     protected function status()
     {
@@ -54,18 +43,13 @@ class CustomerController extends BaseController
     }
 
     //概述主页 用户量 活跃用户量 单圈最佳 累计最长距离
-    public function summary()
+    public function index()
     {
         $customer = new CustomerModel();
-        $data = $customer->mainInfo();//用户量 活跃量 累计最长距离
+        $data = $customer->homeInfo();
 
-        $rank = new RanKMongoModel();
-        $best = $rank->bestScore();
-//        print_r($data);
-//        print_r($best);
-//        exit();
-        $this->assign('user',$data);
-        $this->assign('best',$best);
+        $this->assign('data',$data);
+
         $this->display();
     }
 
@@ -84,8 +68,7 @@ class CustomerController extends BaseController
     //排行表
     public function rank()
     {
-//        print_r($_SESSION);
-//        exit();
+
         $page = 1;
         $pageSize = 10;
         $flag = 'single';

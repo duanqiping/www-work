@@ -12,6 +12,8 @@
  * 所有除开系统级别的前台配置
  */
 return array (
+//    'LOAD_EXT_FILE' => 'function',
+
     'SESSION_PREFIX' => SITE_DIR_NAME . '_admin', // session前缀
     'COOKIE_PREFIX' => SITE_DIR_NAME . '_admin_', // Cookie前缀 避免冲突
 

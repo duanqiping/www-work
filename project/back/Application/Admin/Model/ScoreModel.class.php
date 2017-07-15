@@ -13,13 +13,12 @@ use Think\Model\MongoModel;
 
 //成绩表
 class ScoreModel extends MongoModel{
+    const Month = 'month';
+    const Day = 'day';
 
     protected $dbName='score';//（要连接的数据库名称）
-
     protected $trueTableName = '';
-
     protected $connection = 'DB_CONFIG1';
-
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
@@ -27,10 +26,28 @@ class ScoreModel extends MongoModel{
 //
 //        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
 //    );
-//    public function getTableName()
-//    {
-//
-//    }
+
+    private function activeUserNum($score_table,$time_flag)
+    {
+        //活跃用户量
+        $dateInfo = getTimeBeginAndEnd($time_flag);
+        $begin_time = $dateInfo['begin_time'];
+        $end_time = $dateInfo['end_time'];
+
+        $sql = 'db.'."$score_table".'.group({
+                    key:{user_id:true},//分组条件
+                    initial:{num:0},
+                    $reduce:function(doc,prev){
+                    prev.num++
+                    },
+                    condition:{$where:function(){
+                    return this.add_time>'."$begin_time".' && this.add_time<'."$end_time".';//查询条件
+                    }
+                    }
+                    }); ';
+        $res = $this->mongoCode($sql);
+        return count($res);
+    }
 
     //录入成绩
     public function insert($data,$rankInfo)
@@ -68,42 +85,36 @@ class ScoreModel extends MongoModel{
 
     }
 
-    //活跃用户量(暂定 往上推一个月 平均每天跑了100米)
+    //活跃用户量(暂定 往上推一个月 有跑步记录)
     //每天活跃量 (暂定 上一天有多少人跑步)
     //月跑步公里数 （上个月总公里数）
     //用户时间段统计 （上个月 上午8-10  晚上6-11点）
     //持续运动量（一个月 有20天都在跑，平均每天运动量400米）
     public function UserInfo()
     {
+        $data = array();
+
         $customer = new CustomerModel();
         $res_customer = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('score_table')->find();
         $score_table = $res_customer['score_table'];
 
+        $count_month  = $this->activeUserNum($score_table,ScoreModel::Month);//上月活跃用户量
+        $count_day  = $this->activeUserNum($score_table,ScoreModel::Day);//昨日活跃用户量
+        $data['count_month'] = $count_month;
+        $data['count_day'] = $count_day;
 
-        //活跃用户量
-        $begin_time = strtotime(date('Y-m-01 00:00:00',strtotime('-1 month')));
-        $end_time = strtotime(date("Y-m-d 23:59:59", strtotime(-date('d').'day')));
-
-        $condition['add_time'] = array('gt',$begin_time);
-        $condition['add_time'] = array('lt',$end_time);
-//        $count = $this->table($score_table)->where($condition)->group('user_id')->count();
 //        $count = $this->table($score_table)->where($condition)->group('user_id')->field('user_id')->select();
+//        $sql  = 'db.'."$score_table".'.find({"add_time":{"$gt":'."$begin_time".'},"add_time":{"$lt":'."$end_time".'}},'.
+//            '{"user_id":1,"add_time":1}).toArray()';
 
-//        $sql  = "db.{$score_table}.find({'user_id':'16'},{'user_id':1,'add_time':1}).toArray()";
-        $sql  = 'db.'."$score_table".'.find({"add_time":{"$gt":'."$begin_time".'},"add_time":{"$lt":'."$end_time".'}},'.
-            '{"user_id":1,"add_time":1}).toArray()';
-//        echo $sql;
+//        var_dump($count_month);
+//        var_dump($count_day);
 //        exit();
-        $res = $this->mongoCode($sql);
-//        $res = $this->table($score_table)->where(array('user_id'=>'16'))->field('user_id,add_time')->select();
 
-        echo $this->_sql();
-        var_dump($res);
-        exit();
+//        print_r($count);
+//        exit();
 
-        print_r($count);
-        exit();
-
+        return $data;
     }
 }
 

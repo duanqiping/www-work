@@ -229,16 +229,11 @@ class RanKMongoModel extends MongoModel{
         $tableName = 'rank_single';
         $condition['customer_id'] = $_SESSION['user']['id'];
 
-//        $minScore  = $this->table($tableName)->where($condition)->min('time');
         $min_res  = $this->table($tableName)->where($condition)->field('time')->order('time')->limit(1)->select();
         $min_res = array_values($min_res);
         $minScore = $min_res[0]['time'];
-//        echo $this->_sql();
-//        print_r($minScore);
-//        exit();
+
         return $minScore;
-//        print_r($minScore);
-//        exit();
     }
 
     //获取单圈最佳成绩排行
@@ -257,11 +252,6 @@ class RanKMongoModel extends MongoModel{
             ->order('time')
             ->limit($offset,$pageSize)
             ->select();
-//
-//        print_r($res);
-//        exit();
-//        echo $this->_sql();
-//        exit();
 
         if(!$res) return array();
         $res = array_values($res);

@@ -26,8 +26,25 @@ class CustomerModel extends ConsumerHandleModel
         array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
     );
 
-    //获取客户信息
+    //首页信息
+    public  function homeInfo()
+    {
+        $data = array();
+        $data_user = $this->mainInfo();//用户量 累计最长距离
 
+        $score = new ScoreModel();
+        $data_score = $score->UserInfo();//前一月活跃量 前一日活跃量
+
+        $rank = new RanKMongoModel();
+        $best = $rank->bestScore();//单圈最佳成绩
+
+        $data = array_merge($data,$data_user,$data_score);
+        $data['best_single'] = $best;
+
+        return $data;
+    }
+
+    //获取客户信息
     public function getList()
     {
         $condition['is_show'] = 1;
@@ -68,24 +85,15 @@ class CustomerModel extends ConsumerHandleModel
         $condition['customer_id'] = $_SESSION['user']['id'];
         $count = $user->where($condition)->count();
 
-        //累计最长距离
-        $res_length = $user->where($condition)->field('length')->order('length desc')->limit(1)->select();
-        $max_length = $res_length[0]['length'];
+        //所有用户总公里数
+        $sum_length = $user->where($condition)->sum('length');
 
-        //活跃用户量
-//        $condition['length'] = array('gt',30000);
-//        $count_active = $user->where($condition)->count();
 
         $data = array();
         $data['count'] = $count;
-        $data['max_length'] = round($max_length/1000,2);
-//        $data['count_active'] = $count_active;
-//        print_r($max_length);
-////        echo $user->_sql();
-//        print_r($count);
-//        exit();
-        return $data;
+        $data['sum_length'] = round($sum_length/1000,2);
 
+        return $data;
     }
 
     //创建成绩表和排行表

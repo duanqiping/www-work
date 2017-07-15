@@ -2,27 +2,41 @@
 
 <block name="body">
     <div class="main">
-        <div class="main-title">
+        <div style="left: 10%">
             <h2>设备管理</h2>
         </div>
+        <table class="" style="border-collapse:separate; border-spacing:60px 10px;">
+            <thead>
+                <tr>
+                    <!--<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>-->
+                    <th class="">设备编码</th>
+                    <th class="">运行状态</th>
+                    <th class="">开机时间</th>
+                    <th class="">下一个机器</th>
+                    <th class="">上个机器有效时间</th>
+                    <th class="">故障报销</th>
+                </tr>
+            </thead>
+            <tbody>
+            <notempty name="device">
+                <volist name="device" id="vo">
+                    <tr>
+                        <td>{$vo.ms_code} </td>
+                        <td>{$vo.status}</td>
+                        <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
+                        <td>{$vo.next_ms_code}</td>
+                        <td>{$vo.last_expire_time}</td>
+                        <td>故障报销</td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
 
-        <span style="color: #0000cc">设备运行状态：</span><span>{$status_info}</span><br/>
 
-        <form id="formid"  name= "myform" method = 'post'  action = '__URL__/report'>
-
-            <h4>故障描述</h4>
-            <div>
-                <textarea rows="3" cols="20" name="desc">
-
-                </textarea>
-            </div>
-            <div>
-                <input type="submit" value="障碍报修"   />
-            </div>
-            <span style="color: red">{$info}</span>
-        </form>
-
-        <br/>
+        <br/><br/><br/><br/>
         <div>
             <span>待处理的工单</span>&nbsp&nbsp&nbsp&nbsp <span>处理中的工单</span>&nbsp&nbsp&nbsp&nbsp
             <span>处理完成的工单</span>&nbsp&nbsp&nbsp&nbsp<span>确认完成的工单</span>

@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 
 use Admin\Model\CustomerModel;
+use Admin\Model\DeviceMsModel;
 use Admin\Model\DeviceOrderModel;
 use Admin\Model\RanKMongoModel;
 use Admin\Model\ScoreModel;
@@ -133,12 +134,16 @@ class CustomerController extends BaseController
     //设备管理主页
     public function device()
     {
-        $agent = new DeviceOrderModel();
-        $res = $agent->_list($type = 1);
+        $devicems = new DeviceMsModel();
+        $data = $devicems->_list();
+
+        $deviceorder = new DeviceOrderModel();
+        $res = $deviceorder->_list($type = 1);
 
         $status_info = $this->status();
         $this->assign('status_info',$status_info['info']);
         $this->assign('_list',$res);
+        $this->assign('device',$data);
 
         $this->display();
     }

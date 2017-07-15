@@ -15,6 +15,14 @@ class DeviceMsModel extends Model{
 
     protected $tableName = 'device_ms';
 
+    //
+    public function _list()
+    {
+        $condition['customer_id'] = $_SESSION['user']['id'];
+        $res = $this->where($condition)->field('device_ms_id,ms_code,next_ms_code,last_expire_time,customer_id,add_time,status')->select();
+        return $res;
+    }
+
     //获取设备信息
     public function getDeviceInfo($flag,$agent_id)
     {

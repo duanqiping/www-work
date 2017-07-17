@@ -2,17 +2,44 @@
 
 <block name="body">
     <div class="main">
-        <div class="main-title">
+        <div class="main-title" style="margin-left: 60px">
             <h2>成绩管理</h2>
         </div>
-
-        <div>
-            <span>系别</span>&nbsp&nbsp&nbsp&nbsp <span>班级</span>&nbsp&nbsp&nbsp&nbsp <input type="text" name="score">查找
+        <div style="margin-left: 60px;float: left">
+            <select name="dept" value="系别">
+                <option>系别</option>
+                <option>数学系</option>
+                <option>物理系</option>
+                <option>美术系</option>
+            </select>
         </div>
-
+        <div style="margin-left: 10px;float: left">
+            <select name="dept" value="年级">
+                <option>年级</option>
+                <option>数学系</option>
+                <option>物理系</option>
+                <option>美术系</option>
+            </select>
+        </div>
+        <div style="margin-left: 10px;float: left">
+            <select name="dept" value="班级">
+                <option>班级</option>
+                <option>数学系</option>
+                <option>物理系</option>
+                <option>美术系</option>
+            </select>
+        </div>
+        <div style="margin-left: 10px;float: left">
+            <select name="dept" value="性别">
+                <option>性别</option>
+                <option>男</option>
+                <option>女</option>
+            </select>
+        </div>
         <!-- 数据列表 -->
         <div class="data-table table-striped">
-            <table class="" style="border-collapse:separate; border-spacing:60px 10px;">
+            <!--<table class="" style="border-collapse:separate; border-spacing:60px 10px;">-->
+            <table class=""  style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
                 <thead>
                 <tr>
                     <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>

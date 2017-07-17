@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!-- Alt + C -->
+<input @keyup.alt.67="clear">
+<!-- Ctrl + Click -->
+<div @click.ctrl="doSomething">Do something</div>
+
+<input v-model="message" placeholder="edit me">
+<p>Message is: {{ message }}</p>
+<span>Multiline message is:</span>
+<p style="white-space: pre-line">{{ message }}</p>
+<br>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+<br>
+<input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}</label>
+<br>
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<label for="jack">Jack</label>
+<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<label for="john">John</label>
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<label for="mike">Mike</label>
+<br>
+<span>Checked names: {{ checkedNames }}</span>
+
+<div id="example-4">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+<div id="example-5">
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+</div>
+<div id="example-6">
+    <select v-model="selected" multiple style="width: 50px">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+</div>
+
+<div id="example-7">
+    <select v-model="selected" >
+        <option v-for="option in options" v-bind:value="option.value">
+            {{ option.text }}
+        </option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+</div>
+<!-- 当选中时，`picked` 为字符串 "a" -->
+<input type="radio" v-model="picked" value="a">
+<!-- `toggle` 为 true 或 false -->
+<input type="checkbox" v-model="toggle">
+<!-- 当选中时，`selected` 为字符串 "abc" -->
+<select v-model="selected">
+    <option value="abc">ABC</option>
+</select>
+
+
+
+
+</body>
+<script>
+    new Vue({
+        el: '#example-7',
+        data: {
+            selected: 'A',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ]
+        }
+    });
+    new Vue({
+        el: '#example-6',
+        data: {
+            selected: []
+        }
+    });
+    new Vue({
+        el: '...',
+        data: {
+            selected: ''
+        }
+    });
+    new Vue({
+        el: '#example-4',
+        data: {
+            picked: ''
+        }
+    });
+    new Vue({
+        el: '...',
+        data: {
+            checkedNames: []
+        }
+    })
+</script>
+</html>

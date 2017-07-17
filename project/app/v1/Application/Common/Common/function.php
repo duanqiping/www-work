@@ -92,13 +92,6 @@ function ch_urlencode($data) {
 
     return $data;
 }
-
-function sendSuccess($data) {
-    if(is_string($data)) $data = array('msg'=>$data);
-    $response = ch_json_encode($data);
-    exit($response);
-}
-
 //检查前端post的数据是否合法
 function checkData($b,$msg)
 {
@@ -106,6 +99,12 @@ function checkData($b,$msg)
     else sendError($msg);
 }
 
+
+function sendSuccess($data) {
+    if(is_string($data)) $data = array('msg'=>$data);
+    $response = ch_json_encode($data);
+    exit($response);
+}
 //code 0:正常消息，1：debug信息
 function sendError($msg) {
     $code = APP_DEBUG?1:0;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My first Vue app 2</title>
+    <!--<script src="https://unpkg.com/vue"></script>-->
+    <script src="vue.js"></script>
+
+</head>
+<body>
+
+<div class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+</div>
+<div v-bind:class="classObject"></div>
+
+<div class="static2" v-bind:class="[activeClass, errorClass]"></div>
+
+<my-component class="baz boo"></my-component>
+
+<script>
+
+    Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    });
+
+    var app = new Vue({
+        el: '.static',
+        data: {
+            isActive: true,
+            hasError: true
+        }
+    });
+    var app2 = new Vue({
+        el: '.static2',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    });
+</script>
+
+</body>
+</html>

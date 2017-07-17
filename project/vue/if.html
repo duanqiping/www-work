@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>if条件语句</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<ul id="example-1">
+    <li v-for="item in items">
+        {{ item.message }}
+    </li>
+</ul>
+
+<ul id="example-2">
+    <li v-for="(item, index) of items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+</ul>
+<ul id="repeat-object" class="demo">
+    <li v-for="(value,key) in object">
+        {{ key }} : {{ value }}
+    </li>
+</ul>
+<div>
+    <span v-for="n in 10">{{ n }} </span>
+</div>
+<my-component v-for="item in items" :key="item.id"></my-component>
+<my-component
+        v-for="(item, index) in items"
+        v-bind:item="item"
+        v-bind:index="index"
+        v-bind:key="item.id">
+</my-component>
+</body>
+<script>
+
+    new Vue({
+        el: '#repeat-object',
+        data: {
+            object: {
+                firstName: 'John',
+                lastName: 'Doe',
+                age: 30
+            }
+        }
+    });
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
+        }
+    });
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                {message: 'Foo' },
+                {message: 'Bar' }
+            ]
+        }
+    });
+
+</script>
+</html>

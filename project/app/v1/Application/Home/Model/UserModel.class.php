@@ -90,7 +90,7 @@ class UserModel extends Model
         $data['nick'] = $data['account'];
         $data['is_check'] = 1;
         $data['sex'] = 1;
-        $data['register_time'] = NOW_TIME;
+        $data['add_time'] = NOW_TIME;
 
         $b = $this->add($data);
         if(!$b)

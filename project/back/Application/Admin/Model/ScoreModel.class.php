@@ -27,6 +27,7 @@ class ScoreModel extends MongoModel{
 //        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
 //    );
 
+    //活跃用户量
     private function activeUserNum($score_table,$time_flag)
     {
         //活跃用户量
@@ -47,6 +48,12 @@ class ScoreModel extends MongoModel{
                     }); ';
         $res = $this->mongoCode($sql);
         return count($res);
+    }
+
+    //成绩列表
+    public function _list($where = '')
+    {
+
     }
 
     //录入成绩

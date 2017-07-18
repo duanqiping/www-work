@@ -14,7 +14,7 @@ use Admin\Model\DeviceMsModel;
 use Admin\Model\DeviceOrderModel;
 use Admin\Model\RanKMongoModel;
 use Admin\Model\ScoreModel;
-use Admin\Model\TeacherModel;
+use Admin\Model\UserModel;
 
 class CustomerController extends BaseController
 {
@@ -58,8 +58,10 @@ class CustomerController extends BaseController
     public function info()
     {
 
-        $teacher = new TeacherModel();
-        $res = $teacher->_list();
+        $user = new UserModel();
+        $res = $user->_list();
+
+        $this->assign('dept',array('0'=>'数学系','1'=>'物理系'));
 
         $this->assign('_list',$res);
 
@@ -93,42 +95,9 @@ class CustomerController extends BaseController
 
     public function score()
     {
+        $score = new ScoreModel();
+
         $this->display();
-    }
-
-    //添加老师
-    public function add2()
-    {
-        if(!$_POST){
-            $this->display();
-        }else{
-            if($_POST['passwd'] != $_POST['repasswd'])
-            {
-                $this->assign('error_info','两次密码不一致');
-                $this->display();
-
-            }
-//            echo "<pre>";
-//            print_r($_POST);
-//            echo "</pre>";
-//            exit();
-//            echo "add2";
-            $teacher = new TeacherModel();
-            $uid = $teacher->addTeacher($_POST);
-            if($uid){
-                $teacher = new TeacherModel();
-                $res = $teacher->_list();
-
-                $this->assign('_list',$res);
-                $this->display('info');
-            }else{
-                $this->assign('error_info',$teacher->getError());
-                $this->display();
-            }
-
-            exit();
-        }
-
     }
 
     //设备管理主页

@@ -37,8 +37,6 @@ class TeacherModel extends ConsumerHandleModel
         }else{
             return false;
         }
-//        print_r($data);
-//        exit();
     }
 
     //完善数据
@@ -69,6 +67,5 @@ class TeacherModel extends ConsumerHandleModel
         }
 
         return $res;
-
     }
 } 

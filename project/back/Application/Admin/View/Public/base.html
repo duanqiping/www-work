@@ -20,6 +20,8 @@
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" href="__IMG__/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="__IMG__/favicon.png">
+
+
 </head>
 
 <body>
@@ -91,7 +93,8 @@
 
     <!--内容-->
     <block name="body"> </block>
-
+    <!--下面的需要用<php>/* */</php>这种形式注释-->
+    <php>/*<block name="script"> </block>*/</php>
     <div class="clearfix"></div>
 </div>
 <!-- END WRAPPER -->
@@ -101,9 +104,9 @@
 <script src="__VENDOR__/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="__VENDOR__/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 <script src="__VENDOR__/chartist/js/chartist.min.js"></script>
-<script src="__JS__/klorofil-common.js"></script>
 
-<script type="text/javascript" src="__JS__/common.js?v={:SITE_VERSION}"></script>
+<!--<script src="__JS__/vue.js"></script>-->
+<!--<script src="__JS__/test.js"></script>-->
 <script>
     $(function() {
         var data, options;

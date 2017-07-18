@@ -1,4 +1,4 @@
-<extend name="Public/base_customer" />
+<extend name="Public/base" />
 
 <block name="body">
     <div class="main">
@@ -48,6 +48,7 @@
                     <th class="">所在班级</th>
                     <th class="">耗时时间</th>
                     <th class="">完成时间</th>
+                    <th class="">性别</th>
                 </tr>
                 </thead>
 
@@ -61,6 +62,7 @@
                             <td>{$vo.class}</td>
                             <td>{$vo.time}</td>
                             <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
+                            <td>{$vo.sex}</td>
                         </tr>
                     </volist>
                     <else/>

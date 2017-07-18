@@ -18,6 +18,21 @@ use Admin\Model\UserModel;
 
 class CustomerController extends BaseController
 {
+    public function getSection(){
+        $s= M("user");
+        $condition['customer_id'] = 31;
+        file_put_contents('log.txt',"111\n",FILE_APPEND );
+        $list = $s->field('dept,user_id')->where($condition)->select();
+        echo json_encode($list);
+    }
+
+    public function getCatid(){
+        $sid=$_GET['id'];
+        $c= M("category");
+        $data=$c->field('id,title')->where("sectionid=$sid")->select();
+        echo json_encode($data);
+    }
+
     //工单状态
     protected function status()
     {

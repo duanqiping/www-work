@@ -103,7 +103,7 @@
 <script src="__VENDOR__/bootstrap/js/bootstrap.min.js"></script>
 <script src="__VENDOR__/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="__VENDOR__/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-<script src="__VENDOR__/chartist/js/chartist.min.js"></script>
+<!--<script src="__VENDOR__/chartist/js/chartist.min.js"></script>-->
 
 <!--<script src="__JS__/vue.js"></script>-->
 <!--<script src="__JS__/test.js"></script>-->
@@ -209,19 +209,19 @@
             animate: 800
         });
 
-        var updateInterval = 3000; // in milliseconds
+//        var updateInterval = 3000; // in milliseconds
 
-        setInterval(function() {
-            var randomVal;
-            randomVal = getRandomInt(0, 100);
-
-            sysLoad.data('easyPieChart').update(randomVal);
-            sysLoad.find('.percent').text(randomVal);
-        }, updateInterval);
-
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+//        setInterval(function() {
+//            var randomVal;
+//            randomVal = getRandomInt(0, 100);
+//
+//            sysLoad.data('easyPieChart').update(randomVal);
+//            sysLoad.find('.percent').text(randomVal);
+//        }, updateInterval);
+//
+//        function getRandomInt(min, max) {
+//            return Math.floor(Math.random() * (max - min + 1)) + min;
+//        }
 
     });
 </script>

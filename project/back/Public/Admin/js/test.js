@@ -12,3 +12,30 @@ new Vue({
         ]
     }
 });
+$(document).ready(function(){
+    getSection();
+
+    $("#sectionid").change(function(){
+        getCatid();
+    });
+
+    function getSection()
+    {
+        $.getJSON("__URL__/getSection", function(data) {
+            $.each(data, function(i, item) {
+                $("<option></option>").val(item['user_id']).text(item['dept']).appendTo($("#sectionid"));
+            });
+            getCatid();
+        });
+    }
+    function getCatid()
+    {
+        $("#catid").empty();
+        $.getJSON("__URL__/getCatid",  {id:$("#sectionid").val()}, function(data) {
+            $.each(data, function(i, item) {
+                $("<option></option>").val(item['user_id']).text(item['dept']).appendTo($("#catid"));
+            });
+
+        });
+    }
+});

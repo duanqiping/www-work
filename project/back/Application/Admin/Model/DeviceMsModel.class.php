@@ -15,6 +15,39 @@ class DeviceMsModel extends Model{
 
     protected $tableName = 'device_ms';
 
+    //添加设备
+    public function addDeviceMs($data)
+    {
+
+    }
+
+    //设备注册
+    public function EaseRegister($account,$passwd)
+    {
+        $is_condition['ms_code'] = $account;
+        $res = $this->where($is_condition)->field('next_ms_code,last_expire_time,stay,is_register')->find();
+        if(!$res){
+            $this->error = '系统未录入该设备编码';
+            return false;
+        }
+        if($res['is_register']==1){
+            $this->error = '该编码已经被注册';
+            return false;
+        }
+
+        $e = new Easemob();
+        $result = $e->createUser($account,$passwd);//授权注册
+
+        if($result['error']){
+            $this->error = '注册失败';
+            return false;
+        }else{
+            $this->where($is_condition)->setField('is_register',1);
+        }
+        unset($res['is_register']);
+        return $res;
+    }
+
     //
     public function _list()
     {

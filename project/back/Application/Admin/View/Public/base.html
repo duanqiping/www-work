@@ -21,6 +21,9 @@
     <link rel="apple-touch-icon" sizes="76x76" href="__IMG__/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="__IMG__/favicon.png">
 
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+    <![endif]--><!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 
 </head>
 
@@ -106,7 +109,7 @@
 <!--<script src="__VENDOR__/chartist/js/chartist.min.js"></script>-->
 
 <!--<script src="__JS__/vue.js"></script>-->
-<script src="__JS__/test.js"></script>
+<!--<script src="__JS__/test.js"></script>-->
 <script>
     $(function() {
         var data, options;
@@ -132,7 +135,7 @@
             lineSmooth: false,
         };
 
-        new Chartist.Line('#headline-chart', data, options);
+//        new Chartist.Line('#headline-chart', data, options);
 
 
         // visits trend charts
@@ -175,7 +178,7 @@
             }
         };
 
-        new Chartist.Line('#visits-trends-chart', data, options);
+//        new Chartist.Line('#visits-trends-chart', data, options);
 
 
         // visits chart
@@ -193,7 +196,7 @@
             },
         };
 
-        new Chartist.Bar('#visits-chart', data, options);
+//        new Chartist.Bar('#visits-chart', data, options);
 
 
         // real-time pie chart

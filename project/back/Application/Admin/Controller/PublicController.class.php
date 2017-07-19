@@ -24,8 +24,7 @@ class PublicController extends \Think\Controller{
     public function login($flag='',$account='',$passwd='')
     {
         if(IS_POST) {
-            echo 11;
-            exit();
+
             $consumer = $this->getInstance($flag);
 
             if(! $res = $consumer->login($account,$passwd,$flag))

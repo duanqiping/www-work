@@ -1,0 +1,45 @@
+<extend name="Public/base_admin" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title" style="margin-left: 60px" >
+            <h2>设备管理</h2>
+        </div>
+        <div style="margin-left: 60px;margin-top: 10px">
+            <form action="{:U('admin/addDevice')}" method="post">
+            <div style="float: left">
+                <select name="customerName" value="选择客户" id="customerId">
+                    <!--<option>系别</option>-->
+                    <volist name="_list" id="vo">
+                        <option name="customer">{$vo.name}</option>
+                    </volist>
+                </select>
+            </div>
+            <div style="margin-left: 10px;float: left">
+                <select name="num" value="选择客户" id="num">
+                <option name="num1">3</option>
+                <option name="num2">4</option>
+                <option name="num3">5</option>
+                </select>
+            </div>
+
+            <div style="margin-left: 10px;float: left">
+                <input type="submit" value="添加">
+            </div>
+            </form>
+
+        </div>
+
+        <div class="main-title" style="margin-left: 60px" >
+            <h4>设备列表</h4>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

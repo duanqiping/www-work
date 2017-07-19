@@ -95,9 +95,6 @@ class CustomerController extends BaseController
         $rank = new RankMongoModel();
         $data = $rank->getSingleRank($customer_id,$page,$pageSize);
 
-//        print_r($data);
-//        exit();
-
         $this->assign('_list',$data);
         $this->display();
     }

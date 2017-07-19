@@ -38,7 +38,8 @@ class DeviceMsModel extends Model{
         $e = new Easemob();
         $result = $e->createUser($account,$passwd);//授权注册
 
-        if($result['error']){
+        //这种情况 是为了处理机器软件重装等偶发情况
+        if($result['error'] != 'duplicate_unique_property_exists'){
             $this->error = '注册失败';
             return false;
         }else{

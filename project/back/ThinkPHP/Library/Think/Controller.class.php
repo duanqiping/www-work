@@ -40,7 +40,6 @@ abstract class Controller {
         if(method_exists($this,'_initialize'))
             $this->_initialize();
     }
-
     /**
      * 模板显示 调用内置的模板引擎显示方法，
      * @access protected

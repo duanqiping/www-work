@@ -9,10 +9,10 @@
 namespace Admin\Controller;
 
 
-use Think\Controller;
+//use Think\Controller;
 use Admin\Model\ConsumerHandleModel;
 
-class BaseController extends Controller
+class BaseController extends \Think\Controller
 {
     protected $error_info;
     protected $flag;

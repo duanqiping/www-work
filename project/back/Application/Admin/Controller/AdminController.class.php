@@ -9,9 +9,31 @@
 namespace Admin\Controller;
 
 use Admin\Model\AdminModel;
+use Admin\Model\CustomerModel;
 use Admin\Model\DeviceMsModel;
 
 class AdminController extends BaseController {
+
+    public function index()
+    {
+        $customer = new CustomerModel();
+        $sql = "SELECT customer_id,name FROM customer WHERE customer_id ".
+            "NOT IN (select customer_id FROM device_ms GROUP BY customer_id)";
+        $res = $customer->query($sql);
+
+        $this->assign('_list',$res);//没有添加设备的客户
+        $this->display();
+    }
+
+    public function addDevice()
+    {
+        $data = $_POST;
+        print_r($data);
+        exit();
+
+
+//        $this->display();
+    }
 
     //往后台中添加设备
     public function addDeviceMs()
@@ -22,7 +44,7 @@ class AdminController extends BaseController {
     //设备注册
     public function register()
     {
-        $account = trim($_POST['account']);//设备编码
+        $account = trim($_GET['account']);//设备编码
         $passwd = 123456;//设备设定默认密码
 
         $devicems = new DeviceMsModel();

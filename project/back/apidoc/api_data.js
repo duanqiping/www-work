@@ -56,7 +56,7 @@ define({ "api": [
     "name": ""
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "admin/register",
     "title": "设备注册",
     "version": "1.0.0",
@@ -94,6 +94,6 @@ define({ "api": [
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "deviceMs",
-    "name": "GetAdminRegister"
+    "name": "PostAdminRegister"
   }
 ] });

@@ -51,7 +51,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="__IMG__/user.png" class="img-circle" alt="Avatar"> <span>{$Think.session.user.name}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                            <li><a href="{:U('consumer/logout')}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                            <li><a href="{:U('public/logout')}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                         </ul>
                     </li>
                     <!-- <li>
@@ -67,25 +67,7 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="{:U('customer/index')}" class="active"><i class="lnr lnr-home"></i> <span>学校概述</span></a></li>
-                    <li><a href="{:U('customer/info')}" class=""><i class="lnr lnr-chart-bars"></i> <span>用户管理</span></a></li>
-                    <li><a href="{:U('customer/score')}" class=""><i class="lnr lnr-cog"></i> <span>成绩管理</span></a></li>
-                    <li><a href="{:U('customer/rank')}" class=""><i class="lnr lnr-alarm"></i> <span>排行榜</span></a></li>
-
-                    <li><a href="{:U('customer/contest')}" class=""><i class="lnr lnr-dice"></i> <span>考试/赛事</span></a></li>
-
-                    <li><a href="{:U('customer/device')}" class=""><i class="lnr lnr-file-empty"></i> <span>设备管理</span></a></li>
-
-                    <!--<li>-->
-                        <!--<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>设备管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>-->
-                        <!--<div id="subPages" class="collapse ">-->
-                            <!--<ul class="nav">-->
-                                <!--<li><a href="#" class="">障碍报销</a></li>-->
-                                <!--<li><a href="#" class="">处理中的工单</a></li>-->
-                                <!--<li><a href="#" class="">已处理的工单</a></li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
-                    <!--</li>-->
+                    <li><a href="#" class=""><i class="lnr lnr-file-empty"></i> <span>设备管理</span></a></li>
                 </ul>
             </nav>
         </div>

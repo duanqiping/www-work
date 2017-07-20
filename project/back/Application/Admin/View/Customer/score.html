@@ -5,37 +5,22 @@
         <div class="main-title" style="margin-left: 60px">
             <h2>成绩管理</h2>
         </div>
-        <div style="margin-left: 60px;float: left">
-            <select name="dept" value="系别">
-                <option>系别</option>
-                <option>数学系</option>
-                <option>物理系</option>
-                <option>美术系</option>
-            </select>
-        </div>
-        <div style="margin-left: 10px;float: left">
-            <select name="dept" value="年级">
-                <option>年级</option>
-                <option>数学系</option>
-                <option>物理系</option>
-                <option>美术系</option>
-            </select>
-        </div>
-        <div style="margin-left: 10px;float: left">
-            <select name="dept" value="班级">
-                <option>班级</option>
-                <option>数学系</option>
-                <option>物理系</option>
-                <option>美术系</option>
-            </select>
-        </div>
-        <div style="margin-left: 10px;float: left">
-            <select name="dept" value="性别">
-                <option>性别</option>
-                <option>男</option>
-                <option>女</option>
-            </select>
-        </div>
+        <form action="{:U('score')}" method="post">
+            <div style="margin-left: 60px;margin-top: 10px">
+                <div style="float: left">
+                    <!--<select name="sectionid">系别</select>-->
+                    <select name="dept" id="sectionid"></select>
+                </div>
+                <div style="margin-left: 10px;float: left">
+                    <!--<select>班级</select>-->
+                    <select name="class" id="catid"></select>
+                </div>
+
+                <div style="margin-left: 10px;float: left">
+                    <input type="submit" value="查询">
+                </div>
+            </div>
+        </form>
         <!-- 数据列表 -->
         <div class="data-table table-striped">
             <!--<table class="" style="border-collapse:separate; border-spacing:60px 10px;">-->
@@ -77,5 +62,9 @@
 </block>
 
 <block name="script">
-
+    <script type="text/javascript">
+        var ajaxurldept = "{:U('getSection')}"; // merchant.js 中使用
+        var ajaxurlclass = "{:U('getCatid')}"; // merchant.js 中使用
+    </script>
+    <script src="__JS__/linkage.js"></script>
 </block>

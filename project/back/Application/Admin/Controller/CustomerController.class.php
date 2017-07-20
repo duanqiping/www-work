@@ -19,17 +19,24 @@ use Admin\Model\UserModel;
 class CustomerController extends BaseController
 {
     public function getSection(){
-        $s= M("user");
+        $s= new UserModel();
         $condition['customer_id'] = 31;
-        file_put_contents('log.txt',"111\n",FILE_APPEND );
-        $list = $s->field('dept,user_id')->where($condition)->select();
+//        file_put_contents('log.txt',"111\n",FILE_APPEND );
+        $list = $s->field('dept,user_id')->where($condition)->group('dept')->select();
+//        print_r($list);
+//        exit();
+//        echo $s->_sql();
         echo json_encode($list);
     }
 
     public function getCatid(){
-        $sid=$_GET['id'];
-        $c= M("category");
-        $data=$c->field('id,title')->where("sectionid=$sid")->select();
+
+        $dept=$_GET['dept'];
+        $s= new UserModel();
+        $condition['customer_id'] = 31;
+        $condition['dept'] = $dept;
+        file_put_contents('log.txt',$dept."111222\n",FILE_APPEND );
+        $data=$s->field('user_id,class')->where($condition)->group('class')->select();
         echo json_encode($data);
     }
 
@@ -72,9 +79,14 @@ class CustomerController extends BaseController
     //用户信息列表
     public function info()
     {
+        $condition = array();
+        if($_POST){
+            $condition = $_POST;
+        }
+        $condition['customer_id'] = $_SESSION['user']['id'];
 
         $user = new UserModel();
-        $res = $user->_list();
+        $res = $user->_list($condition);
 
         $this->assign('dept',array('0'=>'数学系','1'=>'物理系'));
 
@@ -107,7 +119,14 @@ class CustomerController extends BaseController
 
     public function score()
     {
+        $condition = array();
+        if($_POST){
+            $condition = $_POST;
+        }
+        $condition['customer_id'] = $_SESSION['user']['id'];
+
         $score = new ScoreModel();
+        $res = $score->_list($condition);
 
         $this->display();
     }

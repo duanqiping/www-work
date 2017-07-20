@@ -869,7 +869,7 @@ class Easemob extends Model{
 		curl_setopt($ch,CURLOPT_HEADER,0);
 //		curl_setopt ( $ch, CURLOPT_TIMEOUT,5); // 设置超时限制防止死循环
 		//设置发起连接前的等待时间，如果设置为0，则无限等待。
-		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
+		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
 		//将curl_exec()获取的信息以文件流的形式返回，而不是直接输出。
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		//2)设备请求体

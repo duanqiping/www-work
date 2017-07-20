@@ -1,54 +1,43 @@
 <extend name="Public/base" />
 
 <block name="body">
+
     <div class="main">
         <div class="main-title" style="margin-left: 60px" >
             <h2>用户列表</h2>
         </div>
 
-
-        <!--<div id="example-7">-->
-            <!--<select v-model="selected" >-->
-                <!--<option v-for="option in options" v-bind:value="option.value">-->
-                    <!--{{ option.text }}-->
-                <!--</option>-->
-            <!--</select>-->
-            <!--<span>Selected: {{ selected }}</span>-->
-        <!--</div>-->
-
+        <form action="{:U('info')}" method="post">
         <div style="margin-left: 60px;margin-top: 10px">
             <div style="float: left">
-                <select name="sectionid" value="系别" id="sectionid">
-                    <!--<option>系别</option>-->
-                    <!--<volist name="dept" id="vo">-->
-                        <!--<option>{$vo}</option>-->
-                    <!--</volist>-->
-                </select>
+                <!--<select name="sectionid">系别</select>-->
+                <select name="dept" id="sectionid"></select>
             </div>
             <div style="margin-left: 10px;float: left">
-                <select name="catid" value="年级" id="catid">
-                    <!--<option>年级</option>-->
+                <!--<select>班级</select>-->
+                <select name="class" id="catid"></select>
+            </div>
+
+            <div style="margin-left: 10px;float: left">
+                <input type="submit" value="查询">
+            </div>
+            <!--<div style="margin-left: 10px;float: left">-->
+                <!--<select name="dept" value="系别">-->
+                    <!--<option>班级</option>-->
                     <!--<option>数学系</option>-->
                     <!--<option>物理系</option>-->
                     <!--<option>美术系</option>-->
-                </select>
-            </div>
-            <div style="margin-left: 10px;float: left">
-                <select name="dept" value="班级">
-                    <option>班级</option>
-                    <option>数学系</option>
-                    <option>物理系</option>
-                    <option>美术系</option>
-                </select>
-            </div>
-            <div style="margin-left: 10px;float: left">
-                <select name="dept" value="性别">
-                    <option>性别</option>
-                    <option>男</option>
-                    <option>女</option>
-                </select>
-            </div>
+                <!--</select>-->
+            <!--</div>-->
+            <!--<div style="margin-left: 10px;float: left">-->
+                <!--<select name="dept" value="性别">-->
+                    <!--<option>性别</option>-->
+                    <!--<option>男</option>-->
+                    <!--<option>女</option>-->
+                <!--</select>-->
+            <!--</div>-->
         </div>
+        </form>
 
         <!-- 数据列表 -->
         <div class="data-table table-striped">
@@ -100,9 +89,11 @@
 </block>
 
 <block name="script">
-    <script>
-
+    <script type="text/javascript">
+        var ajaxurldept = "{:U('getSection')}"; // merchant.js 中使用
+        var ajaxurlclass = "{:U('getCatid')}"; // merchant.js 中使用
     </script>
+    <script src="__JS__/linkage.js"></script>
 </block>
 
 

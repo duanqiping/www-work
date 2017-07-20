@@ -25,7 +25,7 @@ class DeviceMsModel extends Model{
     public function EaseRegister($account,$passwd)
     {
         $is_condition['ms_code'] = $account;
-        $res = $this->where($is_condition)->field('next_ms_code,last_expire_time,stay,is_register')->find();
+        $res = $this->where($is_condition)->field('next_ms_code,last_ms_code,last_expire_time,stay,is_register')->find();
         if(!$res){
             $this->error = '系统未录入该设备编码';
             return false;

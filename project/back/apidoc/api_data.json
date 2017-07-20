@@ -56,7 +56,7 @@
     "name": ""
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "admin/register",
     "title": "设备注册",
     "version": "1.0.0",
@@ -78,7 +78,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "{\n  \"next_ms_code\": \"0000000\",//下一个设备编码\n  \"last_expire_time\": \"9\",//上个设备到该设备的有效时长\n  \"stay\": \"10\"//该设备最多停留时间\n}",
+          "content": "{\n  \"next_ms_code\": \"0000000\",//下一个设备编码\n  \"last_ms_code\": \"0000002\",//上一个设备编码\n  \"last_expire_time\": \"9\",//上个设备到该设备的有效时长\n  \"stay\": \"10\"//该设备最多停留时间\n}",
           "type": "json"
         }
       ]
@@ -94,6 +94,6 @@
     },
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "deviceMs",
-    "name": "PostAdminRegister"
+    "name": "GetAdminRegister"
   }
 ]

@@ -76,10 +76,6 @@ class AgentController extends BaseController
                 $this->display('outHand');
             }
         }
-
-//        $info = $_GET;
-//        print_r($id);
-//        exit();
     }
 
     //test

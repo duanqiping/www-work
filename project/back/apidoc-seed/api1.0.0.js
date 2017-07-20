@@ -9,6 +9,7 @@
  * @apiSuccessExample {json} 成功返回结果:
  *{
  *   "next_ms_code": "0000000",//下一个设备编码
+ *   "last_ms_code": "0000002",//上一个设备编码
  *   "last_expire_time": "9",//上个设备到该设备的有效时长
  *   "stay": "10"//该设备最多停留时间
 *}

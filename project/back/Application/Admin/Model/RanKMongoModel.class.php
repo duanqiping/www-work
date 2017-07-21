@@ -188,13 +188,13 @@ class RanKMongoModel extends MongoModel{
             'score_id' => $data['score_id'],
             'time' => $data['time'],
             'add_time' => NOW_TIME,
+            'name' =>$data['name'],
+            'studentId' =>$data['studentId'],
             'sex' =>$data['sex'],
             'dept' =>$data['dept'],
             'grade' =>$data['grade'],
             'class' =>$data['class'],
             'length' => $length,
-            'studentId' =>$data['studentId'],
-            'name' =>$data['name'],
         );
 
         $tableName = 'rank_single';

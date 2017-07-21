@@ -48,7 +48,14 @@ class RanKMongoModel extends MongoModel{
             'cycles'=>$cycles,
             'time'=>$all_time,
             'add_time'=>NOW_TIME,
-            'length' =>$all_length
+            'sex' =>$data['sex'],
+            'dept' =>$data['dept'],
+            'grade' =>$data['grade'],
+            'class' =>$data['class'],
+            'studentId' =>$data['studentId'],
+            'name' =>$data['name'],
+            'length' =>$all_length,
+
         );
 
         //是否 启用事物， 感觉不合适
@@ -126,8 +133,8 @@ class RanKMongoModel extends MongoModel{
 //            //同一周中可能月份不同
 //            else $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time))  AND WEEK(FROM_UNIXTIME($time)) = WEEK(FROM_UNIXTIME(add_time))";
 
-            $k = 'rank_w_table';
-            $v = 'z_rank_w_34695';
+//            $k = 'rank_w_table';
+//            $v = 'z_rank_w_34695';
 
             //查询是否有当年当月当周记录
             if($k == 'rank_y_table'){
@@ -181,17 +188,19 @@ class RanKMongoModel extends MongoModel{
             'score_id' => $data['score_id'],
             'time' => $data['time'],
             'add_time' => NOW_TIME,
+            'sex' =>$data['sex'],
+            'dept' =>$data['dept'],
+            'grade' =>$data['grade'],
+            'class' =>$data['class'],
             'length' => $length,
+            'studentId' =>$data['studentId'],
+            'name' =>$data['name'],
         );
 
         $tableName = 'rank_single';
         $condition['user_id'] = $data['user_id'];
         $condition['customer_id'] = $data['customer_id'];
         $res = $this->table($tableName)->where($condition)->field('time')->find();
-//        $res = $this->table($tableName)->where($condition)->field('rank_id,time')->select();
-
-//        print_r($res);
-//        exit();
 
         if(!$res){
             //插入

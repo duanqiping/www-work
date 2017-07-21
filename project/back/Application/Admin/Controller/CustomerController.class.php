@@ -20,12 +20,9 @@ class CustomerController extends BaseController
 {
     public function getSection(){
         $s= new UserModel();
-        $condition['customer_id'] = 31;
+        $condition['customer_id'] = $_SESSION['user']['id'];
 //        file_put_contents('log.txt',"111\n",FILE_APPEND );
         $list = $s->field('dept,user_id')->where($condition)->group('dept')->select();
-//        print_r($list);
-//        exit();
-//        echo $s->_sql();
         echo json_encode($list);
     }
 
@@ -33,9 +30,9 @@ class CustomerController extends BaseController
 
         $dept=$_GET['dept'];
         $s= new UserModel();
-        $condition['customer_id'] = 31;
+        $condition['customer_id'] = $_SESSION['user']['id'];
         $condition['dept'] = $dept;
-        file_put_contents('log.txt',$dept."111222\n",FILE_APPEND );
+//        file_put_contents('log.txt',$dept."111222\n",FILE_APPEND );
         $data=$s->field('user_id,class')->where($condition)->group('class')->select();
         echo json_encode($data);
     }
@@ -123,11 +120,17 @@ class CustomerController extends BaseController
         if($_POST){
             $condition = $_POST;
         }
-        $condition['customer_id'] = $_SESSION['user']['id'];
+//        $condition['customer_id'] = $_SESSION['user']['id'];
 
         $score = new ScoreModel();
         $res = $score->_list($condition);
 
+//        echo "<pre>";
+//        print_r($res);
+//        echo "</pre>";
+//        exit();
+
+        $this->assign('_list',$res);
         $this->display();
     }
 

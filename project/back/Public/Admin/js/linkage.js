@@ -1,3 +1,4 @@
+//实现联动效果的js
 $(document).ready(function(){
     getSection();
 

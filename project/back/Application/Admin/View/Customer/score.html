@@ -28,12 +28,15 @@
                 <thead>
                 <tr>
                     <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-                    <th class="">学生姓名</th>
-                    <th class="">所在系别</th>
-                    <th class="">所在班级</th>
-                    <th class="">耗时时间</th>
-                    <th class="">完成时间</th>
+                    <th class="">姓名</th>
+                    <th class="">学号</th>
                     <th class="">性别</th>
+                    <th class="">系别</th>
+                    <th class="">年级</th>
+                    <th class="">班级</th>
+                    <th class="">圈数</th>
+                    <th class="">用时</th>
+                    <th class="">完成时间</th>
                 </tr>
                 </thead>
 
@@ -42,12 +45,15 @@
                     <volist name="_list" id="vo" key="k">
                         <tr>
                             <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
-                            <td>{$vo.nick} </td>
-                            <td>{$vo.dept}</td>
-                            <td>{$vo.class}</td>
-                            <td>{$vo.time}</td>
-                            <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
+                            <td>{$vo.name} </td>
+                            <td>{$vo.studentId}</td>
                             <td>{$vo.sex}</td>
+                            <td>{$vo.dept}</td>
+                            <td>{$vo.grade}</td>
+                            <td>{$vo.class}</td>
+                            <td>{$vo.cycles}</td>
+                            <td>{$vo.sum_time}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
                         </tr>
                     </volist>
                     <else/>

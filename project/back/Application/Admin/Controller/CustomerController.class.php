@@ -77,15 +77,17 @@ class CustomerController extends BaseController
     public function info()
     {
         $condition = array();
-        if($_POST){
+        if($_POST && $_POST['dept'] != '--系别--'){
             $condition = $_POST;
+            if($condition['class'] == '--班级--'){
+                unset($condition['class']);
+            }
         }
+
         $condition['customer_id'] = $_SESSION['user']['id'];
 
         $user = new UserModel();
         $res = $user->_list($condition);
-
-        $this->assign('dept',array('0'=>'数学系','1'=>'物理系'));
 
         $this->assign('_list',$res);
 
@@ -95,16 +97,39 @@ class CustomerController extends BaseController
     //排行表
     public function rank()
     {
-
         $page = 1;
         $pageSize = 10;
         $flag = 'single';
+        $cycles = '';
+        if($_GET){
+            $flag = $_GET['flag'];
+            $cycles = $_GET['cycles'];
+        }
+
         $customer_id = $_SESSION['user']['id'];
 
         $rank = new RankMongoModel();
-        $data = $rank->getSingleRank($customer_id,$page,$pageSize);
+        $data = $rank->getScoreRank($customer_id,$flag,$cycles,$page,$pageSize);
+
+
+        if($flag == 'single'){
+            $rankName = '单圈最佳成绩';
+        }else if($flag == 'week'){
+            $rankName = '当周'.$cycles.'圈成绩';
+        }else if($flag == 'month'){
+            $rankName = '当月'.$cycles.'圈成绩';
+        }else if($flag == 'year'){
+            $rankName = '当年'.$cycles.'圈成绩';
+        }else if($flag == 'marathon'){
+            if($cycles == 26){$rankName = '四分之一程马拉松成绩';}
+            else if($cycles == 52){$rankName = '半程马拉松成绩';}
+            else{$rankName = '全程马拉松成绩';}
+        }else{
+            $rankName = '单圈最佳成绩';
+         }
 
         $this->assign('_list',$data);
+        $this->assign('rankName',$rankName);
         $this->display();
     }
 
@@ -117,13 +142,21 @@ class CustomerController extends BaseController
     public function score()
     {
         $condition = array();
-        if($_POST){
+        if($_POST && $_POST['dept'] != '--系别--'){
             $condition = $_POST;
+            if($condition['class'] == '--班级--'){
+                unset($condition['class']);
+            }
         }
+//        echo "<pre>";
+//        print_r($condition);
+//        print_r($_POST);
+//        echo "</pre>";
+//        exit();
 //        $condition['customer_id'] = $_SESSION['user']['id'];
 
         $score = new ScoreModel();
-        $res = $score->_list($condition);
+        $res = $score->_list($condition,$condition);
 
 //        echo "<pre>";
 //        print_r($res);

@@ -1,30 +1,11 @@
 <?php  
 	
-	$arr    =   array
-	(
-		0 => array
-			(
-				'initial' => 'A',
-				'typename' => '奥迪'
-			),
-		1 => array
-			(
-				'initial' => 'F',
-				'typename' =>'F1'
-			),
-		2 => array
-			(
-				'initial' => 'F',
-				'typename' => 'F2'
-			)
-	);
-$result =   array();
-foreach($arr as $k=>$v){
-    $result[$v['initial']][]    =   $v;
-}
+	
+	
+$s = floor(42195/(400*4));  //105  52 26
 
 echo "<pre>";		
-print_r($result);
+print_r($s);
 echo "</pre>";
 	
 	

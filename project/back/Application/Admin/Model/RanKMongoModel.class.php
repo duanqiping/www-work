@@ -246,24 +246,66 @@ class RanKMongoModel extends MongoModel{
     }
 
     //获取单圈最佳成绩排行
-    public function getSingleRank($customer_id,$page,$pageSize)
+    public function getScoreRank($customer_id,$flag,$cycles,$page,$pageSize)
     {
+        if($flag == 'single'){
+            $tableName = 'rank_single';
+        }else if($flag == 'marathon'){
+            $tableName = 'rank_marathon';
+        }else {
+            if($flag == 'year'){
+                $field = 'rank_y_table';
+            }
+            else if($flag == 'month'){
+                $field = 'rank_m_table';
+            }
+            else{
+                $field = 'rank_w_table';
+            }
+            $customer = new CustomerModel();
+            $res = $customer->where(array('customer_id'=>$customer_id))->field($field)->find();
+            $tableName = $res[$field];
+        }
+
         if(($page<1)||($pageSize<1)){
             $page = 1;
             $pageSize = 20;
         }
         $offset = ($page-1)*$pageSize;
 
-        $condition['customer_id'] = $customer_id;
-        $res = $this->table('rank_single')
-            ->where($condition)
-            ->field('user_id,customer_id,score_id,time,add_time,length')
-            ->order('time')
-            ->limit($offset,$pageSize)
-            ->select();
+        if($flag == 'single'){
+            $condition['customer_id'] = $customer_id;
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }else if($flag == 'marathon'){
+            $condition['customer_id'] = $customer_id;
+            $condition['cycles'] = intval($cycles);
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }else{
+            $condition['cycles'] = intval($cycles);
+            $condition['add_time'] = array('gt',intval(strtotime($this->rankChoiceRule($flag))));
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,cycles,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }
 
         if(!$res) return array();
         $res = array_values($res);
+
+//        print_r($res);
+//        exit();
 
         $user = new UserModel();
         $res = $user->getUserInfoFromRank($res);

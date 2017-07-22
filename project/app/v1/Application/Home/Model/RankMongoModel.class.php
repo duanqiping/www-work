@@ -65,10 +65,6 @@ class RankMongoModel extends MongoModel{
         if(!$rankInfo) return array();
         $rankInfo = array_values($rankInfo);
 
-//        echo $this->_sql();
-//        print_r($rankInfo);
-//        exit();
-
         $user = new UserModel();
         $rankInfo = $user->getUserInfoFromRank($rankInfo);
         return $rankInfo;

@@ -31,3 +31,44 @@ $(document).ready(function(){
 
 
 });
+
+////按钮效果
+//function clickRank(flag)
+//{
+//    alert(flag);
+//}
+$("#week").change( function () {
+    var checkText=$("#week").find("option:selected").text();
+    var url = rankUrl.replace(/.html/, "");
+    checkText = checkText.replace(/圈/, "");
+    location.href = url+"/flag/week/cycles/"+checkText;//location.href实现客户端页面的跳转
+} );
+
+$("#month").change( function () {
+    var checkText=$("#month").find("option:selected").text();
+    var url = rankUrl.replace(/.html/, "");
+    checkText = checkText.replace(/圈/, "");
+    location.href = url+"/flag/month/cycles/"+checkText;//location.href实现客户端页面的跳转
+} );
+
+$("#year").change( function () {
+    var checkText=$("#year").find("option:selected").text();
+    var url = rankUrl.replace(/.html/, "");
+    checkText = checkText.replace(/圈/, "");
+    location.href = url+"/flag/year/cycles/"+checkText;//location.href实现客户端页面的跳转
+} );
+
+$("#marathon").change( function () {
+    var checkText=$("#marathon").find("option:selected").text();
+    var url = rankUrl.replace(/.html/, "");
+    if(checkText == '四分之一程马拉松'){
+        checkText = 26;
+    }else if(checkText == '半程马拉松'){
+        checkText = 52;
+    }else{
+        checkText = 105;
+    }
+
+    //checkText = checkText.replace(/圈/, "");
+    location.href = url+"/flag/marathon/cycles/"+checkText;//location.href实现客户端页面的跳转
+} );

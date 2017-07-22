@@ -19,11 +19,13 @@ class UserModel extends Model{
         for($i=0,$len=count($res);$i<$len;$i++)
         {
             $condition_user['user_id'] = $res[$i]['user_id'];
-            $userInfo = $this->where($condition_user)->field('nick,dept,class')->find();
+            $userInfo = $this->where($condition_user)->field('name,dept,grade,studentId,class')->find();
 //            if($userInfo['img']) $res[$i]['img'] = NROOT.$userInfo['img'];
 //            else $res[$i]['img'] = null;
 
-            $res[$i]['nick'] = $userInfo['nick'];
+            $res[$i]['name'] = $userInfo['name'];
+            $res[$i]['studentId'] = $userInfo['studentId'];
+            $res[$i]['grade'] = $userInfo['grade'];
             $res[$i]['dept'] = $userInfo['dept'];
             $res[$i]['class'] = $userInfo['class'];
         }

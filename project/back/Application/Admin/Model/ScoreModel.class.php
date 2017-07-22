@@ -58,7 +58,7 @@ class ScoreModel extends MongoModel{
 //        $sql = 'db.z_score_34695.find( { "dept": { $exists: true } },{"add_time":true} )';
 //        $res = $this->mongoCode($sql);
 //
-        $condition = array();
+//        $condition = array();
 //        $condition['dept'] = '美术系';
 //        $condition['class'] = '信息一班';
 //        $condition['user_id'] = '1';

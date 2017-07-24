@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 
 use Admin\Model\ContestModel;
+use Admin\Model\ContestOrder;
 use Admin\Model\UserModel;
 use Think\Controller;
 
@@ -57,12 +58,16 @@ class ContestController extends Controller
     public function info()
     {
 //        print_r( $_POST );
+//        var_dump($_SESSION);
 //        exit();
 //        $this->assign('contest',array('contest_id'=>$_GET['contest_id']));
-        
+
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+
+        $contestorder = new ContestOrder();
+        
 
         $this->assign('contest_sn', $_GET['contest_sn']);
         $this->display('info');
@@ -71,9 +76,6 @@ class ContestController extends Controller
     //添加赛事人员
     public function user()
     {
-//            print_r($_POST);
-//            exit();
-
         $user = new UserModel();
 
         $condition['customer_id'] = $_SESSION['user']['id'];

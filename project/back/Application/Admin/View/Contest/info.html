@@ -3,14 +3,7 @@
 <block name="body">
     <div class="main">
         <div class="main-title" style="margin-left: 60px">
-            <h2>考试、赛事</h2>
-        </div>
-        <a style="margin-left: 60px" href="{:U('add')}">创建一场考试</a>
-
-        <div style="margin-left: 60px;margin-top: 10px">
-            <div style="float: left"><button onclick="contest('all')">全部赛事</button></div>
-            <div style="float: left"><button onclick="contest('unfinished')">未开始的赛事</button></div>
-            <div style="float: left"><button onclick="contest('finished')">已完成的赛事</button></div>
+            <h2>赛事人员名单</h2>
         </div>
 
         <!-- 数据列表 -->
@@ -21,14 +14,12 @@
                     <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                     <th class="">UID</th>
                     <th class="">赛事编号</th>
-                    <th class="">赛事标题</th>
-                    <th class="">赛事描述</th>
-                    <th class="">创建时间</th>
-                    <th class="">比赛开始时间</th>
-                    <th class="">比赛结束时间</th>
-                    <th class="">赛事规格</th>
-                    <th class="">创建者</th>
-                    <th class="">人员名单</th>
+                    <th class="">学生姓名</th>
+                    <th class="">学号</th>
+                    <th class="">系别</th>
+                    <th class="">年级</th>
+                    <th class="">班级</th>
+                    <th class="">性别</th>
                 </tr>
                 </thead>
 
@@ -47,13 +38,15 @@
                             <td>{$vo.length} m</td>
                             <td>{$vo.from_name}</td>
                             <!--<td><a href="#" style="color: #0000C0">人员名单</a></td>-->
-                            <td><a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" style="color: #0000C0">人员名单</a></td>
+                            <td><a href="{:U('info',array('contest_id'=>$vo['contest_id']))}" style="color: #0000C0">人员名单</a></td>
                             <!--<td>{$vo['is_show']?'正常':'禁用'}</td>-->
                             <!--<td>{$vo['count']}<a href="">查看详情</a></td>-->
                         </tr>
                     </volist>
                     <else/>
-                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                    <!--<td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_id'=>$vo['contest_id']))}" style="color: red">点击添加学生</a> </td>-->
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击添加学生</a> </td>
+
                 </notempty>
                 </tbody>
 

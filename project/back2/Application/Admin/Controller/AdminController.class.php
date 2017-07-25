@@ -10,7 +10,6 @@ namespace Admin\Controller;
 
 use Admin\Model\AdminModel;
 use Admin\Model\CustomerModel;
-use Admin\Model\DeviceMsModel;
 
 class AdminController extends BaseController {
 
@@ -39,21 +38,6 @@ class AdminController extends BaseController {
     public function addDeviceMs()
     {
 
-    }
-
-    //设备注册
-    public function register()
-    {
-        $account = trim($_GET['account']);//设备编码
-        $passwd = 123456;//设备设定默认密码
-
-        $devicems = new DeviceMsModel();
-        $res = $devicems->EaseRegister($account,$passwd);
-        if(!$res){
-            sendError($devicems->getError());
-        }else{
-            sendSuccess($res);
-        }
     }
 
     //添加 管理员、代理商、客户

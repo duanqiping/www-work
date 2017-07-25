@@ -11,6 +11,7 @@ namespace Admin\Controller;
 
 use Think\Model;
 use Admin\Model\ConsumerHandleModel;
+use Admin\Model\CustomerModel;
 
 class PublicController extends \Think\Controller{
 
@@ -22,6 +23,13 @@ class PublicController extends \Think\Controller{
     //首页
     public function index()
     {
+        $customer = new CustomerModel();
+        $data = $customer->homeInfo();
+
+        $this->assign('data',$data);
+
+        $this->display();
+
         $this->display();
     }
 

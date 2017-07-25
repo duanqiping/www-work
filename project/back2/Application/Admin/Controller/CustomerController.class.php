@@ -45,23 +45,6 @@ class CustomerController extends BaseController
         return $status_info;
     }
 
-    //录入成绩
-    public function add()
-    {
-        $customer = new CustomerModel();
-        $rankInfo = $customer->where(array('customer_id'=>$_POST['customer_id']))
-            ->field('score_table,rank_y_table,rank_m_table,rank_w_table,length')
-            ->find();
-
-        $score = new ScoreModel();
-        $b = $score->insert($_POST,$rankInfo);
-        if($b){
-            exit('success');
-        }else{
-            exit('fail');
-        }
-    }
-
     //概述主页 用户量 活跃用户量 单圈最佳 累计最长距离
     public function index()
     {

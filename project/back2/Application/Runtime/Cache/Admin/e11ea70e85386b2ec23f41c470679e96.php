@@ -46,7 +46,7 @@
                 <img src="/project/back2/Public/Admin/images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-                <h2>上海大学</h2>
+                <h2><?php echo ($_SESSION['user']['name']); ?></h2>
                 <span>广东省/深圳市</span>
             </div>
         </div>
@@ -123,7 +123,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="/project/back2/Public/Admin/images/img.jpg" alt="">代老师
+                        <!--<img src="/project/back2/Public/Admin/images/img.jpg" alt="">代老师-->
+                        <img src="/project/back2/Public/Admin/images/img.jpg" alt="">
+                        <?php if($_SESSION['user']['grade'] > 3 ): echo ($_SESSION['user']['name']); else: ?> 学校管理员<?php endif; ?>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -215,22 +217,22 @@
 <div class="row tile_count">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> 累积用户</span>
-        <div class="count">250000</div>
+        <div class="count"><?php echo ($data['user_count']); ?></div>
         <span class="count_bottom"><i class="green">4% </i> 全国占比</span>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> 单圈纪录</span>
-        <div class="count">23.503</div>
+        <span class="count_top"><i class="fa fa-clock-o"></i> 单圈最佳纪录</span>
+        <div class="count"><?php echo ($data['best_single']); ?></div>
         <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> 提升比例</span>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> 本周活跃人数</span>
-        <div class="count green">2,500</div>
+        <div class="count green"><?php echo ($data['count_week']); ?></div>
         <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> 本场环比指数</span>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> 本周累计算圈数</span>
-        <div class="count">13,567</div>
+        <div class="count"><?php echo ($data['count_week_cycles']); ?></div>
         <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> 本场环比指数</span>
     </div>
     <!--<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">-->

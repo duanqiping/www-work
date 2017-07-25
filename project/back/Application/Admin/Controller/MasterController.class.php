@@ -37,6 +37,9 @@ class MasterController extends Controller{
     public function add()
     {
         $data = $_POST;
+        $data['begin_time'] = intval($data['begin_time']);
+        $data['end_time'] = intval($data['end_time']);
+        $data['time'] = intval($data['time']);
 
         $customer = new CustomerModel();
         $rankInfo = $customer->where(array('customer_id'=>$data['customer_id']))

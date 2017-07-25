@@ -215,12 +215,7 @@ class RanKMongoModel extends MongoModel{
     public function bestScore()
     {
         $tableName = 'rank_single';
-//        $min_res  = $this->table($tableName)->field('time')->order('time')->limit(1)->select();
-        $min_res  = $this->table($tableName)->field('time')->order('time')->select();
-//        echo $this->_sql();
-//        exit();
-//        print_r($min_res);
-//        exit();
+        $min_res  = $this->table($tableName)->field('time')->order('time')->limit(1)->select();
         $min_res = array_values($min_res);
         $minScore = $min_res[0]['time'];
 

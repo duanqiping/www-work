@@ -100,11 +100,6 @@ class ScoreModel extends MongoModel{
 
         $data['add_time'] = NOW_TIME;
 
-
-
-//        var_dump($data);
-//        exit();
-
         $b = $this->table($rankInfo['score_table'])->add($data);
         if(!$b){
             $this->error = '成绩导入失败';

@@ -120,13 +120,6 @@ class RanKMongoModel extends MongoModel{
     //周月年成绩录入
     private function dateSolve($cycles,$all_time,$table_info,$data,$add_info)
     {
-//        print_r($add_info);
-//        print_r($data);
-//        print_r($table_info);
-//        print_r($all_time);
-//        var_dump($cycles);
-//        exit();
-
         foreach($table_info as $k=>$v)
         {
             //查询是否有当年当月当周记录
@@ -186,7 +179,6 @@ class RanKMongoModel extends MongoModel{
 
         $tableName = 'rank_single';
         $condition['user_id'] = $data['user_id'];
-        $condition['customer_id'] = $data['customer_id'];
         $res = $this->table($tableName)->where($condition)->field('time')->find();
 
         if(!$res){
@@ -223,9 +215,12 @@ class RanKMongoModel extends MongoModel{
     public function bestScore()
     {
         $tableName = 'rank_single';
-        $condition['customer_id'] = $_SESSION['user']['id'];
-
-        $min_res  = $this->table($tableName)->where($condition)->field('time')->order('time')->limit(1)->select();
+//        $min_res  = $this->table($tableName)->field('time')->order('time')->limit(1)->select();
+        $min_res  = $this->table($tableName)->field('time')->order('time')->select();
+//        echo $this->_sql();
+//        exit();
+//        print_r($min_res);
+//        exit();
         $min_res = array_values($min_res);
         $minScore = $min_res[0]['time'];
 

@@ -60,7 +60,7 @@ define({ "api": [
     "url": "admin/register",
     "title": "设备注册",
     "version": "1.0.0",
-    "group": "deviceMs",
+    "group": "master",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -93,7 +93,131 @@ define({ "api": [
       ]
     },
     "filename": "apidoc-seed/api1.0.0.js",
-    "groupTitle": "deviceMs",
+    "groupTitle": "master",
     "name": "GetAdminRegister"
+  },
+  {
+    "type": "get",
+    "url": "master/getUserInfo",
+    "title": "获取用户信息",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>手环编码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n \"name\": \"段齐平\",\n \"user_id\": \"1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n \"msg\": \"该用户尚未注册或未绑定手环\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "GetMasterGetuserinfo"
+  },
+  {
+    "type": "post",
+    "url": "master/add",
+    "title": "录入成绩",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>用户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "begin_time",
+            "description": "<p>一圈的起始时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "end_time",
+            "description": "<p>一圈的结束时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "time",
+            "description": "<p>用时</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mode",
+            "description": "<p>1训练 2比赛</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "flag",
+            "description": "<p>一次成绩的起始时间(用于标记)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n  \"msg\": \"success\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n  \"msg\": \"fail\",\n  \"code\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "PostMasterAdd"
   }
 ] });

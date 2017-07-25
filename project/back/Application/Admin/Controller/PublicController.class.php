@@ -29,8 +29,6 @@ class PublicController extends \Think\Controller{
         $this->assign('data',$data);
 
         $this->display();
-
-        $this->display();
     }
 
     //登录
@@ -70,7 +68,9 @@ class PublicController extends \Think\Controller{
         if(IsLogin()){
             session ( 'user', null );
             session('[destroy]');
-            $this->success('退出成功！', U('public/login'));
+
+//            $this->redirect('login');
+            $this->success('退出成功！', U('login'));
         } else {
             $this->redirect('login');
         }

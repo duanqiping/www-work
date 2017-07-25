@@ -100,6 +100,8 @@ class ScoreModel extends MongoModel{
 
         $data['add_time'] = NOW_TIME;
 
+
+
 //        var_dump($data);
 //        exit();
 
@@ -112,7 +114,7 @@ class ScoreModel extends MongoModel{
         //累次查出一次成绩
         $condition['user_id'] = $data['user_id'];
         $condition['flag'] = $data['flag'];
-        $scoreInfo = $this->table($rankInfo['score_table'])->where($condition)->field('time,length')->select();
+        $scoreInfo = $this->table($rankInfo['score_table'])->where($condition)->field('time')->select();
         //排行表插入条件：1没有该用户记录 2圈数不一样 3不在当年当周范围内
         $length = $rankInfo['length'];
         unset($rankInfo['score_table']);

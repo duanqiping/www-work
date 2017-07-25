@@ -29,9 +29,10 @@ function getTimeBegin($time_flag)
         $begin_time = mktime(0,0,0,date('m'),date('d')-date('w'),date('Y')); //当周起始时间
     }else if($time_flag == 'month'){
         $begin_time = mktime(0,0,0,date('m'),1,date('Y')); //当月起始时间
+    }else if($time_flag == 'year'){
+        $begin_time =  mktime(0,0,0,1,1,date('Y'));//当年起始时间
     }else{
-        $begin_time = false;
+        return false;
     }
-
     return $begin_time;
 }

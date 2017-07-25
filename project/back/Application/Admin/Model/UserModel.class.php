@@ -16,7 +16,7 @@ class UserModel extends Model{
     //获取用户名
     public function getUserName($code)
     {
-        $sql = "select u.name from device d LEFT JOIN user u ON d.user_id = u.user_id WHERE d.code='$code'";
+        $sql = "select u.name,u.user_id from device d LEFT JOIN user u ON d.user_id = u.user_id WHERE d.code='$code'";
         $res = $this->query($sql);
         if(!$res){
             $this->error = '该用户尚未注册或未绑定手环';

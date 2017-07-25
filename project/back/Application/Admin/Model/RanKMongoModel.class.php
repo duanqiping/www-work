@@ -34,16 +34,13 @@ class RanKMongoModel extends MongoModel{
     public function dealWithSolve($table_info,$data,$length,$scoreInfo)
     {
         $all_time = 0;
-        $all_length = 0;
         $cycles = count($scoreInfo);
         foreach($scoreInfo as $k=>$v){
             $all_time += $scoreInfo[$k]['time'];
-            $all_length += $scoreInfo[$k]['length'];
         }
 
         $add_info = array(
             'user_id'=>$data['user_id'],
-            'customer_id'=>$data['customer_id'],
             'score_id'=>$data['score_id'],
             'cycles'=>$cycles,
             'time'=>$all_time,
@@ -54,28 +51,26 @@ class RanKMongoModel extends MongoModel{
             'class' =>$data['class'],
             'studentId' =>$data['studentId'],
             'name' =>$data['name'],
-            'length' =>$all_length,
-
         );
 
         //是否 启用事物， 感觉不合适
 
         //单圈最佳成绩
-        $b = $this->singleSolve($data,$length);
+        $b = $this->singleSolve($data);
         if(!$b){
             $this->error = '单圈成绩导入失败';
             return false;
         }
 
         //马拉松成绩录入
-        $b1  = $this->marathonSolve($cycles,$all_time,$all_length,$length,$data,$add_info);
+        $b1  = $this->marathonSolve($cycles,$all_time,$length,$data,$add_info);
         if(!$b1) {
             $this->error = '马拉松成绩导入失败';
             return false;
         }
 
         //周月年成绩录入
-        $b2 = $this->dateSolve($cycles,$all_time,$all_length,$table_info,$data,$add_info);
+        $b2 = $this->dateSolve($cycles,$all_time,$table_info,$data,$add_info);
         if(!$b2){
             $this->error = '周月年成绩导入失败';
             return false;
@@ -85,7 +80,7 @@ class RanKMongoModel extends MongoModel{
     }
 
     //马拉松成绩处理
-    private function marathonSolve($cycles,$all_time,$all_length,$length,$data,$add_info)
+    private function marathonSolve($cycles,$all_time,$length,$data,$add_info)
     {
         $tableName = 'rank_marathon';
 
@@ -107,7 +102,6 @@ class RanKMongoModel extends MongoModel{
                 $updata = array(
                     'score_id' =>$data['score_id'],
                     'time'=>$all_time,
-                    'length'=>$all_length,
                     'add_time'=>NOW_TIME
                 );
                 $b2 = $this->table($tableName)
@@ -124,18 +118,17 @@ class RanKMongoModel extends MongoModel{
     }
 
     //周月年成绩录入
-    private function dateSolve($cycles,$all_time,$all_length,$table_info,$data,$add_info)
+    private function dateSolve($cycles,$all_time,$table_info,$data,$add_info)
     {
+//        print_r($add_info);
+//        print_r($data);
+//        print_r($table_info);
+//        print_r($all_time);
+//        var_dump($cycles);
+//        exit();
+
         foreach($table_info as $k=>$v)
         {
-//            if($k == 'rank_y_table') $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time))";
-//            else if($k == 'rank_m_table') $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time)) AND MONTH(FROM_UNIXTIME($time)) = MONTH(FROM_UNIXTIME(add_time))";
-//            //同一周中可能月份不同
-//            else $condition['__string']  = "YEAR(FROM_UNIXTIME($time)) = YEAR(FROM_UNIXTIME(add_time))  AND WEEK(FROM_UNIXTIME($time)) = WEEK(FROM_UNIXTIME(add_time))";
-
-//            $k = 'rank_w_table';
-//            $v = 'z_rank_w_34695';
-
             //查询是否有当年当月当周记录
             if($k == 'rank_y_table'){
                 $timeflag = 'year';
@@ -147,13 +140,10 @@ class RanKMongoModel extends MongoModel{
 
             $condition['user_id'] = $data['user_id'];
             $condition['cycles'] = $cycles;
-            $condition['add_time'] = array('gt',strtotime($this->rankChoiceRule($timeflag)));
+//            $condition['add_time'] = array('gt',strtotime($this->rankChoiceRule($timeflag)));
+            $condition['add_time'] = array('gt',getTimeBegin($timeflag));
 
             $res =$this->table($v)->where($condition)->field('time,add_time')->find();
-
-//            echo $this->_sql();
-//            print_r($res);
-//            exit();
 
             //rank_y_table排行表插入条件：1没有该用户记录 2圈数不一样 3不在同年或同月或同周范围内
             if(!$res) {
@@ -166,7 +156,6 @@ class RanKMongoModel extends MongoModel{
                 $updata_info = array(
                     'score_id' => $data['score_id'],
                     'time' => $all_time,
-                    'length' => $all_length,
                     'add_time' => NOW_TIME,
                 );
                 $b2 = $this->table($v)->where(array('_id'=>$res['_id']))->save($updata_info);
@@ -180,11 +169,10 @@ class RanKMongoModel extends MongoModel{
     }
 
     //单圈最佳成绩更新判断
-    private function singleSolve($data,$length)
+    private function singleSolve($data)
     {
         $single_info = array(
             'user_id' => $data['user_id'],
-            'customer_id' => $data['customer_id'],
             'score_id' => $data['score_id'],
             'time' => $data['time'],
             'add_time' => NOW_TIME,
@@ -194,7 +182,6 @@ class RanKMongoModel extends MongoModel{
             'dept' =>$data['dept'],
             'grade' =>$data['grade'],
             'class' =>$data['class'],
-            'length' => $length,
         );
 
         $tableName = 'rank_single';
@@ -220,17 +207,17 @@ class RanKMongoModel extends MongoModel{
         return true;
     }
 
-    //时间判断
-    function rankChoiceRule($flag)
-    {
-        if($flag == 'year'){
-            return  date("Y-m-d H:i:s",mktime(0,0,0,1,1,date("Y", time()))) ;//本年起始时间
-        }else if($flag == 'month'){
-            return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
-        }else{
-            return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
-        }
-    }
+//    //时间判断
+//    function rankChoiceRule($flag)
+//    {
+//        if($flag == 'year'){
+//            return  date("Y-m-d H:i:s",mktime(0,0,0,1,1,date("Y", time()))) ;//本年起始时间
+//        }else if($flag == 'month'){
+//            return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
+//        }else{
+//            return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
+//        }
+//    }
 
     //获取单圈最佳成绩
     public function bestScore()

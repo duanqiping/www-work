@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>学校赛道项目管理平台 "<?php echo (C("COLOR_STYLE")); ?>"</title>
-    <!--<link rel="stylesheet" type="text/css" href="/project/back/Public/Admin/css/login.css?v=<?php echo SITE_VERSION;?>" media="all">-->
-    <!--<link rel="stylesheet" type="text/css" href="/project/back/Public/Admin/css/<?php echo (C("COLOR_STYLE")); ?>.css?v=<?php echo SITE_VERSION;?>" media="all">-->
-    <link rel="stylesheet" type="text/css" href="/project/back/Public/Admin/css/login.css" media="all">
+    <!--<link rel="stylesheet" type="text/css" href="/project/back2/Public/Admin/css/login.css?v=<?php echo SITE_VERSION;?>" media="all">-->
+    <!--<link rel="stylesheet" type="text/css" href="/project/back2/Public/Admin/css/<?php echo (C("COLOR_STYLE")); ?>.css?v=<?php echo SITE_VERSION;?>" media="all">-->
+    <link rel="stylesheet" type="text/css" href="/project/back2/Public/Admin/css/login.css" media="all">
 
 </head>
 <body id="login-page">
@@ -61,10 +61,10 @@
     </div>
 </div>
 <!--[if lt IE 9]>
-<script type="text/javascript" src="/project/back/Public/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/project/back2/Public/static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-<script type="text/javascript" src="/project/back/Public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/project/back2/Public/static/jquery-2.0.3.min.js"></script>
 <!--<![endif]-->
 <script type="text/javascript">
     /* 登陆表单获取焦点变色 */

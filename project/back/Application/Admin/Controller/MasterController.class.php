@@ -33,16 +33,19 @@ class MasterController extends Controller{
         }
     }
 
-    //录入成绩
+    //录入成绩(平时训练 单圈单圈录入)
     public function add()
     {
+        $data = $_POST;
+
         $customer = new CustomerModel();
-        $rankInfo = $customer->where(array('customer_id'=>$_POST['customer_id']))
+        $rankInfo = $customer->where(array('customer_id'=>$data['customer_id']))
             ->field('score_table,rank_y_table,rank_m_table,rank_w_table,length')
             ->find();
+        unset($data['customer_id']);
 
         $score = new ScoreModel();
-        $b = $score->insert($_POST,$rankInfo);
+        $b = $score->insert($data,$rankInfo);
         if($b){
             sendSuccess('success');
         }else{
@@ -51,7 +54,7 @@ class MasterController extends Controller{
     }
 
     //返回用户名
-    public function getName()
+    public function getUserInfo()
     {
         $code = $_GET['code'];
 

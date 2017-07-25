@@ -47,7 +47,7 @@
             </div>
             <div class="profile_info">
                 <h2>{$Think.session.user.name}</h2>
-                <span>广东省/深圳市</span>
+                <span>上海市</span>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -104,7 +104,7 @@
             <a data-toggle="tooltip" data-placement="top" title="最小化">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="退出系统" href="login.html">
+            <a data-toggle="tooltip" data-placement="top" title="退出系统" href="{:U('logout')}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
@@ -137,7 +137,7 @@
                             </a>
                         </li>
                         <li><a href="javascript:;">帮助</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出系统</a></li>
+                        <li><a href="{:U('logout')}"><i class="fa fa-sign-out pull-right"></i> 退出系统</a></li>
                     </ul>
                 </li>
 

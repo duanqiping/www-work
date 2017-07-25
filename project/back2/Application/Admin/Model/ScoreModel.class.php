@@ -14,7 +14,6 @@ use Think\Model\MongoModel;
 //成绩表
 class ScoreModel extends MongoModel{
     const Month = 'month';
-    const Week = 'week';
     const Day = 'day';
 
     protected $dbName='score';//（要连接的数据库名称）
@@ -34,11 +33,9 @@ class ScoreModel extends MongoModel{
     private function activeUserNum($score_table,$time_flag)
     {
         //活跃用户量
-//        $dateInfo = getTimeBeginAndEnd($time_flag);
-//        $begin_time = $dateInfo['begin_time'];
-//        $end_time = $dateInfo['end_time'];
-        $begin_time = getTimeBegin($time_flag);
-        $end_time = NOW_TIME;
+        $dateInfo = getTimeBeginAndEnd($time_flag);
+        $begin_time = $dateInfo['begin_time'];
+        $end_time = $dateInfo['end_time'];
 
         $sql = 'db.'."$score_table".'.group({
                     key:{user_id:true},//分组条件
@@ -53,20 +50,6 @@ class ScoreModel extends MongoModel{
                     }); ';
         $res = $this->mongoCode($sql);
         return count($res);
-    }
-
-    //累计圈数
-    private function sumCycles($score_table,$time_flag)
-    {
-        $begin_time = getTimeBegin($time_flag);
-//        $end_time = NOW_TIME;
-
-        $condition['add_time'] = array('gt',$begin_time);
-        //$condition['add_time'] = array('lt',$end_time);
-
-        $count = $this->table($score_table)->where($condition)->count();
-
-        return $count;
     }
 
     //成绩列表
@@ -138,15 +121,21 @@ class ScoreModel extends MongoModel{
         $res_customer = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('score_table')->find();
         $score_table = $res_customer['score_table'];
 
-        $count_week  = $this->activeUserNum($score_table,ScoreModel::Week);//当周活跃用户量
-
-        $count_month  = $this->activeUserNum($score_table,ScoreModel::Month);//当月活跃用户量
-
-        $count_week_cycles = $this->sumCycles($score_table,ScoreModel::Week);//
-
+        $count_month  = $this->activeUserNum($score_table,ScoreModel::Month);//上月活跃用户量
+        $count_day  = $this->activeUserNum($score_table,ScoreModel::Day);//昨日活跃用户量
         $data['count_month'] = $count_month;
-        $data['count_week'] = $count_week;
-        $data['count_week_cycles'] = $count_week_cycles;
+        $data['count_day'] = $count_day;
+
+//        $count = $this->table($score_table)->where($condition)->group('user_id')->field('user_id')->select();
+//        $sql  = 'db.'."$score_table".'.find({"add_time":{"$gt":'."$begin_time".'},"add_time":{"$lt":'."$end_time".'}},'.
+//            '{"user_id":1,"add_time":1}).toArray()';
+
+//        var_dump($count_month);
+//        var_dump($count_day);
+//        exit();
+
+//        print_r($count);
+//        exit();
 
         return $data;
     }

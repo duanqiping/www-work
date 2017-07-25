@@ -25,7 +25,7 @@ return array (
 
     'TMPL_PARSE_STRING' => array (
         '__STATIC__' => __ROOT__ . '/Public/static',
-        '__IMAGES__' => __ROOT__ . '/Public/' . MODULE_NAME . '/images',
+        '__IMG__' => __ROOT__ . '/Public/' . MODULE_NAME . '/img',
         '__CSS__' => __ROOT__ . '/Public/' . MODULE_NAME . '/css',
         '__JS__' => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
         '__VENDOR__' => __ROOT__ . '/Public/' . MODULE_NAME . '/vendor'

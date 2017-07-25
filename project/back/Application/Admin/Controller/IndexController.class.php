@@ -2,7 +2,6 @@
 namespace Admin\Controller;
 
 
-use Admin\Model\MonModel;
 use Think\Controller;
 
 class IndexController extends Controller
@@ -15,23 +14,28 @@ class IndexController extends Controller
     //测试
     public function test()
     {
-        $this->display('public/base');
-    }
+        $device = M('device');
+        $res = $device->select();
 
-    public function test2()
-    {
-        $mon = new MonModel('col');
+        $user = M('user');
+        $res_user = $user->field('user_id')->select();
 
-        $res = $mon->where(array('type'=>'database'))->select();
-
-        echo count($res);
-        foreach ($res as $id => $value)
-        {
-            echo "$id: ";
-            echo "<pre>";
-            print_r($value);
-            echo "</pre>";
+        //循环插入数据
+        for($i=0;$i<=count($res_user);$i++){
+            $data = array();
+            $data['code'] = $i+1;
+            $data['user_id'] = $res_user[$i]['user_id'];
+            $uid = $device->add($data);
+            if(!$uid){
+                exit('fail');
+            }
         }
+        echo "success";
+        var_dump($res);
+        var_dump($res_user);
+        exit();
     }
+
+
 
 }

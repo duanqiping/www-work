@@ -11,6 +11,7 @@ namespace Admin\Controller;
 
 use Think\Model;
 use Admin\Model\ConsumerHandleModel;
+use Admin\Model\CustomerModel;
 
 class PublicController extends \Think\Controller{
 
@@ -19,10 +20,24 @@ class PublicController extends \Think\Controller{
     {
         return  ConsumerHandleModel::getInstance($flag);
     }
+    //首页
+    public function index()
+    {
+        $customer = new CustomerModel();
+        $data = $customer->homeInfo();
+
+        $this->assign('data',$data);
+
+        $this->display();
+
+        $this->display();
+    }
 
     //登录
     public function login($flag='',$account='',$passwd='')
     {
+        $flag = 3;
+
         if(IS_POST) {
 
             $consumer = $this->getInstance($flag);
@@ -38,7 +53,8 @@ class PublicController extends \Think\Controller{
                 }else if($flag ==2){
                     $this->display('agent/index');
                 }else if($flag ==3){
-                    $this->success('登录成功！', U('Customer/index'));
+//                    $this->success('登录成功！', U('Customer/index'));
+                    $this->success('登录成功！', U('index'));
                 }else{
                     $this->display('teacher/index');
                 }

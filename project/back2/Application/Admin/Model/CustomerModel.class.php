@@ -33,7 +33,7 @@ class CustomerModel extends ConsumerHandleModel
         $data_user = $this->mainInfo();//用户量 累计最长距离
 
         $score = new ScoreModel();
-        $data_score = $score->UserInfo();//当周活跃量 当月活跃量
+        $data_score = $score->UserInfo();//前一月活跃量 前一日活跃量
 
         $rank = new RanKMongoModel();
         $best = $rank->bestScore();//单圈最佳成绩
@@ -90,7 +90,7 @@ class CustomerModel extends ConsumerHandleModel
 
 
         $data = array();
-        $data['user_count'] = $count;
+        $data['count'] = $count;
         $data['sum_length'] = round($sum_length/1000,2);
 
         return $data;

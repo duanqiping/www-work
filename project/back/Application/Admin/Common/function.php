@@ -5,12 +5,12 @@
  * Date: 2017/6/16
  * Time: 10:36
  */
+
+//获取前一日和前一个的起始时间
 function getTimeBeginAndEnd($time_flag)
 {
     $data = array();
     if($time_flag == 'day'){
-//        echo "11";
-//        exit();
         $data['begin_time'] = mktime(0,0,0,date('m'),date('d')-1,date('Y'));//前一日开始时间
         $data['end_time'] = mktime(0,0,0,date('m'),date('d'),date('Y'))-1;//前一日结束时间
     }else if($time_flag == 'month'){
@@ -20,8 +20,18 @@ function getTimeBeginAndEnd($time_flag)
     }else{
         return false;
     }
-//    echo strtotime(mktime(0,0,0,date('m'),date('d')-1,date('Y')));
-//    print_r($data);
-//    exit();
     return $data;
+}
+//获取当日 当月的起始时间
+function getTimeBegin($time_flag)
+{
+    if($time_flag == 'week'){
+        $begin_time = mktime(0,0,0,date('m'),date('d')-date('w'),date('Y')); //当周起始时间
+    }else if($time_flag == 'month'){
+        $begin_time = mktime(0,0,0,date('m'),1,date('Y')); //当月起始时间
+    }else{
+        $begin_time = false;
+    }
+
+    return $begin_time;
 }

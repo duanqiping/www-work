@@ -1,0 +1,119 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title" style="margin-left: 60px">
+            <h2>排行</h2>
+        </div>
+
+        <br/>
+        <div style="margin-left: 60px">
+            <!--<span>单圈最佳排行</span>&nbsp&nbsp&nbsp&nbsp <span>马拉松排行</span>&nbsp&nbsp&nbsp&nbsp-->
+            <!--<span>周排行</span>&nbsp&nbsp&nbsp&nbsp<span>月排行</span>&nbsp&nbsp&nbsp&nbsp<span>年排行</span>-->
+            <!--<button id="single" class="btn ajax-post" url="{:U('changeStatus?method=resumeUser')}" target-form="ids">单圈最佳排行</button> <button id="marathon">马拉松排行</button>-->
+            <a href="{:U('rank',array('flag'=>'single'))}">单圈最佳排行</a>&nbsp&nbsp&nbsp&nbsp
+        </div>
+        <div style="margin-left: 60px;margin-top: 10px">
+            <div style="float: left">
+                <select id="week" name="cycles">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>周排行</option>
+                    <option>1圈</option>
+                    <option>2圈</option>
+                    <option>3圈</option>
+                    <option>4圈</option>
+                    <option>5圈</option>
+                </select>
+            </div>
+            <div style="float: left">
+                <select id="month"  name="cycles">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>月排行</option>
+                    <option>1圈</option>
+                    <option>2圈</option>
+                    <option>3圈</option>
+                    <option>4圈</option>
+                    <option>5圈</option>
+                </select>
+            </div>
+            <div style="float: left">
+                <select id="year" name="cycles">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>年排行</option>
+                    <option>1圈</option>
+                    <option>2圈</option>
+                    <option>3圈</option>
+                    <option>4圈</option>
+                    <option>5圈</option>
+                </select>
+            </div>
+            <div style="float: left">
+                <select id="marathon" name="cycles">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>马拉松排行</option>
+                    <option>四分之一程马拉松</option>
+                    <option>半程马拉松</option>
+                    <option>全程马拉松</option>
+                </select>
+            </div>
+        </div>
+
+
+        <br/><br/>
+        <h5 style="margin-left: 60px;margin-top: 10px;color: #0000C0">{$rankName}排行榜</h5>
+        <!-- 数据列表 -->
+        <div class="data-table table-striped">
+            <table class="" style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
+                <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">姓名</th>
+                    <th class="">学号</th>
+                    <th class="">系别</th>
+                    <th class="">年级</th>
+                    <th class="">班级</th>
+                    <th class="">用时(秒)</th>
+                    <th class="">完成时间</th>
+                    <th class="">比赛名次</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo" key="k">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                            <td>{$vo.name} </td>
+                            <td>{$vo.studentId} </td>
+                            <td>{$vo.dept}</td>
+                            <td>{$vo.grade}</td>
+                            <td>{$vo.class}</td>
+                            <td>{$vo.time}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$k}</td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                </notempty>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</block>
+
+<block name="script">
+
+    <script src="__JS__/linkage.js"></script>
+    <script src="__STATIC__/jquery-2.0.3.min.js"></script>
+
+    <script type="text/javascript">
+        var rankUrl = "{:U('rank')}"; // merchant.js 中使用
+    </script>
+</block>
+
+
+
+

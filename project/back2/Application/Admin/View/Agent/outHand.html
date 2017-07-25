@@ -1,0 +1,59 @@
+<extend name="Public/base_agent" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title">
+            <h2>未处理工单列表</h2>
+        </div>
+
+        <!-- 数据列表 -->
+        <div class="data-table table-striped">
+            <table class="" style="border-collapse:separate; border-spacing:60px 10px;">
+                <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">UID</th>
+                    <th class="">工单号</th>
+                    <th class="">工单状态</th>
+                    <th class="">客户名称</th>
+                    <th class="">客户联系方式</th>
+                    <th class="">客户联系地址</th>
+                    <th class="">客户描述</th>
+                    <th class="">生成时间</th>
+                    <th class="">操作处理</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                            <td>{$vo.id} </td>
+                            <td>{$vo.order_sn}</td>
+                            <td>{$vo['status']==1?'待处理':'其他错误'}</td>
+                            <td>{$vo.customer_name}</td>
+                            <td>{$vo.customer_mobile}</td>
+                            <td>{$vo.customer_addr}</td>
+                            <td>{$vo.customer_desc}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:m:s",###}</td>
+                            <td><a href="{:U('agent/deal',array('id' => $vo['id'],'order_sn'=>$vo['order_sn'],'customer_desc'=>$vo['customer_desc']))}">点击受理</a></td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                </notempty>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+
+</block>
+
+
+
+

@@ -1,0 +1,73 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title" style="margin-left: 60px">
+            <h2>赛事人员名单</h2>
+        </div>
+
+        <!-- 数据列表 -->
+        <div class="data-table table-striped">
+            <table class="" style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
+                <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">UID</th>
+                    <th class="">赛事编号</th>
+                    <th class="">学生姓名</th>
+                    <th class="">学号</th>
+                    <th class="">系别</th>
+                    <th class="">年级</th>
+                    <th class="">班级</th>
+                    <th class="">性别</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                            <td>{$vo.contest_id} </td>
+                            <td>{$vo.contest_sn}</td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.desc}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.begin_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.end_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.length} m</td>
+                            <td>{$vo.from_name}</td>
+                            <!--<td><a href="#" style="color: #0000C0">人员名单</a></td>-->
+                            <td><a href="{:U('info',array('contest_id'=>$vo['contest_id']))}" style="color: #0000C0">人员名单</a></td>
+                            <!--<td>{$vo['is_show']?'正常':'禁用'}</td>-->
+                            <!--<td>{$vo['count']}<a href="">查看详情</a></td>-->
+                        </tr>
+                    </volist>
+                    <else/>
+                    <!--<td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_id'=>$vo['contest_id']))}" style="color: red">点击添加学生</a> </td>-->
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击添加学生</a> </td>
+
+                </notempty>
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        function contest(type)
+        {
+            var contestUrl = "{:U('')}"; // merchant.js 中使用
+            var url = contestUrl.replace(/.html/, "");
+            location.href = url+"/type/"+type;//location.href实现客户端页面的跳转
+        }
+    </script>
+</block>
+
+
+
+

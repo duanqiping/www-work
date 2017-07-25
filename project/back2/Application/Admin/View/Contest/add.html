@@ -1,0 +1,38 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title" style="margin-left: 60px;margin-top: 10px">
+            <h2>add</h2>
+        </div>
+        <div style="margin-left: 60px;margin-top: 10px">
+            <form action="{:U()}" method="post">
+                赛事标题：<input type="text" name="title" /><br/>
+                赛事描述：<input type="text" name="desc" /><br/>
+                赛事长度：<input type="text" name="length" /><br/>
+
+                开始时间：<input type="text" name="begin_time" class="some_class" value="" /><br/>
+                结束时间：<input type="text" name="end_time" class="some_class" value="" /><br/>
+
+                <div class="form-item">
+                    <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+                    <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</block>
+
+<block name="script">
+    <script src="__JS__/common.js"></script>
+    <script src="__JS__/jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript">
+        $('.some_class').datetimepicker();
+    </script>
+</block>
+
+
+
+

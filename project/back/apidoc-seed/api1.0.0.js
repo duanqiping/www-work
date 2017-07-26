@@ -82,13 +82,13 @@
   *{
   *  "list": [
   *      {
-  *          "class": "航天一班",
+  *          "classRoom": "航天一班",
   *          "name": "上官云",
   *          "studentId": "764676",
   *          "label": "5"
   *      },
   *      {
-  *          "class": "航天一班",
+  *          "classRoom": "航天一班",
   *          "name": "上官云",
   *          "studentId": "764676",
   *          "label": "5"

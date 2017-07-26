@@ -24,7 +24,7 @@ class ContestOrder extends Model{
     {
         $data = array();
 
-        $sql = "select co.class,co.name,co.studentId,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
+        $sql = "select co.class classRoom,co.name,co.studentId,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
             "co.contest_sn='$contest_sn' and co.customer_id='$customer_id'";
 
         $res = $this->query($sql);

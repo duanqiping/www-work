@@ -74,12 +74,9 @@ class ContestController extends Controller
             $contestorder->addUser($ids);
         }
 
-        $res = $contestorder->_list();
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $res = $contestorder->_list($condition);
 
-//        print_r($res);
-//        exit();
-
-//        $this->assign('contest_sn', $_GET['contest_sn']);
         $this->assign('_list',$res);
         $this->display('info');
     }
@@ -94,9 +91,7 @@ class ContestController extends Controller
         $res = $user->_list($user->makeCondition($_POST));
 
         $this->assign('_list', $res);
-        if($_GET['contest_id']){
-            $this->assign('contest_sn', $_GET['contest_sn']);
-        }
+
         $this->display();
     }
 

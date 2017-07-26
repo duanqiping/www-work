@@ -17,12 +17,17 @@ class UserModel extends Model{
     public function makeCondition($data)
     {
         $condition = array();
-        //系别 和 班级 是ajax 联动
+
+        //系别 和 班级 是ajax 联动 (筛选条件)
         if($data['dept'] && $data['dept'] != '--系别--'){$condition['dept'] = $data['dept'];}
         if($data['class'] && $data['class'] != '--班级--'){$condition['class'] = $data['class'];}
         if($data['sex'] && $data['sex'] != '--性别--'){$condition['sex'] = $data['sex'];}
 
         $condition['customer_id'] = $_SESSION['user']['id'];
+
+//        print_r($condition);
+//        exit();
+
         return $condition;
     }
 
@@ -55,7 +60,6 @@ class UserModel extends Model{
                 $where .= "u.$k='$v' AND ";
             }
         }
-        
         $sql = "SELECT u.user_id,u.name,u.studentId,u.sex,u.grade,u.dept,u.class,u.last_login_time,u.last_login_ip,u.login_count,d.device_id ".
             "FROM user u left join device d on u.user_id=d.user_id WHERE $where ORDER BY u.add_time desc";
         $res = $this->query($sql);

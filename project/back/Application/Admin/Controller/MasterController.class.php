@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 
 
+use Admin\Model\ContestOrder;
 use Admin\Model\UserModel;
 use Think\Controller;
 use Admin\Model\CustomerModel;
@@ -68,5 +69,22 @@ class MasterController extends Controller{
         }else{
             sendSuccess($res);
         }
+    }
+
+    //获取考试名单
+    public function getContest()
+    {
+        $condition = array();
+        $contest_sn = $_GET['contest_sn'];
+        $customer_id = $_GET['customer_id'];
+
+        $condition['contest_sn'] = $_GET['contest_sn'];
+        $condition['customer_id'] = $_GET['customer_id'];
+
+        $contestOrder = new ContestOrder();
+        $res = $contestOrder->getContestOrder($contest_sn,$customer_id);
+
+        sendSuccess($res);
+
     }
 } 

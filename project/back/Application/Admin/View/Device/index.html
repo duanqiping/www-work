@@ -1,0 +1,271 @@
+<extend name="Public/base2" />
+
+<block name="body">
+    <!-- page content -->
+
+    <div class="page-title"  style="margin-left: 8px">
+        <div class="title_left">
+            <h3>设备管理 <small>当前赛道大屏主机管理</small></h3>
+        </div>
+
+        <div class="title_right" style="margin-right: auto">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入内容">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+    <div class="x_title">
+        <h2>赛道主机 <small>实时状态监控</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+
+    <p>主机状态定时刷新，自动预警信息请关注右上角消息栏。</p>
+    <!--<div class="x_content">-->
+
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>区域筛选：</a>
+        </li>
+
+        <li role="presentation" class="dropdown">
+            <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                {$info['province']}
+                <span class="caret"></span>
+            </a>
+            <!--<a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">-->
+                <!--上海市-->
+                <!--<span class="caret"></span>-->
+            <!--</a>-->
+            <!--<ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海</a>-->
+                <!--</li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">广东</a>-->
+                <!--</li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">海南</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="divider"></li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </li>
+        <li role="presentation" class="dropdown">
+
+            <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                {$info['city']}
+                <span class="caret"></span>
+            </a>
+
+            <!--<a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">-->
+                <!--城市-->
+                <!--<span class="caret"></span>-->
+            <!--</a>-->
+            <!--<ul id="menu2" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop5">-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="divider"></li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </li>
+        <li role="presentation" class="dropdown">
+
+            <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                学校
+                <span class="caret"></span>
+            </a>
+
+            <!--<a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">-->
+                <!--类型-->
+                <!--<span class="caret"></span>-->
+            <!--</a>-->
+            <!--<ul id="menu2" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop5">-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">学校</a>-->
+                <!--</li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">运动场</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="divider"></li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </li>
+        <li role="presentation" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                {$info['name']}
+                <span class="caret"></span>
+            </a>
+
+            <!--<a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">-->
+                <!--跑道-->
+                <!--<span class="caret"></span>-->
+            <!--</a>-->
+            <!--<ul id="menu3" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop6">-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海复旦大学</a>-->
+                <!--</li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海交通大学</a>-->
+                <!--</li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">南翔社区运动场</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="divider"></li>-->
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </li>
+    </ul>
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>属性筛选：</a>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                状态
+                <span class="caret"></span>
+            </a>
+            <ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">在线</a>
+                </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">无信号</a>
+                </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">报修</a>
+                </li>
+
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">维修中</a>
+                </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">停用</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>
+                </li>
+            </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                批次
+                <span class="caret"></span>
+            </a>
+            <ul id="menu2" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop5">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q1季度</a>
+                </li>
+
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q2季度</a>
+                </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q3季度</a>
+                </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q4季度</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+    </li>
+    </ul>
+
+    <!--</div>-->
+
+    <div class="table-responsive">
+        <table class="table table-striped jambo_table bulk_action">
+            <thead>
+            <tr class="headings">
+                <th>
+                    <input type="checkbox" id="check-all" class="flat">
+                </th>
+                <th class="column-title">主机编码 </th>
+                <th class="column-title">激活时间 </th>
+                <th class="column-title">在线时长 </th>
+                <th class="column-title">信道编号 </th>
+                <th class="column-title">上一主机超时 </th>
+                <th class="column-title">下一主机编码 </th>
+                <th class="column-title">下一主机超时</th>
+                <th class="column-title no-link last"><span class="nobr">状态</span>
+                </th>
+                <th class="bulk-actions" colspan="7">
+                    <a class="antoo" style="color:#fff; font-weight:500;">批量操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo">
+                    <tr class="even pointer">
+                        <td class="a-center ">
+                            <input type="checkbox" class="flat" name="table_records">
+                        </td>
+                        <td class=" ">{$vo.ms_code}</td>
+                        <td class=" ">{$vo.add_time|date="Y-m-d H:i:s",###} </td>
+                        <td class=" ">{$vo['add_time']} <i class="success fa fa-long-arrow-up"></i></td>
+                        <td class=" ">{$vo.ms_code}</td>
+                        <td class=" ">{$vo.last_expire_time}</td>
+                        <td class=" ">{$vo.next_ms_code}</td>
+                        <td class=" ">{$vo.last_expire_time}</td>
+                        <td class=" ">{$vo.status}</td>
+                        <!--<td class="a-right a-right ">$7.45</td>-->
+                        <!--<td class=" last"><a href="#">View</a>-->
+                        </td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="x_content">
+        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">休眠 <span class="caret"></span>
+        </button>
+        <ul role="menu" class="dropdown-menu">
+            <li><a href="#">一小时</a>
+            </li>
+            <li><a href="#">十小时</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="#">自动节能</a>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-default">重启</button>
+        <button type="button" class="btn btn-default">报修</button>
+    </div>
+    <p>休眠状态节约能源（关闭屏幕），自动休眠模式会在运动者跑步时自动唤醒主机。</p>
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <!-- /page content -->
+</block>
+
+<block name="script">
+
+</block>

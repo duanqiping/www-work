@@ -69,3 +69,35 @@
   *}
   **/
 
+ /**
+  * @api {get} master/getContest 获取赛事名单
+  * @apiVersion 1.0.0
+
+  * @apiGroup master
+
+  *@apiParam {String} contest_sn 赛事编码
+  *@apiParam {String} customer_id 客户id号
+  *
+  * @apiSuccessExample {json} 成功返回结果:
+  *{
+  *  "list": [
+  *      {
+  *          "class": "航天一班",
+  *          "name": "上官云",
+  *          "studentId": "764676",
+  *          "label": "5"
+  *      },
+  *      {
+  *          "class": "航天一班",
+  *          "name": "上官云",
+  *          "studentId": "764676",
+  *          "label": "5"
+  *      }
+  *  ],
+  *  "endMachine": "0000113",
+  *  "circle": "4",
+  *  "type": 2
+  *}
+  *}
+  **/
+

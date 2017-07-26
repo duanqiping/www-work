@@ -98,6 +98,45 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "master/getContest",
+    "title": "获取赛事名单",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contest_sn",
+            "description": "<p>赛事编码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n \"list\": [\n     {\n         \"class\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     },\n     {\n         \"class\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     }\n ],\n \"endMachine\": \"0000113\",\n \"circle\": \"4\",\n \"type\": 2\n}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "GetMasterGetcontest"
+  },
+  {
+    "type": "get",
     "url": "master/getUserInfo",
     "title": "获取用户信息",
     "version": "1.0.0",

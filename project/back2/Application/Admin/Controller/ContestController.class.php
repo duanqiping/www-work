@@ -62,14 +62,25 @@ class ContestController extends Controller
 //        exit();
 //        $this->assign('contest',array('contest_id'=>$_GET['contest_id']));
 
+        $contestorder = new ContestOrder();
+
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        if($_POST){
+            $ids = $_POST;
+            $ids = $ids['id'];
 
-        $contestorder = new ContestOrder();
-        
+            $contestorder->addUser($ids);
+        }
 
-        $this->assign('contest_sn', $_GET['contest_sn']);
+        $res = $contestorder->_list();
+
+//        print_r($res);
+//        exit();
+
+//        $this->assign('contest_sn', $_GET['contest_sn']);
+        $this->assign('_list',$res);
         $this->display('info');
     }
 
@@ -87,9 +98,6 @@ class ContestController extends Controller
             $this->assign('contest_sn', $_GET['contest_sn']);
         }
         $this->display();
-//        print_r( $_GET );
-//        exit();
-
     }
 
     public function changeStatus()

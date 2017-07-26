@@ -34,6 +34,10 @@
 
         <br/><br/>
         <form action="{:U('info')}" method="post">
+
+            <div style="margin-left: 60px;">
+                <span style="color: red">{$condition_string|default="全部学生"}</span>
+            </div>
             <div style="margin-left: 60px;margin-top: 10px;">
                 <button class="btn ajax-post">添加</button>
             </div>
@@ -76,7 +80,7 @@
             </div>
 
         </form>
-        <div style="margin-left: 60px" class="M-box"></div>
+        <div style="margin-left: 60px" class="M-box2"></div>
     </div>
 
 </block>
@@ -105,44 +109,6 @@
                 endPage:'末页',
                 prevContent:'上页',
                 nextContent:'下页'
-            });
-
-            $('.M-box1').pagination({
-                totalData:100,
-                showData:5,
-                coping:true
-            });
-
-            $('.M-box3').pagination({
-                pageCount:50,
-                jump:true,
-                coping:true,
-                homePage:'首页',
-                endPage:'末页',
-                prevContent:'上页',
-                nextContent:'下页'
-            });
-
-            $('.M-box4').pagination({
-                pageCount: 3, //初始化时总页数3页
-                callback:function(api){
-                    api.setPageCount(20);//动态修改总页数为20页
-                }
-            });
-
-            $('.M-box5').pagination({
-                pageCount: 50,
-                jump: true,
-                callback:function(api){
-                    var data = {
-                        page: api.getCurrent(),
-                        name: 'mss',
-                        say: 'oh'
-                    };
-                    $.getJSON('http://localhost:3000/data.json',data,function(json){
-                        console.log(json);
-                    });
-                }
             });
         });
     </script>

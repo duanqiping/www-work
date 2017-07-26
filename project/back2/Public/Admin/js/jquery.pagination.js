@@ -163,7 +163,7 @@
 						return;
 					}
 				}else{
-					index = parseInt($(this).data('page'));
+					index = parseInt($(this).data('page'));//获取页数
 				}
 				that.filling(index);
 				typeof opts.callback === 'function' && opts.callback(that);

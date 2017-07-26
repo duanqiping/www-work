@@ -25,9 +25,6 @@ class UserModel extends Model{
 
         $condition['customer_id'] = $_SESSION['user']['id'];
 
-//        print_r($condition);
-//        exit();
-
         return $condition;
     }
 
@@ -50,8 +47,10 @@ class UserModel extends Model{
         return $res;
     }
     //用户列表
-    public function _list($condition)
+    public function _list($condition,$page,$pageSize)
     {
+        $offset = ($page-1)*$pageSize;
+
         $where = '';
         foreach($condition as $k=>$v){
             if(end($condition) == $v){
@@ -61,7 +60,7 @@ class UserModel extends Model{
             }
         }
         $sql = "SELECT u.user_id,u.name,u.studentId,u.sex,u.grade,u.dept,u.class,u.last_login_time,u.last_login_ip,u.login_count,d.device_id ".
-            "FROM user u left join device d on u.user_id=d.user_id WHERE $where ORDER BY u.add_time desc";
+            "FROM user u left join device d on u.user_id=d.user_id WHERE $where ORDER BY u.add_time desc limit $offset,$pageSize";
         $res = $this->query($sql);
 
         return $res;

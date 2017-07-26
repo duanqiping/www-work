@@ -49,19 +49,12 @@ class ContestController extends Controller
             }
         } else {
             $this->display();
-//            echo "add";
-//            exit();
         }
     }
 
     //赛事人员名单
     public function info()
     {
-//        print_r( $_POST );
-//        var_dump($_SESSION);
-//        exit();
-//        $this->assign('contest',array('contest_id'=>$_GET['contest_id']));
-
         $contestorder = new ContestOrder();
 
         if($_GET['contest_sn']){
@@ -87,10 +80,24 @@ class ContestController extends Controller
         $user = new UserModel();
 
         $condition['customer_id'] = $_SESSION['user']['id'];
+        $condition = $user->makeCondition($_POST);//筛选条件
 
-        $res = $user->_list($user->makeCondition($_POST));
+        $page = 1;
+        $pageSize=10;
+
+        $res = $user->_list($condition,$page,$pageSize);
+
+        unset($condition['customer_id']);
+        $condition_string = '';
+        foreach ($condition as $k=>$v){
+            if($k == 'sex'){
+                $v = ($v==1)?'男':'女';
+            }
+            $condition_string = $condition_string.' '.$v;
+        }
 
         $this->assign('_list', $res);
+        $this->assign('condition_string', $condition_string);
 
         $this->display();
     }

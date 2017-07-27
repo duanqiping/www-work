@@ -22,7 +22,7 @@ class DeviceOrderModel extends Model{
     );
 
     //生成工单
-    public function insertData($desc)
+    public function insertData($data)
     {
         //查询客户信息
         $customer=  new CustomerModel();
@@ -35,9 +35,11 @@ class DeviceOrderModel extends Model{
             'customer_name' => $res_customer['name'],
             'customer_mobile' => $res_customer['customer_mobile'],
             'customer_addr' => $res_customer['customer_addr'],
-            'customer_desc' => $desc,
+            'customer_desc' => $data['desc'],
+            'contact_name' => $data['name'],
+            'contact_mobile' => $data['mobile'],
+            'type' => $data['type'],
         );
-
         if($this->create($add_data)){
             $id = $this->add();
             return $id;

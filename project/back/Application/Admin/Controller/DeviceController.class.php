@@ -20,10 +20,10 @@ class DeviceController extends Controller{
         if($_SESSION['user']['grade'] == 3 || $_SESSION['user']['grade']==4){
             $customer = new CustomerModel();
             $res = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('province,city,name,grade')->find();
-            $this->assign('info',$res);
+            $this->assign('info',$res);//客户信息
         }
         $devicems = new DeviceMsModel();
-        $data = $devicems->_list();
+        $data = $devicems->_list();//工单列表
 
         $this->assign('_list',$data);
 

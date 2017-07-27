@@ -222,12 +222,13 @@
                         </td>
                         <td class=" ">{$vo.ms_code}</td>
                         <td class=" ">{$vo.add_time|date="Y-m-d H:i:s",###} </td>
-                        <td class=" ">{$vo['add_time']} <i class="success fa fa-long-arrow-up"></i></td>
+                        <td class=" ">{$vo.online} hour <i class="success fa fa-long-arrow-up"></i></td>
                         <td class=" ">{$vo.ms_code}</td>
-                        <td class=" ">{$vo.last_expire_time}</td>
+                        <td class=" ">{$vo.last_expire_time} s</td>
                         <td class=" ">{$vo.next_ms_code}</td>
-                        <td class=" ">{$vo.last_expire_time}</td>
-                        <td class=" ">{$vo.status}</td>
+                        <td class=" ">{$vo.last_expire_time} s</td>
+                        <!--<td class=" ">{$vo.status}</td>-->
+                        <td class=" "><if condition="$vo['status'] eq 1 ">正常<else /> 故障</if></td>
                         <!--<td class="a-right a-right ">$7.45</td>-->
                         <!--<td class=" last"><a href="#">View</a>-->
                         </td>

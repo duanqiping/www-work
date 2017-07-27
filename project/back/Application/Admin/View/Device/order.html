@@ -17,7 +17,14 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
+   <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+   <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <!--<link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -355,16 +362,16 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>赛道主机 <small>实时状态监控</small></h2>
+                    <h2>工单系统 <small>故障报修及技术咨询</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-outdent"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                          <li><a href="#">设备管理</a>
                           </li>
-                          <li><a href="#">Settings 2</a>
+                          <li><a href="#">工单系统</a>
                           </li>
                         </ul>
                       </li>
@@ -378,8 +385,362 @@
 
                     <p>主机状态定时刷新，自动预警信息请关注右上角消息栏。</p>
                     <!--<div class="x_content">-->
+<div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              提交工单<br />
+                                              <small>填写详细故障信息</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              进行维护<br />
+                                              <small>当地网点到场维修</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-3">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              维修反馈<br />
+                                              <small>接触故障后报备详情</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-4">
+                            <span class="step_no">4</span>
+                            <span class="step_descr">
+                                              结束工单<br />
+                                              <small>机器故障已排除</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                      <div id="step-1">
+                        <form class="form-horizontal form-label-left">
 
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">选择问题设备 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">联系人姓名 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">联系人手机</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">类型</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div id="gender" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                  <input type="radio" name="gender" value="male"> &nbsp; 咨询 &nbsp;
+                                </label>
+                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                  <input type="radio" name="gender" value="female"> 报修
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">详细描述 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                          </div>
+
+                        </form>
+
+                      </div>
+                      <div id="step-2">
+                        <h2 class="StepTitle">本次工单由深圳市代理商提供技术支持</h2>
+                        <p>
+                          请积极配合技术人员进行抢修工作。
+                        </p>
+                        <div class="col-sm-9">
+                          <div class="input-group">
+                            
+                            <select id="heard" class="form-control" required>
+                            <option value="">工单报备</option>
+                            <option value="press">新状况汇报</option>
+                            <option value="net">等待更换配件</option>
+                            <option value="mouth">咨询</option>
+                          </select>
+                            <!-- /btn-group -->
+                          </div>
+                          <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-primary">提交</button>
+                            </span>
+                          </div>
+                        </div>
+                        <!--<button class="btn btn-default source" onclick="new PNotify({
+                                  title: '已成功提交催单',
+                                  text: '请积极与技术人员沟通并配合现场维护工作。',
+                                  type: 'success',
+                                  styling: 'bootstrap3'
+                              });">Success</button>-->
+                        <div class="x_panel">
+                <div class="x_title">
+                  <h2>工单进度 <small>进度报备记录</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a onclick="new PNotify({
+                                  title: '已成功提交催单',
+                                  text: '请积极与技术人员沟通并配合现场维护工作。',
+                                  type: 'success',
+                                  styling: 'bootstrap3'
+                              });">催单</a>
+                        </li>
+                        <li><a onclick="new PNotify({
+                                  title: '投诉通道',
+                                  text: '请拨打400-0000-0000',
+                                  type: 'error',
+                                  styling: 'bootstrap3'
+                              });">投诉</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <ul class="list-unstyled timeline">
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>20170803</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                                          <a>工单报备</a>
+                                      </h2>
+                          <div class="byline">
+                            <span>11:30</span> 操作人 <a>段齐平</a>
+                          </div>
+                          <p class="excerpt">已更换主板，状态正常。
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>20170801</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                                          <a>工单报备</a>
+                                      </h2>
+                          <div class="byline">
+                            <span>15:00</span> 操作人 <a>段齐平</a>
+                          </div>
+                          <p class="excerpt">主板故障，等待更换主板。
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>20170801</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                                          <a>工单报备</a>
+                                      </h2>
+                          <div class="byline">
+                            <span>09:40</span> 操作人 <a>段齐平</a>
+                          </div>
+                          <p class="excerpt">已安排技术人员出勤现场。
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                </div>
+              </div>
+                        <p>
+                        </p>
+                      </div>
+                      <div id="step-3">
+                        <h2 class="StepTitle">工单结算</h2>
+                        
+                        <p>请详细检查工单内容，确认无误请确认工单完结。</p>
+                        <div class="clearfix"></div>
                   
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                                          <i class="fa fa-globe"></i> 工单验收
+                                          <small class="pull-right">Date: 16/08/2016</small>
+                                      </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          报修
+                          <address>
+                                          <strong>深圳大学</strong>
+                                          <br>广东省 深圳市
+                                          <br>操作人：段齐平
+                                          <br>联系方式：13000000000
+                                      </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          运维
+                          <address>
+                                          <strong>深圳市代理商</strong>
+                                          <br>广东省 深圳市
+                                          <br>操作人：段齐平
+                                          <br>联系方式：13000000000
+                                      </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b>工单结单备案</b>
+                          <br>
+                          <br>
+                          <b>提交工单日期：</b> 20170801
+                          <br>
+                          <b>解除工单日期：</b> 20170805
+                          <br>
+                          <b>工单是否解决：</b> 是
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="col-xs-12 table">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>序号</th>
+                                <th>收费项目</th>
+                                <th>数量</th>
+                                <th style="width: 59%">用途</th>
+                                <th>价格（￥）</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>（无）</td>
+                                <td>（无）</td>
+                                <td>（无）</td>
+                                <td>（无）</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-6">
+                          <p class="lead">工单详情记录:</p>
+                          
+                          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            主板损坏，已更换。
+                          </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-6">
+                          <p class="lead">费用统计</p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">维修费:</th>
+                                  <td>￥0.00</td>
+                                </tr>
+                                <tr>
+                                  <th>配件费：</th>
+                                  <td>￥500.00</td>
+                                </tr>
+                                <tr>
+                                  <th>税费：</th>
+                                  <td>￥40.00</td>
+                                </tr>
+                                <tr>
+                                  <th>总计：</th>
+                                  <td>￥540.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-xs-12">
+                          <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> 打印</button>
+                          <!--<button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>-->
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                      </div>
+                      <div id="step-4">
+                        <h2 class="StepTitle">工单已结束</h2>
+                        <div class="byline">
+                            <span>2017/08/05 09:40</span> 操作人 <a>段齐平</a>
+                          </div>
+                        <p>本次工单已确认结束。如有其他事项请重新创建工单。
+                        </p>
+                      </div>
+
+                    </div>
+                    <!-- End SmartWizard Content -->
+                  <br />
                   <ul class="nav nav-pills" role="tablist">
                     <li role="presentation"><a>区域筛选：</a>
                     </li>
@@ -456,44 +817,28 @@
                                   <span class="caret"></span>
                               </a>
                       <ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">在线</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">进度1</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">无信号</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">进度2</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">报修</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">进度3</a>
                         </li>
                         
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">维修中</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">停用</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">已结单</a>
                         </li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>
                         </li>
                       </ul>
                     </li>
-                    <li role="presentation" class="dropdown">
-                      <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                  批次
-                                  <span class="caret"></span>
-                              </a>
-                      <ul id="menu2" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop5">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q1季度</a>
-                        </li>
-                        
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q2季度</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q3季度</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Q4季度</a>
-                        </li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>
-                        </li>
+                    <!--<div class="col-md-4">-->
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                          <span>选择日期</span> <b class="caret"></b>
+                        </div>
+                      <!--</div>-->
                       </ul>
-                    </li>
-                    
-                      </ul>
+                      
                     </li>
                   </ul>
 
@@ -507,12 +852,12 @@
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
                             <th class="column-title">主机编码 </th>
-                            <th class="column-title">激活时间 </th>
-                            <th class="column-title">在线时长 </th>
-                            <th class="column-title">信道编号 </th>
-                            <th class="column-title">上一主机超时 </th>
-                            <th class="column-title">下一主机超时</th>
-                            <th class="column-title no-link last"><span class="nobr">状态</span>
+                            <th class="column-title">故障描述 </th>
+                            <th class="column-title">提交时间 </th>
+                            <th class="column-title">结单时间 </th>
+                            <th class="column-title">更换配件 </th>
+                            <th class="column-title">总费用</th>
+                            <th class="column-title no-link last"><span class="nobr">详情</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">批量操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -526,68 +871,18 @@
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
                             <td class=" ">121000040</td>
-                            <td class=" ">May 23, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
+                            <td class=" ">主板损坏 </td>
+                            <td class=" ">20170801 <i class="success fa fa-long-arrow-up"></i></td>
+                            <td class=" ">20170805</td>
+                            <td class=" ">有</td>
+                            <td class="a-right a-right ">￥540.00</td>
+                            <td class=" last"><a href="#">详情</a>
                             </td>
                           </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 23, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 24, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 24, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 24, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
+                          
+                          
+                          
+                          
                           <tr class="odd pointer">
                             <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
@@ -659,21 +954,9 @@
                       </table>
                     </div>
                     <div class="x_content">
-                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">休眠 <span class="caret"></span>
-                    </button>
-                    <ul role="menu" class="dropdown-menu">
-                      <li><a href="#">一小时</a>
-                      </li>
-                      <li><a href="#">十小时</a>
-                      </li>
-                      <li class="divider"></li>
-                      <li><a href="#">自动节能</a>
-                      </li>
-                    </ul>
-                        <button type="button" class="btn btn-default">重启</button>
-                        <button type="button" class="btn btn-default">报修</button>
+                        <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> 打印</button>
                       </div>
-                    <p>休眠状态节约能源（关闭屏幕），自动休眠模式会在运动者跑步时自动唤醒主机。</p>
+                    <p></p>
 							
 						
                   </div>
@@ -703,9 +986,19 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
-
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <!--<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>-->
+    <!--<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
+		<!-- jQuery Smart Wizard -->
+    <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
   </body>

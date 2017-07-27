@@ -609,7 +609,7 @@
 // 020	London
 // 023	Southampton(8X), Portsmouth(9X)
 // 024	Coventry
-// 028	Ballycastle(20), Martinstown(21), Ballymena(25), Ballymoney(27), Larne(28), Kilrea(29), Newry(30), Armagh(37), Portadown(38), Banbridge(40), Rostrevor(41), Kircubbin(42), Newcastle(Co. Down)(43), Downpatrick(44), Enniskillen(66), Lisnaskea(67), Kesh(68), Coleraine(70), Londonderry(71), Limavady(77), Magherafelt(79), Carrickmore(80), Newtownstewart(81), Omagh(82), Ballygawley(85), Cookstown(86), Dungannon(87), Fivemiletown(89), Belfast(90&95), Bangor(Co. Down)(91), Lisburn(92), Ballyclare(93), Antrim(94), Saintfield(97)
+// 028	Ballycastle(20), Martinstown(21), Ballymena(25), Ballymoney(27), Larne(28), Kilrea(29), Newry(30), Armagh(37), Portadown(38), Banbridge(40), Rostrevor(41), Kircubbin(42), Newcastle(Wo. Down)(43), Downpatrick(44), Enniskillen(66), Lisnaskea(67), Kesh(68), Coleraine(70), Londonderry(71), Limavady(77), Magherafelt(79), Carrickmore(80), Newtownstewart(81), Omagh(82), Ballygawley(85), Cookstown(86), Dungannon(87), Fivemiletown(89), Belfast(90&95), Bangor(Wo. Down)(91), Lisburn(92), Ballyclare(93), Antrim(94), Saintfield(97)
 // 029	Cardiff
 //
 //

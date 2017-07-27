@@ -27,6 +27,8 @@
 
     <!-- Custom Theme Style -->
     <link href="__CSS__/custom.min.css" rel="stylesheet">
+
+    <link href="__VENDOR__/pnotify/dist/pnotify.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -59,13 +61,18 @@
             <div class="menu_section">
                 <h3>设备功能菜单</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> 概览 </a>
-                        <!--<ul class="nav child_menu">
-                          <li><a href="index.html">Dashboard</a></li>
-                        </ul>-->
+                    <li><a href="{:U('public/index')}"><i class="fa fa-home"></i> 概览 </a>
+                        <!--<ul class="nav child_menu">-->
+                          <!--<li><a href="index.html">Dashboard</a></li>-->
+                        <!--</ul>-->
                     </li>
-                    <li><a href="{:U('device/index')}"><i class="fa fa-desktop"></i> 设备管理 <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-desktop"></i> 设备管理 <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{:U('device/index')}">设备详情</a></li>
+                            <li><a href="{:U('wo/index')}">工单系统</a></li>
+                        </ul>
                     </li>
+
                     <li><a><i class="fa fa-user"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                     </li>
                     <li><a><i class="fa fa-edit"></i> 考核/赛事 <span class="fa fa-chevron-down"></span></a>
@@ -104,7 +111,7 @@
             <a data-toggle="tooltip" data-placement="top" title="最小化">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="退出系统" href="{:U('logout')}">
+            <a data-toggle="tooltip" data-placement="top" title="退出系统" href="{:U('public/logout')}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
@@ -215,6 +222,9 @@
 <div class="right_col" role="main">
     <!--内容-->
     <block name="body"> </block>
+
+    <!--下面的需要用<php>/* */</php>这种形式注释-->
+    <block name="script"> </block>
 
     <!--<div class="clearfix"></div>-->
 </div>

@@ -21,6 +21,16 @@ class DeviceOrderModel extends Model{
         array ('status', 1, self::MODEL_INSERT),//只能是当前模型的方法
     );
 
+    //获取客户的填写信息
+    public function getCustomerFillData()
+    {
+        $condition['customer_id'] = $_SESSION['user']['id'];
+        $condition['status'] = array('in',array(2,3,4));
+        $res = $this->where(array())->field('ms_code,desc,contact_name,contact_mobile,type')->find();
+        if(!$res) return array();
+        else return $res;
+    }
+
     //生成工单
     public function insertData($data)
     {
@@ -35,7 +45,7 @@ class DeviceOrderModel extends Model{
             'customer_name' => $res_customer['name'],
             'customer_mobile' => $res_customer['customer_mobile'],
             'customer_addr' => $res_customer['customer_addr'],
-            'customer_desc' => $data['desc'],
+            'desc' => $data['desc'],
             'contact_name' => $data['name'],
             'contact_mobile' => $data['mobile'],
             'type' => $data['type'],

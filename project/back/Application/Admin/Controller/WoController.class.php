@@ -18,8 +18,8 @@ class WoController extends Controller{
 
     public function index()
     {
+        $deviceOrder=  new DeviceOrderModel();
         if($_POST){
-            $deviceOrder=  new DeviceOrderModel();
             $deviceOrder->insertData($_POST);
         }
 
@@ -28,7 +28,9 @@ class WoController extends Controller{
             $res = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('province,city,name,grade')->find();
             $this->assign('info',$res);//客户信息
         }
-        
+        $fillInfo = $deviceOrder->getCustomerFillData();
+
+        $this->assign('fillData',$fillInfo);
         $this->display();
     }
 

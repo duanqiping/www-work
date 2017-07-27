@@ -45,11 +45,18 @@ class DeviceOrderModel extends Model{
             'customer_name' => $res_customer['name'],
             'customer_mobile' => $res_customer['customer_mobile'],
             'customer_addr' => $res_customer['customer_addr'],
+
             'desc' => $data['desc'],
-            'contact_name' => $data['name'],
+            'ms_code' => $data['ms_code'],
+            'contact_name' => $data['contact_name'],
             'contact_mobile' => $data['mobile'],
             'type' => $data['type'],
         );
+//        print_r($add_data);
+//        $this->add($add_data);
+//        echo $this->_sql();
+//        exit();
+
         if($this->create($add_data)){
             $id = $this->add();
             return $id;

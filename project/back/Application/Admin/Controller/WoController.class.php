@@ -18,6 +18,8 @@ class WoController extends Controller{
 
     public function index()
     {
+//        print_r($_POST);
+//        exit();
         $deviceOrder=  new DeviceOrderModel();
         if($_POST){
             $deviceOrder->insertData($_POST);

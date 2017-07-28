@@ -49,15 +49,32 @@ class DeviceMsModel extends Model{
         return $res;
     }
 
-    //
+    //设备列表
     public function _list()
     {
-        $condition['customer_id'] = $_SESSION['user']['id'];
-        $res = $this->where($condition)->field('device_ms_id,ms_code,next_ms_code,last_expire_time,customer_id,add_time,status')->select();
+        $uid = $_SESSION['user']['id'];
+        $grade  = $_SESSION['user']['grade'];
+        $condition = array();
+
+        if($grade == 3 || $grade == 4){
+            $condition['customer_id'] = $uid;
+        }else if($grade == 2){
+            //筛选出 所有学校
+            $customer = new CustomerModel();
+            $customer_infos = $customer->where(array('agent_id'=>$uid))->field('customer_id,name')->select();
+            $customer_ids = array();
+            for($i=0,$len=count($customer_infos);$i<$len;$i++){
+                $customer_ids[] = $customer_infos[$i]['customer_id'];
+            }
+            $condition['customer_id'] = array('in',$customer_ids);
+        }
+
+        $res = $this->where($condition)->field('device_ms_id,ms_code,next_ms_code,last_expire_time,customer_id,customer_name,add_time,status')->select();
 
         foreach($res as $k=>$v){
             $res[$k]['online'] = round((NOW_TIME-$v['add_time'])/3600,2);
         }
+
         return $res;
     }
 

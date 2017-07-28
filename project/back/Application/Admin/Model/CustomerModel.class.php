@@ -30,13 +30,16 @@ class CustomerModel extends ConsumerHandleModel
     public  function homeInfo()
     {
         $data = array();
-        $data_user = $this->mainInfo();//用户量 累计最长距离
+
+        $grade = $_SESSION['user']['grade'];//身份 1系统 2代理商 3客户 4老师
+
+        $data_user = $this->mainInfo($grade);//用户量 累计最长距离
 
         $score = new ScoreModel();
-        $data_score = $score->UserInfo();//当周活跃量 当月活跃量
+        $data_score = $score->UserInfo($grade);//当周活跃量 当月活跃量
 
         $rank = new RanKMongoModel();
-        $best = $rank->bestScore();//单圈最佳成绩
+        $best = $rank->bestScore($grade);//单圈最佳成绩
 
         $data = array_merge($data,$data_user,$data_score);
         $data['best_single'] = $best;
@@ -78,20 +81,43 @@ class CustomerModel extends ConsumerHandleModel
     }
 
     //客户概述信息
-    public function mainInfo()
+    public function mainInfo($grade)
     {
-        //用户量
+        $data = array();
+
+        $uid = $_SESSION['user']['id'];
+        $condition = array();
+
         $user = new UserModel();
-        $condition['customer_id'] = $_SESSION['user']['id'];
+
+        //客户、老师
+        if($grade == 3 || $grade == 4){
+            $condition['customer_id'] = $uid;
+        }else if($grade == 2){
+            //筛选出 所有学校
+            $customer_infos = $this->where(array('agent_id'=>$uid))->field('customer_id')->select();
+            $customer_ids = array();
+            for($i=0,$len=count($customer_infos);$i<$len;$i++){
+                $customer_ids[] = $customer_infos[$i]['customer_id'];
+            }
+            $condition['customer_id'] = array('in',$customer_ids);
+        }else{
+            $condition['customer_id'] = $uid;
+        }
+
+        //用户量
         $count = $user->where($condition)->count();
 
         //所有用户总公里数
         $sum_length = $user->where($condition)->sum('length');
 
-
-        $data = array();
         $data['user_count'] = $count;
         $data['sum_length'] = round($sum_length/1000,2);
+
+//        print_r($data);
+//        exit();
+
+
 
         return $data;
     }

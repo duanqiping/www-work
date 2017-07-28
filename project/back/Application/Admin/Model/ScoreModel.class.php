@@ -127,23 +127,45 @@ class ScoreModel extends MongoModel{
     //月跑步公里数 （上个月总公里数）
     //用户时间段统计 （上个月 上午8-10  晚上6-11点）
     //持续运动量（一个月 有20天都在跑，平均每天运动量400米）
-    public function UserInfo()
+    public function UserInfo($grade)
     {
         $data = array();
+        $uid = $_SESSION['user']['id'];
+        $count_week = 0;//当周活跃用户量
+        $count_month = 0;//当月活跃用户量
+        $count_week_cycles = 0;//当周 总圈数
 
         $customer = new CustomerModel();
-        $res_customer = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('score_table')->find();
-        $score_table = $res_customer['score_table'];
 
-        $count_week  = $this->activeUserNum($score_table,ScoreModel::Week);//当周活跃用户量
+        if($grade==3 || $grade==4){
+            $res_customer = $customer->where(array('customer_id'=>$uid))->field('score_table')->find();
+            $score_table = $res_customer['score_table'];
 
-        $count_month  = $this->activeUserNum($score_table,ScoreModel::Month);//当月活跃用户量
+            $count_week  = $this->activeUserNum($score_table,ScoreModel::Week);//当周活跃用户量
 
-        $count_week_cycles = $this->sumCycles($score_table,ScoreModel::Week);//
+            $count_month  = $this->activeUserNum($score_table,ScoreModel::Month);//当月活跃用户量
+
+            $count_week_cycles = $this->sumCycles($score_table,ScoreModel::Week);//当周 总圈数
+        }else if($grade == 2){
+            $res_customers = $customer->where(array('agent_id'=>$uid))->field('score_table')->select();
+
+            for($i=0,$len=count($res_customers);$i<$len;$i++){
+                $score_table = $res_customers[$i]['score_table'];
+
+                $count_week  += $this->activeUserNum($score_table,ScoreModel::Week);//当周活跃用户量
+
+                $count_month  += $this->activeUserNum($score_table,ScoreModel::Month);//当月活跃用户量
+
+                $count_week_cycles += $this->sumCycles($score_table,ScoreModel::Week);//当周 总圈数
+            }
+        }
 
         $data['count_month'] = $count_month;
         $data['count_week'] = $count_week;
         $data['count_week_cycles'] = $count_week_cycles;
+
+//        print_r($data);
+//        exit();
 
         return $data;
     }

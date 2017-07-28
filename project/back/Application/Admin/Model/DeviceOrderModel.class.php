@@ -17,16 +17,44 @@ class DeviceOrderModel extends Model{
 
     /* 用户模型自动完成 */
     protected $_auto = array (
-        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
+//        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
         array ('status', 1, self::MODEL_INSERT),//只能是当前模型的方法
     );
+    //工单列表 $status=1 待处理 2处理中 3处理完成 4客户确认完成
+    public function _list($status)
+    {
+        if($status == 1){
+            $condition['status'] = 1;
+            $order = 'add_time desc';
+        }else if($status == 2){
+            $condition['status'] = 2;
+            $order = 'add_time desc';
+        }else if($status == 3){
+            $condition['status'] = $status;
+            $order = 'add_time desc';
+        }else{
+            $order = 'add_time desc';
+        }
+        $field = 'device_order_id id,order_sn,status,customer_name,customer_addr,desc,add_time,'.
+            'ms_code,contact_name,contact_mobile,type,'.
+            'agent_name,agent_mobile,accept_time,agent_desc';
+
+        $condition['customer_id'] = $_SESSION['user']['id'];
+        $res = $this->where($condition)
+            ->field($field)
+            ->order($order)
+            ->select();
+
+        return $res;
+    }
+
 
     //获取客户的填写信息
     public function getCustomerFillData()
     {
         $condition['customer_id'] = $_SESSION['user']['id'];
-        $condition['status'] = array('in',array(2,3,4));
-        $res = $this->where(array())->field('ms_code,desc,contact_name,contact_mobile,type')->find();
+        $condition['status'] = array('in',array(1,2,3));
+        $res = $this->where($condition)->field('ms_code,desc,contact_name,contact_mobile,type')->find();
         if(!$res) return array();
         else return $res;
     }
@@ -34,17 +62,27 @@ class DeviceOrderModel extends Model{
     //生成工单
     public function insertData($data)
     {
+        $uid = $_SESSION['user']['id'];
+
+        //查询是否有处理中的工单 有则直接返回
+        $map['customer_id'] = $uid;
+        $map['status'] = array('in',array(1,2,3));
+        $count = $this->where($map)->count();
+        if($count > 0) return false;
+
         //查询客户信息
         $customer=  new CustomerModel();
-        $condition_customer['customer_id'] = $_SESSION['user']['id'];
-        $res_customer = $customer->where($condition_customer)->field('customer_id,name,customer_addr,customer_mobile')->find();
+        $condition_customer['customer_id'] = $uid;
+        $res_customer = $customer->where($condition_customer)->field('customer_id,name,customer_addr')->find();
 
         $add_data = array(
             'order_sn' => get_order_sn($res_customer['customer_id']),
             'customer_id' => $res_customer['customer_id'],
             'customer_name' => $res_customer['name'],
-            'customer_mobile' => $res_customer['customer_mobile'],
             'customer_addr' => $res_customer['customer_addr'],
+
+            'status' => 1,
+            'add_time' => NOW_TIME,
 
             'desc' => $data['desc'],
             'ms_code' => $data['ms_code'],
@@ -57,8 +95,7 @@ class DeviceOrderModel extends Model{
 //        echo $this->_sql();
 //        exit();
 
-        if($this->create($add_data)){
-            $id = $this->add();
+        if($id = $this->add($add_data)){
             return $id;
         }else{
             return false;
@@ -120,35 +157,5 @@ class DeviceOrderModel extends Model{
             }
             return $res;
         }
-    }
-
-    //工单列表 $type=1 待处理 2处理中 3处理完成 4客户确认完成
-    public function _list($type)
-    {
-        if($type == 1){
-            $condition['status'] = 1;
-            $field = 'device_order_id id,order_sn,status,customer_name,customer_mobile,customer_addr,customer_desc,add_time';
-            $order = 'add_time desc';
-        }else if($type == 2){
-            $condition['status'] = 2;
-            $field = 'device_order_id id,order_sn,status,customer_name,customer_mobile,customer_addr,customer_desc,add_time,'.
-                'agent_name,agent_mobile,accept_time,agent_desc';
-            $order = 'accept_time desc';
-        }else if($type == 3){
-            $field = '';
-            $order = '';
-        }else{
-            $field = '';
-            $order = '';
-        }
-        $condition['status'] = $type;
-        $res = $this->where($condition)
-            ->field($field)
-            ->order($order)
-            ->select();
-//        echo $this->_sql();
-//        print_r($res);
-//        exit();
-        return $res;
     }
 } 

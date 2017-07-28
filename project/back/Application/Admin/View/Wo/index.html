@@ -323,10 +323,10 @@
 
     <div class="x_content">
 
-        <section class="content invoice">
+        <section class="content in$voice">
             <!-- title row -->
             <div class="row">
-                <div class="col-xs-12 invoice-header">
+                <div class="col-xs-12 in$voice-header">
                     <h1>
                         <i class="fa fa-globe"></i> 工单验收
                         <small class="pull-right">Date: 16/08/2016</small>
@@ -335,8 +335,8 @@
                 <!-- /.col -->
             </div>
             <!-- info row -->
-            <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
+            <div class="row in$voice-info">
+                <div class="col-sm-4 in$voice-col">
                     报修
                     <address>
                         <strong>深圳大学</strong>
@@ -346,7 +346,7 @@
                     </address>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
+                <div class="col-sm-4 in$voice-col">
                     运维
                     <address>
                         <strong>深圳市代理商</strong>
@@ -356,7 +356,7 @@
                     </address>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
+                <div class="col-sm-4 in$voice-col">
                     <b>工单结单备案</b>
                     <br>
                     <br>
@@ -577,8 +577,17 @@
             <th class="column-title">主机编码 </th>
             <th class="column-title">故障描述 </th>
             <th class="column-title">提交时间 </th>
-            <th class="column-title">结单时间 </th>
-            <th class="column-title">更换配件 </th>
+            <th class="column-title">联系人姓名 </th>
+            <th class="column-title">联系人手机号 </th>
+            <th class="column-title">问题类型 </th>
+
+
+            <th class="column-title">工单状态 </th>
+            <th class="column-title">受理人 </th>
+            <th class="column-title">受理人联系方式 </th>
+
+            <th class="column-title">受理时间 </th>
+            <!--<th class="column-title">更换配件 </th>-->
             <th class="column-title">总费用</th>
             <th class="column-title no-link last"><span class="nobr">详情</span>
             </th>
@@ -589,90 +598,42 @@
         </thead>
 
         <tbody>
-        <tr class="even pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000040</td>
-            <td class=" ">主板损坏 </td>
-            <td class=" ">20170801 <i class="success fa fa-long-arrow-up"></i></td>
-            <td class=" ">20170805</td>
-            <td class=" ">有</td>
-            <td class="a-right a-right ">￥540.00</td>
-            <td class=" last"><a href="#">详情</a>
-            </td>
-        </tr>
+        <notempty name="_list">
+            <volist name="_list" id="vo">
+                <tr class="even pointer">
+                    <td class="a-center ">
+                        <input type="checkbox" class="flat" name="table_records">
+                    </td>
+                    <td class=" ">{$vo.ms_code}</td>
+                    <td class=" ">{$vo.desc} </td>
+                    <td class=" ">{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                    <td class=" ">{$vo.contact_name}</td>
+                    <td class=" ">{$vo.contact_mobile}</td>
+                    <!--<td class=" ">{$vo.type}</td>-->
+                    <td class=" "><if condition="$vo['type'] eq 1 ">咨询<else /> 报修</if></td>
+                    <td class=" ">
+                        <if condition="$vo['status'] eq 0 "> 已取消
+                            <elseif condition="$vo['status'] eq 1"/>待处理
+                            <elseif condition="$vo['status'] eq 2"/>处理中
+                            <elseif condition="$vo['status'] eq 3"/>已处理
+                            <else /> 已完成
+                        </if>
+                    </td>
+                    <td class=" ">{$vo.agent_name}</td>
+                    <td class=" ">{$vo.agent_mobile}</td>
+                    <td class=" ">
+                        <if condition="$vo['accept_time'] gt 0"> {$vo.accept_time|date="Y-m-d H:i:s",###}
+                            <else />
+                        </if>
+                    </td>
 
-
-
-
-        <tr class="odd pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000039</td>
-            <td class=" ">May 26, 2014 11:30:12 PM</td>
-            <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-            </td>
-            <td class=" ">John Blank L</td>
-            <td class=" ">Paid</td>
-            <td class="a-right a-right ">$741.20</td>
-            <td class=" last"><a href="#">View</a>
-            </td>
-        </tr>
-        <tr class="even pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000038</td>
-            <td class=" ">May 26, 2014 10:55:33 PM</td>
-            <td class=" ">121000203</td>
-            <td class=" ">Mike Smith</td>
-            <td class=" ">Paid</td>
-            <td class="a-right a-right ">$432.26</td>
-            <td class=" last"><a href="#">View</a>
-            </td>
-        </tr>
-        <tr class="odd pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000037</td>
-            <td class=" ">May 26, 2014 10:52:44 PM</td>
-            <td class=" ">121000204</td>
-            <td class=" ">Mike Smith</td>
-            <td class=" ">Paid</td>
-            <td class="a-right a-right ">$333.21</td>
-            <td class=" last"><a href="#">View</a>
-            </td>
-        </tr>
-
-        <tr class="even pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000040</td>
-            <td class=" ">May 27, 2014 11:47:56 PM </td>
-            <td class=" ">121000210</td>
-            <td class=" ">John Blank L</td>
-            <td class=" ">Paid</td>
-            <td class="a-right a-right ">$7.45</td>
-            <td class=" last"><a href="#">View</a>
-            </td>
-        </tr>
-        <tr class="odd pointer">
-            <td class="a-center ">
-                <input type="checkbox" class="flat" name="table_records">
-            </td>
-            <td class=" ">121000039</td>
-            <td class=" ">May 28, 2014 11:30:12 PM</td>
-            <td class=" ">121000208</td>
-            <td class=" ">John Blank L</td>
-            <td class=" ">Paid</td>
-            <td class="a-right a-right ">$741.20</td>
-            <td class=" last"><a href="#">View</a>
-            </td>
-        </tr>
+                    <td class=" ">0</td>
+                    <td class=" ">view</td>
+                </tr>
+            </volist>
+            <else/>
+            <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+        </notempty>
         </tbody>
     </table>
 </div>

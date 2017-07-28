@@ -32,19 +32,13 @@ abstract class ConsumerHandleModel extends Model
             case self::TEACHER:
                 return new TeacherModel();//老师
             default:
-                return new TeacherModel();//老师 权限最低
+                return false;
         }
     }
 
     //用户登录
-    public function login($account,$passwd,$flag)
+    public function login($account,$passwd)
     {
-        if(!in_array($flag,array(1,2,3,4)))
-        {
-            $this->error = 'flag有误';
-            return false;
-        }
-
         $condition['account'] = $account;
         $res = $this->table($this->tableName)->where($condition)->field($this->custom_fields)->find();
 

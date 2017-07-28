@@ -212,10 +212,25 @@ class RanKMongoModel extends MongoModel{
 //    }
 
     //获取单圈最佳成绩
-    public function bestScore()
+    public function bestScore($grade)
     {
-        $tableName = 'rank_single';
-        $min_res  = $this->table($tableName)->field('time')->order('time')->limit(1)->select();
+        $condition = array();
+        $uid = $_SESSION['user']['id'];
+
+        if($grade == 3 || $grade == 4){
+            $condition['customer_id'] = $uid;
+
+        }else if($grade == 2){
+            $customer = new CustomerModel();
+            $customer_infos = $customer->where(array('agent_id'=>$uid))->field('customer_id')->select();
+            $customer_ids = array();
+            for($i=0,$len=count($customer_infos);$i<$len;$i++){
+                $customer_ids[] = $customer_infos[$i]['customer_id'];
+            }
+            $condition['customer_id'] = array('in',$customer_ids);
+        }
+
+        $min_res  = $this->table('rank_single')->where($condition)->field('time')->order('time')->limit(1)->select();
         $min_res = array_values($min_res);
         $minScore = $min_res[0]['time'];
 

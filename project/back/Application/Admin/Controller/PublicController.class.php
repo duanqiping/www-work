@@ -20,7 +20,7 @@ class PublicController extends \Think\Controller{
     {
         return  ConsumerHandleModel::getInstance($flag);
     }
-    //首页
+    //首页 概览
     public function index()
     {
         $customer = new CustomerModel();
@@ -34,28 +34,22 @@ class PublicController extends \Think\Controller{
     //登录
     public function login($flag='',$account='',$passwd='')
     {
-        $flag = 3;
-
         if(IS_POST) {
 
             $consumer = $this->getInstance($flag);
+            if(!$consumer) $this->error('flag参数有误');
 
-            if(! $res = $consumer->login($account,$passwd,$flag))
+            if(!$consumer->login($account,$passwd))
             {
-                $this->error($consumer->getError());
+//                $this->error($consumer->getError());
+                $this->display('public/login');
             }
             else
             {
-                if($flag ==1){
-                    $this->success('登录成功！', U('Admin/index'));
-                }else if($flag ==2){
-                    $this->display('agent/index');
-                }else if($flag ==3){
-//                    $this->success('登录成功！', U('Customer/index'));
-                    $this->success('登录成功！', U('index'));
-                }else{
-                    $this->display('teacher/index');
-                }
+//                exit('success');
+//
+                $this->redirect('index');
+//                $this->success('登录成功！', U('index'));
             }
         }else{
             $this->display('public/login');

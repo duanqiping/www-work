@@ -87,4 +87,16 @@ class MasterController extends Controller{
         sendSuccess($res);
 
     }
+
+    //获取当前时间  精确到毫秒
+    public function getTime()
+    {
+        list($s1, $s2) = explode(' ', microtime());
+        $res =  (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000); //411
+
+//        list($usec, $sec) = explode(" ", microtime());
+//        $res = ((float)$usec + (float)$sec);//这个会带小数点
+
+        sendSuccess($res);
+    }
 } 

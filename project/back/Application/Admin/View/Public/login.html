@@ -34,6 +34,13 @@
             <section class="login_content">
                 <form method="post" action="{:U('login')}">
                     <h1>管理系统</h1>
+                    <div style="margin-bottom: 10px">
+                        <select name="flag" data-value="选择身份" class="form-control">
+                            <option value="3">客户</option>
+                            <option value="2">代理商</option>
+                            <option value="1">系统管理员</option>
+                        </select>
+                    </div>
 
                     <div>
                         <!--<input type="text" class="form-control" placeholder="Username" name="account" required="" />-->
@@ -60,7 +67,7 @@
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> 悦动力</h1>
+                            <h1><i class="fa fa-paw"></i> 50智慧园</h1>
                             <p>©2017 版权归上海***公司所有。</p>
                         </div>
                     </div>

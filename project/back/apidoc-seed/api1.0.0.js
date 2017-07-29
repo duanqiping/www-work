@@ -1,5 +1,5 @@
  /**
- * @api {get} admin/register 设备注册
+ * @api {get} master/register 设备注册
  * @apiVersion 1.0.0
 
  * @apiGroup master
@@ -12,6 +12,8 @@
  *   "last_ms_code": "0000002",//上一个设备编码
  *   "last_expire_time": "9",//上个设备到该设备的有效时长
  *   "stay": "10"//该设备最多停留时间
+ *   "customer_id": "31",//客户id
+ *   "isPoint": "1"// 0经过点 1起点
 *}
  * @apiErrorExample {json} 失败返回结果：
  *{
@@ -94,6 +96,7 @@
   *          "label": "5"
   *      }
   *  ],
+  *  "customer_id": "31",
   *  "endMachine": "0000113",
   *  "circle": "4",
   *  "type": 2

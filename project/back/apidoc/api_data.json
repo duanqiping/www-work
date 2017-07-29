@@ -57,47 +57,6 @@
   },
   {
     "type": "get",
-    "url": "admin/register",
-    "title": "设备注册",
-    "version": "1.0.0",
-    "group": "master",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "account",
-            "description": "<p>机器编码</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回结果:",
-          "content": "{\n  \"next_ms_code\": \"0000000\",//下一个设备编码\n  \"last_ms_code\": \"0000002\",//上一个设备编码\n  \"last_expire_time\": \"9\",//上个设备到该设备的有效时长\n  \"stay\": \"10\"//该设备最多停留时间\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回结果：",
-          "content": "{\n  \"msg\": \"注册失败\",\n  \"code\": 0\n}\n{\n \"msg\": \"该编码已经被注册\",\n \"code\": 1\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "apidoc-seed/api1.0.0.js",
-    "groupTitle": "master",
-    "name": "GetAdminRegister"
-  },
-  {
-    "type": "get",
     "url": "master/getContest",
     "title": "获取赛事名单",
     "version": "1.0.0",
@@ -126,7 +85,7 @@
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "{\n \"list\": [\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     },\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     }\n ],\n \"endMachine\": \"0000113\",\n \"circle\": \"4\",\n \"type\": 2\n}\n}",
+          "content": "{\n \"list\": [\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     },\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n     }\n ],\n \"customer_id\": \"31\",\n \"endMachine\": \"0000113\",\n \"circle\": \"4\",\n \"type\": 2\n}\n}",
           "type": "json"
         }
       ]
@@ -175,6 +134,47 @@
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "master",
     "name": "GetMasterGetuserinfo"
+  },
+  {
+    "type": "get",
+    "url": "master/register",
+    "title": "设备注册",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "account",
+            "description": "<p>机器编码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\n  \"next_ms_code\": \"0000000\",//下一个设备编码\n  \"last_ms_code\": \"0000002\",//上一个设备编码\n  \"last_expire_time\": \"9\",//上个设备到该设备的有效时长\n  \"stay\": \"10\"//该设备最多停留时间\n  \"customer_id\": \"31\",//客户id\n  \"isPoint\": \"1\"// 0经过点 1起点\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n  \"msg\": \"注册失败\",\n  \"code\": 0\n}\n{\n \"msg\": \"该编码已经被注册\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "GetMasterRegister"
   },
   {
     "type": "post",

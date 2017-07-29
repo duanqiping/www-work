@@ -57,10 +57,14 @@
         <!--省份-->
         <li role="presentation" class="dropdown">
             <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                <if condition = "$_SESSION['user']['grade'] gt 1">{$info['province']}
+                <if condition = "$_SESSION['user']['grade'] lt 2">
+                    <!--{$info['province']}-->
+                    <!--如果grade小于2，为系统后台操作，省份要动态出现-->
+                    <input type="text" id="provinceId" name="province" value="{$info['province']}">
                     <else />
-                    {$info['province']}
-                    <span class="caret"></span>
+                    <!--非系统后台操作，省份唯一-->
+                    <input type="text" id="provinceId2" style="width:50px;border:none" name="province" value="{$info['province']}">
+                    <!--<span class="caret"></span>-->
                 </if>
 
             </a>
@@ -72,25 +76,39 @@
 
                 <if condition = "$_SESSION['user']['grade'] gt 2">{$info['city']}
                     <else />
-                    <select name="city" id="cityId"></select>
-                    <span class="caret"></span>
+                    <select name="city" id="cityId" style="border:none;"></select>
                 </if>
             </a>
 
         </li>
-        <!--客户-->
+        <!--类型-->
         <li role="presentation" class="dropdown">
 
             <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                学校
-                <span class="caret"></span>
+                <if condition = "$_SESSION['user']['grade'] gt 2">{$info['city']}
+                    <else />
+                    <select name="type" id="typeId" style="border:none;">
+                        <option>
+                            <if condition="$type">{$type}
+                                <else />类型
+                            </if>
+                        </option>
+                        <option >学校</option>
+                        <option >运动馆</option>
+                    </select>
+                </if>
+
             </a>
         </li>
         <!--客户名-->
         <li role="presentation" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                {$info['name']}
-                <span class="caret"></span>
+
+                <if condition = "$_SESSION['user']['grade'] gt 2">{$info['name']}<span class="caret"></span>
+                    <else />
+                    <select name="type" id="customerId" style="border:none;">
+                    </select>
+                </if>
             </a>
 
         </li>
@@ -147,6 +165,10 @@
     </ul>
 
     <!--</div>-->
+        <div style="margin-bottom: 10px">
+            <span style="color: red" id="condition_string">{$condition_string}</span>
+        </div>
+
 
     <div class="table-responsive">
         <table class="table table-striped jambo_table bulk_action">
@@ -163,11 +185,15 @@
                 <th class="column-title">上一主机超时 </th>
                 <th class="column-title">下一主机编码 </th>
                 <th class="column-title">下一主机超时</th>
+
+                <th class="column-title">是否注册</th>
+                <th class="column-title">是否起点</th>
+
                 <th class="column-title no-link last"><span class="nobr">状态</span>
                 </th>
-                <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">批量操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                </th>
+                <!--<th class="bulk-actions" colspan="7">-->
+                    <!--<a class="antoo" style="color:#fff; font-weight:500;">批量操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>-->
+                <!--</th>-->
             </tr>
             </thead>
 
@@ -186,6 +212,9 @@
                         <td class=" ">{$vo.last_expire_time} s</td>
                         <td class=" ">{$vo.next_ms_code}</td>
                         <td class=" ">{$vo.last_expire_time} s</td>
+
+                        <td class=" "><if condition="$vo['is_register'] eq 1 ">是<else /> 否</if></td>
+                        <td class=" "><if condition="$vo['isPoint'] eq 1 ">是<else /> 否</if></td>
                         <!--<td class=" ">{$vo.status}</td>-->
                         <td class=" "><if condition="$vo['status'] eq 1 ">正常<else /> 故障</if></td>
                         <!--<td class="a-right a-right ">$7.45</td>-->
@@ -194,7 +223,12 @@
                     </tr>
                 </volist>
                 <else/>
-                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容!
+                    <if condition = "$_SESSION['user']['grade'] lt 3">
+                        <button type="button" id="addDevice" class="btn btn-default">添加设备</button>
+                        <else />
+                    </if>
+                </td>
             </notempty>
             </tbody>
         </table>
@@ -223,13 +257,22 @@
     </div>
 
 
+
     <!-- /page content -->
 </block>
 
 <block name="script">
     <script type="text/javascript">
+        var city = "{$city}";
+        var customer_name = "{$name}";
+        var customer_id = "{$customer_id}";
+
         var ajaxurlcities = "{:U('getCities')}"; // merchant.js 中使用
         var ajaxurlcustomer = "{:U('getCustomer')}"; // merchant.js 中使用
+        var indexUrl = "{:U()}";
+        var addDeviceUrl = "{:U('addDevice')}";
+
     </script>
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
     <script src="__JS__/device.js"></script>
 </block>

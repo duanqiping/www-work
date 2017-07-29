@@ -29,29 +29,72 @@ class DeviceController extends Controller{
             $this->assign('info',$res);//客户信息
         }
 
+
         $devicems = new DeviceMsModel();
-        $data = $devicems->_list();//设备列表
+
+        $condition = $devicems->condition($_GET);
+
+        $condition_string = '';
+        if($_GET){
+            foreach($_GET as $v){
+                $condition_string .=' '.$v;
+            }
+        }
+
+        $data = $devicems->_list($condition);//设备列表
 
         $this->assign('_list',$data);
+        $this->assign('condition_string',$condition_string);
+        $this->assign('city',$_GET['city']);//城市名
+        $this->assign('name',$_GET['name']);//客户名
+        $this->assign('type',$_GET['type']);//类别
+
+//        var_dump($devicems->getCustomerId($_GET['name']));
+//        exit();
+
+        $this->assign('customer_id',$devicems->getCustomerId($_GET['name']));
 
         $this->display();
     }
 
+    //ajax 添加设备
+    public function addDevice()
+    {
+        $customer_id = $_GET['customer_id'];
+        $DeviceNum = $_GET['DeviceNum'];
+        file_put_contents('log.txt',$customer_id.'44'.$DeviceNum."\n",FILE_APPEND );
+
+        echo json_encode(array());
+    }
+
     //ajax 获取城市
     public function getCities(){
-        $s= new UserModel();
-        $condition['customer_id'] = $_SESSION['user']['id'];
-//        file_put_contents('log.txt',"111\n",FILE_APPEND );
-        $list = $s->field('dept,user_id')->where($condition)->group('dept')->select();
+
+        $province = $_GET['province'];
+
+        $s= new AgentModel();
+//        $condition['parent_id'] = $_SESSION['user']['id'];
+        $condition['province'] = $province;
+
+        $list = $s->field('agent_id,city')->where($condition)->select();
+
+//        file_put_contents('log.txt',$province.$s->_sql()."\n",FILE_APPEND );
         echo json_encode($list);
     }
 
     //ajax 获取客户
     public function getCustomer(){
-        $s= new UserModel();
-        $condition['customer_id'] = $_SESSION['user']['id'];
-//        file_put_contents('log.txt',"111\n",FILE_APPEND );
-        $list = $s->field('dept,user_id')->where($condition)->group('dept')->select();
+        $type = $_GET['type'];
+
+        $s= new CustomerModel();
+        $condition['agent_id'] = $_SESSION['user']['id'];
+
+        if($type == '学校') $condition['type'] = 1;
+        else $condition['type'] = 2;
+//        file_put_contents('log.txt',$type."--111\n",FILE_APPEND );
+
+        $list = $s->field('customer_id,name')->where($condition)->select();
+//        file_put_contents('log.txt',$s->_sql()."\n",FILE_APPEND );
         echo json_encode($list);
     }
 } 

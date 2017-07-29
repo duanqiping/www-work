@@ -32,6 +32,7 @@ class ContestOrder extends Model{
             return array();
         }
         $data['list'] = $res;
+        $data['customer_id'] = $customer_id;
         $data['title'] = '上海交通大学夏季运动会';
         $data['endMachine'] = '0000113';
         $data['circle'] = '4';

@@ -1,3 +1,23 @@
-
-334477
-334400
+33--2--1
+SELECT `name`,`type`,`length` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type`,`length` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type`,`length` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+33--3--1
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+33--2--1
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 33 LIMIT 1  
+35--3--1
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 35 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 35 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 35 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 35 LIMIT 1  
+37--3--1
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 37 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 37 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 37 LIMIT 1  
+SELECT `name`,`type` FROM `customer` WHERE `customer_id` = 37 LIMIT 1  

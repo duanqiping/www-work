@@ -70,8 +70,22 @@ $(document).ready(function(){
         //alert(addDeviceUrl);
         //alert(customer_id);
 
-        $.getJSON(addDeviceUrl, {customer_id:customer_id,DeviceNum:DeviceNum}, function(data) {
+        $.getJSON(addDeviceUrl, {customer_id:customer_id,agent_id:agent_id,DeviceNum:DeviceNum}, function(data) {
+
             $.each(data, function(i, item) {
+
+                if(item){
+                    var city = $('#cityId').val();//为获取agent_id (id是不变的)
+                    var type = $('#typeId').val();//类型
+                    var name = $('#customerId').val();//客户名 通过此可以获取到客户id(id是不变的)
+
+                    var url = indexUrl.replace(/.html/, "");
+
+                    location.href = url+"/city/"+city+"/type/"+type+"/name/"+name;//location.href实现客户端页面的跳转
+                }else{
+                    alert('添加失败');
+                }
+
                 //$("<option></option>").val(item['name']).text(item['name']).appendTo($("#customerId"));
             });
         });

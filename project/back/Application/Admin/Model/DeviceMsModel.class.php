@@ -78,9 +78,51 @@ class DeviceMsModel extends Model{
 
 
     //添加设备
-    public function addDeviceMs($data)
+    public function addDeviceMs($customer_id,$agent_id,$DeviceNum)
     {
+        $customer = new CustomerModel();
+        $customer_res = $customer->where(array('customer_id'=>$customer_id))->field('name,type')->find();
 
+        file_put_contents('log.txt',$customer->_sql()."\n",FILE_APPEND );
+
+        $this->startTrans();
+        for ($i=0;$i<$DeviceNum;$i++){
+
+            $flag = true;
+            while($flag){
+                $ms_code = random(8,0);
+                $count = $this->where(array('ms_code'=>$ms_code))->count();
+
+                file_put_contents('log.txt',$customer->_sql()."\n",FILE_APPEND );
+
+                //如果code码已经存在，则重新循环while
+                if($count>0){
+                    $flag = true;
+                }else{
+                    //如果code码已经不存在就入库
+                    $data = array();
+                    $data['ms_code'] = $ms_code;
+                    $data['agent_id'] = $agent_id;
+                    $data['type'] = $customer_res['type'];
+                    $data['customer_id'] = $customer_id;
+                    $data['customer_name'] = $customer_res['name'];
+                    $data['add_time'] = NOW_TIME;
+
+                    if(!$this->add($data)){
+                        file_put_contents('log.txt',$this->_sql()."\n",FILE_APPEND );
+
+                        $this->rollback();
+                        return false;
+                    }else{
+                        $flag = false;//继续for循环
+                    }
+                }
+            }
+
+        }
+        $this->commit();
+
+        return true;
     }
 
     //设备注册

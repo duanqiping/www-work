@@ -18,21 +18,29 @@ class DeviceController extends Controller{
     //设备管理主页
     public function index()
     {
+        $select_condition = array();//筛选条件
+
+        $grade = $_SESSION['user']['grade'];
         $uid = $_SESSION['user']['id'];
-        if($_SESSION['user']['grade'] == 3 || $_SESSION['user']['grade']==4){
+
+        if($grade == 3 || $grade==4){
             $customer = new CustomerModel();
             $res = $customer->where(array('customer_id'=>$uid))->field('province,city,name,grade')->find();
             $this->assign('info',$res);//客户信息
-        }else if($_SESSION['user']['grade'] == 2){
+        }else if($grade == 2){
             $agent = new AgentModel();
             $res = $agent->where(array('agent_id'=>$uid))->field('parent_id,province,city')->find();
             $this->assign('info',$res);//客户信息
         }
 
-
         $devicems = new DeviceMsModel();
 
         $condition = $devicems->condition($_GET);
+        if($_GET){
+            $select_condition['city'] = $_GET['city'];
+            $select_condition['type'] = $_GET['type'];
+            $select_condition['name'] = $_GET['name'];
+        }
 
         $condition_string = '';
         if($_GET){
@@ -53,6 +61,13 @@ class DeviceController extends Controller{
 //        exit();
 
         $this->assign('customer_id',$devicems->getCustomerId($_GET['name']));
+        $this->assign('grade',$grade);
+        if($grade == 2){
+            $this->assign('agent_id',$_SESSION['user']['id']);
+        }else if($grade == 1){
+            $this->assign('agent_id',0);
+        }
+
 
         $this->display();
     }
@@ -61,10 +76,15 @@ class DeviceController extends Controller{
     public function addDevice()
     {
         $customer_id = $_GET['customer_id'];
+        $agent_id = $_GET['agent_id'];
         $DeviceNum = $_GET['DeviceNum'];
-        file_put_contents('log.txt',$customer_id.'44'.$DeviceNum."\n",FILE_APPEND );
 
-        echo json_encode(array());
+        file_put_contents('log.txt',$customer_id.'--'.$DeviceNum.'--'.$agent_id."\n",FILE_APPEND );
+
+        $devicems = new DeviceMsModel();
+        $result = $devicems->addDeviceMs($customer_id,$agent_id,$DeviceNum);
+
+        echo json_encode(array('flag'=>$result));
     }
 
     //ajax 获取城市

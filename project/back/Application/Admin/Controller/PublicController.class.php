@@ -63,8 +63,8 @@ class PublicController extends \Think\Controller{
             session ( 'user', null );
             session('[destroy]');
 
-//            $this->redirect('login');
-            $this->success('退出成功！', U('login'));
+            $this->redirect('login');
+//            $this->success('退出成功！', U('login'));
         } else {
             $this->redirect('login');
         }

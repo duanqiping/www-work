@@ -88,108 +88,113 @@
         </a>
     </li>
 </ul>
-<div id="step-1">
-    <form class="form-horizontal form-label-left" action="{:U()}" method="post">
 
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">选择问题设备 <span class="required">*</span>
-            </label>
-            <if condition="$fillData">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" readonly="true" value="{$fillData.ms_code}" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-                <else />
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="first-name" name="ms_code" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </if>
+<if condition="$grade gt 2">
+    <div id="step-1">
+        <form class="form-horizontal form-label-left" action="{:U()}" method="post">
 
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">联系人姓名 <span class="required">*</span>
-            </label>
-            <if condition="$fillData">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" readonly="true" value="{$fillData.contact_name}" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-                <else />
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="last-name" name="contact_name" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </if>
-        </div>
-        <div class="form-group">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">联系人手机</label>
-            <if condition="$fillData">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" readonly="true" value="{$fillData.contact_mobile}" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-                <else />
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="mobile">
-                </div>
-            </if>
-
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">类型</label>
-            <if condition="$fillData">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="type" value="1"> &nbsp; 咨询 &nbsp;
-                        </label>
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="type" value="0"> 报修
-                        </label>
-                    </div>
-                </div>
-                <else />
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div id="gender" class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="type" value="1"> &nbsp; 咨询 &nbsp;
-                        </label>
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="type" value="0"> 报修
-                        </label>
-                    </div>
-                </div>
-            </if>
-
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">详细描述 <span class="required">*</span>
-            </label>
-            <if condition="$fillData">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" readonly="true" value="{$fillData.desc}" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-                <else />
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" name="desc" required="required" type="text">
-                </div>
-            </if>
-
-        </div>
-
-        <div class="form-group">
-            <if condition="$fillData">
-
-                <else />
-                <!--居中-->
-                <label class="control-label col-md-3 col-sm-3 col-xs-12"> <span class="required"></span>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">选择问题设备 <span class="required">*</span>
                 </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input  class="date-picker form-control col-md-7 col-xs-12" style="color: #0000FF" required="required" value="提交" type="submit">
-                </div>
-            </if>
+                <if condition="$fillData">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" readonly="true" value="{$fillData.ms_code}" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <else />
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" name="ms_code" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </if>
 
-        </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">联系人姓名 <span class="required">*</span>
+                </label>
+                <if condition="$fillData">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" readonly="true" value="{$fillData.contact_name}" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <else />
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="last-name" name="contact_name" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </if>
+            </div>
+            <div class="form-group">
+                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">联系人手机</label>
+                <if condition="$fillData">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" readonly="true" value="{$fillData.contact_mobile}" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <else />
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="mobile">
+                    </div>
+                </if>
 
-    </form>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">类型</label>
+                <if condition="$fillData">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                <input type="radio" name="type" value="1"> &nbsp; 咨询 &nbsp;
+                            </label>
+                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                <input type="radio" name="type" value="0"> 报修
+                            </label>
+                        </div>
+                    </div>
+                    <else />
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id="gender" class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                <input type="radio" name="type" value="1"> &nbsp; 咨询 &nbsp;
+                            </label>
+                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                <input type="radio" name="type" value="0"> 报修
+                            </label>
+                        </div>
+                    </div>
+                </if>
 
-</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">详细描述 <span class="required">*</span>
+                </label>
+                <if condition="$fillData">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" readonly="true" value="{$fillData.desc}" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <else />
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" name="desc" required="required" type="text">
+                    </div>
+                </if>
+
+            </div>
+
+            <div class="form-group">
+                <if condition="$fillData">
+
+                    <else />
+                    <!--居中-->
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input  class="date-picker form-control col-md-7 col-xs-12" style="color: #0000FF" required="required" value="提交" type="submit">
+                    </div>
+                </if>
+
+            </div>
+
+        </form>
+
+    </div>
+    <else />
+</if>
+
 <div id="step-2">
     <h2 class="StepTitle">本次工单由深圳市代理商提供技术支持</h2>
     <p>

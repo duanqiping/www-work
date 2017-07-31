@@ -52,23 +52,6 @@ abstract class ConsumerHandleModel extends Model
         }
     }
 
-    //检查用户账号
-//    public function checkAccount($account,$from)
-//    {
-//        if($from == 'home')
-//        {
-//            $condition['account'] =  $account;
-//            $count = $this->table($this->tableName)->where($condition)->count();
-//
-//            if($count>0) return true;//已经注册
-//            else return false;//未注册
-//        }
-//        else{
-//            return 'admin';
-//        }
-//    }
-
-
     //保存用户信息
     protected  function autoLogin($user) {
         /* 更新登录信息 */

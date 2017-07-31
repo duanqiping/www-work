@@ -117,4 +117,12 @@ class DeviceController extends Controller{
 //        file_put_contents('log.txt',$s->_sql()."\n",FILE_APPEND );
         echo json_encode($list);
     }
+
+    //查询设备 所有设备 正常设备 损坏设备
+    public function getDevice($flag,$agent_id)
+    {
+        $deviceMs = new DeviceMsModel();
+        $res = $deviceMs->getDeviceInfo($flag,$agent_id);
+        print_r($res);
+    }
 } 

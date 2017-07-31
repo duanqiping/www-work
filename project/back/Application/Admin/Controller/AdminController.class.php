@@ -13,6 +13,7 @@ use Admin\Model\CustomerModel;
 
 class AdminController extends BaseController {
 
+    //查询出没有添加设备的客户
     public function index()
     {
         $customer = new CustomerModel();
@@ -22,22 +23,6 @@ class AdminController extends BaseController {
 
         $this->assign('_list',$res);//没有添加设备的客户
         $this->display();
-    }
-
-    public function addDevice()
-    {
-        $data = $_POST;
-        print_r($data);
-        exit();
-
-
-//        $this->display();
-    }
-
-    //往后台中添加设备
-    public function addDeviceMs()
-    {
-
     }
 
     //添加 管理员、代理商、客户

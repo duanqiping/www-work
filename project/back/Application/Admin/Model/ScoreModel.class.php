@@ -198,21 +198,8 @@ class ScoreModel extends MongoModel{
             $sort[$i] = $s[$i]['add_time'];
         }
         array_multisort($sort,SORT_DESC,$s);
-        //        print_r($result);
-//        echo "<pre>";
-//        print_r($s);
-//        echo "</pre>";
-//        exit();
 
         return $s;
-
-//        echo "<pre>";
-//        print_r($result);
-//        print_r($this->data_array);
-//        print_r($s);
-//        echo "</pre>";
-//        exit();
-//        return $res;
     }
 }
 

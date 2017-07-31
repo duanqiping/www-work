@@ -19,9 +19,6 @@ class ContestController extends Controller
     //创建考试\赛事
     public function index()
     {
-//        print_r($_GET);
-//        exit();
-
         $contest = new ContestModel();
         $type = $_GET['type'];
         $res = $contest->_list($type);

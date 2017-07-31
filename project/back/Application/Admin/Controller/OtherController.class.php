@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 
 
+use Admin\Model\UserModel;
 use Think\Controller;
 
 class OtherController extends BaseController{
@@ -33,5 +34,14 @@ class OtherController extends BaseController{
         }else{
             echo "success";
         }
+    }
+
+    public function test()
+    {
+        $user = new UserModel();
+        $condition = true;
+
+        $count = $user->where($condition)->count();
+        echo $user->_sql();
     }
 } 

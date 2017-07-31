@@ -85,20 +85,24 @@
   *  "list": [
   *      {
   *          "classRoom": "航天一班",
-  *          "name": "上官云",
+  *          "name": "王猛",
   *          "studentId": "764676",
   *          "label": "5"
+  *          "endMachine": "0000113",
+  *          "sex": "1",
+  *	         "circle": "4"
   *      },
   *      {
   *          "classRoom": "航天一班",
   *          "name": "上官云",
   *          "studentId": "764676",
-  *          "label": "5"
+  *          "label": "5",
+  *          "endMachine": "0000114",
+  *          "sex": "2",
+  *	         "circle": "3"
   *      }
   *  ],
   *  "customer_id": "31",
-  *  "endMachine": "0000113",
-  *  "circle": "4",
   *  "type": 2
   *}
   *}

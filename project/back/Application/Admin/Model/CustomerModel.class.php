@@ -90,6 +90,9 @@ class CustomerModel extends ConsumerHandleModel
 
         $user = new UserModel();
 
+        $sql_device = '';//手环sql
+        $sql_device_ms = '';//主机数量sql
+
         //客户、老师
         if($grade == 3 || $grade == 4){
             $condition['customer_id'] = $uid;
@@ -101,8 +104,14 @@ class CustomerModel extends ConsumerHandleModel
                 $customer_ids[] = $customer_infos[$i]['customer_id'];
             }
             $condition['customer_id'] = array('in',$customer_ids);
-        }else{
-            $condition['customer_id'] = $uid;
+
+            $sql_device = "select count(*) as count from device WHERE agent_id='$uid'";
+            $sql_device_ms = "select count(*) as count from device_ms WHERE agent_id='$uid'";
+        }else if($grade == 1){
+            $condition['customer_id'] = true;
+
+            $sql_device = "select count(*) as count from device";
+            $sql_device_ms = "select count(*) as count from device_ms";
         }
 
         //用户量
@@ -113,7 +122,18 @@ class CustomerModel extends ConsumerHandleModel
 
         $data['user_count'] = $count;
         $data['sum_length'] = round($sum_length/1000,2);
-        
+
+        if($sql_device){
+            $res_device = $this->query($sql_device);
+            $res_device_ms = $this->query($sql_device_ms);
+            $count_device = $res_device[0]['count'];//手环数量
+            $count_device_ms = $res_device_ms[0]['count'];//主机数量
+
+            $data['count_device'] = $count_device;
+            $data['count_device_ms'] = $count_device_ms;
+        }
+
+
         return $data;
     }
 

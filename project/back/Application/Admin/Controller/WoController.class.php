@@ -24,19 +24,13 @@ class WoController extends Controller{
             $deviceOrder->insertData($_POST);
         }
 
-        if($_SESSION['user']['grade'] == 3 || $_SESSION['user']['grade']==4){
-            $customer = new CustomerModel();
-            $res = $customer->where(array('customer_id'=>$_SESSION['user']['id']))->field('province,city,name,grade')->find();
-            $this->assign('info',$res);//客户信息
-        }
-        $fillInfo = $deviceOrder->getCustomerFillData();
+        $selectCondition = $deviceOrder->selectCondition();//筛选条件
+        $fillInfo = $deviceOrder->getCustomerFillData();//获取客户的填写数据（适用于客户查看）
         $list = $deviceOrder->_list($status = 0);
-
-//        print_r($fillInfo);
-//        exit();
 
         $this->assign('fillData',$fillInfo);
         $this->assign('_list',$list);
+        $this->assign('selectCondition',$selectCondition);
 
         $this->display();
     }

@@ -20,43 +20,96 @@ class DeviceOrderModel extends Model{
 //        array ('add_time', NOW_TIME, self::MODEL_INSERT),//只能是当前模型的方法
         array ('status', 1, self::MODEL_INSERT),//只能是当前模型的方法
     );
-    //工单列表 $status=1 待处理 2处理中 3处理完成 4客户确认完成
+
+    //筛选条件 省份 城市 类型 客户
+    public function selectCondition()
+    {
+        $selectConditon = array();
+
+        $grade = $_SESSION['user']['grade'];
+        $uid = $_SESSION['user']['id'];
+        if($grade == 1){
+            $selectConditon['province'] = '省份';
+            $selectConditon['city'] = '城市';
+            $selectConditon['type'] = '类型';
+            $selectConditon['name'] = '跑道';
+        }else if($grade == 2){
+            $agent = new AgentModel();
+            $agent_res = $agent->where(array('agent_id'=>$uid))->field('province')->find();
+
+            $selectConditon['province'] = $agent_res['province'];
+            $selectConditon['city'] = '城市';
+            $selectConditon['type'] = '类型';
+            $selectConditon['name'] = '跑道';
+        }else{
+
+            $customer = new CustomerModel();
+            $customer_res = $customer->where(array('customer_id'=>$uid))->field('province,city,type,name')->find();
+
+            $selectConditon['province'] = $customer_res['province'];
+            $selectConditon['city'] = $customer_res['city'];
+            $selectConditon['type'] = $customer_res['type']==1?'学校':'运动场';
+            $selectConditon['name'] = $customer_res['name'];
+        }
+
+        return $selectConditon;
+    }
+
+    //系统后台 代理商 客户
+    //工单列表 $status 1待处理 2处理中 3处理完成 4客户确认完成
     public function _list($status)
     {
+        $grade = $_SESSION['user']['grade'];
+        $uid = $_SESSION['user']['id'];
+
+        $condition = array();
+
+        if($grade == 3 || $grade == 4){
+            $condition['customer_id'] = $uid;
+        }else if($grade == 2){
+            $condition['agent_id'] = $uid;
+        }else{
+        }
+
         if($status == 1){
             $condition['status'] = 1;
-            $order = 'add_time desc';
         }else if($status == 2){
             $condition['status'] = 2;
-            $order = 'add_time desc';
         }else if($status == 3){
             $condition['status'] = $status;
-            $order = 'add_time desc';
         }else{
-            $order = 'add_time desc';
         }
         $field = 'device_order_id id,order_sn,status,customer_name,customer_addr,desc,add_time,'.
             'ms_code,contact_name,contact_mobile,type,'.
             'agent_name,agent_mobile,accept_time,agent_desc';
 
-        $condition['customer_id'] = $_SESSION['user']['id'];
+        $order = 'add_time desc';
+
         $res = $this->where($condition)
             ->field($field)
             ->order($order)
             ->select();
 
+//        echo $this->_sql();
+//        exit();
+
         return $res;
     }
-
 
     //获取客户的填写信息
     public function getCustomerFillData()
     {
-        $condition['customer_id'] = $_SESSION['user']['id'];
-        $condition['status'] = array('in',array(1,2,3));
-        $res = $this->where($condition)->field('ms_code,desc,contact_name,contact_mobile,type')->find();
-        if(!$res) return array();
-        else return $res;
+        $grade = $_SESSION['user']['grade'];
+
+        if($grade == 3 || $grade == 4){
+            $condition['customer_id'] = $_SESSION['user']['id'];
+            $condition['status'] = array('in',array(1,2,3));
+            $res = $this->where($condition)->field('ms_code,desc,contact_name,contact_mobile,type')->find();
+            if(!$res) return array();
+            else return $res;
+        }else{
+            return array();
+        }
     }
 
     //生成工单
@@ -109,10 +162,7 @@ class DeviceOrderModel extends Model{
         $agent = new AgentModel();
         $condition['agent_id'] = $_SESSION['user']['id'];
         $agent_data = $agent->where($condition)->field('agent_id,name,agent_mobile')->find();
-//        echo $agent->_sql();
-//
-//        print_r($agent_data);
-//        print_r($_SESSION);
+
         $update_data = array(
             'agent_id'=>$agent_data['agent_id'],
             'agent_name'=>$agent_data['name'],

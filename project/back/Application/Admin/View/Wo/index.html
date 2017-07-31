@@ -88,7 +88,6 @@
         </a>
     </li>
 </ul>
-
 <if condition="$grade gt 2">
     <else />
 </if>
@@ -624,7 +623,8 @@
                     </td>
 
                     <td class=" ">0</td>
-                    <td class=" ">view</td>
+                    <td class="last"><a href="#">View</a>
+                    </td>
                 </tr>
             </volist>
             <else/>
@@ -647,6 +647,7 @@
 
 <block name="script">
     <script src="__VENDOR__/pnotify/dist/pnotify.js"></script>
+
     <!--<script src="__JS__/custom.min.js"></script>-->
     <!--<script src="__JS__/jquery-2.0.3.min.js"></script>-->
 </block>

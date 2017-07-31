@@ -19,12 +19,12 @@ class ContestOrder extends Model{
         return $res;
     }
 
-    //获取赛事名单
+    //获取赛事名单  圈数、终点endMachine放到List中
     public function getContestOrder($contest_sn,$customer_id)
     {
         $data = array();
 
-        $sql = "select co.class classRoom,co.name,co.studentId,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
+        $sql = "select co.class classRoom,co.name,co.studentId,co.sex,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
             "co.contest_sn='$contest_sn' and co.customer_id='$customer_id'";
 
         $res = $this->query($sql);

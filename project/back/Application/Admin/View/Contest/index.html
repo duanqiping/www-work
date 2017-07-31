@@ -1,80 +1,722 @@
-<extend name="Public/base" />
+<extend name="Public/base2" />
 
 <block name="body">
-    <div class="main">
-        <div class="main-title" style="margin-left: 60px">
-            <h2>考试、赛事</h2>
+<div class="">
+<div class="page-title">
+    <div class="title_left">
+        <h3>赛事/考核 <small>专业体育数据统计系统</small></h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入关键字">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+            </div>
         </div>
-        <a style="margin-left: 60px" href="{:U('add')}">创建一场考试</a>
+    </div>
+</div>
 
-        <div style="margin-left: 60px;margin-top: 10px">
-            <div style="float: left"><button onclick="contest('all')">全部赛事</button></div>
-            <div style="float: left"><button onclick="contest('unfinished')">未开始的赛事</button></div>
-            <div style="float: left"><button onclick="contest('finished')">已完成的赛事</button></div>
+<div class="clearfix"></div>
+
+<div class="row">
+
+
+
+<div class="col-md-12">
+
+<div class="alert alert-success">
+    </a><ul class="fa-ul">
+    <li>
+        <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">正在进行</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
+    </li>
+</ul>
+</div>
+
+<div class="alert alert-danger">
+    </a><ul class="fa-ul">
+    <li>
+        <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">时间冲突</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
+    </li>
+</ul>
+</div>
+
+<div class="alert alert-warning">
+    <h4><i class="fa fa-warning"></i>20170805 9:30</h4> <a class="alert-link">即将开始</a><code>期末考</code>高三(3)班1000米考试.
+    <span class="fa fa-sign-in right"></span>
+</div>
+<div class="alert alert-warning">
+    <h4><i class="fa fa-warning"></i>20170805 15:00</h4> <a class="alert-link">即将开始</a><code>活动</code>城市马拉松海选.
+    <span class="fa fa-sign-in right"></span>
+</div>
+
+<!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+<div class="x_panel">
+<div class="x_title">
+    <h2><i class="fa fa-bars"></i> 操作台 <small>创建新的日程项目</small></h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+            </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+
+
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">新建考核</a>
+    </li>
+    <!--<li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">新建补考</a>
+    </li>-->
+    <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">新建报名</a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+<div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+    <p>新建一次考核,请详细填写信息以便数据管理.</p>
+    <div class="col-md-6 col-xs-12">
+        <form class="form-horizontal form-label-left input_mask">
+
+            <!--<div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">考核标题</label>
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <input type="text" class="form-control" placeholder="请为本次考核命名">
+      </div>
+    </div><div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">学生考核内容</label>
+    </div>-->
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left"  placeholder="男生考核内容">
+                <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Last Name">-->
+                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
+                <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left"  placeholder="女生考核内容">
+                <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
+                <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">标题</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" placeholder="本次考核显示的标题">
+                </div>
+            </div>
+
+            <!--<div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">考核编号 </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" disabled="disabled" placeholder="ABC123456">
+              </div>
+            </div>-->
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">考核时间 </label>
+                <div class="col-md-9 col-sm-9 col-xs-12 ">
+                    <!--<span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>-->
+                    <input type="text" name="reservation-time"  class="form-control has-feedback-left" value="01/01/2017 - 01/01/2017" />
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                </div>
+            </div>
+
+
+            <!--<div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Read-Only Input</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Read-Only Input">
+              </div>
+            </div>-->
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">考核描述 <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <!--<button type="button" class="btn btn-primary">Cancel</button>-->
+                    <button class="btn btn-primary" type="reset">重置</button>
+                    <button type="submit" class="btn btn-success">下一步</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+
+
+
+
+        <!--<div class="bs-example" data-example-id="simple-jumbotron">-->
+        <div class="jumbotron">
+            <h3>温馨提示!</h3>
+            <p>1.考试内容若不分男女生,需填写相同内容;</p>
+            <p>2.下一步选择名单;</p>
+            <!--<ul class="margin-bottom-none padding-left-lg">
+                <li>All brand icons are trademarks of their respective owners.</li>
+                <li>The use of these trademarks does not indicate endorsement of the trademark holder by Font Awesome, nor vice versa.</li>
+              </ul>-->
         </div>
+        <!--</div>-->
 
-        <!-- 数据列表 -->
-        <div class="data-table table-striped">
-            <table class="" style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
-                <thead>
-                <tr>
-                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-                    <th class="">UID</th>
-                    <th class="">赛事编号</th>
-                    <th class="">赛事标题</th>
-                    <th class="">赛事描述</th>
-                    <th class="">创建时间</th>
-                    <th class="">比赛开始时间</th>
-                    <th class="">比赛结束时间</th>
-                    <th class="">赛事规格</th>
-                    <th class="">创建者</th>
-                    <th class="">人员名单</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <notempty name="_list">
-                    <volist name="_list" id="vo">
-                        <tr>
-                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
-                            <td>{$vo.contest_id} </td>
-                            <td>{$vo.contest_sn}</td>
-                            <td>{$vo.title}</td>
-                            <td>{$vo.desc}</td>
-                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
-                            <td>{$vo.begin_time|date="Y-m-d H:i:s",###}</td>
-                            <td>{$vo.end_time|date="Y-m-d H:i:s",###}</td>
-                            <td>{$vo.length} m</td>
-                            <td>{$vo.from_name}</td>
-                            <!--<td><a href="#" style="color: #0000C0">人员名单</a></td>-->
-                            <td><a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" style="color: #0000C0">人员名单</a></td>
-                            <!--<td>{$vo['is_show']?'正常':'禁用'}</td>-->
-                            <!--<td>{$vo['count']}<a href="">查看详情</a></td>-->
-                        </tr>
-                    </volist>
-                    <else/>
-                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
-                </notempty>
-                </tbody>
-
-            </table>
-        </div>
 
 
     </div>
+</div>
+
+<div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+    <!--***************-->
+    <div class="col-md-6 col-xs-12">
+        <form class="form-horizontal form-label-left input_mask">
+            <p>活动信息及报名制度</p>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">活动名称</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" placeholder="为本次活动设置标题">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">活动时间 </label>
+                <div class="col-md-9 col-sm-9 col-xs-12 ">
+                    <input type="text" name="reservation-time" id="reservation-time" class="form-control has-feedback-left" value="01/01/2017 - 01/01/2017" />
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">人数上限</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" placeholder="无人数限制不填写此项">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">活动描述 <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                </div>
+            </div>
+            <!--<div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                 <button class="btn btn-primary" type="reset">重置</button>
+                <button type="submit" class="btn btn-success">确定</button>
+              </div>
+            </div>-->
+
+        </form>
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+        <form class="form-horizontal form-label-left input_mask">
+            <p>活动奖励制度</p>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="男生考核内容">
+                <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Last Name">-->
+                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
+                <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="女生考核内容">
+                <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
+                <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 col-sm-3 col-xs-12">设置奖项</label>
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <input type="text" placeholder="奖项" class="form-control">
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <input type="text" placeholder="数量" class="form-control">
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <input type="text" placeholder="奖品" class="form-control">
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <!--<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">排序 <span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">1</a>
+                      </li>
+                      <li><a href="#">2</a>
+                      </li>
+                      <li><a href="#">3</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="#">最后</a>
+                      </li>
+                    </ul>-->
+                    <button type="button" class="btn btn-primary">添加</button>
+                </div>
+
+            </div>
+
+
+            <div class="form-group panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>编辑</th>
+                        <th>奖项</th>
+                        <th>数量</th>
+                        <th>奖品</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><i class="fa fa-pencil-square-o"></i>1</th>
+                        <td>一等奖</td>
+                        <td>1</td>
+                        <td>运动手环</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><i class="fa fa-pencil-square-o"></i>2</th>
+                        <td>二等奖</td>
+                        <td>5</td>
+                        <td>蓝牙耳机</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><i class="fa fa-pencil-square-o"></i>3</th>
+                        <td>三等奖</td>
+                        <td>10</td>
+                        <td>运动鞋</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="reset">重置</button>
+                    <button type="submit" class="btn btn-success">创建</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<!--</div>-->
+
+<div class="x_panel">
+<div class="x_title">
+    <h2>Projects</h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+            </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+
+<p>Simple table with project listing with progress and editing options</p>
+
+<!-- start project list -->
+<table class="table table-striped projects">
+<thead>
+<tr>
+    <th style="width: 1%">#</th>
+    <th style="width: 20%">Project Name</th>
+    <th>Team Members</th>
+    <th>Project Progress</th>
+    <th>Status</th>
+    <!--<th style="width: 20%">#Edit</th>-->
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
+        </div>
+        <small>57% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="47"></div>
+        </div>
+        <small>47% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
+        </div>
+        <small>77% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+        </div>
+        <small>60% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="12"></div>
+        </div>
+        <small>12% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="35"></div>
+        </div>
+        <small>35% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="87"></div>
+        </div>
+        <small>87% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
+        </div>
+        <small>77% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+<tr>
+    <td>#</td>
+    <td>
+        <a>Pesamakini Backend UI</a>
+        <br />
+        <small>Created 01.01.2015</small>
+    </td>
+    <!--<td>
+      <ul class="list-inline">
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+        <li>
+          <img src="images/user.png" class="avatar" alt="Avatar">
+        </li>
+      </ul>
+    </td>-->
+    <td class="project_progress">
+        <div class="progress progress_sm">
+            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
+        </div>
+        <small>77% Complete</small>
+    </td>
+    <td>
+        <button type="button" class="btn btn-success btn-xs">Success</button>
+    </td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+    </td>
+</tr>
+</tbody>
+</table>
+<!-- end project list -->
+
+</div>
+</div>
+</div>
+</div>
+</div>
 </block>
 
 <block name="script">
-    <script type="text/javascript">
-        function contest(type)
-        {
-            var contestUrl = "{:U('')}"; // merchant.js 中使用
-            var url = contestUrl.replace(/.html/, "");
-            location.href = url+"/type/"+type;//location.href实现客户端页面的跳转
-        }
-    </script>
+    <!--<script src="__JS__/custom.min.js"></script>-->
+    <!--<script src="__JS__/jquery-2.0.3.min.js"></script>-->
 </block>
-
-
 
 

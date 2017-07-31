@@ -46,8 +46,6 @@ class PublicController extends \Think\Controller{
             }
             else
             {
-//                exit('success');
-//
                 $this->redirect('index');
 //                $this->success('登录成功！', U('index'));
             }

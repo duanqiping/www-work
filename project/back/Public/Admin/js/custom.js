@@ -1783,8 +1783,13 @@ if (typeof NProgress != 'undefined') {
 			if( typeof ($.fn.smartWizard) === 'undefined'){ return; }
 			console.log('init_SmartWizard');
 			
-			var com = $('#wizard').smartWizard();
-            var index = 2;
+            var com = $('#wizard').smartWizard();
+
+            //alert(index);
+            //var index = 1;
+            if(!index){
+                var index = 0;
+            }
             for (var i  = 0; i < index; i ++) {
                 com.data('smartWizard').buttons.next.click();
             }

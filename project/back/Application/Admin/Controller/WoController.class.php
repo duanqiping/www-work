@@ -31,6 +31,7 @@ class WoController extends Controller{
         $this->assign('fillData',$fillInfo);
         $this->assign('_list',$list);
         $this->assign('selectCondition',$selectCondition);
+        $this->assign('grade',$_SESSION['user']['grade']);
 
         $this->display();
     }

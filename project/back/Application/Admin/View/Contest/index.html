@@ -89,51 +89,35 @@
 <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
     <p>新建一次考核,请详细填写信息以便数据管理.</p>
     <div class="col-md-6 col-xs-12">
-        <form class="form-horizontal form-label-left input_mask">
-
-            <!--<div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12">考核标题</label>
-      <div class="col-md-9 col-sm-9 col-xs-12">
-        <input type="text" class="form-control" placeholder="请为本次考核命名">
-      </div>
-    </div><div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12">学生考核内容</label>
-    </div>-->
+        <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" class="form-control has-feedback-left"  placeholder="男生考核内容">
+                <input type="text" name="length_male" class="form-control has-feedback-left"  placeholder="男生考核内容">
                 <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Last Name">-->
-                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
+                <input type="text" name="pass_score_male" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
                 <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" class="form-control has-feedback-left"  placeholder="女生考核内容">
+                <input type="text" name="length_female" class="form-control has-feedback-left"  placeholder="女生考核内容">
                 <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
+                <input type="text" name="pass_score_female" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
                 <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">标题</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" placeholder="本次考核显示的标题">
+                    <input type="text" name="title" class="form-control" placeholder="本次考核显示的标题">
                 </div>
             </div>
-
-            <!--<div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">考核编号 </label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" disabled="disabled" placeholder="ABC123456">
-              </div>
-            </div>-->
 
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">考核时间 </label>
@@ -144,26 +128,21 @@
                 </div>
             </div>
 
-
-            <!--<div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Read-Only Input</label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" placeholder="Read-Only Input">
-              </div>
-            </div>-->
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">考核描述 <span class="required">*</span>
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                    <input name="desc" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                 </div>
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                     <!--<button type="button" class="btn btn-primary">Cancel</button>-->
-                    <button class="btn btn-primary" type="reset">重置</button>
-                    <button type="submit" class="btn btn-success">下一步</button>
+                    <!--<button class="btn btn-primary" type="reset">重置</button>-->
+                    <!--<button type="submit" class="btn btn-success">下一步</button>-->
+                    <input type="reset" value="重置" class="btn btn-primary">
+                    <input type="submit" value="下一步" class="btn btn-success">
                 </div>
             </div>
 
@@ -365,6 +344,7 @@
     </ul>
     <div class="clearfix"></div>
 </div>
+
 <div class="x_content">
 
 <p>Simple table with project listing with progress and editing options</p>
@@ -389,22 +369,7 @@
         <br />
         <small>Created 01.01.2015</small>
     </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
+
     <td class="project_progress">
         <div class="progress progress_sm">
             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
@@ -420,289 +385,7 @@
         <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
     </td>
 </tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="47"></div>
-        </div>
-        <small>47% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
-        </div>
-        <small>77% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-        </div>
-        <small>60% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="12"></div>
-        </div>
-        <small>12% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="35"></div>
-        </div>
-        <small>35% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="87"></div>
-        </div>
-        <small>87% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
-        </div>
-        <small>77% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
-<tr>
-    <td>#</td>
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
-    <!--<td>
-      <ul class="list-inline">
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-        <li>
-          <img src="images/user.png" class="avatar" alt="Avatar">
-        </li>
-      </ul>
-    </td>-->
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="77"></div>
-        </div>
-        <small>77% Complete</small>
-    </td>
-    <td>
-        <button type="button" class="btn btn-success btn-xs">Success</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-    </td>
-</tr>
+
 </tbody>
 </table>
 <!-- end project list -->

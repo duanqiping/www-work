@@ -1,89 +1,152 @@
-<extend name="Public/base" />
+<extend name="Public/base2" />
 
 <block name="body">
-    <div class="main">
-        <div class="main-title" style="margin-left: 60px">
-            <h2>添加赛事人员</h2>
-        </div>
+    <div class="x_content">
 
-        <div style="margin-left: 60px;margin-top: 10px">
-            <form action="{:U()}" method="post">
-                    <div style="float: left">
-                        <!--<select name="sectionid">系别</select>-->
-                        <select name="dept" id="sectionid"></select>
-                    </div>
-                    <div style="margin-left: 10px;float: left">
-                        <!--<select>班级</select>-->
-                        <select name="class" id="catid"></select>
-                    </div>
+        <p>赛事人员名单添加界面</p>
 
-                    <div style="margin-left: 10px;float: left">
-                        <!--<select>班级</select>-->
-                        <select name="sex">
-                            <option>--性别--</option>
-                            <option value="1">男</option>
-                            <option value="2">女</option>
-                        </select>
-                    </div>
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>名单筛选：</a>
+            </li>
 
-                    <div style="margin-left: 10px;float: left">
-                        <input type="submit" value="查询">
-                    </div>
-            </form>
-        </div>
+            <!--系别-->
+            <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                    <!--<input type="text" id="provinceId" name="province" value="系别">-->
+                    <!--<select name="dept" id="deptId" style="border:none;">-->
+                    <select name="dept" id="deptId" style="border:none;">
+                        <if condition="$condition['dept']"><option>{$condition['dept']}</option><option>系别</option>
+                            <else />
+                            <option>系别</option>
+                        </if>
 
-        <br/><br/>
+                        <notempty name="deptInfo">
+                            <volist name="deptInfo" id="vo" key="k">
+                                <tr>
+                                    <option>{$vo.dept}</option>
+                                </tr>
+                            </volist>
+                            <else/>
+                        </notempty>
+                    </select>
+                </a>
+
+            </li>
+            <!--年级-->
+            <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                    <!--<input type="text" id="provinceId2" name="province" value="年级">-->
+                    <select name="grade" id="gradeId" style="border:none;">
+
+                        <if condition="$condition['grade']"><option>{$condition['grade']}</option><option>年级</option>
+                            <else />
+                            <option>年级</option>
+                        </if>
+                        <notempty name="gradeInfo">
+                            <volist name="gradeInfo" id="vo" key="k">
+                                <tr>
+                                    <option>{$vo.grade}</option>
+                                </tr>
+                            </volist>
+                            <else/>
+                        </notempty>
+                    </select>
+                </a>
+
+            </li>
+            <!--班级-->
+            <li role="presentation" class="dropdown">
+
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                    <!--<input type="text" id="provinceId3" name="province" value="班级">-->
+                    <select name="class" id="classId" style="border:none;">
+                        <if condition="$condition['class']"><option>{$condition['class']}</option><option>班级</option>
+                            <else />
+                            <option>班级</option>
+                        </if>
+
+                        <notempty name="classInfo">
+                            <volist name="classInfo" id="vo" key="k">
+                                <tr>
+                                    <option>{$vo.class}</option>
+                                </tr>
+                            </volist>
+                            <else/>
+                            <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                        </notempty>
+                    </select>
+
+                </a>
+            </li>
+            <!--客户名-->
+            <li role="presentation" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                    <select name="sex" id="sexId" style="border:none;">
+                        <if condition="$condition['sex']"><option>{$condition['sex']}</option><option>性别</option>
+                            <else />
+                            <option>性别</option>
+                        </if>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </a>
+
+            </li>
+        </ul>
+
         <form action="{:U('info')}" method="post">
-            <div style="margin-left: 60px;margin-top: 10px;">
+            <div>
                 <button class="btn ajax-post">添加</button>
             </div>
-            <!--<input type="hidden" name="contest_sn" value="{$contest_sn}">-->
-            <!-- 数据列表 -->
-            <div class="data-table table-striped" style="margin-top: 10px">
-                <!--<table class="" style="border-collapse:separate; border-spacing:60px 10px;">-->
-                <table class=""  style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
-                    <thead>
+
+        <!-- start project list -->
+        <table class="table table-striped projects">
+            <thead>
+            <tr>
+                <!--<th style="width: 1%">UID</th>-->
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th style="width: 20%">姓名</th>
+                <th>学号</th>
+                <th>性别</th>
+                <th>系别</th>
+                <th>年级</th>
+                <th>班级</th>
+                <!--<th style="width: 20%">#Edit</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo" key="k">
                     <tr>
-                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-                        <th class="">姓名</th>
-                        <th class="">学号</th>
-                        <th class="">性别</th>
-                        <th class="">系别</th>
-                        <th class="">年级</th>
-                        <th class="">班级</th>
+                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.user_id}" /></td>
+                        <td>{$vo.name} </td>
+                        <td>{$vo.studentId}</td>
+                        <td>{$vo.sex}</td>
+                        <td>{$vo.dept}</td>
+                        <td>{$vo.grade}</td>
+                        <td>{$vo.class}</td>
                     </tr>
-                    </thead>
-
-                    <tbody>
-                    <notempty name="_list">
-                        <volist name="_list" id="vo" key="k">
-                            <tr>
-                                <td><input class="ids" type="checkbox" name="id[]" value="{$vo.user_id}" /></td>
-                                <td>{$vo.name} </td>
-                                <td>{$vo.studentId}</td>
-                                <td>{$vo.sex}</td>
-                                <td>{$vo.dept}</td>
-                                <td>{$vo.grade}</td>
-                                <td>{$vo.class}</td>
-                            </tr>
-                        </volist>
-                        <else/>
-                        <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
-                    </notempty>
-                    </tbody>
-
-                </table>
-            </div>
+                </volist>
+                <else/>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+        <!-- end project list -->
         </form>
-
     </div>
+
 </block>
 
 <block name="script">
     <script type="text/javascript">
-        var ajaxurldept = "{:U('customer/getSection')}"; // merchant.js 中使用
-        var ajaxurlclass = "{:U('customer/getCatid')}"; // merchant.js 中使用
+        var indexurl = "{:U()}";
+        var ajaxurldept = "{:U('contest/getDept')}"; //
+        var ajaxurlgrade = "{:U('contest/getGrade')}"; //
+        var ajaxurlclass = "{:U('contest/getClass')}"; //
     </script>
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+
     <script src="__JS__/linkage.js"></script>
     <script src="__JS__/common.js"></script>
 </block>

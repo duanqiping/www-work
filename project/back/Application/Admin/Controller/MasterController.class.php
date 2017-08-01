@@ -37,6 +37,11 @@ class MasterController extends Controller{
     //录入成绩(平时训练 单圈单圈录入)
     public function add()
     {
+//        foreach($_POST as $k=>$v){
+//            file_put_contents('log.txt',$k.'--'.$v."\n",FILE_APPEND );
+//        }
+//        sendSuccess('success');
+
         $data = $_POST;
         $data['begin_time'] = intval($data['begin_time']);
         $data['end_time'] = intval($data['end_time']);
@@ -46,6 +51,8 @@ class MasterController extends Controller{
         $rankInfo = $customer->where(array('customer_id'=>$data['customer_id']))
             ->field('score_table,rank_y_table,rank_m_table,rank_w_table,length')
             ->find();
+        if(!$rankInfo) sendError('fail');
+
         unset($data['customer_id']);
 
         $score = new ScoreModel();

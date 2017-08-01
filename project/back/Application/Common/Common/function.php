@@ -115,7 +115,7 @@ function checkData($b,$msg)
 //code 0:正常消息，1：debug信息
 function sendError($msg) {
     $code = APP_DEBUG?1:0;
-    header('HTTP/1.1 400 Unauthorized', true, 400);//一般错误
+    header('HTTP/1.1 400 Unauthorized', true, 401);//一般错误
     exit(ch_json_encode(array('msg'=>$msg,'code'=>$code)));
 }
 function sendServerError($msg) {

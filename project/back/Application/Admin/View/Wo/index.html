@@ -648,6 +648,15 @@
 <block name="script">
     <script src="__VENDOR__/pnotify/dist/pnotify.js"></script>
 
-    <!--<script src="__JS__/custom.min.js"></script>-->
-    <!--<script src="__JS__/jquery-2.0.3.min.js"></script>-->
+    <script type="text/javascript">
+        var index = 0;
+        var grade = "{$grade}";
+
+        if(grade < 3){
+             index = 1;
+        }else{
+             index = 0;
+        }
+
+    </script>
 </block>

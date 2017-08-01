@@ -1,0 +1,89 @@
+<extend name="Public/base2" />
+
+<block name="body">
+    <div class="main">
+        <div class="main-title" style="margin-left: 60px">
+            <h2>添加赛事人员</h2>
+        </div>
+
+        <div style="margin-left: 60px;margin-top: 10px">
+            <form action="{:U()}" method="post">
+                    <div style="float: left">
+                        <!--<select name="sectionid">系别</select>-->
+                        <select name="dept" id="sectionid"></select>
+                    </div>
+                    <div style="margin-left: 10px;float: left">
+                        <!--<select>班级</select>-->
+                        <select name="class" id="catid"></select>
+                    </div>
+
+                    <div style="margin-left: 10px;float: left">
+                        <!--<select>班级</select>-->
+                        <select name="sex">
+                            <option>--性别--</option>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-left: 10px;float: left">
+                        <input type="submit" value="查询">
+                    </div>
+            </form>
+        </div>
+
+        <br/><br/>
+        <form action="{:U('info')}" method="post">
+            <div style="margin-left: 60px;margin-top: 10px;">
+                <button class="btn ajax-post">添加</button>
+            </div>
+            <!--<input type="hidden" name="contest_sn" value="{$contest_sn}">-->
+            <!-- 数据列表 -->
+            <div class="data-table table-striped" style="margin-top: 10px">
+                <!--<table class="" style="border-collapse:separate; border-spacing:60px 10px;">-->
+                <table class=""  style="clear:both;height:0;width:0;border-collapse:separate; border-spacing:60px 10px;">
+                    <thead>
+                    <tr>
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">姓名</th>
+                        <th class="">学号</th>
+                        <th class="">性别</th>
+                        <th class="">系别</th>
+                        <th class="">年级</th>
+                        <th class="">班级</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <notempty name="_list">
+                        <volist name="_list" id="vo" key="k">
+                            <tr>
+                                <td><input class="ids" type="checkbox" name="id[]" value="{$vo.user_id}" /></td>
+                                <td>{$vo.name} </td>
+                                <td>{$vo.studentId}</td>
+                                <td>{$vo.sex}</td>
+                                <td>{$vo.dept}</td>
+                                <td>{$vo.grade}</td>
+                                <td>{$vo.class}</td>
+                            </tr>
+                        </volist>
+                        <else/>
+                        <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                    </notempty>
+                    </tbody>
+
+                </table>
+            </div>
+        </form>
+
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        var ajaxurldept = "{:U('customer/getSection')}"; // merchant.js 中使用
+        var ajaxurlclass = "{:U('customer/getCatid')}"; // merchant.js 中使用
+    </script>
+    <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/common.js"></script>
+</block>

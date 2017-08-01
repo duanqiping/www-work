@@ -62,10 +62,25 @@ class ContestModel extends Model{
     //填充数据
     public function fillData($data)
     {
+//        print_r($data);
+//        exit();
+
         $data['customer_id'] = $_SESSION['user']['id'];
         $data['contest_sn'] = $this->createContestSn();
-        $data['end_time'] = strtotime($data['end_time']);
-        $data['begin_time'] = strtotime($data['begin_time']);
+
+        $s = explode('-',$data['reservation-time']);
+        unset($data['reservation-time']);
+
+//        print_r($s);
+//        exit();
+
+//        $data['end_time'] = strtotime($data['end_time']);
+//        $data['begin_time'] = strtotime($data['begin_time']);
+
+        $data['begin_time'] = strtotime($s[0]);
+        $data['end_time'] = strtotime($s[1]);
+
+
         $data['add_time'] = NOW_TIME;
 
         if($_SESSION['user']['grade'] == 3){
@@ -77,6 +92,10 @@ class ContestModel extends Model{
             $data['from_name'] = $_SESSION['user']['id'];
         }
 
+//        print_r($data);
+//        exit();
+
         return $data;
     }
+
 } 

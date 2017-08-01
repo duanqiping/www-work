@@ -13,6 +13,25 @@ use Think\Model;
 
 class UserModel extends Model{
 
+    //系别
+    public function getDept($uid)
+    {
+        $res = $this->where(array('customer_id'=>$uid))->field('dept')->group('dept')->select();
+        return $res?$res:array();
+    }
+    //获取年级
+    public function getGrade($uid,$dept)
+    {
+        $res = $this->where(array('customer_id'=>$uid,'dept'=>$dept))->field('grade')->group('grade')->select();
+        return $res?$res:array();
+    }
+    //获取班级
+    public function getClass($uid,$dept,$grade)
+    {
+        $res = $this->where(array('customer_id'=>$uid,'dept'=>$dept,'grade'=>$grade))->field('class')->group('class')->select();
+        return $res?$res:array();
+    }
+
     //获取用户名
     public function getUserName($code)
     {
@@ -27,15 +46,21 @@ class UserModel extends Model{
     }
 
     //筛选条件
-    public function makeCondition($data)
+    public function makeCondition($data,$uid)
     {
         $condition = array();
-        //系别 和 班级 是ajax 联动
-        if($data['dept'] && $data['dept'] != '--系别--'){$condition['dept'] = $data['dept'];}
-        if($data['class'] && $data['class'] != '--班级--'){$condition['class'] = $data['class'];}
-        if($data['sex'] && $data['sex'] != '--性别--'){$condition['sex'] = $data['sex'];}
 
-        $condition['customer_id'] = $_SESSION['user']['id'];
+        $condition['customer_id'] = $uid;
+
+        //系别 和 班级 是ajax 联动
+        if($data['dept'] && $data['dept'] != '系别'){$condition['dept'] = $data['dept'];}
+        if($data['grade'] && $data['grade'] != '年级'){$condition['grade'] = $data['grade'];}
+        if($data['class'] && $data['class'] != '班级'){$condition['class'] = $data['class'];}
+        if($data['sex'] && $data['sex'] != '性别'){
+            if($data['sex'] == '男')$condition['sex'] = 1;
+            else $condition['sex'] = 2;
+        }
+
         return $condition;
     }
 

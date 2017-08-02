@@ -1,6 +1,6 @@
 //实现联动效果的js
 $(document).ready(function(){
-
+    
     $("#deptId").change(function(){
         url = returnUrl();
         location.href = url;//location.href实现客户端页面的跳转

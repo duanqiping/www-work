@@ -39,6 +39,7 @@ class ContestController extends Controller
 
             if ($contest->create($data)) {
                 $uid = $contest->add($data);
+
                 if($uid){
                     $this->redirect('user');
                     exit('success');
@@ -46,7 +47,7 @@ class ContestController extends Controller
                     exit('fail');
                 }
 
-                $this->redirect('index');
+//                $this->redirect('index');
             } else {
                 exit('fail2');
                 $this->display();
@@ -79,8 +80,6 @@ class ContestController extends Controller
     //添加赛事人员
     public function user()
     {
-//        print_r( $_GET );
-//        exit();
         $uid = $_SESSION['user']['id'];
 
         $user = new UserModel();

@@ -1773,8 +1773,25 @@ if (typeof NProgress != 'undefined') {
 				format: 'MM/DD/YYYY h:mm A'
 			  }
 			});
-	
 		}
+
+        function init_daterangepicker_reservation2() {
+
+            if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
+            console.log('init_daterangepicker_reservation2');
+
+            $('#reservation').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+
+            $('#reservation-time2').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY h:mm A'
+                }
+            });
+        }
 	   
 	   /* SMART WIZARD */
 		
@@ -5050,6 +5067,7 @@ if (typeof NProgress != 'undefined') {
 		init_daterangepicker_right();
 		init_daterangepicker_single_call();
 		init_daterangepicker_reservation();
+		init_daterangepicker_reservation2();
 		init_SmartWizard();
 		init_EasyPieChart();
 		init_charts();

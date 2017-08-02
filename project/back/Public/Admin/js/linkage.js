@@ -1,6 +1,6 @@
 //实现联动效果的js
 $(document).ready(function(){
-    
+
     $("#deptId").change(function(){
         url = returnUrl();
         location.href = url;//location.href实现客户端页面的跳转
@@ -20,29 +20,30 @@ $(document).ready(function(){
 
     function returnUrl()
     {
-        //alert(11111122222);
         var Dept=$("#deptId").find("option:selected").text();
         var Grade=$("#gradeId").find("option:selected").text();
         var Class=$("#classId").find("option:selected").text();
         var Sex=$("#sexId").find("option:selected").text();
 
-        //var dept=$("#deptId").val();
         var url = indexurl.replace(/.html/, "");
-        if(Dept != '系别'){
-            url = url+"/dept/"+Dept
-        }
-        if(Grade != '年级'){
-            url = url+"/grade/"+Grade
-        }
-        if(Class != '班级'){
-            url = url+"/class/"+Class
-        }
-        if(Sex != '性别'){
-            url = url+"/sex/"+Sex
-        }
-        return url;
 
-        location.href = url;//location.href实现客户端页面的跳转
+        if(Dept != '系别' && Dept != '不限'){
+            url = url+"/dept/"+Dept;
+        }
+        if(Grade != '年级' && Grade != '不限'){
+            url = url+"/grade/"+Grade;
+        }
+        if(Class != '班级' && Class != '不限' ){
+            url = url+"/class/"+Class;
+        }
+        if(Sex != '性别' && Sex != '不限'){
+            url = url+"/sex/"+Sex;
+        }
+        url = url.replace(/\s/g,"");//去除文章中间空格
+
+        alert(url);
+
+        return url;
     }
 
 

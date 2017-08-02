@@ -20,8 +20,22 @@ class ContestController extends Controller
     public function index()
     {
         $contest = new ContestModel();
-        $type = $_GET['type'];
-        $res = $contest->_list($type);
+        $contestOrder = new ContestOrder();
+
+        $result = $contest->clickOperate($_GET);//按钮操作 编辑 删除
+        if(!$result){
+            exit($contest->getError());
+        }else{
+            //edit
+            if($result !== true){
+                $this->assign('contestInfo', $result);
+            }
+        }
+
+
+        $res = $contest->getContestInfo();//获取赛事列表
+        $res = $contestOrder->getContestNum($res);//获取赛事名单人数
+
 
         $this->assign('_list', $res);
         $this->display();
@@ -30,28 +44,46 @@ class ContestController extends Controller
     //添加一场赛事
     public function add()
     {
-//        print_r($_POST);
-//        exit();
-
         if ($_POST) {
             $contest = new ContestModel();
-            $data = $contest->fillData($_POST);//填充数据
-
-            if ($contest->create($data)) {
-                $uid = $contest->add($data);
-
-                if($uid){
-                    $this->redirect('user');
-                    exit('success');
-                }else{
-                    exit('fail');
+            if($_POST['contest_sn']){
+                //对赛事信息进行修改
+                $s = explode('-',$_POST['reservation-time']);
+                unset($_POST['reservation-time']);
+                $_POST['begin_time'] = strtotime($s[0]);
+                $_POST['end_time'] = strtotime($s[1]);
+                if($_SESSION['user']['grade'] == 3){
+                    $_POST['from_id'] = $_SESSION['user']['id'];
+                    $_POST['from_name'] = '学校管理员';
                 }
-
-//                $this->redirect('index');
-            } else {
-                exit('fail2');
-                $this->display();
+                else{
+                    $_POST['from_id'] = $_SESSION['user']['id'];
+                    $_POST['from_name'] = $_SESSION['user']['id'];
+                }
+                $b = $contest->where(array('contest_sn'=>$_POST['contest_sn']))->save($_POST);
+                echo $contest->_sql();
+                if($b){
+                    $this->redirect('index');
+                }else{
+                    $this->redirect('index');
+//                    exit('fail');
+                }
+            }else{
+                //添加一场赛事
+                $data = $contest->fillData($_POST);//填充数据
+                if ($contest->create($data)) {
+                    if($contest->add($data)){
+                        $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
+                        $this->redirect('user');
+                    }else{
+                        exit('fail');
+                    }
+                } else {
+                    exit('fail2');
+                    $this->display();
+                }
             }
+
         } else {
             exit('fail3');
             $this->display();
@@ -61,19 +93,29 @@ class ContestController extends Controller
     //赛事人员名单
     public function info()
     {
-//        print_r( $_POST );
-//        var_dump($_SESSION);
-//        exit();
-//        $this->assign('contest',array('contest_id'=>$_GET['contest_id']));
+        $contestorder = new ContestOrder();
 
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        if($_POST){
+            $ids = $_POST;
+            $ids = $ids['id'];
 
-        $contestorder = new ContestOrder();
-        
+            $b = $contestorder->addUser($ids);
+            if(!$b) exit('fail');
+        }
 
-        $this->assign('contest_sn', $_GET['contest_sn']);
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $res = $contestorder->contestList($condition);
+
+//        echo "<pre>";
+//        print_r($res);
+//        echo "</pre>";
+//        exit();
+
+//        $this->assign('contest_sn', $_GET['contest_sn']);
+        $this->assign('_list',$res);
         $this->display('info');
     }
 
@@ -85,6 +127,7 @@ class ContestController extends Controller
         $user = new UserModel();
 
         $condition = $_GET;//筛选条件
+
         $res = $user->_list($user->makeCondition($condition,$uid));
 
         $deptInfo = $user->getDept($uid);//获取系别

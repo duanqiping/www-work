@@ -28,7 +28,7 @@
 <div class="col-md-12">
 
 <div class="alert alert-success">
-    </a><ul class="fa-ul">
+    <ul class="fa-ul">
     <li>
         <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">正在进行</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
     </li>
@@ -36,7 +36,7 @@
 </div>
 
 <div class="alert alert-danger">
-    </a><ul class="fa-ul">
+    <ul class="fa-ul">
     <li>
         <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">时间冲突</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
     </li>
@@ -92,30 +92,30 @@
         <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" name="length_male" class="form-control has-feedback-left"  placeholder="男生考核内容">
+                <input type="text" name="length_male" value="{$contestInfo['length_male']}" class="form-control has-feedback-left"  placeholder="男生考核内容">
                 <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Last Name">-->
-                <input type="text" name="pass_score_male" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
+                <input type="text" name="pass_score_male" value="{$contestInfo['pass_score_male']}" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="男生合格成绩:分钟-秒钟">
                 <span class="fa fa-male form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" name="length_female" class="form-control has-feedback-left"  placeholder="女生考核内容">
+                <input type="text" name="length_female" value="{$contestInfo['length_female']}" class="form-control has-feedback-left"  placeholder="女生考核内容">
                 <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input type="text" name="pass_score_female" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
+                <input type="text" name="pass_score_female" value="{$contestInfo['pass_score_female']}" class="form-control has-feedback-left" data-inputmask="'mask': '99-99'" placeholder="女生合格成绩:分钟-秒钟">
                 <span class="fa fa-female form-control-feedback left" aria-hidden="true"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">标题</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" name="title" class="form-control" placeholder="本次考核显示的标题">
+                    <input type="text" name="title" value="{$contestInfo['title']}" class="form-control" placeholder="本次考核显示的标题">
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">考核时间 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12 ">
                     <!--<span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>-->
-                    <input type="text" name="reservation-time"  class="form-control has-feedback-left" value="01/01/2017 - 01/01/2017" />
+                    <input type="text" name="reservation-time" id="reservation-time2" class="form-control has-feedback-left" value="{$contestInfo['reservation-time']}" />
                     <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">考核描述 <span class="required">*</span>
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input name="desc" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                    <input name="desc" value="{$contestInfo['desc']}" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                 </div>
             </div>
             <div class="ln_solid"></div>
@@ -142,7 +142,14 @@
                     <!--<button class="btn btn-primary" type="reset">重置</button>-->
                     <!--<button type="submit" class="btn btn-success">下一步</button>-->
                     <input type="reset" value="重置" class="btn btn-primary">
-                    <input type="submit" value="下一步" class="btn btn-success">
+
+                    <if condition="$contestInfo['contest_sn']">
+                        <input type="hidden" value="{$contestInfo['contest_sn']}" name="contest_sn" />
+                        <input type="submit" value="确认修改" class="btn btn-success">
+                        <else />
+                        <input type="submit" value="下一步" class="btn btn-success">
+                    </if>
+
                 </div>
             </div>
 
@@ -362,31 +369,36 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-    <!--<td>#</td>-->
-    <td>
-        <a>Pesamakini Backend UI</a>
-        <br />
-        <small>Created 01.01.2015</small>
-    </td>
+<notempty name="_list">
+    <volist name="_list" id="vo" key="k">
+        <tr>
+            <!--<td>#</td>-->
+            <td>
+                <a>{$vo.title}</a>
+                <br />
+                <small>{$vo.add_time|date="Y-m-d H:i:s",###}</small>
+            </td>
 
-    <td class="project_progress">
-        <div class="progress progress_sm">
-            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-        </div>
-        <small>57% Complete</small>
-    </td>
-    <td>
-        <!--<button type="button" class="btn btn-success btn-xs">Success</button>-->
-        <button type="button" class="btn btn-success btn-xs">开始</button>
-    </td>
-    <td>
-        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
-        <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> 编辑 </a>
-        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>
-    </td>
-</tr>
-
+            <td class="project_progress">
+                <div class="progress progress_sm">
+                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{$vo.count}"></div>
+                </div>
+                <small>57% Complete</small>
+            </td>
+            <td>
+                <!--<button type="button" class="btn btn-success btn-xs">Success</button>-->
+                <button type="button" class="btn btn-success btn-xs">开始</button>
+            </td>
+            <td>
+                <a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'edit'))}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> 编辑 </a>
+                <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'delete'))}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>
+            </td>
+        </tr>
+    </volist>
+    <else/>
+    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+</notempty>
 </tbody>
 </table>
 <!-- end project list -->

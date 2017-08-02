@@ -14,7 +14,7 @@
                 <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 
                     <select name="dept" id="deptId" style="border:none;">
-                        <if condition="$condition['dept']"><option>{$condition['dept']}</option><option>系别</option>
+                        <if condition="$condition['dept']"><option>{$condition['dept']}
                             <else />
                             <option>系别</option>
                         </if>
@@ -27,6 +27,7 @@
                             </volist>
                             <else/>
                         </notempty>
+                        </option><option>不限</option>
                     </select>
                 </a>
 
@@ -37,7 +38,7 @@
                     <!--<input type="text" id="provinceId2" name="province" value="年级">-->
                     <select name="grade" id="gradeId" style="border:none;">
 
-                        <if condition="$condition['grade']"><option>{$condition['grade']}</option><option>年级</option>
+                        <if condition="$condition['grade']"><option>{$condition['grade']}</option>
                             <else />
                             <option>年级</option>
                         </if>
@@ -49,6 +50,7 @@
                             </volist>
                             <else/>
                         </notempty>
+                        </option><option>不限</option>
                     </select>
                 </a>
 
@@ -59,7 +61,7 @@
                 <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                     <!--<input type="text" id="provinceId3" name="province" value="班级">-->
                     <select name="class" id="classId" style="border:none;">
-                        <if condition="$condition['class']"><option>{$condition['class']}</option><option>班级</option>
+                        <if condition="$condition['class']"><option>{$condition['class']}</option>
                             <else />
                             <option>班级</option>
                         </if>
@@ -73,20 +75,22 @@
                             <else/>
                             <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
                         </notempty>
+                        </option><option>不限</option>
                     </select>
 
                 </a>
             </li>
-            <!--客户名-->
+            <!--性别-->
             <li role="presentation" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                     <select name="sex" id="sexId" style="border:none;">
-                        <if condition="$condition['sex']"><option>{$condition['sex']}</option><option>性别</option>
+                        <if condition="$condition['sex']"><option>{$condition['sex']}</option>
                             <else />
                             <option>性别</option>
                         </if>
                         <option value="1">男</option>
                         <option value="2">女</option>
+                        <option>不限</option>
                     </select>
                 </a>
 

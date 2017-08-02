@@ -5,12 +5,12 @@
 
         <p>赛事人员名单界面</p>
         <ul class="nav nav-pills" role="tablist">
-            <li role="presentation"><a>名单筛选：</a>
+            <li role="presentation"><a>赛事名单：</a>
             </li>
 
             <!--系别-->
             <li role="presentation" class="dropdown">
-                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                <a  href="#" class="dropdown-toggle">
 
                     <select name="dept" id="deptId" style="border:none;">
                         <if condition="$condition['dept']"><option>{$condition['dept']}
@@ -20,9 +20,7 @@
 
                         <notempty name="deptInfo">
                             <volist name="deptInfo" id="vo" key="k">
-                                <tr>
-                                    <option>{$vo.dept}</option>
-                                </tr>
+                                <option>{$vo.dept}</option>
                             </volist>
                             <else/>
                         </notempty>
@@ -33,7 +31,7 @@
             </li>
             <!--年级-->
             <li role="presentation" class="dropdown">
-                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                <a  href="#" class="dropdown-toggle">
                     <!--<input type="text" id="provinceId2" name="province" value="年级">-->
                     <select name="grade" id="gradeId" style="border:none;">
 
@@ -57,7 +55,7 @@
             <!--班级-->
             <li role="presentation" class="dropdown">
 
-                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                <a  href="#" class="dropdown-toggle">
                     <!--<input type="text" id="provinceId3" name="province" value="班级">-->
                     <select name="class" id="classId" style="border:none;">
                         <if condition="$condition['class']"><option>{$condition['class']}</option>
@@ -81,7 +79,7 @@
             </li>
             <!--性别-->
             <li role="presentation" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                <a href="#" class="dropdown-toggle">
                     <select name="sex" id="sexId" style="border:none;">
                         <if condition="$condition['sex']"><option>{$condition['sex']}</option>
                             <else />
@@ -138,13 +136,11 @@
 
 <block name="script">
     <script type="text/javascript">
-        function contest(type)
-        {
-            var contestUrl = "{:U('')}"; // merchant.js 中使用
-            var url = contestUrl.replace(/.html/, "");
-            location.href = url+"/type/"+type;//location.href实现客户端页面的跳转
-        }
+        var indexurl = "{:U()}";
     </script>
+
+    <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/common.js"></script>
 </block>
 
 

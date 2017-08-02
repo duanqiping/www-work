@@ -10,7 +10,7 @@ namespace Admin\Controller;
 
 
 use Admin\Model\ContestModel;
-use Admin\Model\ContestOrder;
+use Admin\Model\ContestOrderModel;
 use Admin\Model\UserModel;
 use Think\Controller;
 
@@ -20,7 +20,7 @@ class ContestController extends Controller
     public function index()
     {
         $contest = new ContestModel();
-        $contestOrder = new ContestOrder();
+        $contestOrder = new ContestOrderModel();
 
         $result = $contest->clickOperate($_GET);//按钮操作 编辑 删除
         if(!$result){
@@ -93,7 +93,9 @@ class ContestController extends Controller
     //赛事人员名单
     public function info()
     {
-        $contestorder = new ContestOrder();
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
 
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
@@ -109,6 +111,10 @@ class ContestController extends Controller
         $condition['contest_sn'] = $_SESSION['contest_sn'];
         $res = $contestorder->contestList($condition);
 
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+//        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+//        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
 //        echo "<pre>";
 //        print_r($res);
 //        echo "</pre>";
@@ -117,6 +123,11 @@ class ContestController extends Controller
 //        $this->assign('contest_sn', $_GET['contest_sn']);
         $this->assign('_list',$res);
         $this->display('info');
+
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+//        $this->assign('gradeInfo', $gradeInfo);
+//        $this->assign('classInfo', $classInfo);
     }
 
     //添加赛事人员

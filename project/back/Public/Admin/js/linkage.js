@@ -41,8 +41,6 @@ $(document).ready(function(){
         }
         url = url.replace(/\s/g,"");//去除文章中间空格
 
-        alert(url);
-
         return url;
     }
 

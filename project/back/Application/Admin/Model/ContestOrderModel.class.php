@@ -11,7 +11,7 @@ namespace Admin\Model;
 
 use Think\Model;
 
-class ContestOrder extends Model{
+class ContestOrderModel extends Model{
 
     protected $tableName = 'contest_order';
 
@@ -102,5 +102,21 @@ class ContestOrder extends Model{
 //        $data['circle'] = '4';
         $data['type'] = 2;
         return $data;
+    }
+
+    public function getDept($contest_sn)
+    {
+        $res = $this->where(array('contest_sn'=>$contest_sn))->field('dept')->select();
+        return $res;
+    }
+    public function getGrade($contest_sn)
+    {
+        $res = $this->where(array('contest_sn'=>$contest_sn))->field('dept')->select();
+        return $res;
+    }
+    public function getClass($contest_sn)
+    {
+        $res = $this->where(array('contest_sn'=>$contest_sn))->field('dept')->select();
+        return $res;
     }
 } 

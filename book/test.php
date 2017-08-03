@@ -4,16 +4,19 @@
 date_default_timezone_set("Asia/Shanghai");
 
 
+var_dump(1 & 1);
+var_dump(2 & 1);
+var_dump(3 & 1);
+var_dump(4 & 1);
 	
 	
 //是用来 过滤其他数据
-	
 function odd($var)
 {
-	print_r($var);
-	exit();
+	
     // returns whether the input integer is odd
-    return($var & 1);
+	//file_put_contents('log.txt',$val."\n",FILE_APPEND );
+    return($var & 1);//位运算
 }
 
 function even($var)
@@ -27,6 +30,8 @@ $array2 = array(6, 7, 8, 9, 10, 11, 12);
 
 echo "Odd :\n";
 print_r(array_filter($array1, "odd"));//Array ( [a] => 1 [c] => 3 [e] => 5 ) 
+
+exit();
 
 
 echo "Even:\n";

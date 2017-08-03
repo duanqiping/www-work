@@ -85,7 +85,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回结果:",
-          "content": "{\n \"list\": [\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"王猛\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n         \"endMachine\": \"0000113\",\n         \"length\": \"1500\",\n         \"sex\": \"1\",\n         \"circle\": \"4\"\n     },\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\",\n         \"endMachine\": \"0000114\",\n         \"length\": \"1000\",\n         \"sex\": \"2\",\n         \"circle\": \"3\"\n     }\n ],\n \"customer_id\": \"31\",\n \"type\": 2\n \"title\": \"上海交通大学夏季运动会\",\n \"content\": \"运动与健康\",\n \"is_again\": 0, //0非重考 1重考\n}\n}",
+          "content": "{\n \"list\": [\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"王猛\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\"\n         \"endMachine\": \"0000113\",\n         \"length\": \"1500\",\n         \"sex\": \"1\",\n         \"circle\": \"4\"\n     },\n     {\n         \"classRoom\": \"航天一班\",\n         \"name\": \"上官云\",\n         \"studentId\": \"764676\",\n         \"label\": \"5\",\n         \"endMachine\": \"0000114\",\n         \"length\": \"1000\",\n         \"sex\": \"2\",\n         \"circle\": \"3\"\n     }\n ],\n \"customer_id\": \"31\",\n \"title\": \"上海交通大学夏季运动会\",\n \"content\": \"运动与健康\",\n \"is_again\": 0, //0非重考 1重考\n}\n}",
           "type": "json"
         }
       ]

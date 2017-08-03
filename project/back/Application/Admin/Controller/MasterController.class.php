@@ -85,9 +85,10 @@ class MasterController extends Controller{
         $condition = array();
         $condition['customer_id'] = $customer = $_GET['customer_id'];
         $condition['contest_sn'] = $contest_sn = $_GET['contest_sn'];
+        $condition['time'] = array('gt',0);
 
-        $score = new ScoreModel();
-        $res = $score->table('contest_score')->where($condition)
+        $score = new ContestOrderModel();
+        $res = $score->where($condition)
             ->field('user_id,time,sex,dept,grade,class classRoom,name,studentId')
             ->order('time')
             ->select();

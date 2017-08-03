@@ -168,6 +168,7 @@ class ContestController extends Controller
         echo json_encode($list);
     }
 
+    //获取年级
     public function getGrade(){
 
         $dept=$_GET['dept'];
@@ -178,6 +179,8 @@ class ContestController extends Controller
         $data=$s->field('user_id,grade')->where($condition)->group('grade')->select();
         echo json_encode($data);
     }
+
+    //
     public function getClass(){
 
         $grade=$_GET['grade'];

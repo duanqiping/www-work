@@ -21,6 +21,46 @@ class ContestOrderModel extends Model{
         return $res;
     }
 
+    //更新用户成绩
+    public function updateContest($data)
+    {
+        //先判断 是否已经存在这个成绩
+        $condition = array();
+
+        $condition['user_id'] = $data['user_id'];
+        $condition['customer_id'] = $data['customer_id'];
+        $condition['contest_sn'] = $data['contest_sn'];
+        $count = $this->where($condition)->count();
+
+        if($count<1){
+            $this->error = '赛事名单中不存在该学生';
+            return false;
+        }
+
+        $user = new UserModel();
+        $sql = "update user set length=length+'{$data['length']}' WHERE user_id='{$data['user_id']}'";
+        $user->execute($sql);
+
+        $data['update'] = NOW_TIME;
+
+        unset($data['customer_id']);
+        unset($data['contest_sn']);
+        unset($data['user_id']);
+
+//        print_r($data);
+
+        $b = $this->where($condition)->save($data);
+//        echo $this->_sql();
+//        exit();
+        if(!$b){
+            $this->error = '服务器错误';
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
     //筛选条件
     public function makeCondition($data,$uid)
     {
@@ -57,9 +97,6 @@ class ContestOrderModel extends Model{
     {
         $res = $this->where($condition)->field('*')->select();
 
-//        echo $this->_sql();
-//        exit();
-
         return $res;
     }
 
@@ -67,8 +104,12 @@ class ContestOrderModel extends Model{
     public function addUser($ids){
 
         $user= new UserModel();
+        $contest = new ContestModel();
+
         $map['user_id'] = array('in',$ids);
-        $addinfo = $user->where($map)->field("customer_id,user_id,name,studentId,sex,dept,grade,class,{$_SESSION['contest_sn']} as contest_sn")->select();
+        $addinfo = $user->where($map)
+            ->field("customer_id,user_id,name,studentId,sex,dept,grade,class,{$_SESSION['contest_sn']} as contest_sn")
+            ->select();
 
         //开启事物
         $this->startTrans();
@@ -80,10 +121,14 @@ class ContestOrderModel extends Model{
             $condition_s['contest_sn'] = $_SESSION['contest_sn'];
             $condition_s['user_id'] = $v['user_id'];
 
-
             $count = $this->where($condition_s)->count();
 
             if($count<1){
+                //获取对应的比赛长度
+                $field = ($v['sex']==1)?'length_male':'length_female';
+                $res_length = $contest->where(array('contest_sn'=>$v['contest_sn']))->field($field)->find();
+                $v['length'] = $res_length[$field];
+
                 $result = $this->add($v);
                 if(!$result){
                     $this->rollback();
@@ -102,7 +147,7 @@ class ContestOrderModel extends Model{
     {
         $data = array();
 
-        $sql = "select co.class classRoom,co.name,co.user_id,co.studentId,co.sex,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
+        $sql = "select co.class classRoom,co.name,co.user_id,co.studentId,co.length,co.sex,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
             "co.contest_sn='$contest_sn' and co.customer_id='$customer_id'";
 
         $res = $this->query($sql);
@@ -118,14 +163,14 @@ class ContestOrderModel extends Model{
                 $res[$i]['endMachine'] = '0000112';
                 $res[$i]['circle'] = '3';
             }
+            unset($res[$i]['length_male']);
+            unset($res[$i]['length_female']);
         }
         $data['list'] = $res;
         $data['customer_id'] = $customer_id;
         $data['title'] = '上海交通大学夏季运动会';
         $data['content'] = '运动与健康';
-//        $data['endMachine'] = '0000113';
-//        $data['circle'] = '4';
-        $data['type'] = 2;
+        $data['is_again'] = 0;//是否为重考
         return $data;
     }
 

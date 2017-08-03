@@ -68,20 +68,18 @@ class MasterController extends Controller{
     public function addContest()
     {
         $data = $_POST;
-        $data['begin_time'] = intval($data['begin_time']);
-        $data['end_time'] = intval($data['end_time']);
-        $data['time'] = intval($data['time']);
 
-        $score = new ScoreModel();
-        $b = $score->insertContest($data);
+        $contestOrder = new ContestOrderModel();
+        $b = $contestOrder->updateContest($data);
+
         if($b){
             sendSuccess('success');
         }else{
-            sendError($score->getError());
+            sendError($contestOrder->getError());
         }
     }
 
-    //获取 比赛成绩名单
+    //获取某次比赛成绩
     public function getContestScore()
     {
         $condition = array();
@@ -90,7 +88,7 @@ class MasterController extends Controller{
 
         $score = new ScoreModel();
         $res = $score->table('contest_score')->where($condition)
-            ->field('user_id,time,sex,dept,grade,class,name,studentId')
+            ->field('user_id,time,sex,dept,grade,class classRoom,name,studentId')
             ->order('time')
             ->select();
         $res = $res?array_values($res):array();

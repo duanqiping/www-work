@@ -123,7 +123,11 @@
                         <td>{$vo.dept}</td>
                         <td>{$vo.grade}</td>
                         <td>{$vo.class}</td>
-                        <td>{$vo.sex}</td>
+                        <td>
+                            <if condition="$vo['sex'] eq 1">男
+                                <else/>女
+                            </if>
+                        </td>
                     </tr>
                 </volist>
                 <else/>

@@ -89,8 +89,9 @@
   *          "studentId": "764676",
   *          "label": "5"
   *          "endMachine": "0000113",
+  *          "length": "1500",
   *          "sex": "1",
-  *	         "circle": "4"
+  *          "circle": "4"
   *      },
   *      {
   *          "classRoom": "航天一班",
@@ -98,12 +99,15 @@
   *          "studentId": "764676",
   *          "label": "5",
   *          "endMachine": "0000114",
+  *          "length": "1000",
   *          "sex": "2",
-  *	         "circle": "3"
+  *          "circle": "3"
   *      }
   *  ],
   *  "customer_id": "31",
-  *  "type": 2
+  *  "title": "上海交通大学夏季运动会",
+  *  "content": "运动与健康",
+  *  "is_again": 0, //0非重考 1重考
   *}
   *}
   **/
@@ -120,7 +124,6 @@
   *@apiParam {String} time 用时
   *@apiParam {String} customer_id 客户id号
   *@apiParam {String} mode 1考试 2赛事
-  *@apiParam {String} length 长度
   *@apiParam {String} contest_sn 赛事编码
   *@apiParam {String} is_again 是否为重考 0否 1是
   *

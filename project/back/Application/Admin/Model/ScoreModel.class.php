@@ -86,42 +86,6 @@ class ScoreModel extends MongoModel{
 
         return $result;
     }
-    //录入考试\赛事成绩
-    public function insertContest($data)
-    {
-        $this->tableName = 'contest_score';
-
-        //先判断 是否已经存在这个成绩
-        $condition = array();
-        $condition['user_id'] = $data['user_id'];
-        $condition['customer_id'] = $data['customer_id'];
-        $condition['contest_sn'] = $data['contest_sn'];
-        $count = $this->table($this->tableName)->where($condition)->count();
-//        echo $this->_sql();
-//        exit();
-        if($count>0){
-            $this->error = '该同学成绩已经存在';
-            return false;
-        }
-
-        $user = new UserModel();
-        $sql = "update user set length=length+'{$data['length']}' WHERE user_id='{$data['user_id']}'";
-        $user_res = $user->where(array('user_id'=>$data['user_id']))->field('sex,dept,grade,class,name,studentId')->find();
-        $user->execute($sql);
-
-        $data = array_merge($data,$user_res);
-
-        $data['add_time'] = NOW_TIME;
-
-        $b = $this->table($this->tableName)->add($data);
-        if(!$b){
-            $this->error = '服务器错误';
-            return false;
-        }else{
-            return true;
-        }
-    }
-
 
     //录入平时成绩
     public function insert($data,$rankInfo)

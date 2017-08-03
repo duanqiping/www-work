@@ -96,6 +96,45 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "master/getContestScore",
+    "title": "获取比赛成绩",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contest_sn",
+            "description": "<p>赛事编码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "[\n{\n   \"_id\": 3,\n   \"user_id\": \"17\",\n   \"time\": 220,\n   \"sex\": \"2\",\n   \"dept\": \"物理系\",\n   \"grade\": \"1\",\n   \"class\": \"航天一班\",\n   \"name\": \"上官云\",\n   \"studentId\": \"764676\"\n},\n{\n   \"_id\": 2,\n   \"user_id\": \"16\",\n   \"time\": 800,\n   \"sex\": \"2\",\n   \"dept\": \"物理系\",\n   \"grade\": \"4\",\n   \"class\": \"航天一班\",\n   \"name\": \"李四\",\n   \"studentId\": \"7676\"\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "GetMasterGetcontestscore"
+  },
+  {
+    "type": "get",
     "url": "master/getUserInfo",
     "title": "获取用户信息",
     "version": "1.0.0",
@@ -258,5 +297,102 @@ define({ "api": [
     "filename": "apidoc-seed/api1.0.0.js",
     "groupTitle": "master",
     "name": "PostMasterAdd"
+  },
+  {
+    "type": "post",
+    "url": "master/addContest",
+    "title": "成绩录入(考试\\赛事)",
+    "version": "1.0.0",
+    "group": "master",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>用户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "begin_time",
+            "description": "<p>开始时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "end_time",
+            "description": "<p>结束时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "time",
+            "description": "<p>用时</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>客户id号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mode",
+            "description": "<p>1考试 2赛事</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "length",
+            "description": "<p>长度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contest_sn",
+            "description": "<p>赛事编码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "is_again",
+            "description": "<p>是否为重考 0否 1是</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回结果:",
+          "content": "{\"msg\":\"success\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回结果：",
+          "content": "{\n \"msg\": \"该同学成绩已经存在\",\n \"code\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "apidoc-seed/api1.0.0.js",
+    "groupTitle": "master",
+    "name": "PostMasterAddcontest"
   }
 ] });

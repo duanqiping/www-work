@@ -108,3 +108,64 @@
   *}
   **/
 
+ /**
+  * @api {post} master/addContest 成绩录入(考试\赛事)
+  * @apiVersion 1.0.0
+
+  * @apiGroup master
+
+  *@apiParam {String} user_id 用户id
+  *@apiParam {String} begin_time 开始时间
+  *@apiParam {String} end_time  结束时间
+  *@apiParam {String} time 用时
+  *@apiParam {String} customer_id 客户id号
+  *@apiParam {String} mode 1考试 2赛事
+  *@apiParam {String} length 长度
+  *@apiParam {String} contest_sn 赛事编码
+  *@apiParam {String} is_again 是否为重考 0否 1是
+  *
+  * @apiSuccessExample {json} 成功返回结果:
+  *{"msg":"success"}
+  * @apiErrorExample {json} 失败返回结果：
+  *{
+  *  "msg": "该同学成绩已经存在",
+  *  "code": 1
+  *}
+  **/
+
+ /**
+  * @api {get} master/getContestScore 获取比赛成绩
+  * @apiVersion 1.0.0
+
+  * @apiGroup master
+
+  *@apiParam {String} customer_id 客户id号
+  *@apiParam {String} contest_sn 赛事编码
+
+  * @apiSuccessExample {json} 成功返回结果:
+  *[
+  *{
+  *    "_id": 3,
+  *    "user_id": "17",
+  *    "time": 220,
+  *    "sex": "2",
+  *    "dept": "物理系",
+  *    "grade": "1",
+  *    "class": "航天一班",
+  *    "name": "上官云",
+  *    "studentId": "764676"
+  *},
+  *{
+  *    "_id": 2,
+  *    "user_id": "16",
+  *    "time": 800,
+  *    "sex": "2",
+  *    "dept": "物理系",
+  *    "grade": "4",
+  *    "class": "航天一班",
+  *    "name": "李四",
+  *    "studentId": "7676"
+  *}
+  *]
+  **/
+

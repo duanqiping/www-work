@@ -97,6 +97,8 @@ class ContestController extends Controller
 
         $uid = $_SESSION['user']['id'];
 
+        $condition = $_GET;//筛选条件
+
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
@@ -109,25 +111,28 @@ class ContestController extends Controller
         }
 
         $condition['contest_sn'] = $_SESSION['contest_sn'];
-        $res = $contestorder->contestList($condition);
+
+        $res = $contestorder->contestList($contestorder->makeCondition($condition,$uid));
+
+//        $res = $contestorder->contestList($condition);
 
         $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-//        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-//        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
 
 //        echo "<pre>";
-//        print_r($res);
+//        print_r($deptInfo);
 //        echo "</pre>";
 //        exit();
 
 //        $this->assign('contest_sn', $_GET['contest_sn']);
         $this->assign('_list',$res);
-        $this->display('info');
-
         $this->assign('condition', $condition);
         $this->assign('deptInfo', $deptInfo);
-//        $this->assign('gradeInfo', $gradeInfo);
-//        $this->assign('classInfo', $classInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+
+        $this->display('info');
     }
 
     //添加赛事人员

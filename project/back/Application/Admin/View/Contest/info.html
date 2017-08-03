@@ -3,6 +3,8 @@
 <block name="body">
     <div class="x_content">
 
+        <!--{$nimei['aa']}-->
+
         <p>赛事人员名单界面</p>
         <ul class="nav nav-pills" role="tablist">
             <li role="presentation"><a>赛事名单：</a>
@@ -17,6 +19,7 @@
                             <else />
                             <option>系别</option>
                         </if>
+
 
                         <notempty name="deptInfo">
                             <volist name="deptInfo" id="vo" key="k">
@@ -138,6 +141,7 @@
     <script type="text/javascript">
         var indexurl = "{:U()}";
     </script>
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
 
     <script src="__JS__/linkage.js"></script>
     <script src="__JS__/common.js"></script>

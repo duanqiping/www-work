@@ -9,7 +9,7 @@
 namespace Admin\Controller;
 
 
-use Admin\Model\ContestOrder;
+use Admin\Model\ContestOrderModel;
 use Admin\Model\UserModel;
 use Think\Controller;
 use Admin\Model\CustomerModel;
@@ -64,6 +64,39 @@ class MasterController extends Controller{
         }
     }
 
+    //录入 比赛\赛事 成绩
+    public function addContest()
+    {
+        $data = $_POST;
+        $data['begin_time'] = intval($data['begin_time']);
+        $data['end_time'] = intval($data['end_time']);
+        $data['time'] = intval($data['time']);
+
+        $score = new ScoreModel();
+        $b = $score->insertContest($data);
+        if($b){
+            sendSuccess('success');
+        }else{
+            sendError($score->getError());
+        }
+    }
+
+    //获取 比赛成绩名单
+    public function getContestScore()
+    {
+        $condition = array();
+        $condition['customer_id'] = $customer = $_GET['customer_id'];
+        $condition['contest_sn'] = $contest_sn = $_GET['contest_sn'];
+
+        $score = new ScoreModel();
+        $res = $score->table('contest_score')->where($condition)
+            ->field('user_id,time,sex,dept,grade,class,name,studentId')
+            ->order('time')
+            ->select();
+        $res = $res?array_values($res):array();
+        sendSuccess($res);
+    }
+
     //返回用户名
     public function getUserInfo()
     {
@@ -88,7 +121,7 @@ class MasterController extends Controller{
         $condition['contest_sn'] = $_GET['contest_sn'];
         $condition['customer_id'] = $_GET['customer_id'];
 
-        $contestOrder = new ContestOrder();
+        $contestOrder = new ContestOrderModel();
         $res = $contestOrder->getContestOrder($contest_sn,$customer_id);
 
         sendSuccess($res);

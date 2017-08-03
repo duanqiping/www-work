@@ -27,30 +27,51 @@
 
 <div class="col-md-12">
 
-<div class="alert alert-success">
-    <ul class="fa-ul">
-    <li>
-        <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">正在进行</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
-    </li>
-</ul>
-</div>
+<if condition="$nowContest">
+    <div class="alert alert-success">
+        <ul class="fa-ul">
+            <li>
+                <!--<i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">正在进行</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>-->
+                <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">正在进行</a> {$nowContest.title}.<span class="fa fa-sign-in right"></span>
+            </li>
+        </ul>
+    </div>
+    <else/>
+</if>
 
-<div class="alert alert-danger">
-    <ul class="fa-ul">
-    <li>
-        <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">时间冲突</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>
-    </li>
-</ul>
-</div>
+<if condition="$conflictContest">
+    <div class="alert alert-danger">
+        <ul class="fa-ul">
+            <volist name="conflictContest" id="vo" key="k">
+                <li>
+                    <!--<i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">时间冲突</a> <code>期末考</code>高三(2)班1500米考试.<span class="fa fa-sign-in right"></span>-->
+                    <i class="fa fa-info-circle fa-lg fa-li"></i><a class="alert-link">时间冲突</a> {$vo.title}.<span class="fa fa-sign-in right"></span>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <else/>
+</if>
 
-<div class="alert alert-warning">
-    <h4><i class="fa fa-warning"></i>20170805 9:30</h4> <a class="alert-link">即将开始</a><code>期末考</code>高三(3)班1000米考试.
-    <span class="fa fa-sign-in right"></span>
-</div>
-<div class="alert alert-warning">
-    <h4><i class="fa fa-warning"></i>20170805 15:00</h4> <a class="alert-link">即将开始</a><code>活动</code>城市马拉松海选.
-    <span class="fa fa-sign-in right"></span>
-</div>
+<if condition="$soonContest">
+        <volist name="soonContest" id="vo" key="k">
+            <div class="alert alert-warning">
+                <h4><i class="fa fa-warning"></i>{$vo.begin_time|date="Y-m-d H:i:s",###}</h4> <a class="alert-link">即将开始 </a>{$vo.title}.
+                <span class="fa fa-sign-in right"></span>
+            </div>
+        </volist>
+    <else/>
+</if>
+
+
+<!--<div class="alert alert-warning">-->
+    <!--<h4><i class="fa fa-warning"></i>20170805 9:30</h4> <a class="alert-link">即将开始</a><code>期末考</code>高三(3)班1000米考试.-->
+    <!--<span class="fa fa-sign-in right"></span>-->
+<!--</div>-->
+<!--<div class="alert alert-warning">-->
+    <!--<h4><i class="fa fa-warning"></i>20170805 15:00</h4> <a class="alert-link">即将开始</a><code>活动</code>城市马拉松海选.-->
+    <!--<span class="fa fa-sign-in right"></span>-->
+<!--</div>-->
 
 <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
 <div class="x_panel">
@@ -376,14 +397,15 @@
             <td>
                 <a>{$vo.title}</a>
                 <br />
-                <small>{$vo.add_time|date="Y-m-d H:i:s",###}</small>
+                <small>{$vo.begin_time|date="ymd H:i:s",###}</small>
             </td>
 
             <td class="project_progress">
                 <div class="progress progress_sm">
                     <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{$vo.count}"></div>
                 </div>
-                <small>57% Complete</small>
+                <!--<small>57% Complete</small>-->
+                <small>{$vo.count}/{$vo.count}</small>
             </td>
             <td>
                 <!--<button type="button" class="btn btn-success btn-xs">Success</button>-->

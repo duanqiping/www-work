@@ -51,10 +51,38 @@ class ContestModel extends Model{
         }
     }
 
-    //正在进行 冲突中 即将开始的考试
-    public function contestSelect()
+    //正在进行
+    public function contestSelectNow()
     {
+        $condition = array();
+        $condition['begin_time'] = array('lt',NOW_TIME);//开始时间小于当前时间
+        $condition['end_time'] = array('gt',NOW_TIME);//结束时间大于当前时间
+        $res = $this->where($condition)->field('contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
+        return $res[0];
+    }
 
+    //冲突中
+    public function contestSelectConflict($nowContest)
+    {
+        if(!$nowContest) return array();
+        $end_time = $nowContest['end_time'];
+        $begin_time = $nowContest['begin_time'];
+
+        $condition['begin_time'] = array('lt',$end_time);
+        $condition['begin_time'] = array('gt',$begin_time);
+
+        $res = $this->where($condition)->field('contest_sn,title')->order('begin_time')->limit(1)->select();
+        return $res;
+    }
+
+    //即将开始的考试
+    public function contestSelectSoon()
+    {
+        $condition['begin_time'] = array('gt',NOW_TIME);//开始时间大于当前时间
+        $condition['begin_time'] = array('lt',NOW_TIME+3600*24*3);//开始时间小于当前时间+3天的时间
+
+        $res = $this->where($condition)->field('contest_sn,title,begin_time')->order('begin_time')->limit(2)->select();
+        return $res;
     }
 
 
@@ -65,7 +93,7 @@ class ContestModel extends Model{
         $condition['customer_id'] = $_SESSION['user']['id'];
 
         $res = $this->where($condition)
-            ->field('contest_sn,title,add_time')
+            ->field('contest_sn,title,begin_time')
             ->order('add_time desc')
             ->select();
 
@@ -128,6 +156,13 @@ class ContestModel extends Model{
 
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
+
+        $res1 = explode('-',$data['pass_score_male']);
+        $res2 = explode('-',$data['pass_score_female']);
+        $data['pass_score_male'] = $res1[0]*60+$res1[1];
+        $data['pass_score_female'] = $res2[0]*60+$res2[1];
+
+        $data['pass_score_male'] =
 
         $data['add_time'] = NOW_TIME;
 

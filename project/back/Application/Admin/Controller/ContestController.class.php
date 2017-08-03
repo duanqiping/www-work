@@ -22,22 +22,34 @@ class ContestController extends Controller
         $contest = new ContestModel();
         $contestOrder = new ContestOrderModel();
 
-        $result = $contest->clickOperate($_GET);//按钮操作 编辑 删除
+        //按钮操作 编辑 删除
+        $result = $contest->clickOperate($_GET);
         if(!$result){
             exit($contest->getError());
         }else{
             //edit
             if($result !== true){
-                $this->assign('contestInfo', $result);
+                $this->assign('contestInfo', $result);//赛事的详细信息
             }
         }
 
+        $nowContest = $contest->contestSelectNow();//正在进行 一维
+        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中 二维数组
+        $soonContest = $contest->contestSelectSoon();//即将开始 二维数组
 
         $res = $contest->getContestInfo();//获取赛事列表
-        $res = $contestOrder->getContestNum($res);//获取赛事名单人数
+        $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
+//        print_r($nowContest);
+//        print_r($conflictContest);
+//        print_r($soonContest);
+//        exit();
 
-        $this->assign('_list', $res);
+        $this->assign('_list', $list);
+        $this->assign('nowContest', $nowContest);
+        $this->assign('conflictContest', $conflictContest);
+        $this->assign('soonContest', $soonContest);
+
         $this->display();
     }
 
@@ -68,9 +80,11 @@ class ContestController extends Controller
                     $this->redirect('index');
 //                    exit('fail');
                 }
-            }else{
+            }
+            else{
                 //添加一场赛事
                 $data = $contest->fillData($_POST);//填充数据
+
                 if ($contest->create($data)) {
                     if($contest->add($data)){
                         $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中

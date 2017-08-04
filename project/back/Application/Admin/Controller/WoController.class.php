@@ -52,14 +52,12 @@ class WoController extends Controller{
     {
         if($_GET){
             $data = $_GET;
-//            var_dump($data);
-//            exit();
             $this->assign('data',$data);
+
             $this->display();
         }else if($_POST){
             $data = $_POST;
-//            var_dump($data);
-//            exit();
+
             $deviceorder = new DeviceOrderModel();
             $result = $deviceorder->updateData($data);
             if($result){

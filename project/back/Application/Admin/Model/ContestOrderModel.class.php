@@ -126,13 +126,13 @@ class ContestOrderModel extends Model{
 
         //获取考试名单人详细信息
         $sql = "select co.class classRoom,co.name,co.user_id,co.studentId,co.length,co.sex,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
-            "co.contest_sn='$contest_sn' and co.customer_id='$customer_id'";
+            "co.contest_sn=%s and co.customer_id=%d";
 
         //获取赛事标题和内容
-        $sql2 = "select title,content from contest WHERE contest_sn='$contest_sn'";
+        $sql2 = "select title,content from contest WHERE contest_sn=%s";
 
-        $res = $this->query($sql);
-        $res2 = $this->query($sql2);
+        $res = $this->query($sql,$contest_sn,$customer_id);
+        $res2 = $this->query($sql2,$contest_sn);
 
         if(!$res){
             return array();

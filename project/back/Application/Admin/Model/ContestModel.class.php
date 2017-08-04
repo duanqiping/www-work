@@ -65,6 +65,7 @@ class ContestModel extends Model{
     public function contestSelectConflict($nowContest)
     {
         if(!$nowContest) return array();
+
         $end_time = $nowContest['end_time'];
         $begin_time = $nowContest['begin_time'];
 
@@ -78,13 +79,12 @@ class ContestModel extends Model{
     //即将开始的考试
     public function contestSelectSoon()
     {
-        $condition['begin_time'] = array('gt',NOW_TIME);//开始时间大于当前时间
-        $condition['begin_time'] = array('lt',NOW_TIME+3600*24*3);//开始时间小于当前时间+3天的时间
+        //开始时间大于当前时间 开始时间小于当前时间+3天的时间
+        $condition['begin_time'] = array('between',array(NOW_TIME,NOW_TIME+3600*24*3));
 
         $res = $this->where($condition)->field('contest_sn,title,begin_time')->order('begin_time')->limit(2)->select();
         return $res;
     }
-
 
     //获取赛事列表
     public function getContestInfo()
@@ -96,33 +96,6 @@ class ContestModel extends Model{
             ->field('contest_sn,title,begin_time')
             ->order('add_time desc')
             ->select();
-
-        return $res;
-    }
-
-
-    //赛事列表
-    public function _list($type)
-    {
-        $condition['is_show'] = 1;
-
-        if(!$type){
-            $condition['customer_id'] = $_SESSION['user']['id'];
-        }else{
-            $condition['customer_id'] = $_SESSION['user']['id'];
-            if($type == 'unfinished'){
-                $condition['begin_time'] = array('gt',NOW_TIME);
-            }else if($type == 'finished'){
-                $condition['is_use'] = 1;
-            }else{
-
-            }
-        }
-        $res = $this->where($condition)
-            ->field('contest_id,customer_id,contest_sn,title,desc,add_time,begin_time,end_time,length,from_name')
-            ->order('add_time desc')
-            ->select();
-
         return $res;
     }
 

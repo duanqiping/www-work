@@ -33,17 +33,12 @@ class ContestController extends Controller
             }
         }
 
-        $nowContest = $contest->contestSelectNow();//正在进行 一维
-        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中 二维数组
-        $soonContest = $contest->contestSelectSoon();//即将开始 二维数组
+        $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
+        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
+        $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
 
         $res = $contest->getContestInfo();//获取赛事列表
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
-
-//        print_r($nowContest);
-//        print_r($conflictContest);
-//        print_r($soonContest);
-//        exit();
 
         $this->assign('_list', $list);
         $this->assign('nowContest', $nowContest);
@@ -78,7 +73,6 @@ class ContestController extends Controller
                     $this->redirect('index');
                 }else{
                     $this->redirect('index');
-//                    exit('fail');
                 }
             }
             else{
@@ -86,7 +80,8 @@ class ContestController extends Controller
                 $data = $contest->fillData($_POST);//填充数据
 
                 if ($contest->create($data)) {
-                    if($contest->add($data)){
+                    if($contest->add($data))
+                    {
                         $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
                         $this->redirect('user');
                     }else{
@@ -94,7 +89,6 @@ class ContestController extends Controller
                     }
                 } else {
                     exit('fail2');
-                    $this->display();
                 }
             }
 
@@ -126,20 +120,12 @@ class ContestController extends Controller
 
         $condition['contest_sn'] = $_SESSION['contest_sn'];
 
-        $res = $contestorder->contestList($contestorder->makeCondition($condition,$uid));
-
-//        $res = $contestorder->contestList($condition);
+        $res = $contestorder->contestList(makeCondition($condition,$uid));
 
         $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
         $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
         $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
 
-//        echo "<pre>";
-//        print_r($deptInfo);
-//        echo "</pre>";
-//        exit();
-
-//        $this->assign('contest_sn', $_GET['contest_sn']);
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
         $this->assign('deptInfo', $deptInfo);
@@ -158,7 +144,7 @@ class ContestController extends Controller
 
         $condition = $_GET;//筛选条件
 
-        $res = $user->_list($user->makeCondition($condition,$uid));
+        $res = $user->_list(makeCondition($condition,$uid));
 
         $deptInfo = $user->getDept($uid);//获取系别
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级

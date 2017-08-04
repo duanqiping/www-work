@@ -45,25 +45,6 @@ class UserModel extends Model{
         }
     }
 
-    //筛选条件
-    public function makeCondition($data,$uid)
-    {
-        $condition = array();
-
-        $condition['customer_id'] = $uid;
-
-        //系别 和 班级 是ajax 联动
-        if($data['dept'] && $data['dept'] != '系别' && $data['dept'] != '不限'){$condition['dept'] = $data['dept'];}
-        if($data['grade'] && $data['grade'] != '年级' && $data['grade'] != '不限'){$condition['grade'] = $data['grade'];}
-        if($data['class'] && $data['class'] != '班级' && $data['class'] != '不限'){$condition['class'] = $data['class'];}
-        if($data['sex'] && $data['sex'] != '性别' && $data['sex'] != '不限'){
-            if($data['sex'] == '男')$condition['sex'] = 1;
-            else $condition['sex'] = 2;
-        }
-
-        return $condition;
-    }
-
     //排行表中获取用户信息
     public function getUserInfoFromRank($res)
     {

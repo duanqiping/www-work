@@ -124,10 +124,16 @@ class ContestOrderModel extends Model{
     {
         $data = array();
 
+        //获取考试名单人详细信息
         $sql = "select co.class classRoom,co.name,co.user_id,co.studentId,co.length,co.sex,d.code label from contest_order co LEFT JOIN device d ON co.user_id=d.user_id WHERE ".
             "co.contest_sn='$contest_sn' and co.customer_id='$customer_id'";
 
+        //获取赛事标题和内容
+        $sql2 = "select title,content from contest WHERE contest_sn='$contest_sn'";
+
         $res = $this->query($sql);
+        $res2 = $this->query($sql2);
+
         if(!$res){
             return array();
         }
@@ -135,18 +141,20 @@ class ContestOrderModel extends Model{
         {
             if($res[$i]['sex'] == 1){
                 $res[$i]['endMachine'] = '0000113';
-                $res[$i]['circle'] = '4';
+                $res[$i]['circle'] = '3';
             }else{
                 $res[$i]['endMachine'] = '0000112';
-                $res[$i]['circle'] = '3';
+                $res[$i]['circle'] = '2';
             }
             unset($res[$i]['length_male']);
             unset($res[$i]['length_female']);
         }
         $data['list'] = $res;
         $data['customer_id'] = $customer_id;
-        $data['title'] = '上海交通大学夏季运动会';
-        $data['content'] = '运动与健康';
+//        $data['title'] = '上海交通大学夏季运动会';
+//        $data['content'] = '运动与健康';
+        $data['title'] = $res2[0]['title'];
+        $data['content'] = $res2[0]['content'];
         $data['is_again'] = 0;//是否为重考
         return $data;
     }

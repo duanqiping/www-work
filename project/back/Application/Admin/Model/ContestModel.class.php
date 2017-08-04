@@ -28,7 +28,7 @@ class ContestModel extends Model{
         if($type == 'edit'){
             $contest_sn = $getInfo['contest_sn'];
             $res = $this->where(array('contest_sn'=>$contest_sn))
-                ->field('contest_sn,title,length_male,length_female,pass_score_male,pass_score_female,desc,begin_time,end_time')
+                ->field('contest_sn,title,length_male,length_female,pass_score_male,pass_score_female,content,begin_time,end_time')
                 ->find();
             if($res){
                 $res['reservation-time'] = date('d-m-Y:H:i:s',$res['begin_time']).'-'.date('d-m-Y:H:i:s',$res['end_time']);

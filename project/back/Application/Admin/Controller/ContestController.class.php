@@ -55,40 +55,20 @@ class ContestController extends Controller
             $contest = new ContestModel();
             if($_POST['contest_sn']){
                 //对赛事信息进行修改
-                $s = explode('-',$_POST['reservation-time']);
-                unset($_POST['reservation-time']);
-                $_POST['begin_time'] = strtotime($s[0]);
-                $_POST['end_time'] = strtotime($s[1]);
-                if($_SESSION['user']['grade'] == 3){
-                    $_POST['from_id'] = $_SESSION['user']['id'];
-                    $_POST['from_name'] = '学校管理员';
-                }
-                else{
-                    $_POST['from_id'] = $_SESSION['user']['id'];
-                    $_POST['from_name'] = $_SESSION['user']['id'];
-                }
-                $b = $contest->where(array('contest_sn'=>$_POST['contest_sn']))->save($_POST);
-                echo $contest->_sql();
-                if($b){
-                    $this->redirect('index');
-                }else{
-                    $this->redirect('index');
-                }
+                $contest->editContest($_POST);
+
+                $this->redirect('index');
             }
             else{
                 //添加一场赛事
                 $data = $contest->fillData($_POST);//填充数据
 
-                if ($contest->create($data)) {
-                    if($contest->add($data))
-                    {
-                        $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
-                        $this->redirect('user');
-                    }else{
-                        exit('fail');
-                    }
-                } else {
-                    exit('fail2');
+                if($contest->add($data))
+                {
+                    $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
+                    $this->redirect('user');
+                }else{
+                    exit('fail');
                 }
             }
 

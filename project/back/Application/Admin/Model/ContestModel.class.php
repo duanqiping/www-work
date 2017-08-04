@@ -150,4 +150,23 @@ class ContestModel extends Model{
         return $data;
     }
 
+    //赛事重新编辑
+    public function editContest($data)
+    {
+        $s = explode('-',$data['reservation-time']);
+        unset($data['reservation-time']);
+        $data['begin_time'] = strtotime($s[0]);
+        $data['end_time'] = strtotime($s[1]);
+        if($_SESSION['user']['grade'] == 3){
+            $data['from_id'] = $_SESSION['user']['id'];
+            $data['from_name'] = '学校管理员';
+        }
+        else{
+            $data['from_id'] = $_SESSION['user']['id'];
+            $data['from_name'] = $_SESSION['user']['id'];
+        }
+        $b = $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
+        return true;
+    }
+
 } 

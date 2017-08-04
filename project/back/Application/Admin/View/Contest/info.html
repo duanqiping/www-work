@@ -112,6 +112,13 @@
 
             </li>
         </ul>
+        <div style="float: left;color: #008000">
+            <button class="btn ajax-post">新增</button>
+        </div>
+        <div style="float: left;color: #008000">
+            <button class="btn ajax-post">删除</button>
+        </div>
+
         <!-- start project list -->
         <table class="table table-striped projects">
             <thead>
@@ -125,6 +132,7 @@
                 <th class="">年级</th>
                 <th class="">班级</th>
                 <th class="">性别</th>
+                <th class="">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -144,6 +152,7 @@
                                 <else/>女
                             </if>
                         </td>
+                        <td><a style="color: #006600">删除</a></td>
                     </tr>
                 </volist>
                 <else/>

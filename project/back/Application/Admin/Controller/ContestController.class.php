@@ -100,7 +100,7 @@ class ContestController extends Controller
 
         $condition['contest_sn'] = $_SESSION['contest_sn'];
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid));
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
 
         $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
         $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
@@ -124,7 +124,7 @@ class ContestController extends Controller
 
         $condition = $_GET;//筛选条件
 
-        $res = $user->_list(makeCondition($condition,$uid));
+        $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0));
 
         $deptInfo = $user->getDept($uid);//获取系别
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级

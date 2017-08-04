@@ -38,11 +38,12 @@ function getTimeBegin($time_flag)
 }
 
 //筛选条件
-function makeCondition($data,$uid)
+function makeCondition($data,$uid,$contest_sn)
 {
     $condition = array();
 
     $condition['customer_id'] = $uid;
+    if($contest_sn) $condition['contest_sn'] = $contest_sn;//已选的名单
 
     //系别 和 班级 是ajax 联动
     if($data['dept'] && $data['dept'] != '系别' && $data['dept'] != '不限'){$condition['dept'] = $data['dept'];}

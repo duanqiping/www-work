@@ -139,6 +139,26 @@ class ContestController extends Controller
         $this->display();
     }
 
+    //删除赛事人员
+    public function delete()
+    {
+        $condition = array();
+
+        if($_GET['id']){
+            $condition['contest_order_id'] = $_GET['id'];//单个删除
+        }else if($_POST['id']){
+            $condition['contest_order_id'] = array('in',$_POST['id']);//批量删除
+        }else{
+            exit('id获取失败');
+        }
+
+        $contestOrder = new ContestOrderModel();
+        $result = $contestOrder->where($condition)->delete();
+
+        if(!$result) exit('服务器错误');
+        else $this->redirect('info');
+    }
+
     //获取系别
     public function getDept(){
         $s= new UserModel();
@@ -160,7 +180,7 @@ class ContestController extends Controller
         echo json_encode($data);
     }
 
-    //
+    //获取班级
     public function getClass(){
 
         $grade=$_GET['grade'];

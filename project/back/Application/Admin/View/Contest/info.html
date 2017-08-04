@@ -112,11 +112,13 @@
 
             </li>
         </ul>
+        <!--<div style="float: left;color: #008000">-->
+            <!--<button class="btn ajax-post">新增</button>-->
+        <!--</div>-->
+        <form action="{:U('delete')}" method="post">
+
         <div style="float: left;color: #008000">
-            <button class="btn ajax-post">新增</button>
-        </div>
-        <div style="float: left;color: #008000">
-            <button class="btn ajax-post">删除</button>
+            <button class="btn ajax-post" onclick="return confirm('确定删除选中的学生?');">删除</button>
         </div>
 
         <!-- start project list -->
@@ -139,7 +141,7 @@
             <notempty name="_list">
                 <volist name="_list" id="vo" key="k">
                     <tr>
-                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.contest_order_id}" /></td>
                         <td>{$vo.contest_order_id} </td>
                         <td>{$vo.contest_sn}</td>
                         <td>{$vo.name}</td>
@@ -152,15 +154,18 @@
                                 <else/>女
                             </if>
                         </td>
-                        <td><a style="color: #006600">删除</a></td>
+                        <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
                     </tr>
                 </volist>
+                <td colspan="11" class="text-center"> <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击继续添加学生</a> </td>
                 <else/>
                 <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击添加学生</a> </td>
             </notempty>
-            <td colspan="11" class="text-center"> <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击继续添加学生</a> </td>
+
             </tbody>
         </table>
+
+        </form>
         <!-- end project list -->
 
     </div>

@@ -284,7 +284,8 @@ class RanKMongoModel extends MongoModel{
                 ->select();
         }else{
             $condition['cycles'] = intval($cycles);
-            $condition['add_time'] = array('gt',intval(strtotime($this->rankChoiceRule($flag))));
+//            $condition['add_time'] = array('gt',intval(strtotime($this->rankChoiceRule($flag))));
+            $condition['add_time'] = array('gt',intval(getTimeBegin($flag) ));
             $res = $this->table($tableName)
                 ->where($condition)
                 ->field('user_id,customer_id,score_id,cycles,time,add_time,length')
@@ -295,9 +296,6 @@ class RanKMongoModel extends MongoModel{
 
         if(!$res) return array();
         $res = array_values($res);
-
-//        print_r($res);
-//        exit();
 
         $user = new UserModel();
         $res = $user->getUserInfoFromRank($res);

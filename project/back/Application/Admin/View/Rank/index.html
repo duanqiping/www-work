@@ -1,0 +1,185 @@
+<extend name="Public/base2" />
+
+<block name="head">
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+    <script src="__JS__/linkage.js"></script>
+</block>
+
+<block name="body">
+
+    <div class="page-title">
+        <div class="title_left">
+            <h3>排行榜</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="输入关键字">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">搜索</button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+    <div class="x_title">
+        <h2>实时排名 <small>实时排名监控</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+
+    <p>刷新 可查看最新排名。</p>
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>排行筛选：</a>
+        </li>
+
+        <li role="presentation" class="dropdown">
+            <a  href="{:U('index',array('flag'=>'single'))}" class="dropdown-toggle">
+               单圈最佳排行
+            </a>
+        </li>
+
+        <!--系别-->
+        <li role="presentation" class="dropdown">
+            <a  href="#" class="dropdown-toggle">
+                    <select id="week" name="cycles" style="border:none;">
+                        <!--<OPTGROUP LABEL="周排行">-->
+                        <option>周排行</option>
+                        <option>1圈</option>
+                        <option>2圈</option>
+                        <option>3圈</option>
+                        <option>4圈</option>
+                        <option>5圈</option>
+                    </select>
+            </a>
+        </li>
+
+        <li role="presentation" class="dropdown">
+            <a  href="#" class="dropdown-toggle">
+                <select id="month"  name="cycles" style="border:none;">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>月排行</option>
+                    <option>1圈</option>
+                    <option>2圈</option>
+                    <option>3圈</option>
+                    <option>4圈</option>
+                    <option>5圈</option>
+                </select>
+
+            </a>
+        </li>
+
+        <li role="presentation" class="dropdown">
+            <a  href="#" class="dropdown-toggle">
+                <select id="year" name="cycles" style="border:none;">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>年排行</option>
+                    <option>1圈</option>
+                    <option>2圈</option>
+                    <option>3圈</option>
+                    <option>4圈</option>
+                    <option>5圈</option>
+                </select>
+
+            </a>
+        </li>
+
+        <li role="presentation" class="dropdown">
+            <a  href="#" class="dropdown-toggle">
+                <select id="marathon" name="cycles" style="border:none;">
+                    <!--<OPTGROUP LABEL="周排行">-->
+                    <option>马拉松排行</option>
+                    <option>四分之一程马拉松</option>
+                    <option>半程马拉松</option>
+                    <option>全程马拉松</option>
+                </select>
+            </a>
+        </li>
+
+    </ul>
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>已选排行：</a>
+        </li>
+        <li role="presentation" class="dropdown" >
+            <a class="dropdown-toggle">
+               <span style="color: red">{$rankName}  排行榜</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- start project list -->
+    <div class="table-responsive">
+        <table class="table table-striped projects">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="">姓名</th>
+                <th class="">学号</th>
+                <th class="">系别</th>
+                <th class="">年级</th>
+                <th class="">班级</th>
+                <th class="">用时(秒)</th>
+                <th class="">完成时间</th>
+                <th class="">比赛名次</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo" key="k">
+                    <tr>
+                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+                        <td>{$vo.name} </td>
+                        <td>{$vo.studentId} </td>
+                        <td>{$vo.dept}</td>
+                        <td>{$vo.grade}</td>
+                        <td>{$vo.class}</td>
+                        <td>{$vo.time}</td>
+                        <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$k}</td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+            <!-- end project list -->
+
+        </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        var rankUrl = "{:U('index')}"; // merchant.js 中使用
+    </script>
+</block>

@@ -44,49 +44,39 @@ $(document).ready(function(){
         return url;
     }
 
+    $("#week").change( function () {
+        var checkText=$("#week").find("option:selected").text();
+        var url = rankUrl.replace(/.html/, "");
+        checkText = checkText.replace(/圈/, "");
+        location.href = url+"/flag/week/cycles/"+checkText;//location.href实现客户端页面的跳转
+    } );
 
-    //$("#deptId").change(function(){
-    //    getGrade();
-    //});
-    //
-    //$("#gradeId").change(function(){
-    //    getClass();
-    //});
+    $("#month").change( function () {
+        var checkText=$("#month").find("option:selected").text();
+        var url = rankUrl.replace(/.html/, "");
+        checkText = checkText.replace(/圈/, "");
+        location.href = url+"/flag/month/cycles/"+checkText;//location.href实现客户端页面的跳转
+    } );
 
-    //getDept();
-    //function getDept()
-    //{
-    //    //alert('hello');
-    //    $.getJSON(ajaxurldept, function(data) {
-    //        $("<option></option>?").text('系别').appendTo($("#deptId"));
-    //        $.each(data, function(i, item) {
-    //            $("<option></option>").val(item['dept']).text(item['dept']).appendTo($("#deptId"));
-    //        });
-    //        //getGrade();
-    //    });
-    //}
-    //function getGrade()
-    //{
-    //    $("#gradeId").empty();
-    //    $.getJSON(ajaxurlgrade,  {dept:$("#deptId").val()}, function(data) {
-    //        $("<option></option>?").text('年级').appendTo($("#gradeId"));
-    //        $.each(data, function(i, item) {
-    //            $("<option></option>").val(item['grade']).text(item['grade']).appendTo($("#gradeId"));
-    //        });
-    //        getClass();
-    //    });
-    //}
-    //
-    //function getClass()
-    //{
-    //    $("#classId").empty();
-    //    $.getJSON(ajaxurlclass,  {grade:$("#gradeId").val()}, function(data) {
-    //        $("<option></option>?").text('班级').appendTo($("#classId"));
-    //        $.each(data, function(i, item) {
-    //            $("<option></option>").val(item['class']).text(item['class']).appendTo($("#classId"));
-    //        });
-    //    });
-    //}
+    $("#year").change( function () {
+        var checkText=$("#year").find("option:selected").text();
+        var url = rankUrl.replace(/.html/, "");
+        checkText = checkText.replace(/圈/, "");
+        location.href = url+"/flag/year/cycles/"+checkText;//location.href实现客户端页面的跳转
+    } );
 
+    $("#marathon").change( function () {
+        var checkText=$("#marathon").find("option:selected").text();
+        var url = rankUrl.replace(/.html/, "");
+        if(checkText == '四分之一程马拉松'){
+            checkText = 26;
+        }else if(checkText == '半程马拉松'){
+            checkText = 52;
+        }else{
+            checkText = 105;
+        }
 
+        //checkText = checkText.replace(/圈/, "");
+        location.href = url+"/flag/marathon/cycles/"+checkText;//location.href实现客户端页面的跳转
+    } );
 });

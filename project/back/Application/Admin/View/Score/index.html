@@ -51,15 +51,32 @@
             <div class="x_content">
 
                 <div class="x_content">
-                    <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation"><a href="#" style="color: #006600">平时训练 成绩</a>
-                        </li>
-                        <li role="presentation"><a href="#" style="color: #006600">考试\赛事 成绩</a>
-                        </li>
-                    </ul>
+                    <!--<ul class="nav nav-pills" role="tablist">-->
+                        <!--<li role="presentation"><a href="{:U('index',array('type'=>1))}" style="color: #006600">平时训练 成绩</a>-->
+                        <!--</li>-->
+                        <!--<li role="presentation"><a href="{:U('index',array('type'=>2))}" style="color: #006600">考试\赛事 成绩</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
 
                     <ul class="nav nav-pills" role="tablist">
                         <li role="presentation"><a>成绩筛选：</a>
+                        </li>
+
+                        <!--成绩-->
+                        <li role="presentation" class="dropdown">
+                            <a  href="#" class="dropdown-toggle">
+
+                                <select name="score" id="scoreId" style="border:none;">
+                                    <if condition="$condition['score']"><option>{$condition['score']}</option>
+                                        <else />
+                                        <option>成绩类型</option>
+                                    </if>
+                                    <option>平时成绩</option>
+                                    <option>考试\赛事成绩</option>
+                                    <option>不限</option>
+                                </select>
+                            </a>
+
                         </li>
 
                         <!--系别-->

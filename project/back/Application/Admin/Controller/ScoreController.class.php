@@ -17,29 +17,37 @@ class ScoreController extends Controller{
 
     public function index()
     {
-
-        $contestorder = new ContestOrderModel();
-        $score=  new ScoreModel();
+        $deptInfo  = array();
+        $gradeInfo  = array();
+        $classInfo  = array();
+        $res = array();
 
         $uid = $_SESSION['user']['id'];
 
+        $type = $_GET['type']?$_GET['type']:'平时成绩';
+        unset($_GET['type']);
         $condition = $_GET;//筛选条件
-//
 
-//
-        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
-//
-//        $score = new ScoreModel();
-//        $res = $score->_list(makeCondition($condition,$uid,$contest_sn = 0));
+        if($type == '平时成绩'){
+            $score=  new ScoreModel();
 
-//        echo "<pre>";
-//        print_r($res);
-//        echo "</pre>";
-//        exit();
+            $deptInfo = $score->getDept();//获取系别
+            $gradeInfo = $score->getGrade($condition['dept']);//获取年级
+            $classInfo = $score->getClass($condition['dept'],$condition['grade']);//获取班级
+            $res = $score->_list(makeCondition($condition,$uid,$contest_sn = 0));
+        }else if($type == '考试\赛事成绩'){
+            $contestorder = new ContestOrderModel();
+            $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+            $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+            $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
 
-//        $this->assign('_list',$res);
+            $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn = 0));
+        }
+
+
+
+        $this->assign('_list',$res);
+
         $this->assign('condition', $condition);
         $this->assign('deptInfo', $deptInfo);
         $this->assign('gradeInfo', $gradeInfo);

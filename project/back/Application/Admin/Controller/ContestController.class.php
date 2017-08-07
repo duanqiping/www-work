@@ -225,15 +225,19 @@ class ContestController extends Controller
         $target = array('0000111','0000112','0000113');
 
         $content = array(
-            'data' => array(
-                'customer_id'=>'31',
-                'contest_sn'=>$_SESSION['contest_sn']
-            ),
+            'customer_id' => '31',
+            'contest_sn' => $_SESSION['contest_sn']
+        );
+
+        $content = str_replace("\\/", "/", json_encode($content));
+
+        $content = array(
+            'data' =>$content,
             'type'=>2
         );
+
         $content = json_encode($content);//注意 这里需要提前将content json_encode
 
-//        $ext = array('data'=>array('11','222','222','33333'),'type'=>5);
         $result = $e->sendText($from="admin",$target_type,$target,$content);//($from="admin",$target_type,$target,$content,$ext)
 
         if($result){
@@ -241,9 +245,6 @@ class ContestController extends Controller
         }else{
             exit('fail');
         }
-//        echo "<pre>";
-//        print_r($result);
-//        echo "</pre>";
     }
 
     //获取系别

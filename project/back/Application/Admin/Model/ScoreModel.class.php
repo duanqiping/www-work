@@ -59,11 +59,7 @@ class ScoreModel extends MongoModel{
     private function sumCycles($score_table,$time_flag)
     {
         $begin_time = getTimeBegin($time_flag);
-//        $end_time = NOW_TIME;
-
         $condition['add_time'] = array('gt',$begin_time);
-        //$condition['add_time'] = array('lt',$end_time);
-
         $count = $this->table($score_table)->where($condition)->count();
 
         return $count;
@@ -72,9 +68,8 @@ class ScoreModel extends MongoModel{
     //成绩列表
     public function _list($condition)
     {
-//        $sql = 'db.z_score_34695.find( { "dept": { $exists: true } },{"add_time":true} )';
-//        $res = $this->mongoCode($sql);
 
+        unset($condition['customer_id']);
 
         $res = $this->table('z_score_34695')
             ->where($condition)
@@ -171,6 +166,7 @@ class ScoreModel extends MongoModel{
         return $data;
     }
 
+    //对成绩信息进行分组统计和排序  user_id和flag判断一次成绩
     public function scoreAccount($res)
     {
         $result =   array();//先按user_id分组
@@ -182,10 +178,14 @@ class ScoreModel extends MongoModel{
         foreach($result as $k1=>$v1){
             $result2 =   array();//再按flag分组
             foreach($v1 as $k2=>$v2){
-                $result2[$v2['flag']][]    =   $v2;
+//                $result2[$k1][$v2['flag']][]    =   $v2;
+                $result2[$k1][]    =   $v2;
             }
+
             $data_group = array_merge($data_group,$result2);
         }
+
+        $data_group = array_values($data_group);
 
         $s = array();//把统计好的数据进行合并
         $sort = array();
@@ -201,6 +201,60 @@ class ScoreModel extends MongoModel{
         array_multisort($sort,SORT_DESC,$s);
 
         return $s;
+    }
+
+    public function getDept()
+    {
+        $score_table = 'z_score_34695';
+        $sql = 'db.'."$score_table".'.group({
+                    key:{dept:true},//分组条件
+                    initial:{num:0},
+                    $reduce:function(doc,prev){
+                    prev.num++
+                    }
+                    }); ';
+        $res = $this->mongoCode($sql);
+
+        return $res;
+    }
+    public function getGrade($dept)
+    {
+//        var_dump($dept);
+//        exit();
+        if(!$dept) return array();
+        $score_table = 'z_score_34695';
+        $sql = 'db.'."$score_table".'.group({
+                    key:{grade:true},//分组条件
+                    initial:{num:0},
+                    $reduce:function(doc,prev){
+                    prev.num++
+                    },
+                    condition:{$where:function(){
+                    return this.dept=='."'$dept'".';//查询条件
+                    }
+                    }
+                    }); ';
+        $res = $this->mongoCode($sql);
+        return $res?$res:array();
+    }
+    public function getClass($dept,$grade)
+    {
+        if(!$dept || !$grade) return array();
+        $score_table = 'z_score_34695';
+        $sql = 'db.'."$score_table".'.group({
+                    key:{class:true},//分组条件
+                    initial:{num:0},
+                    $reduce:function(doc,prev){
+                    prev.num++
+                    },
+                    condition:{$where:function(){
+                    return this.dept=='."'$dept'".' && this.grade=='."'$grade'".';//查询条件
+                    }
+                    }
+                    }); ';
+        $res = $this->mongoCode($sql);
+
+        return $res?$res:array();
     }
 }
 

@@ -416,9 +416,11 @@ class Easemob extends Model{
 
 		$options['type']="txt";
 		$options['msg']=$content;
+
 		$body['msg']=$options;
 		$body['from']=$from;
 //		$body['ext']=$ext;
+
 		$b=json_encode($body);
 
 		$header=array($this->getToken());

@@ -183,14 +183,14 @@ class ContestOrderModel extends Model{
         $res = $this->where(array('contest_sn'=>$contest_sn))->field('dept')->group('dept')->select();
         return $res;
     }
-    public function getGrade($contest_sn)
+    public function getGrade($contest_sn,$dept)
     {
-        $res = $this->where(array('contest_sn'=>$contest_sn))->field('grade')->group('grade')->select();
+        $res = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$dept))->field('grade')->group('grade')->select();
         return $res;
     }
-    public function getClass($contest_sn)
+    public function getClass($contest_sn,$dept,$grade)
     {
-        $res = $this->where(array('contest_sn'=>$contest_sn))->field('class')->group('class')->select();
+        $res = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$dept,'grade'=>$grade))->field('class')->group('class')->select();
         return $res;
     }
 } 

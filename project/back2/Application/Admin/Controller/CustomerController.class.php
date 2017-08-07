@@ -156,7 +156,7 @@ class CustomerController extends BaseController
 //        $condition['customer_id'] = $_SESSION['user']['id'];
 
         $score = new ScoreModel();
-        $res = $score->_list($condition,$condition);
+        $res = $score->_list($condition);
 
 //        echo "<pre>";
 //        print_r($res);

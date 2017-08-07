@@ -20,6 +20,26 @@ class ContestOrderModel extends Model{
         $res = $this->where($condition)->field($field)->select();
         return $res;
     }
+    //检查签到人员是否在考试名单列表中
+    public function checkSignContest($user_ids,$contest_sn)
+    {
+        $condition = array();
+        $condition['contest_sn'] = $contest_sn;
+//        print_r($user_ids);
+//        exit();
+        for($i=0,$len=count($user_ids);$i<$len;$i++){
+            $condition['user_id'] = $user_ids[$i];
+            $count = $this->where($condition)->count();
+//            echo $this->_sql();
+//            exit();
+            if($count<1){
+                $this->error = "user_id为".$user_ids[$i]['user_id']."学生未在该考试名单中";
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     //更新用户成绩
     public function updateContest($data)
@@ -73,7 +93,6 @@ class ContestOrderModel extends Model{
     public function contestList($condition)
     {
         $res = $this->where($condition)->field('*')->select();
-
         return $res;
     }
 

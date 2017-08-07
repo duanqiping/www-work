@@ -11,6 +11,7 @@ namespace Admin\Controller;
 
 use Admin\Model\ContestModel;
 use Admin\Model\ContestOrderModel;
+use Admin\Model\Easemob;
 use Admin\Model\UserModel;
 use Think\Controller;
 
@@ -28,8 +29,15 @@ class ContestController extends Controller
             exit($contest->getError());
         }else{
             //edit
-            if($result !== true){
+//            if($result !== true){
+            if(is_array($result)){
                 $this->assign('contestInfo', $result);//赛事的详细信息
+            }else if($result == 2){
+                //delete
+                unset($_GET);
+                $this->redirect('index');
+            }
+            else{
             }
         }
 
@@ -81,6 +89,7 @@ class ContestController extends Controller
     //赛事人员名单
     public function info()
     {
+        $contest = new ContestModel();
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
@@ -106,11 +115,14 @@ class ContestController extends Controller
         $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
         $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
 
+        $title = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))->getField('title');
+
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
         $this->assign('deptInfo', $deptInfo);
         $this->assign('gradeInfo', $gradeInfo);
         $this->assign('classInfo', $classInfo);
+        $this->assign('title',$title);
 
         $this->display('info');
     }
@@ -157,6 +169,81 @@ class ContestController extends Controller
 
         if(!$result) exit('服务器错误');
         else $this->redirect('info');
+    }
+
+    //签到
+    public function sign()
+    {
+        $contest = new ContestModel();
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
+
+        $condition = $_GET;//筛选条件
+
+//        print_r($condition);
+//        exit();
+
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+        if($_POST){
+            $ids = $_POST;
+            $ids = $ids['id'];
+
+            $b = $contestorder->addUser($ids);
+            if(!$b) exit('fail');
+        }
+
+
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
+        $title = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))->getField('title');
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+        $this->assign('title', $title);
+
+        $this->display();
+    }
+
+    //开始考试
+    public function beginContest()
+    {
+        $e = new Easemob();
+
+        $target_type = 'users';
+        $target = array('0000111','0000112','0000113');
+
+        $content = array(
+            'data' => array(
+                'customer_id'=>'31',
+                'contest_sn'=>$_SESSION['contest_sn']
+            ),
+            'type'=>2
+        );
+        $content = json_encode($content);//注意 这里需要提前将content json_encode
+
+//        $ext = array('data'=>array('11','222','222','33333'),'type'=>5);
+        $result = $e->sendText($from="admin",$target_type,$target,$content);//($from="admin",$target_type,$target,$content,$ext)
+
+        if($result){
+            $this->redirect('index');
+        }else{
+            exit('fail');
+        }
+//        echo "<pre>";
+//        print_r($result);
+//        echo "</pre>";
     }
 
     //获取系别

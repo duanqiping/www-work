@@ -96,6 +96,31 @@ class MasterController extends Controller{
         sendSuccess($res);
     }
 
+    //签到学生信息 入库
+    public function sign()
+    {
+        $contestOrder = new ContestOrderModel();
+        $user_ids = $_POST['user_id'];
+        $contest_sn = $_POST['contest_sn'];
+        $result = $contestOrder->checkSignContest($user_ids,$contest_sn);
+        if(!$result){
+            sendError($contestOrder->getError());
+        }
+        $condition['user_id'] = array('in',$user_ids);
+        $condition['contest_sn'] = $contest_sn;
+        $b = $contestOrder->where($condition)->setField('sign',1);
+
+        sendSuccess('success');
+//        echo $contestOrder->_sql();
+//        exit();
+//        if(!$b){
+//            sendServerError('签到更新失败');
+//        }else{
+//            sendSuccess('success');
+//        }
+
+    }
+
     //返回用户名
     public function getUserInfo()
     {

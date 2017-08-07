@@ -74,12 +74,12 @@ class ScoreModel extends MongoModel{
     {
 //        $sql = 'db.z_score_34695.find( { "dept": { $exists: true } },{"add_time":true} )';
 //        $res = $this->mongoCode($sql);
-//
-//        $condition = array();
-//        $condition['dept'] = '美术系';
-//        $condition['class'] = '信息一班';
-//        $condition['user_id'] = '1';
-        $res = $this->table('z_score_34695')->where($condition)->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')->select();
+
+
+        $res = $this->table('z_score_34695')
+            ->where($condition)
+            ->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')
+            ->select();
 
         //对成绩信息进行分组统计和排序
         $result = $this->scoreAccount($res);

@@ -409,7 +409,7 @@
             </td>
             <td>
                 <!--<button type="button" class="btn btn-success btn-xs">Success</button>-->
-                <button type="button" class="btn btn-success btn-xs">开始</button>
+                <button type="button" onclick="beginContest({$vo['contest_sn']})" class="btn btn-success btn-xs">开始</button>
             </td>
             <td>
                 <a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
@@ -433,6 +433,17 @@
 </block>
 
 <block name="script">
+
+    <script type="text/javascript">
+        function beginContest(sn)
+        {
+            var url = "{:U('sign')}";
+            var url = url.replace(/.html/, "");
+//            alert(sn);
+//            alert(111);
+            location.href = url+"/contest_sn/"+sn;//location.href实现客户端页面的跳转
+        }
+    </script>
     <!--<script src="__JS__/custom.min.js"></script>-->
     <!--<script src="__JS__/jquery-2.0.3.min.js"></script>-->
 </block>

@@ -1,0 +1,232 @@
+<extend name="Public/base2" />
+
+<block name="body">
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>赛事/考核 <small>赛事人员签到</small></h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入关键字">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+
+        <div class="x_title">
+            <h2>已选名单 <small>{$title} 赛事名单监控</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+            <div class="x_content">
+
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation"><a>赛事名单列表：</a>
+                    </li>
+
+                    <!--是否签到-->
+                    <li role="presentation" class="dropdown">
+                        <a  href="#" class="dropdown-toggle">
+
+                            <select name="sign" id="sign" style="border:none;">
+                                <if condition="$condition['sign']"><option>{$condition['sign']}</option>
+                                    <else />
+                                    <option>签到</option>
+                                </if>
+                                <option value="1">已签到</option>
+                                <option value="2">未签到</option>
+                                <option>不限</option>
+
+                            </select>
+                        </a>
+                    </li>
+
+                    <!--系别-->
+                    <li role="presentation" class="dropdown">
+                        <a  href="#" class="dropdown-toggle">
+
+                            <select name="dept" id="deptId" style="border:none;">
+                                <if condition="$condition['dept']"><option>{$condition['dept']}
+                                    <else />
+                                    <option>系别</option>
+                                </if>
+
+
+                                <notempty name="deptInfo">
+                                    <volist name="deptInfo" id="vo" key="k">
+                                        <option>{$vo.dept}</option>
+                                    </volist>
+                                    <else/>
+                                </notempty>
+                                </option><option>不限</option>
+                            </select>
+                        </a>
+
+                    </li>
+                    <!--年级-->
+                    <li role="presentation" class="dropdown">
+                        <a  href="#" class="dropdown-toggle">
+                            <!--<input type="text" id="provinceId2" name="province" value="年级">-->
+                            <select name="grade" id="gradeId" style="border:none;">
+
+                                <if condition="$condition['grade']"><option>{$condition['grade']}</option>
+                                    <else />
+                                    <option>年级</option>
+                                </if>
+                                <notempty name="gradeInfo">
+                                    <volist name="gradeInfo" id="vo" key="k">
+                                        <tr>
+                                            <option>{$vo.grade}</option>
+                                        </tr>
+                                    </volist>
+                                    <else/>
+                                </notempty>
+                                </option><option>不限</option>
+                            </select>
+                        </a>
+
+                    </li>
+                    <!--班级-->
+                    <li role="presentation" class="dropdown">
+
+                        <a  href="#" class="dropdown-toggle">
+                            <!--<input type="text" id="provinceId3" name="province" value="班级">-->
+                            <select name="class" id="classId" style="border:none;">
+                                <if condition="$condition['class']"><option>{$condition['class']}</option>
+                                    <else />
+                                    <option>班级</option>
+                                </if>
+
+                                <notempty name="classInfo">
+                                    <volist name="classInfo" id="vo" key="k">
+                                        <tr>
+                                            <option>{$vo.class}</option>
+                                        </tr>
+                                    </volist>
+                                    <else/>
+                                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                                </notempty>
+                                </option><option>不限</option>
+                            </select>
+
+                        </a>
+                    </li>
+                    <!--性别-->
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <select name="sex" id="sexId" style="border:none;">
+                                <if condition="$condition['sex']"><option>{$condition['sex']}</option>
+                                    <else />
+                                    <option>性别</option>
+                                </if>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                                <option>不限</option>
+                            </select>
+                        </a>
+
+                    </li>
+                </ul>
+
+                <form action="{:U('beginContest')}" method="post">
+
+                    <ul class="nav nav-pills" role="tablist">
+                        <div style="float: left;color: #008000">
+                            <button class="btn ajax-post">开始考试</button>
+                        </div>
+                    </ul>
+
+                    <!-- start project list -->
+                    <div class="table-responsive">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                                <th class="">UID</th>
+                                <th class="">赛事编号</th>
+                                <th class="">学生姓名</th>
+                                <th class="">学号</th>
+                                <th class="">系别</th>
+                                <th class="">年级</th>
+                                <th class="">班级</th>
+                                <th class="">性别</th>
+                                <th class="">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <notempty name="_list">
+                                <volist name="_list" id="vo" key="k">
+                                    <tr>
+                                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.contest_order_id}" /></td>
+                                        <td>{$vo.contest_order_id} </td>
+                                        <td>{$vo.contest_sn}</td>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.studentId}</td>
+                                        <td>{$vo.dept}</td>
+                                        <td>{$vo.grade}</td>
+                                        <td>{$vo.class}</td>
+                                        <td>
+                                            <if condition="$vo['sex'] eq 1">男
+                                                <else/>女
+                                            </if>
+                                        </td>
+                                        <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
+                                    </tr>
+                                </volist>
+                                <else/>
+                                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                            </notempty>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <!-- end project list -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        var indexurl = "{:U()}";
+    </script>
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+
+    <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/common.js"></script>
+</block>
+
+
+
+

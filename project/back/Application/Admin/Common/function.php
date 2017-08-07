@@ -53,6 +53,13 @@ function makeCondition($data,$uid,$contest_sn)
         if($data['sex'] == '男')$condition['sex'] = 1;
         else $condition['sex'] = 2;
     }
+    if($data['sign'] && $data['sign'] != '签到' && $data['sign'] != '不限'){
+        if($data['sign'] == '未签到')$condition['sign'] = 0;
+        else $condition['sign'] = 1;
+    }
+
+//    print_r($condition);
+//    exit();
 
     return $condition;
 }

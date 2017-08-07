@@ -408,16 +408,19 @@ class Easemob extends Model{
 	/*
 		发送文本消息
 	*/
-	function sendText($from="admin",$target_type,$target,$content,$ext){
+//	function sendText($from="admin",$target_type,$target,$content,$ext){
+	function sendText($from="admin",$target_type,$target,$content){
 		$url=$this->url.'messages';
 		$body['target_type']=$target_type;
 		$body['target']=$target;
+
 		$options['type']="txt";
 		$options['msg']=$content;
 		$body['msg']=$options;
 		$body['from']=$from;
-		$body['ext']=$ext;
+//		$body['ext']=$ext;
 		$b=json_encode($body);
+
 		$header=array($this->getToken());
 		$result=$this->postCurl($url,$b,$header);
 		return $result;

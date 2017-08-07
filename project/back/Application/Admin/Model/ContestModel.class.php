@@ -22,7 +22,7 @@ class ContestModel extends Model{
     //按钮操作 type:edit编辑 delete删除
     public function clickOperate($getInfo)
     {
-        if(!$getInfo) return true;
+        if(!$getInfo) return 1;
 
         $type = $getInfo['type'];
         if($type == 'edit'){
@@ -41,9 +41,10 @@ class ContestModel extends Model{
             }
         }else if($type == 'delete'){
             $contest_sn = $getInfo['contest_sn'];
-            $b = $this->where(array('contest_sn'=>$contest_sn))->delete();
+//            $b = $this->where(array('contest_sn'=>$contest_sn))->delete();
+            $b = $this->where(array('contest_sn'=>$contest_sn))->setField('is_show',0);
             if($b){
-                return true;
+                return 2;
             }else{
                 $this->error = '服务器错误';
                 return false;

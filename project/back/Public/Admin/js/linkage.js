@@ -18,12 +18,19 @@ $(document).ready(function(){
         location.href = url;//location.href实现客户端页面的跳转
     });
 
+    $("#sign").change(function(){
+
+        url = returnUrl();
+        location.href = url;//location.href实现客户端页面的跳转
+    });
+
     function returnUrl()
     {
         var Dept=$("#deptId").find("option:selected").text();
         var Grade=$("#gradeId").find("option:selected").text();
         var Class=$("#classId").find("option:selected").text();
         var Sex=$("#sexId").find("option:selected").text();
+        var Sign=$("#sign").find("option:selected").text();
 
         var url = indexurl.replace(/.html/, "");
 
@@ -39,6 +46,11 @@ $(document).ready(function(){
         if(Sex != '性别' && Sex != '不限'){
             url = url+"/sex/"+Sex;
         }
+        if(Sign != '签到')
+        {
+            url = url+"/sign/"+Sign;
+        }
+
         url = url.replace(/\s/g,"");//去除文章中间空格
 
         return url;

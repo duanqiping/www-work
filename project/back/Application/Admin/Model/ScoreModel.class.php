@@ -219,8 +219,6 @@ class ScoreModel extends MongoModel{
     }
     public function getGrade($dept)
     {
-//        var_dump($dept);
-//        exit();
         if(!$dept) return array();
         $score_table = 'z_score_34695';
         $sql = 'db.'."$score_table".'.group({

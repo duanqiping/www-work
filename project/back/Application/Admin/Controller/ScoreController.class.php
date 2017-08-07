@@ -41,9 +41,10 @@ class ScoreController extends Controller{
             $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
             $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
 
-            $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn = 0));
+            $res = $contestorder->contestList2(makeCondition($condition,$uid,$contest_sn = 0));
         }
 
+        $condition['type'] = $type;
 
 
         $this->assign('_list',$res);

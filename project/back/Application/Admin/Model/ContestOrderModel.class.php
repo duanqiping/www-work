@@ -96,6 +96,14 @@ class ContestOrderModel extends Model{
         return $res;
     }
 
+    //赛事名单列表
+    public function contestList2($condition)
+    {
+        $condition['time'] = array('gt',0);
+        $res = $this->where($condition)->field('*')->select();
+        return $res;
+    }
+
     //添加赛事学生名单
     public function addUser($ids){
 

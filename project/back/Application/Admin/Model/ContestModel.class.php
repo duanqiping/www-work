@@ -139,16 +139,11 @@ class ContestModel extends Model{
         $s = explode('-',$data['reservation-time']);
         unset($data['reservation-time']);
 
-//        $data['end_time'] = strtotime($data['end_time']);
-//        $data['begin_time'] = strtotime($data['begin_time']);
-
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
 
-        $res1 = explode('-',$data['pass_score_male']);
-        $res2 = explode('-',$data['pass_score_female']);
-        $data['pass_score_male'] = $res1[0]*60+$res1[1];
-        $data['pass_score_female'] = $res2[0]*60+$res2[1];
+        $data['pass_score_male'] = ScoreTimeExplode($data['pass_score_male']);
+        $data['pass_score_female'] = ScoreTimeExplode($data['pass_score_female']);
 
         $data['add_time'] = NOW_TIME;
 
@@ -167,6 +162,10 @@ class ContestModel extends Model{
     public function editContest($data)
     {
         $s = explode('-',$data['reservation-time']);
+
+        $data['pass_score_male'] = ScoreTimeExplode($data['pass_score_male']);
+        $data['pass_score_female'] = ScoreTimeExplode($data['pass_score_female']);
+
         unset($data['reservation-time']);
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
@@ -178,7 +177,7 @@ class ContestModel extends Model{
             $data['from_id'] = $_SESSION['user']['id'];
             $data['from_name'] = $_SESSION['user']['id'];
         }
-        $b = $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
+        $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
         return true;
     }
 

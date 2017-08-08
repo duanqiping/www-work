@@ -59,7 +59,8 @@ class ContestController extends BaseController
     //添加一场赛事
     public function add()
     {
-        if ($_POST) {
+        if($_POST)
+        {
             $contest = new ContestModel();
             if($_POST['contest_sn']){
                 //对赛事信息进行修改
@@ -80,9 +81,10 @@ class ContestController extends BaseController
                 }
             }
 
-        } else {
+        }
+        else
+        {
             exit('fail3');
-            $this->display();
         }
     }
 
@@ -93,6 +95,7 @@ class ContestController extends BaseController
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
+        $contest_sn = $_SESSION['contest_sn'];
 
         $condition = $_GET;//筛选条件
 
@@ -103,19 +106,23 @@ class ContestController extends BaseController
             $ids = $_POST;
             $ids = $ids['id'];
 
-            $b = $contestorder->addUser($ids);
+            $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
+            $b = $contestorder->addUser($ids,$contest_sn,$res_length);
             if(!$b) exit('fail');
         }
 
         $condition['contest_sn'] = $_SESSION['contest_sn'];
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+        $deptInfo = $contestorder->getDept($contest_sn);//获取系别
+        $gradeInfo = $contestorder->getGrade($contest_sn,$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($contest_sn,$condition['dept'],$condition['grade']);//获取班级
 
-        $title = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))->getField('title');
+//        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+//        my_print($studentInfo);
+
+        $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);

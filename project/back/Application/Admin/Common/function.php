@@ -72,3 +72,11 @@ function my_print($res)
     echo "</pre>";
     exit();
 }
+
+//分割时间
+function ScoreTimeExplode($time)
+{
+    $s = explode('-',$time);
+    $time = $s[0]*60+$s[1];
+    return $time;
+}

@@ -132,14 +132,13 @@ class ContestOrderModel extends Model{
     }
 
     //添加赛事学生名单
-    public function addUser($ids){
-
+    public function addUser($ids,$contest_sn,$res_length)
+    {
         $user= new UserModel();
-        $contest = new ContestModel();
 
         $map['user_id'] = array('in',$ids);
         $addinfo = $user->where($map)
-            ->field("customer_id,user_id,name,studentId,sex,dept,grade,class,{$_SESSION['contest_sn']} as contest_sn")
+            ->field("customer_id,user_id,name,studentId,sex,dept,grade,class")
             ->select();
 
         //开启事物
@@ -149,18 +148,17 @@ class ContestOrderModel extends Model{
 
             //先查询是否已经添加 customer_id contest_sn user_id
             $condition_s['customer_id'] = $v['customer_id'];
-            $condition_s['contest_sn'] = $_SESSION['contest_sn'];
+            $condition_s['contest_sn'] = $contest_sn;
             $condition_s['user_id'] = $v['user_id'];
 
             $count = $this->where($condition_s)->count();
 
             if($count<1){
-                //获取对应的比赛长度
-                $field = ($v['sex']==1)?'length_male':'length_female';
-                $res_length = $contest->where(array('contest_sn'=>$v['contest_sn']))->field($field)->find();
-                $v['length'] = $res_length[$field];
+                $v['length'] = ($v['sex']==1)?$res_length['length_male']:$res_length['length_female'];
+                $v['contest_sn'] = $contest_sn;
 
                 $result = $this->add($v);
+
                 if(!$result){
                     $this->rollback();
                     $this->error = '添加失败';
@@ -205,12 +203,30 @@ class ContestOrderModel extends Model{
         }
         $data['list'] = $res;
         $data['customer_id'] = $customer_id;
-//        $data['title'] = '上海交通大学夏季运动会';
-//        $data['content'] = '运动与健康';
+
         $data['title'] = $res2[0]['title'];
         $data['content'] = $res2[0]['content'];
         $data['is_again'] = 0;//是否为重考
         return $data;
+    }
+
+    //获取系、年级、班级
+    public function getStudentInfo($condition,$contest_sn)
+    {
+        $studentInfo = array();
+        $studentInfo['dept'] = $this->where(array('contest_sn'=>$contest_sn))
+            ->field('dept')
+            ->group('dept')
+            ->select();
+        $studentInfo['grade'] = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$condition['dept']))
+            ->field('grade')
+            ->group('grade')
+            ->select();
+        $studentInfo['class'] = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$condition['dept'],'grade'=>$condition['grade']))
+            ->field('class')
+            ->group('class')
+            ->select();
+        return $studentInfo;
     }
 
     public function getDept($contest_sn)

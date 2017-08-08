@@ -14,15 +14,22 @@ use Think\Model;
 
 abstract class Score2Model extends Model{
     private $scoreStrategy;
+
     protected $dept = array();
     protected $grade = array();
     protected $class = array();
 
     abstract public function _list($condition,$fields);//成绩列表
 
+    public function __construct(ScoreStrategy $scoreStrategy)
+    {
+        parent::__construct();
+        $this->scoreStrategy = $scoreStrategy;
+    }
+
     public function performCondition()
     {
-        $this->scoreStrategy->condition();
+        return $this->scoreStrategy->condition();
     }
     public function getCondition(ScoreStrategy $scoreStrategy)
     {

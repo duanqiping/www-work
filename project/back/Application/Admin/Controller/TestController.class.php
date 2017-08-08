@@ -9,15 +9,22 @@
 namespace Admin\Controller;
 
 
+use Admin\Logic\ScoreContestStrategy;
 use Admin\Logic\ScoreGeneralStrategy;
 use Admin\Model\ScoreContestModel;
 use Think\Controller;
 
-class TestController extends Controller{
+class TestController extends Controller
+{
     public function test()
     {
-        $scorecontest = new ScoreContestModel();
+        $scorecontest = new ScoreContestModel(new ScoreContestStrategy());
 
-        $scorecontest->_list(new ScoreGeneralStrategy(),$fields='*');
+        $condition = $scorecontest->performCondition();
+
+        var_dump($condition);
+        exit();
+
+//        $scorecontest->_list(new ScoreGeneralStrategy(),$fields='*');
     }
 } 

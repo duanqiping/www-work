@@ -13,5 +13,6 @@ class ScoreContestStrategy extends ScoreStrategy{
 
     public function condition()
     {
+        return "contest condition";
     }
 } 

@@ -29,7 +29,6 @@ class ContestController extends BaseController
             exit($contest->getError());
         }else{
             //edit
-//            if($result !== true){
             if(is_array($result)){
                 $this->assign('contestInfo', $result);//赛事的详细信息
             }else if($result == 2){
@@ -46,6 +45,7 @@ class ContestController extends BaseController
         $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
 
         $res = $contest->getContestInfo();//获取赛事列表
+
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
         $this->assign('_list', $list);

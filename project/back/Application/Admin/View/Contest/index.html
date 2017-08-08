@@ -387,7 +387,7 @@
         <tr>
             <!--<td>#</td>-->
             <td>
-                <a>{$vo.title}</a>
+                <a>{$vo.title}{$vo['contest_sn']}</a>
                 <br />
                 <small>{$vo.begin_time|date="ymd H:i:s",###}</small>
             </td>
@@ -402,7 +402,7 @@
             <td>
                 <!--<button type="button" onclick="beginContest({$vo['contest_sn']})" class="btn btn-success btn-xs">开始</button>-->
                 <if condition="$vo['flag'] eq 未开始">
-                    <button type="button" onclick="beginContest({$vo['contest_sn']})" class="btn btn-success btn-xs">开始</button>
+                    <button type="button" onclick="beginContest('{$vo.contest_sn}')" class="btn btn-success btn-xs">开始</button>
                     <else/>
                     <button type="button" class="btn1 btn-success btn-xs" style="background-color:lightslategrey">开始</button>
                 </if>
@@ -443,6 +443,7 @@
         {
             var url = "{:U('sign')}";
             url = url.replace(/.html/, "");
+            alert(sn);
             location.href = url+"/contest_sn/"+sn;//location.href实现客户端页面的跳转
         }
     </script>

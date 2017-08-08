@@ -98,6 +98,7 @@ class ContestOrderModel extends Model{
         $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
             ->field('title,pass_score_male,pass_score_female')
             ->find();
+
         $res_male = explode('-',$res_contest['pass_score_male']);
         $res_contest['pass_score_male'] = $res_male[0]*60+$res_male[1];
         $res_female = explode('-',$res_contest['pass_score_female']);

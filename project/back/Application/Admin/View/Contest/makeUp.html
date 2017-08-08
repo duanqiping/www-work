@@ -4,7 +4,7 @@
 
 <div class="page-title">
     <div class="title_left">
-        <h3>赛事/考核 <small>赛事人员签到</small></h3>
+        <h3>赛事/考核 <small>创建补考</small></h3>
     </div>
 
     <div class="title_right">
@@ -24,7 +24,7 @@
     <div class="x_panel">
 
         <div class="x_title">
-            <h2>已选名单 <small>{$title} 赛事名单监控</small></h2>
+            <h2>补考 <small>{$contestInfo.title}</small></h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -46,26 +46,13 @@
         <div class="x_content">
 
             <div class="x_content">
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation"><a>{$title}</a>
+                    </li>
+                </ul>
 
                 <ul class="nav nav-pills" role="tablist">
                     <li role="presentation"><a>赛事名单列表：</a>
-                    </li>
-
-                    <!--是否签到-->
-                    <li role="presentation" class="dropdown">
-                        <a  href="#" class="dropdown-toggle">
-
-                            <select name="sign" id="sign" style="border:none;">
-                                <if condition="$condition['sign']"><option>{$condition['sign']}</option>
-                                    <else />
-                                    <option>签到</option>
-                                </if>
-                                <option value="1">已签到</option>
-                                <option value="2">未签到</option>
-                                <option>不限</option>
-
-                            </select>
-                        </a>
                     </li>
 
                     <!--系别-->
@@ -155,7 +142,7 @@
                     </li>
                 </ul>
 
-                <form action="{:U('beginContest')}" method="post">
+                <form action="" method="post">
 
                     <!-- start project list -->
                     <div class="table-responsive">
@@ -171,7 +158,10 @@
                                 <th class="">年级</th>
                                 <th class="">班级</th>
                                 <th class="">性别</th>
-                                <th class="">操作</th>
+                                <th class="">成绩(秒)</th>
+                                <th class="">达标成绩(秒)</th>
+                                <th class="">是否合格</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -191,7 +181,14 @@
                                                 <else/>女
                                             </if>
                                         </td>
-                                        <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
+                                        <th class="">{$vo.time}</th>
+                                        <td>
+                                            {$vo.pass_score}
+                                        </td>
+                                        <td>
+                                            {$vo.achieve}
+                                        </td>
+
                                     </tr>
                                 </volist>
                                 <else/>
@@ -203,12 +200,21 @@
                     </div>
                     <ul class="nav nav-pills" role="tablist">
                         <div style="float: left;color: #008000">
-                            <button class="btn ajax-post">开始考试</button>
+                            <button class="btn ajax-post" onclick="makeUp()">确认补考</button>
                         </div>
                     </ul>
-                </form>
+                    <ul class="nav nav-pills" role="tablist">
+                        <div class="form-group" style="display: show" id="makeTime">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">补考时间:</label>
+                            <!--<div class="col-md-9 col-sm-9 col-xs-12 ">-->
+                            <div>
+                                <input type="text" name="reservation-time" id="reservation-time2" class="form-control has-feedback-left" />
+                                <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </ul>
 
-                <!-- end project list -->
+                </form>
             </div>
         </div>
     </div>
@@ -216,13 +222,18 @@
 </block>
 
 <block name="script">
-    <script type="text/javascript">
-        var indexurl = "{:U()}";
-    </script>
     <script src="__JS__/jquery-2.0.3.min.js"></script>
 
     <script src="__JS__/linkage.js"></script>
     <script src="__JS__/common.js"></script>
+
+    <script type="text/javascript">
+        var indexurl = "{:U()}";
+
+        function makeUp()
+        {
+        }
+    </script>
 </block>
 
 

@@ -15,7 +15,7 @@ use Admin\Model\Easemob;
 use Admin\Model\UserModel;
 use Think\Controller;
 
-class ContestController extends Controller
+class ContestController extends BaseController
 {
     //创建考试\赛事
     public function index()
@@ -29,7 +29,6 @@ class ContestController extends Controller
             exit($contest->getError());
         }else{
             //edit
-//            if($result !== true){
             if(is_array($result)){
                 $this->assign('contestInfo', $result);//赛事的详细信息
             }else if($result == 2){
@@ -46,6 +45,7 @@ class ContestController extends Controller
         $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
 
         $res = $contest->getContestInfo();//获取赛事列表
+
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
         $this->assign('_list', $list);
@@ -59,7 +59,8 @@ class ContestController extends Controller
     //添加一场赛事
     public function add()
     {
-        if ($_POST) {
+        if($_POST)
+        {
             $contest = new ContestModel();
             if($_POST['contest_sn']){
                 //对赛事信息进行修改
@@ -80,9 +81,10 @@ class ContestController extends Controller
                 }
             }
 
-        } else {
+        }
+        else
+        {
             exit('fail3');
-            $this->display();
         }
     }
 
@@ -93,6 +95,7 @@ class ContestController extends Controller
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
+        $contest_sn = $_SESSION['contest_sn'];
 
         $condition = $_GET;//筛选条件
 
@@ -103,19 +106,23 @@ class ContestController extends Controller
             $ids = $_POST;
             $ids = $ids['id'];
 
-            $b = $contestorder->addUser($ids);
+            $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
+            $b = $contestorder->addUser($ids,$contest_sn,$res_length);
             if(!$b) exit('fail');
         }
 
         $condition['contest_sn'] = $_SESSION['contest_sn'];
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+        $deptInfo = $contestorder->getDept($contest_sn);//获取系别
+        $gradeInfo = $contestorder->getGrade($contest_sn,$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($contest_sn,$condition['dept'],$condition['grade']);//获取班级
 
-        $title = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))->getField('title');
+//        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+//        my_print($studentInfo);
+
+        $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
@@ -141,6 +148,9 @@ class ContestController extends Controller
         $deptInfo = $user->getDept($uid);//获取系别
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
         $classInfo = $user->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
+
+//        $studentInfo = $this->selectCondition($user,$condition,$contest_sn='');
+//        my_print($studentInfo);
 
         $this->assign('_list', $res);
         $this->assign('condition', $condition);
@@ -250,6 +260,32 @@ class ContestController extends Controller
     //成绩单
     public function score()
     {
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
+
+        $condition = $_GET;//筛选条件
+
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+        $this->assign('title',$contestorder->title);
+        $this->assign('outAchieve',$contestorder->outAchieve);
+
         $this->display();
     }
 
@@ -282,6 +318,40 @@ class ContestController extends Controller
         }else{
             exit('fail');
         }
+    }
+
+    //创建补考
+    public function makeUp()
+    {
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
+
+        $condition = $_GET;//筛选条件
+
+
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $condition['confirm'] = 0;
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+        $this->assign('title',$contestorder->title);
+        $this->assign('outAchieve',$contestorder->outAchieve);
+
+        $this->display();
     }
 
     //获取系别

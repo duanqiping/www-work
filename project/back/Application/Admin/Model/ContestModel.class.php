@@ -31,6 +31,9 @@ class ContestModel extends Model{
                 ->field('contest_sn,title,length_male,length_female,pass_score_male,pass_score_female,content,begin_time,end_time')
                 ->find();
             if($res){
+                $res['pass_score_male'] = str_pad(floor($res['pass_score_male']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_male']%60),2,0,STR_PAD_LEFT);
+                $res['pass_score_female'] = str_pad(floor($res['pass_score_female']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_female']%60),2,0,STR_PAD_LEFT);
+
                 $res['reservation-time'] = date('d-m-Y:H:i:s',$res['begin_time']).'-'.date('d-m-Y:H:i:s',$res['end_time']);
                 unset($res['begin_time']);
                 unset($res['end_time']);
@@ -94,9 +97,20 @@ class ContestModel extends Model{
         $condition['customer_id'] = $_SESSION['user']['id'];
 
         $res = $this->where($condition)
-            ->field('contest_sn,title,begin_time')
+            ->field('contest_sn,title,begin_time,end_time,is_use')
             ->order('add_time desc')
             ->select();
+        for($i=0,$len=count($res);$i<$len;$i++){
+            if($res[$i]['is_use'] == 1){
+                $res[$i]['flag'] = '已结束';
+            }else{
+                if($res[$i]['end_time']<NOW_TIME){
+                    $res[$i]['flag'] = '已过期';
+                }else{
+                    $res[$i]['flag'] = '未开始';
+                }
+            }
+        }
         return $res;
     }
 
@@ -125,18 +139,11 @@ class ContestModel extends Model{
         $s = explode('-',$data['reservation-time']);
         unset($data['reservation-time']);
 
-//        $data['end_time'] = strtotime($data['end_time']);
-//        $data['begin_time'] = strtotime($data['begin_time']);
-
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
 
-        $res1 = explode('-',$data['pass_score_male']);
-        $res2 = explode('-',$data['pass_score_female']);
-        $data['pass_score_male'] = $res1[0]*60+$res1[1];
-        $data['pass_score_female'] = $res2[0]*60+$res2[1];
-
-        $data['pass_score_male'] =
+        $data['pass_score_male'] = ScoreTimeExplode($data['pass_score_male']);
+        $data['pass_score_female'] = ScoreTimeExplode($data['pass_score_female']);
 
         $data['add_time'] = NOW_TIME;
 
@@ -155,6 +162,10 @@ class ContestModel extends Model{
     public function editContest($data)
     {
         $s = explode('-',$data['reservation-time']);
+
+        $data['pass_score_male'] = ScoreTimeExplode($data['pass_score_male']);
+        $data['pass_score_female'] = ScoreTimeExplode($data['pass_score_female']);
+
         unset($data['reservation-time']);
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
@@ -166,7 +177,7 @@ class ContestModel extends Model{
             $data['from_id'] = $_SESSION['user']['id'];
             $data['from_name'] = $_SESSION['user']['id'];
         }
-        $b = $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
+        $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
         return true;
     }
 

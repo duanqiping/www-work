@@ -57,10 +57,10 @@ function makeCondition($data,$uid,$contest_sn)
         if($data['sign'] == '未签到')$condition['sign'] = 0;
         else $condition['sign'] = 1;
     }
-
-//    print_r($condition);
-//    exit();
-
+    //不合格的学生
+    if($data['confirm'] === 0){
+        $condition['confirm'] = $data['confirm'];
+    }
     return $condition;
 }
 
@@ -71,4 +71,12 @@ function my_print($res)
     print_r($res);
     echo "</pre>";
     exit();
+}
+
+//分割时间
+function ScoreTimeExplode($time)
+{
+    $s = explode('-',$time);
+    $time = $s[0]*60+$s[1];
+    return $time;
 }

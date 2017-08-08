@@ -11,6 +11,7 @@ namespace Admin\Controller;
 
 //use Think\Controller;
 use Admin\Model\ConsumerHandleModel;
+use Admin\Model\UserModel;
 
 class BaseController extends \Think\Controller
 {
@@ -21,6 +22,23 @@ class BaseController extends \Think\Controller
     public static function  getInstance($flag)
     {
         return  ConsumerHandleModel::getInstance($flag);
+    }
+
+    //获取学校 系、年级、班级筛选条件
+    public function selectCondition(&$model,$condition,$uid,$content_sn='')
+    {
+
+        $studentInfo = array();
+        if($model instanceof UserModel){
+            $studentInfo['deptInfo'] = $model->getDept($uid);//获取系别
+//            $res2 = $model->getDept($uid);//获取系别  打印东西为空
+
+            my_print($studentInfo);
+            $studentInfo['gradeInfo'] = $model->getGrade($uid,$condition['dept']);//获取年级
+            $studentInfo['classInfo'] = $model->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
+        }
+
+        return $studentInfo;
     }
 
     //是否为管理员登陆

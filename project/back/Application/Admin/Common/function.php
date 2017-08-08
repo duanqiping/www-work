@@ -57,10 +57,10 @@ function makeCondition($data,$uid,$contest_sn)
         if($data['sign'] == '未签到')$condition['sign'] = 0;
         else $condition['sign'] = 1;
     }
-
-//    print_r($condition);
-//    exit();
-
+    //不合格的学生
+    if($data['confirm'] === 0){
+        $condition['confirm'] = $data['confirm'];
+    }
     return $condition;
 }
 

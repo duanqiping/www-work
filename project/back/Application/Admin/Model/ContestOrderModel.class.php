@@ -14,6 +14,9 @@ use Think\Model;
 class ContestOrderModel extends Model{
 
     protected $tableName = 'contest_order';
+    public $title;//赛事标题
+    public $onAchieve = 0;//合格人数
+    public $outAchieve = 0;//不合格人数
 
     public function _list($condition,$field)
     {
@@ -25,13 +28,10 @@ class ContestOrderModel extends Model{
     {
         $condition = array();
         $condition['contest_sn'] = $contest_sn;
-//        print_r($user_ids);
-//        exit();
+
         for($i=0,$len=count($user_ids);$i<$len;$i++){
             $condition['user_id'] = $user_ids[$i];
             $count = $this->where($condition)->count();
-//            echo $this->_sql();
-//            exit();
             if($count<1){
                 $this->error = "user_id为".$user_ids[$i]['user_id']."学生未在该考试名单中";
                 return false;
@@ -93,6 +93,33 @@ class ContestOrderModel extends Model{
     public function contestList($condition)
     {
         $res = $this->where($condition)->field('*')->select();
+
+        $contest = new ContestModel();
+        $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
+            ->field('title,pass_score_male,pass_score_female')
+            ->find();
+        $res_male = explode('-',$res_contest['pass_score_male']);
+        $res_contest['pass_score_male'] = $res_male[0]*60+$res_male[1];
+        $res_female = explode('-',$res_contest['pass_score_female']);
+        $res_contest['pass_score_female'] = $res_female[0]*60+$res_female[1];
+
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            if($res[$i]['sex'] == 1){
+                $res[$i]['pass_score'] = $res_contest['pass_score_male'];
+            }else{
+                $res[$i]['pass_score'] = $res_contest['pass_score_female'];
+            }
+            if($res[$i]['time'] <= $res[$i]['pass_score'] && $res[$i]['time']>0){
+                $res[$i]['achieve'] = '合格';
+                $this->onAchieve += 1;
+            }else{
+                $res[$i]['achieve'] = '不合格';
+                $this->outAchieve += 1;
+            }
+        }
+        $this->title = $res_contest['title'];
+
         return $res;
     }
 

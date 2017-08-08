@@ -24,7 +24,7 @@
     <div class="x_panel">
 
         <div class="x_title">
-            <h2>成绩单 <small>{$title} 赛事成绩监控</small></h2>
+            <h2>成绩单 <small>{$contestInfo.title}</small></h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -46,26 +46,13 @@
         <div class="x_content">
 
             <div class="x_content">
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation"><a>{$title}</a>
+                    </li>
+                </ul>
 
                 <ul class="nav nav-pills" role="tablist">
                     <li role="presentation"><a>赛事名单列表：</a>
-                    </li>
-
-                    <!--是否签到-->
-                    <li role="presentation" class="dropdown">
-                        <a  href="#" class="dropdown-toggle">
-
-                            <select name="sign" id="sign" style="border:none;">
-                                <if condition="$condition['sign']"><option>{$condition['sign']}</option>
-                                    <else />
-                                    <option>签到</option>
-                                </if>
-                                <option value="1">已签到</option>
-                                <option value="2">未签到</option>
-                                <option>不限</option>
-
-                            </select>
-                        </a>
                     </li>
 
                     <!--系别-->
@@ -171,7 +158,10 @@
                                 <th class="">年级</th>
                                 <th class="">班级</th>
                                 <th class="">性别</th>
-                                <th class="">操作</th>
+                                <th class="">成绩(秒)</th>
+                                <th class="">达标成绩(秒)</th>
+                                <th class="">是否合格</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -191,7 +181,14 @@
                                                 <else/>女
                                             </if>
                                         </td>
-                                        <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
+                                        <th class="">{$vo.time}</th>
+                                        <td>
+                                            {$vo.pass_score}
+                                        </td>
+                                        <td>
+                                            {$vo.achieve}
+                                        </td>
+
                                     </tr>
                                 </volist>
                                 <else/>
@@ -204,7 +201,10 @@
                 </form>
                 <ul class="nav nav-pills" role="tablist">
                     <div style="float: left;color: #008000">
-                        <button class="btn ajax-post">结束考试</button>
+                        <button class="btn ajax-post" onclick="endContest()">结束考试</button>
+                    </div>
+                    <div style="float: left;color: #008000">
+                        <button class="btn ajax-post" id="refresh" onclick="refresh()">点击刷新查看最新成绩</button>
                     </div>
                 </ul>
                 <!-- end project list -->
@@ -217,6 +217,25 @@
 <block name="script">
     <script type="text/javascript">
         var indexurl = "{:U()}";
+
+        function refresh()
+        {
+            location.href = indexurl;
+        }
+        function endContest()
+        {
+            var outAchieve = "{$outAchieve}";
+            if(outAchieve > 0){
+                if(confirm(outAchieve+"个学生成绩不合格，是否现在创建补考"))
+                {
+                    location.href = "{:U('makeUp')}";
+                }else{
+                    location.href = "{:U('')}";
+                }
+            }else{
+                location.href = "{:U('')}";
+            }
+        }
     </script>
     <script src="__JS__/jquery-2.0.3.min.js"></script>
 

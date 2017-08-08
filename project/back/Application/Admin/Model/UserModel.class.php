@@ -13,10 +13,17 @@ use Think\Model;
 
 class UserModel extends Model{
 
+    public function test()
+    {
+        return 'hello';
+    }
+
     //系别
     public function getDept($uid)
     {
         $res = $this->where(array('customer_id'=>$uid))->field('dept')->group('dept')->select();
+        return $res;
+        my_print($res);
         return $res?$res:array();
     }
     //获取年级
@@ -68,6 +75,7 @@ class UserModel extends Model{
     {
         $where = '';
         foreach($condition as $k=>$v){
+            //最后一个元素
             if(end($condition) == $v){
                 $where .= "u.$k='$v'";
             }else{

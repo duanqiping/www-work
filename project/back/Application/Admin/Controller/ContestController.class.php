@@ -15,7 +15,7 @@ use Admin\Model\Easemob;
 use Admin\Model\UserModel;
 use Think\Controller;
 
-class ContestController extends Controller
+class ContestController extends BaseController
 {
     //创建考试\赛事
     public function index()
@@ -142,6 +142,9 @@ class ContestController extends Controller
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
         $classInfo = $user->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
 
+//        $studentInfo = $this->selectCondition($user,$condition,$contest_sn='');
+//        my_print($studentInfo);
+
         $this->assign('_list', $res);
         $this->assign('condition', $condition);
         $this->assign('deptInfo', $deptInfo);
@@ -250,6 +253,32 @@ class ContestController extends Controller
     //成绩单
     public function score()
     {
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
+
+        $condition = $_GET;//筛选条件
+
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+        $this->assign('title',$contestorder->title);
+        $this->assign('outAchieve',$contestorder->outAchieve);
+
         $this->display();
     }
 
@@ -282,6 +311,40 @@ class ContestController extends Controller
         }else{
             exit('fail');
         }
+    }
+
+    //创建补考
+    public function makeUp()
+    {
+        $contestorder = new ContestOrderModel();
+
+        $uid = $_SESSION['user']['id'];
+
+        $condition = $_GET;//筛选条件
+
+
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+
+        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $condition['confirm'] = 0;
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$_SESSION['contest_sn']));
+
+        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
+        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
+        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+        $this->assign('deptInfo', $deptInfo);
+        $this->assign('gradeInfo', $gradeInfo);
+        $this->assign('classInfo', $classInfo);
+        $this->assign('title',$contestorder->title);
+        $this->assign('outAchieve',$contestorder->outAchieve);
+
+        $this->display();
     }
 
     //获取系别

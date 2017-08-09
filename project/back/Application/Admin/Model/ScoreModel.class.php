@@ -17,6 +17,10 @@ class ScoreModel extends MongoModel{
     const Week = 'week';
     const Day = 'day';
 
+    public $totalNum=0;//总记录条数
+    public $pageSize=15;//每页的条数
+    public $current = 1;//当前页
+
     protected $dbName='score';//（要连接的数据库名称）
     protected $trueTableName = '';
     protected $connection = 'DB_CONFIG1';
@@ -66,15 +70,21 @@ class ScoreModel extends MongoModel{
     }
 
     //成绩列表
-    public function _list($condition)
+    public function _list($condition,$page)
     {
+        if($page<1)$page=1;
+        $offset = ($page-1)*$this->pageSize;
+        $this->current = $page;
 
         unset($condition['customer_id']);
 
         $res = $this->table('z_score_34695')
             ->where($condition)
             ->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')
+            ->limit($offset,$this->pageSize)
             ->select();
+
+        $this->totalNum = $this->table('z_score_34695')->where($condition)->count();
 
         //对成绩信息进行分组统计和排序
         $result = $this->scoreAccount($res);

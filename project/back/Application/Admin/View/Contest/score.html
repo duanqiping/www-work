@@ -1,5 +1,15 @@
 <extend name="Public/base2" />
 
+<block name="head">
+    <!--<link href="__VENDOR__/pagination/css/common.css" rel="stylesheet">-->
+    <link href="__VENDOR__/pagination/css/pagination.css" rel="stylesheet">
+
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+    <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/common.js"></script>
+    <script src="__VENDOR__/pagination/jquery.pagination.js"></script>
+</block>
+
 <block name="body">
 
 <div class="page-title">
@@ -200,6 +210,10 @@
                     </div>
                 </form>
                 <ul class="nav nav-pills" role="tablist">
+                    <div class="M-box1"></div>
+                </ul>
+                <br/>
+                <ul class="nav nav-pills" role="tablist">
                     <div style="float: left;color: #008000">
                         <button class="btn ajax-post" onclick="endContest()">结束考试</button>
                     </div>
@@ -207,6 +221,7 @@
                         <button class="btn ajax-post" id="refresh" onclick="refresh()">点击刷新查看最新成绩</button>
                     </div>
                 </ul>
+
                 <!-- end project list -->
             </div>
         </div>
@@ -236,11 +251,23 @@
                 location.href = "{:U('')}";
             }
         }
-    </script>
-    <script src="__JS__/jquery-2.0.3.min.js"></script>
+        $('.M-box1').pagination({
+            totalData:"{$totalNum}",
+            showData:"{$pageSize}",
+            current:"{$current}",
+            coping:true,
+            callback:function(api){
+                //这里写ajax方法，url
+                var url = window.location.href;
 
-    <script src="__JS__/linkage.js"></script>
-    <script src="__JS__/common.js"></script>
+                strs=url.split("/current"); //字符分割
+                url = strs[0];
+
+                var current = api.getCurrent();
+                location.href = url+"/current/"+current;
+            }
+        });
+    </script>
 </block>
 
 

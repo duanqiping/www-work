@@ -18,6 +18,10 @@ class ContestOrderModel extends Model{
     public $onAchieve = 0;//合格人数
     public $outAchieve = 0;//不合格人数
 
+    public $totalNum=0;//总记录条数
+    public $pageSize=15;//每页的条数
+    public $current = 1;//当前页
+
     public function _list($condition,$field)
     {
         $res = $this->where($condition)->field($field)->select();
@@ -90,9 +94,14 @@ class ContestOrderModel extends Model{
     }
 
     //赛事名单列表
-    public function contestList($condition)
+    public function contestList($condition,$page)
     {
-        $res = $this->where($condition)->field('*')->select();
+        if($page<1)$page=1;
+        $this->current = $page;
+
+        $offset = ($page-1)*$this->pageSize;
+        $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
+        $this->totalNum = $this->where($condition)->count();
 
         $contest = new ContestModel();
         $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))

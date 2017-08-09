@@ -1,5 +1,15 @@
 <extend name="Public/base2" />
 
+<block name="head">
+    <!--<link href="__VENDOR__/pagination/css/common.css" rel="stylesheet">-->
+    <link href="__VENDOR__/pagination/css/pagination.css" rel="stylesheet">
+
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+    <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/common.js"></script>
+    <script src="__VENDOR__/pagination/jquery.pagination.js"></script>
+</block>
+
 <block name="body">
 
 <div class="page-title">
@@ -199,12 +209,11 @@
                         </table>
                     </div>
                     <ul class="nav nav-pills" role="tablist">
-                        <div style="float: left;color: #008000">
-                            <button class="btn ajax-post" onclick="makeUp()">确认补考</button>
-                        </div>
+                        <div class="M-box1"></div>
                     </ul>
+                    <br/>
                     <ul class="nav nav-pills" role="tablist">
-                        <div class="form-group" style="display: show" id="makeTime">
+                        <div class="form-group" id="makeTime">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">补考时间:</label>
                             <!--<div class="col-md-9 col-sm-9 col-xs-12 ">-->
                             <div>
@@ -212,9 +221,15 @@
                                 <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                             </div>
                         </div>
-                    </ul>
 
+                    </ul>
+                    <ul class="nav nav-pills" role="tablist">
+                        <div style="float: left;color: #008000">
+                            <button class="btn ajax-post" onclick="makeUp()">确认补考</button>
+                        </div>
+                    </ul>
                 </form>
+
             </div>
         </div>
     </div>
@@ -222,17 +237,26 @@
 </block>
 
 <block name="script">
-    <script src="__JS__/jquery-2.0.3.min.js"></script>
-
-    <script src="__JS__/linkage.js"></script>
-    <script src="__JS__/common.js"></script>
-
     <script type="text/javascript">
         var indexurl = "{:U()}";
 
-        function makeUp()
-        {
-        }
+        $('.M-box1').pagination({
+            totalData:"{$totalNum}",
+            showData:"{$pageSize}",
+            current:"{$current}",
+            coping:true,
+            callback:function(api){
+                //这里写ajax方法，url
+                var url = window.location.href;
+                url = url.replace(/.html/, "");
+
+                strs=url.split("/current"); //字符分割
+                url = strs[0];
+
+                var current = api.getCurrent();
+                location.href = url+"/current/"+current;
+            }
+        });
     </script>
 </block>
 

@@ -17,9 +17,6 @@ class ScoreController extends Controller{
 
     public function index()
     {
-        $deptInfo  = array();
-        $gradeInfo  = array();
-        $classInfo  = array();
         $res = array();
 
         $uid = $_SESSION['user']['id'];

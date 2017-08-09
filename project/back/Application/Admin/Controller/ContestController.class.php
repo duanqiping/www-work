@@ -241,7 +241,7 @@ class ContestController extends BaseController
 
         $content = array(
             'data' =>$content,
-            'type'=>2
+            'type'=>5
         );
 
         $content = json_encode($content);//注意 $content 得是一个字符窜
@@ -339,7 +339,7 @@ class ContestController extends BaseController
         $condition['contest_sn'] = $contest_sn;
         $condition['confirm'] = 0;
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);
 
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
@@ -352,6 +352,10 @@ class ContestController extends BaseController
         
         $this->assign('title',$contestorder->title);
         $this->assign('outAchieve',$contestorder->outAchieve);
+
+        $this->assign('totalNum',$contestorder->totalNum);//总页数
+        $this->assign('pageSize',$contestorder->pageSize);//每页数
+        $this->assign('current',$contestorder->current);//第几页
 
         $this->display();
     }

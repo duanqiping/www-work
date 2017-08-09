@@ -38,9 +38,6 @@ class ScoreModel extends MongoModel{
     private function activeUserNum($score_table,$time_flag)
     {
         //活跃用户量
-//        $dateInfo = getTimeBeginAndEnd($time_flag);
-//        $begin_time = $dateInfo['begin_time'];
-//        $end_time = $dateInfo['end_time'];
         $begin_time = getTimeBegin($time_flag);
         $end_time = NOW_TIME;
 
@@ -170,9 +167,6 @@ class ScoreModel extends MongoModel{
         $data['count_week'] = $count_week;
         $data['count_week_cycles'] = $count_week_cycles;
 
-//        print_r($data);
-//        exit();
-
         return $data;
     }
 
@@ -211,6 +205,12 @@ class ScoreModel extends MongoModel{
         array_multisort($sort,SORT_DESC,$s);
 
         return $s;
+    }
+
+    //获取系、年级、班级
+    public function getStudentInfo()
+    {
+
     }
 
     public function getDept()

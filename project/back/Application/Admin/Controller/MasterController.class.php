@@ -108,17 +108,9 @@ class MasterController extends Controller{
         }
         $condition['user_id'] = array('in',$user_ids);
         $condition['contest_sn'] = $contest_sn;
-        $b = $contestOrder->where($condition)->setField('sign',1);
+        $contestOrder->where($condition)->setField('sign',1);
 
         sendSuccess('success');
-//        echo $contestOrder->_sql();
-//        exit();
-//        if(!$b){
-//            sendServerError('签到更新失败');
-//        }else{
-//            sendSuccess('success');
-//        }
-
     }
 
     //返回用户名

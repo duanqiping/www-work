@@ -115,20 +115,13 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-//        $deptInfo = $contestorder->getDept($contest_sn);//获取系别
-//        $gradeInfo = $contestorder->getGrade($contest_sn,$condition['dept']);//获取年级
-//        $classInfo = $contestorder->getClass($contest_sn,$condition['dept'],$condition['grade']);//获取班级
-
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
-//        my_print($studentInfo);
+
 
         $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
-//        $this->assign('deptInfo', $deptInfo);
-//        $this->assign('gradeInfo', $gradeInfo);
-//        $this->assign('classInfo', $classInfo);
 
         $this->assign('deptInfo', $studentInfo['dept']);
         $this->assign('gradeInfo', $studentInfo['grade']);
@@ -210,10 +203,6 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-//        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-//        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-//        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
-
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
         $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
@@ -225,9 +214,6 @@ class ContestController extends BaseController
         $this->assign('gradeInfo', $studentInfo['grade']);
         $this->assign('classInfo', $studentInfo['class']);
 
-//        $this->assign('deptInfo', $deptInfo);
-//        $this->assign('gradeInfo', $gradeInfo);
-//        $this->assign('classInfo', $classInfo);
         $this->assign('title', $title);
 
         $this->display();
@@ -282,16 +268,11 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-//        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-//        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-//        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
-//        $this->assign('deptInfo', $deptInfo);
-//        $this->assign('gradeInfo', $gradeInfo);
-//        $this->assign('classInfo', $classInfo);
+
         $this->assign('deptInfo', $studentInfo['dept']);
         $this->assign('gradeInfo', $studentInfo['grade']);
         $this->assign('classInfo', $studentInfo['class']);
@@ -353,16 +334,11 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
-//        $deptInfo = $contestorder->getDept($_SESSION['contest_sn']);//获取系别
-//        $gradeInfo = $contestorder->getGrade($_SESSION['contest_sn'],$condition['dept']);//获取年级
-//        $classInfo = $contestorder->getClass($_SESSION['contest_sn'],$condition['dept'],$condition['grade']);//获取班级
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
-//        $this->assign('deptInfo', $deptInfo);
-//        $this->assign('gradeInfo', $gradeInfo);
-//        $this->assign('classInfo', $classInfo);
+
         $this->assign('deptInfo', $studentInfo['dept']);
         $this->assign('gradeInfo', $studentInfo['grade']);
         $this->assign('classInfo', $studentInfo['class']);

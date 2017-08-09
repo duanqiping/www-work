@@ -99,11 +99,6 @@ class ContestOrderModel extends Model{
             ->field('title,pass_score_male,pass_score_female')
             ->find();
 
-        $res_male = explode('-',$res_contest['pass_score_male']);
-        $res_contest['pass_score_male'] = $res_male[0]*60+$res_male[1];
-        $res_female = explode('-',$res_contest['pass_score_female']);
-        $res_contest['pass_score_female'] = $res_female[0]*60+$res_female[1];
-
         for($i=0,$len=count($res);$i<$len;$i++)
         {
             if($res[$i]['sex'] == 1){

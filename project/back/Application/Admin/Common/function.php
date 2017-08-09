@@ -80,3 +80,46 @@ function ScoreTimeExplode($time)
     $time = $s[0]*60+$s[1];
     return $time;
 }
+
+//判断赛事状态 $res为赛事列表 或单场赛事
+function ContestState($res)
+{
+    //一维
+    if (count($res) == count($res, 1))
+    {
+        if($res['is_use'] == 1){
+            $res['flag'] = '已结束';
+            $res['valid'] = 0;
+        }else
+        {
+            if($res['end_time']<NOW_TIME){
+                $res['flag'] = '已过期';
+                $res['valid'] = 0;
+            }else{
+                $res['flag'] = '未开始';
+                $res['valid'] = 1;
+            }
+        }
+    }
+    //二维
+    else
+    {
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            if($res[$i]['is_use'] == 1){
+                $res[$i]['flag'] = '已结束';
+                $res[$i]['valid'] = 0;
+            }else
+            {
+                if($res[$i]['end_time']<NOW_TIME){
+                    $res[$i]['flag'] = '已过期';
+                    $res[$i]['valid'] = 0;
+                }else{
+                    $res[$i]['flag'] = '未开始';
+                    $res[$i]['valid'] = 1;
+                }
+            }
+        }
+    }
+    return $res;
+}

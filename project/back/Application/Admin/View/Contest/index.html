@@ -147,8 +147,12 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">考核时间 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12 ">
-                    <!--<span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>-->
-                    <input type="text" name="reservation-time" id="reservation-time2" class="form-control has-feedback-left" value="{$contestInfo['reservation-time']}" />
+                    <if condition="$contestInfo">
+                        <input type="text" name="reservation-time" class="form-control has-feedback-left" value="{$contestInfo['reservation-time']}" />
+                        <else/>
+                        <input type="text" name="reservation-time" id="reservation-time2" class="form-control has-feedback-left" />
+                    </if>
+
                     <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                 </div>
             </div>
@@ -387,7 +391,7 @@
         <tr>
             <!--<td>#</td>-->
             <td>
-                <a>{$vo.title}{$vo['contest_sn']}</a>
+                <a>{$vo.title}</a>
                 <br />
                 <small>{$vo.begin_time|date="ymd H:i:s",###}</small>
             </td>
@@ -443,7 +447,6 @@
         {
             var url = "{:U('sign')}";
             url = url.replace(/.html/, "");
-            alert(sn);
             location.href = url+"/contest_sn/"+sn;//location.href实现客户端页面的跳转
         }
     </script>

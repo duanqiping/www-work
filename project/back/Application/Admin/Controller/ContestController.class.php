@@ -20,6 +20,8 @@ class ContestController extends BaseController
     //创建考试\赛事
     public function index()
     {
+        $uid = $_SESSION['user']['id'];
+
         $contest = new ContestModel();
         $contestOrder = new ContestOrderModel();
 
@@ -30,6 +32,7 @@ class ContestController extends BaseController
         }else{
             //edit
             if(is_array($result)){
+//                my_print($result);
                 $this->assign('contestInfo', $result);//赛事的详细信息
             }else if($result == 2){
                 //delete
@@ -44,7 +47,9 @@ class ContestController extends BaseController
         $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
         $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
 
-        $res = $contest->getContestInfo();//获取赛事列表
+        $res = $contest->getContestInfo($uid);//获取赛事列表
+
+//        my_print($res);
 
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
@@ -95,13 +100,13 @@ class ContestController extends BaseController
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
-        $contest_sn = $_SESSION['contest_sn'];
-
         $condition = $_GET;//筛选条件
 
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        $contest_sn = $_SESSION['contest_sn'];
+
         if($_POST){
             $ids = $_POST;
             $ids = $ids['id'];
@@ -111,23 +116,24 @@ class ContestController extends BaseController
             if(!$b) exit('fail');
         }
 
-        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $condition['contest_sn'] = $contest_sn;
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
+        $res_contest = $contest->where(array('contest_sn'=>$contest_sn))->field('is_use,end_time')->find();
+        $res_contest = ContestState($res_contest);
+
+        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));//赛事名单列表
 
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
-
-        $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
-
         $this->assign('_list',$res);
-        $this->assign('condition', $condition);
+        $this->assign('condition', $condition);//筛选的条件
 
         $this->assign('deptInfo', $studentInfo['dept']);
         $this->assign('gradeInfo', $studentInfo['grade']);
         $this->assign('classInfo', $studentInfo['class']);
 
-        $this->assign('title',$title);
+        $this->assign('title',$contestorder->title);//标题
+        $this->assign('contestInfo',$res_contest);//赛事信息 未开始(可以添加和删除用户) 和 其他情况
 
         $this->display('info');
     }
@@ -179,17 +185,17 @@ class ContestController extends BaseController
     //签到
     public function sign()
     {
-        $contest = new ContestModel();
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
-        $contest_sn = $_SESSION['contest_sn'];
 
         $condition = $_GET;//筛选条件
 
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        $contest_sn = $_SESSION['contest_sn'];
+
         if($_POST){
 //            $ids = $_POST;
 //            $ids = $ids['id'];
@@ -205,8 +211,6 @@ class ContestController extends BaseController
 
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
-        $title = $contest->where(array('contest_sn'=>$contest_sn))->getField('title');
-
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
 
@@ -214,7 +218,7 @@ class ContestController extends BaseController
         $this->assign('gradeInfo', $studentInfo['grade']);
         $this->assign('classInfo', $studentInfo['class']);
 
-        $this->assign('title', $title);
+        $this->assign('title', $contestorder->title);
 
         $this->display();
     }
@@ -256,15 +260,15 @@ class ContestController extends BaseController
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
-        $contest_sn = $_SESSION['contest_sn'];
 
         $condition = $_GET;//筛选条件
 
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        $contest_sn = $_SESSION['contest_sn'];
 
-        $condition['contest_sn'] = $_SESSION['contest_sn'];
+        $condition['contest_sn'] = $contest_sn;
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn));
 
@@ -320,14 +324,12 @@ class ContestController extends BaseController
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
-        $contest_sn = $_SESSION['contest_sn'];
 
         $condition = $_GET;//筛选条件
-
-
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
+        $contest_sn = $_SESSION['contest_sn'];
 
         $condition['contest_sn'] = $contest_sn;
         $condition['confirm'] = 0;

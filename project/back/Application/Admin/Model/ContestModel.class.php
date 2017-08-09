@@ -34,7 +34,8 @@ class ContestModel extends Model{
                 $res['pass_score_male'] = str_pad(floor($res['pass_score_male']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_male']%60),2,0,STR_PAD_LEFT);
                 $res['pass_score_female'] = str_pad(floor($res['pass_score_female']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_female']%60),2,0,STR_PAD_LEFT);
 
-                $res['reservation-time'] = date('d-m-Y:H:i:s',$res['begin_time']).'-'.date('d-m-Y:H:i:s',$res['end_time']);
+                $res['reservation-time'] = date('d/m/Y H:i',$res['begin_time']).' - '.date('d/m/Y H:i',$res['end_time']);
+
                 unset($res['begin_time']);
                 unset($res['end_time']);
                 return $res;
@@ -91,26 +92,17 @@ class ContestModel extends Model{
     }
 
     //获取赛事列表
-    public function getContestInfo()
+    public function getContestInfo($uid)
     {
         $condition['is_show'] = 1;
-        $condition['customer_id'] = $_SESSION['user']['id'];
+        $condition['customer_id'] = $uid;
 
         $res = $this->where($condition)
             ->field('contest_sn,title,begin_time,end_time,is_use')
             ->order('add_time desc')
             ->select();
-        for($i=0,$len=count($res);$i<$len;$i++){
-            if($res[$i]['is_use'] == 1){
-                $res[$i]['flag'] = '已结束';
-            }else{
-                if($res[$i]['end_time']<NOW_TIME){
-                    $res[$i]['flag'] = '已过期';
-                }else{
-                    $res[$i]['flag'] = '未开始';
-                }
-            }
-        }
+        $res = ContestState($res);
+
         return $res;
     }
 

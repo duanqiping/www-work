@@ -19,6 +19,50 @@ class ContestModel extends Model{
         array ('is_audit', '1', self::MODEL_INSERT),
     );
 
+    /**获取赛事标题
+     * $title 赛事标题
+     * $parent_id  赛事父级id
+    */
+    public function getTitle($title,$parent_id)
+    {
+        return ($parent_id != 0)?$title.'(补考)':$title;
+    }
+
+    /**获取按钮属性
+     * $end_time 赛事结束时间
+     * $status  赛事状态
+    */
+    public function getButtonProperty($end_time,$status)
+    {
+        $res = array();
+        if($end_time<NOW_TIME)
+        {
+            $res['button'] = '开始';
+            $res['click'] = 0;//不可点击
+        }
+        else if($status == 4)
+        {
+            $res['button'] = '进入';
+            $res['click'] = 1;//可点击
+        }
+        else if($status == 3)
+        {
+            $res['button'] = '进入';
+            $res['click'] = 1;//可点击
+        }
+        else if($status == 2)
+        {
+            $res['button'] = '进入';
+            $res['click'] = 1;//可点击
+        }
+        else if($status == 1)
+        {
+            $res['button'] = '开始';
+            $res['click'] = 1;//可点击
+        }
+        return $res;
+    }
+
     //按钮操作 type:edit编辑 delete删除
     public function clickOperate($getInfo)
     {
@@ -98,9 +142,10 @@ class ContestModel extends Model{
         $condition['customer_id'] = $uid;
 
         $res = $this->where($condition)
-            ->field('contest_sn,title,begin_time,end_time,is_use,status')
+            ->field('contest_sn,parent_id,title,begin_time,end_time,status')
             ->order('add_time desc')
             ->select();
+
         $res = ContestState($res);
 
         return $res;

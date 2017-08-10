@@ -42,13 +42,13 @@ class ContestController extends BaseController
             }
         }
 
+
         $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
         $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
         $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
 
-        $res = $contest->getContestInfo($uid);//获取赛事列表
 
-//        my_print($res);
+        $res = $contest->getContestInfo($uid);//获取赛事列表
 
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
@@ -117,7 +117,7 @@ class ContestController extends BaseController
 
         $condition['contest_sn'] = $contest_sn;
 
-        $res_contest = $contest->where(array('contest_sn'=>$contest_sn))->field('is_use,end_time')->find();
+        $res_contest = $contest->where(array('contest_sn'=>$contest_sn))->field('status,end_time')->find();
         $res_contest = ContestState($res_contest);
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);//赛事名单列表
@@ -197,10 +197,6 @@ class ContestController extends BaseController
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
         }
         $contest_sn = $_SESSION['contest_sn'];
-
-        if($_POST){
-        }
-
         $condition['contest_sn'] = $contest_sn;
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);
@@ -229,10 +225,9 @@ class ContestController extends BaseController
         $type = $_GET['type'];
         $flag = $_GET['flag'];
         $contest_sn = $_GET['contest_sn'];
+
         $customer_id = $_SESSION['user']['id'];
-
-
-//        my_print($_GET);
+        $_SESSION['contest_sn'] = $contest_sn;
 
         $e = new Easemob();
 
@@ -256,11 +251,15 @@ class ContestController extends BaseController
         $result = $e->sendText($from="admin",$target_type,$target,$content);//($from="admin",$target_type,$target,$content,$ext)
 
         if($result){
+            $contest = new ContestModel();
             if($type == 2){//开始考试
+                $contest->where(array('contest_sn'=>$contest_sn,'status'=>1))->setField('status',2);//修改赛事状态
                 $this->redirect('sign');
             }else if($type == 5){//确认开始考试
+                $contest->where(array('contest_sn'=>$contest_sn,'status'=>2))->setField('status',3);//修改赛事状态
                 $this->redirect('score');
             }else if($type == 3){//结束考试
+                $contest->where(array('contest_sn'=>$contest_sn,'status'=>3))->setField('status',4);//修改赛事状态
                 if($flag == 1){
                     $this->redirect('makeUp');//补考界面
                 }else{
@@ -319,6 +318,17 @@ class ContestController extends BaseController
         $condition = $_GET;//筛选条件
         if($_GET['contest_sn']){
             $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+        if($_POST){
+            $ids = $_POST;
+            $ids = $ids['id'];
+            $reservationtime = $_POST['reservation-time'];
+
+            $b = $contestorder->makeUpStudent($ids,$_SESSION['contest_sn'],$reservationtime);
+            if(!$b) exit('fail');
+            else {
+                $this->redirect('index');
+            }
         }
         $contest_sn = $_SESSION['contest_sn'];
 

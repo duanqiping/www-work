@@ -22,6 +22,7 @@ function getTimeBeginAndEnd($time_flag)
     }
     return $data;
 }
+
 //获取当日 当月的起始时间
 function getTimeBegin($time_flag)
 {
@@ -87,39 +88,58 @@ function ContestState($res)
     //一维
     if (count($res) == count($res, 1))
     {
-        if($res['is_use'] == 1){
-            $res['flag'] = '已结束';
-            $res['valid'] = 0;
-        }else
-        {
-            if($res['end_time']<NOW_TIME){
-                $res['flag'] = '已过期';
-                $res['valid'] = 0;
-            }else{
-                $res['flag'] = '未开始';
-                $res['valid'] = 1;
-            }
-        }
+        $res = buttonProperty($res);
     }
     //二维
     else
     {
         for($i=0,$len=count($res);$i<$len;$i++)
         {
-            if($res[$i]['is_use'] == 1){
-                $res[$i]['flag'] = '已结束';
-                $res[$i]['valid'] = 0;
-            }else
-            {
-                if($res[$i]['end_time']<NOW_TIME){
-                    $res[$i]['flag'] = '已过期';
-                    $res[$i]['valid'] = 0;
-                }else{
-                    $res[$i]['flag'] = '未开始';
-                    $res[$i]['valid'] = 1;
-                }
-            }
+            $res[$i] = buttonProperty($res[$i]);
         }
+    }
+    return $res;
+}
+
+//通过赛事状态 设置按钮属性
+function buttonProperty($res)
+{
+    if($res['parent_id'] != 0) $res['title'] = $res['title'].'(补考)';
+
+    if($res['end_time']<NOW_TIME)
+    {
+        $res['flag'] = ($res['status'] == 4)?'已结束':'已过期';
+        $res['button'] = '开始';
+        $res['click'] = 0;//不可点击
+        $res['valid'] = 0;
+    }
+    else if($res['status'] == 4)
+    {
+        $res['flag'] = '已结束';
+        $res['button'] = '进入';
+        $res['click'] = 1;//可点击
+        $res['valid'] = 1;
+    }
+    else if($res['status'] == 3)
+    {
+        $res['flag'] = '进行中';
+        $res['button'] = '进入';
+        $res['click'] = 1;//可点击
+        $res['valid'] = 1;
+    }
+    else if($res['status'] == 2)
+    {
+        $res['flag'] = '准备中';
+        $res['button'] = '进入';
+        $res['click'] = 1;//可点击
+        $res['valid'] = 1;
+    }
+    else if($res['status'] == 1)
+    {
+        $res['flag'] = '未开始';
+        $res['button'] = '开始';
+        $res['click'] = 1;//可点击
+        $res['valid'] = 1;
     }
     return $res;
 }

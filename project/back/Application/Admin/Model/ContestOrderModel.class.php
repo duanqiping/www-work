@@ -181,6 +181,38 @@ class ContestOrderModel extends Model{
         return true;
     }
 
+    //添加补考学生
+    public function makeUpStudent($ids,$contest_sn,$reservationtime)
+    {
+        $contest = new ContestModel();
+
+        $res = $contest->where(array('contest_sn'=>$contest_sn))
+            ->field('contest_id parent_id,customer_id,contest_sn,title,content,length_male,length_female,length,pass_score_male,pass_score_female')
+            ->find();
+
+        $s = explode('-',$reservationtime);
+        $res['begin_time'] = strtotime($s[0]);
+        $res['end_time'] = strtotime($s[1]);
+        $res['add_time'] = NOW_TIME;
+        if($_SESSION['user']['grade'] == 3){
+            $res['from_id'] = $_SESSION['user']['id'];
+            $res['from_name'] = '学校管理员';
+        }
+        else{
+            $res['from_id'] = $_SESSION['user']['id'];
+            $res['from_name'] = $_SESSION['user']['id'];
+        }
+        if(!$contest->add($res)){
+            $this->error = '补考赛事生成失败';
+            return false;
+        }
+
+        $map['contest_order_id'] = array('in',$ids);
+        $map['contest_sn'] = $contest_sn;
+        $b = $this->where($map)->setInc('makeup');
+        if(!$b) return false;
+        else return true;
+    }
 
     //获取赛事名单  圈数、终点endMachine放到List中
     public function getContestOrder($contest_sn,$customer_id)

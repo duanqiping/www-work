@@ -28,6 +28,26 @@ class ContestModel extends Model{
         return ($parent_id != 0)?$title.'(补考)':$title;
     }
 
+    /**获取状态属性
+    */
+    public function statusProperty($end_time,$status)
+    {
+        $res = array();
+        if($status == 4){
+            $res['flag'] = '已结束';
+        }else{
+            if($end_time<NOW_TIME)//过期
+            {
+                $res['flag'] = '已过期';
+            }else{
+                if($status == 1) $res['flag'] = '未开始';
+                else if($status == 2) $res['flag'] = '准备中';
+                else $res['flag'] = '进行中';
+            }
+        }
+        return $res;
+    }
+
     /**获取按钮属性
      * $end_time 赛事结束时间
      * $status  赛事状态
@@ -35,31 +55,37 @@ class ContestModel extends Model{
     public function getButtonProperty($end_time,$status)
     {
         $res = array();
-        if($end_time<NOW_TIME)
+
+        if($status == 4)//完成 （如需要补考，可从名单页面中进行）
         {
             $res['button'] = '开始';
             $res['click'] = 0;//不可点击
+            $res['url'] = '';
         }
-        else if($status == 4)
+        else//未完成
         {
-            $res['button'] = '进入';
-            $res['click'] = 1;//可点击
+            if($end_time<NOW_TIME)//过期
+            {
+                $res['button'] = '开始';
+                $res['click'] = 0;//不可点击
+                $res['url'] = '';
+            }
+            else
+            {
+                if($status == 1){
+                    $res['button'] = '开始';
+                    $res['click'] = 1;//可点击
+                    $res['url'] = 'contestClick';//"{:U(url)}";
+//                    $res['url'] = "{:U('contestClick')}";//"{:U(url)}";
+                }else{
+                    $res['button'] = '进入';
+                    $res['click'] = 1;//可点击
+                    $res['url'] = ($status==2)?'sign':'score';
+//                    $res['url'] = ($status==2)?'"{:U(sign)}"':'"{:U(score)}"';
+                }
+            }
         }
-        else if($status == 3)
-        {
-            $res['button'] = '进入';
-            $res['click'] = 1;//可点击
-        }
-        else if($status == 2)
-        {
-            $res['button'] = '进入';
-            $res['click'] = 1;//可点击
-        }
-        else if($status == 1)
-        {
-            $res['button'] = '开始';
-            $res['click'] = 1;//可点击
-        }
+
         return $res;
     }
 
@@ -146,7 +172,18 @@ class ContestModel extends Model{
             ->order('add_time desc')
             ->select();
 
-        $res = ContestState($res);
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            $res_button = $this->getButtonProperty($res[$i]['end_time'],$res[$i]['status']);//获取按钮属性
+            $res_status = $this->statusProperty($res[$i]['end_time'],$res[$i]['status']);//获取状态
+
+//            $res[$i] = buttonProperty($res[$i]);
+            $res[$i] = array_merge($res[$i],$res_button,$res_status);
+        }
+//        my_print($res);
+//        exit();
+
+//        $res = ContestState($res);
 
         return $res;
     }

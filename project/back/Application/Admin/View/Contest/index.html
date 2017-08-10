@@ -393,9 +393,8 @@
                 <small>{$vo.count}/{$vo.count}</small>
             </td>
             <td>
-                <!--<button type="button" onclick="beginContest({$vo['contest_sn']})" class="btn btn-success btn-xs">开始</button>-->
                 <if condition="$vo['click'] eq 1">
-                    <button type="button" onclick="clickButton('{$vo.contest_sn}','{$vo.status}')" class="btn btn-success btn-xs">{$vo.button}</button>
+                    <button type="button" onclick="clickButton('{$vo.contest_sn}','{$vo.status}','{$vo.url}')" class="btn btn-success btn-xs">{$vo.button}</button>
                     <else/>
                     <button type="button" class="btn1 btn-success btn-xs" style="background-color:lightslategrey">开始</button>
                 </if>
@@ -405,11 +404,7 @@
                 <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'edit'))}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> 编辑 </a>
                 <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'delete'))}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>
             </td>
-            <if condition="$vo['flag'] eq 已过期"><td style="color: red">{$vo.flag}</td>
-                <elseif condition="$vo['flag'] eq 未开始" /><td style="color: #003399">{$vo.flag}</td>
-                <else/><td style="color: #0000FF">{$vo.flag}</td>
-            </if>
-
+            <td style="color: red">{$vo.flag}</td>
         </tr>
     </volist>
     <else/>
@@ -432,26 +427,17 @@
         $(document).ready(function(){
             $(".btn1").attr("disabled", true);
         });
-        function clickButton(sn,status)
+        function clickButton(sn,status,url)
         {
-            var url = "{:U('contestClick')}";
-            if(status == 2){
-                url = "{:U('sign')}";
-            }else if(status == 3){
-                url = "{:U('score')}";
-            }else if(status == 4){
-                url = "{:U('makeup')}";
-            }else{
-                url = "{:U('contestClick')}";
-            }
+            var indexurl = window.location.href;
 
-            url = url.replace(/.html/, "");
+            jumpUrl = indexurl.replace(/index.html/, url);
+
             if(status == 1){
-                location.href = url+"/contest_sn/"+sn+"/type/"+2;//location.href实现客户端页面的跳转
+                location.href = jumpUrl+"/contest_sn/"+sn+"/type/"+2;//location.href实现客户端页面的跳转
             }else{
-                location.href = url+"/contest_sn/"+sn;
+                location.href = jumpUrl+"/contest_sn/"+sn;
             }
-
         }
     </script>
 </block>

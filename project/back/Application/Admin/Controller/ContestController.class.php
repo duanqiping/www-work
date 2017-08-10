@@ -13,7 +13,6 @@ use Admin\Model\ContestModel;
 use Admin\Model\ContestOrderModel;
 use Admin\Model\Easemob;
 use Admin\Model\UserModel;
-use Think\Controller;
 
 class ContestController extends BaseController
 {
@@ -42,11 +41,9 @@ class ContestController extends BaseController
             }
         }
 
-
         $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
         $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
         $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
-
 
         $res = $contest->getContestInfo($uid);//获取赛事列表
 

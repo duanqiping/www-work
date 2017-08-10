@@ -445,9 +445,9 @@
         });
         function beginContest(sn)
         {
-            var url = "{:U('sign')}";
+            var url = "{:U('contestClick')}";
             url = url.replace(/.html/, "");
-            location.href = url+"/contest_sn/"+sn;//location.href实现客户端页面的跳转
+            location.href = url+"/contest_sn/"+sn+"/type/"+2;//location.href实现客户端页面的跳转
         }
     </script>
 </block>

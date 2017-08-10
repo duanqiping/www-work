@@ -34,7 +34,7 @@
     <div class="x_panel">
 
         <div class="x_title">
-            <h2>已选名单 <small>{$title} 赛事</small></h2>
+            <h2>签到界面 <small>{$title} 赛事</small></h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -181,7 +181,7 @@
                                 <th class="">年级</th>
                                 <th class="">班级</th>
                                 <th class="">性别</th>
-                                <th class="">操作</th>
+                                <!--<th class="">操作</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -201,7 +201,7 @@
                                                 <else/>女
                                             </if>
                                         </td>
-                                        <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
+                                        <!--<td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>-->
                                     </tr>
                                 </volist>
                                 <else/>
@@ -211,18 +211,18 @@
                             </tbody>
                         </table>
                     </div>
-                    <ul class="nav nav-pills" role="tablist">
-                        <div class="M-box1"></div>
-                        <div style="float: left;color: #008000">
-                            <button class="btn ajax-post">开始考试</button>
-                        </div>
-                    </ul>
-                    <!--<ul class="nav nav-pills" role="tablist">-->
-                        <!--<div style="float: left;color: #008000">-->
-                            <!--<button class="btn ajax-post">开始考试</button>-->
-                        <!--</div>-->
-                    <!--</ul>-->
+
                 </form>
+                <ul class="nav nav-pills" role="tablist">
+                    <div class="M-box1"></div>
+                </ul>
+                <br/>
+
+                <ul class="nav nav-pills" role="tablist">
+                    <div style="float: left;color: #008000">
+                        <button class="btn ajax-post" onclick="confirmBeginContest('{$vo.contest_sn}')">开始考试</button>
+                    </div>
+                </ul>
 
                 <!-- end project list -->
             </div>
@@ -235,6 +235,13 @@
     <script type="text/javascript">
         var indexurl = "{:U()}";
 
+        function confirmBeginContest(sn)
+        {
+            var url = "{:U('contestClick')}";
+            url = url.replace(/.html/, "");
+            location.href = url+"/contest_sn/"+sn+"/type/"+5;//location.href实现客户端页面的跳转
+        }
+
         $('.M-box1').pagination({
             totalData:"{$totalNum}",
             showData:"{$pageSize}",
@@ -243,6 +250,7 @@
             callback:function(api){
                 //这里写ajax方法，url
                 var url = window.location.href;
+                url = url.replace(/.html/, "");
 
                 strs=url.split("/current"); //字符分割
                 url = strs[0];

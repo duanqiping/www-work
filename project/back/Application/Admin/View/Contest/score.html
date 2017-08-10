@@ -170,7 +170,7 @@
                                 <th class="">性别</th>
                                 <th class="">成绩(秒)</th>
                                 <th class="">达标成绩(秒)</th>
-                                <th class="">是否合格</th>
+                                <th class="">成绩</th>
 
                             </tr>
                             </thead>
@@ -215,7 +215,7 @@
                 <br/>
                 <ul class="nav nav-pills" role="tablist">
                     <div style="float: left;color: #008000">
-                        <button class="btn ajax-post" onclick="endContest()">结束考试</button>
+                        <button class="btn ajax-post" onclick="endContest('{$vo.contest_sn}')">结束考试</button>
                     </div>
                     <div style="float: left;color: #008000">
                         <button class="btn ajax-post" id="refresh" onclick="refresh()">点击刷新查看最新成绩</button>
@@ -237,18 +237,21 @@
         {
             location.href = indexurl;
         }
-        function endContest()
+        function endContest(sn)
         {
+            var url = "{:U('contestClick')}";
+            url = url.replace(/.html/, "");
+
             var outAchieve = "{$outAchieve}";
             if(outAchieve > 0){
                 if(confirm(outAchieve+"个学生成绩不合格，是否现在创建补考"))
                 {
-                    location.href = "{:U('makeUp')}";
+                    location.href = url+"/contest_sn/"+sn+"/type/"+3+"/flag/"+1;//location.href实现客户端页面的跳转
                 }else{
-                    location.href = "{:U('')}";
+                   location.href = url+"/contest_sn/"+sn+"/type/"+3;//location.href实现客户端页面的跳转
                 }
             }else{
-                location.href = "{:U('')}";
+                location.href = url+"/contest_sn/"+sn+"/type/"+3;//location.href实现客户端页面的跳转
             }
         }
         $('.M-box1').pagination({
@@ -259,6 +262,7 @@
             callback:function(api){
                 //这里写ajax方法，url
                 var url = window.location.href;
+                url = url.replace(/.html/, "");
 
                 strs=url.split("/current"); //字符分割
                 url = strs[0];

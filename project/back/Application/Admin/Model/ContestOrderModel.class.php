@@ -115,12 +115,18 @@ class ContestOrderModel extends Model{
             }else{
                 $res[$i]['pass_score'] = $res_contest['pass_score_female'];
             }
-            if($res[$i]['time'] <= $res[$i]['pass_score'] && $res[$i]['time']>0){
-                $res[$i]['achieve'] = '合格';
-                $this->onAchieve += 1;
-            }else{
-                $res[$i]['achieve'] = '不合格';
+            if($res[$i]['sign'] != 1)
+            {
+                $res[$i]['achieve'] = '未签到';
                 $this->outAchieve += 1;
+            }else{
+                if($res[$i]['time'] <= $res[$i]['pass_score'] && $res[$i]['time']>0){
+                    $res[$i]['achieve'] = '合格';
+                    $this->onAchieve += 1;
+                }else{
+                    $res[$i]['achieve'] = '不合格';
+                    $this->outAchieve += 1;
+                }
             }
         }
         $this->title = $res_contest['title'];

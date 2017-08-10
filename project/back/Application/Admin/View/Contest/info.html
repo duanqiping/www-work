@@ -247,6 +247,7 @@
             callback:function(api){
                 //这里写ajax方法，url
                 var url = window.location.href;
+                url = url.replace(/.html/, "");
 
                 strs=url.split("/current"); //字符分割
                 url = strs[0];

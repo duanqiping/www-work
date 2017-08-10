@@ -98,7 +98,7 @@ class ContestModel extends Model{
         $condition['customer_id'] = $uid;
 
         $res = $this->where($condition)
-            ->field('contest_sn,title,begin_time,end_time,is_use')
+            ->field('contest_sn,title,begin_time,end_time,is_use,status')
             ->order('add_time desc')
             ->select();
         $res = ContestState($res);

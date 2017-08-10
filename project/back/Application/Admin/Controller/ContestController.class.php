@@ -32,7 +32,6 @@ class ContestController extends BaseController
         }else{
             //edit
             if(is_array($result)){
-//                my_print($result);
                 $this->assign('contestInfo', $result);//赛事的详细信息
             }else if($result == 2){
                 //delete
@@ -224,24 +223,32 @@ class ContestController extends BaseController
         $this->display();
     }
 
-    //开始考试
-    public function beginContest()
+    //考试 按钮 type 2:开始 5:确认开始 3:结束考试
+    public function contestClick()
     {
+        $type = $_GET['type'];
+        $flag = $_GET['flag'];
+        $contest_sn = $_GET['contest_sn'];
+        $customer_id = $_SESSION['user']['id'];
+
+
+//        my_print($_GET);
+
         $e = new Easemob();
 
         $target_type = 'users';
         $target = array('0000111','0000112','0000113');
 
         $content = array(
-            'customer_id' => '31',
-            'contest_sn' => $_SESSION['contest_sn']
+            'customer_id' => $customer_id,
+            'contest_sn' => $contest_sn
         );
 
         $content = str_replace("\\/", "/", json_encode($content));
 
         $content = array(
             'data' =>$content,
-            'type'=>5
+            'type'=>$type
         );
 
         $content = json_encode($content);//注意 $content 得是一个字符窜
@@ -249,7 +256,17 @@ class ContestController extends BaseController
         $result = $e->sendText($from="admin",$target_type,$target,$content);//($from="admin",$target_type,$target,$content,$ext)
 
         if($result){
-            $this->redirect('score');
+            if($type == 2){//开始考试
+                $this->redirect('sign');
+            }else if($type == 5){//确认开始考试
+                $this->redirect('score');
+            }else if($type == 3){//结束考试
+                if($flag == 1){
+                    $this->redirect('makeUp');//补考界面
+                }else{
+                    $this->redirect('index');
+                }
+            }
         }else{
             exit('fail');
         }
@@ -290,37 +307,6 @@ class ContestController extends BaseController
         $this->assign('current',$contestorder->current);//第几页
 
         $this->display();
-    }
-
-    //结束考试
-    public function endContest()
-    {
-        $e = new Easemob();
-
-        $target_type = 'users';
-        $target = array('0000111','0000112','0000113');
-
-        $content = array(
-            'customer_id' => '31',
-            'contest_sn' => $_SESSION['contest_sn']
-        );
-
-        $content = str_replace("\\/", "/", json_encode($content));
-
-        $content = array(
-            'data' =>$content,
-            'type'=>3
-        );
-
-        $content = json_encode($content);//注意 $content 得是一个字符窜
-
-        $result = $e->sendText($from="admin",$target_type,$target,$content);//($from="admin",$target_type,$target,$content,$ext)
-
-        if($result){
-            $this->redirect('score');
-        }else{
-            exit('fail');
-        }
     }
 
     //创建补考

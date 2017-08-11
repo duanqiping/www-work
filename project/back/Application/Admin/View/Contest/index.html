@@ -436,11 +436,14 @@
         {
             var indexurl = window.location.href;
 
-            var url_res = indexurl.split('Contest/index');
-            indexurl = url_res[0];
+            jumpUrl = indexurl.replace(/index.html/, url);
+            if(jumpUrl == indexurl){
+                var url_res = indexurl.split('Contest/index');
+                indexurl = url_res[0];
 
-            jumpUrl = indexurl+'/contest/'+url;
-//            jumpUrl = indexurl.replace(/index.html/, url);
+                jumpUrl = indexurl+'/contest/'+url;
+            }
+
             if(status == 1){
                 location.href = jumpUrl+"/contest_sn/"+sn+"/type/"+2;//跳转并发送准备考试指令
             }else{

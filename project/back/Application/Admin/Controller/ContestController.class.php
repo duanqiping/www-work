@@ -348,6 +348,7 @@ class ContestController extends BaseController
             $ids = $ids['id'];
             $reservationtime = $_POST['reservation-time'];
 
+            //创建补考 和 补考赛事名单
             $b = $contestorder->makeUpStudent($ids,$_SESSION['contest_sn'],$reservationtime);
             if(!$b) exit('fail');
             else {

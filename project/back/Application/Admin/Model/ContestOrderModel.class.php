@@ -216,6 +216,7 @@ class ContestOrderModel extends Model{
         $res['end_time'] = strtotime($s[1]);
         $res['add_time'] = NOW_TIME;
         $res['contest_sn'] = $contest->createContestSn();
+        $res['title'] = $res['title'].'(补考)';
 
         if($_SESSION['user']['grade'] == 3){
             $res['from_id'] = $_SESSION['user']['id'];

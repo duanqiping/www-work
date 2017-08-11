@@ -206,12 +206,14 @@
                 </tr>
             </volist>
             <if condition="$status eq 1">
-                <td colspan="11" class="text-center"> <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击继续添加学生</a> </td>
+                <td colspan="11" class="text-center"> <a href="{:U('user',array('contest_sn'=>$vo['contest_sn']))}" style="color: red">点击继续添加学生</a> </td>
                 <else />
             </if>
+
             <else/>
+
             <if condition="$status eq 1">
-                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击添加学生</a> </td>
+                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$vo['contest_sn']))}" style="color: red">点击添加学生</a> </td>
                 <else />
             </if>
         </notempty>

@@ -400,7 +400,12 @@
                 </if>
             </td>
             <td>
-                <a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                <if condition="$vo['status'] eq 4">
+                    <a href="{:U('makeUp',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                    <else/>
+                    <a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                </if>
+                <!--<a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>-->
                 <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'edit'))}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> 编辑 </a>
                 <a href="{:U('index',array('contest_sn'=>$vo['contest_sn'],'type'=>'delete'))}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>
             </td>

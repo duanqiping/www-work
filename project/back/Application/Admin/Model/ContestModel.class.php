@@ -161,8 +161,10 @@ class ContestModel extends Model{
         $condition = array();
         $condition['begin_time'] = array('lt',NOW_TIME);//开始时间小于当前时间
         $condition['end_time'] = array('gt',NOW_TIME);//结束时间大于当前时间
-        $res = $this->where($condition)->field('contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
-        return $res[0];
+        $res = $this->where($condition)->field('parent_id,contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
+        $res = $res[0];
+        $res['title'] = $this->getTitle($res['title'],$res['parent_id']);
+        return $res;
     }
 
     //冲突中
@@ -207,6 +209,7 @@ class ContestModel extends Model{
             $res_status = $this->statusProperty($res[$i]['end_time'],$res[$i]['status']);//获取状态
 
             $res[$i] = array_merge($res[$i],$res_button,$res_status);
+            $res[$i]['title'] = $this->getTitle($res[$i]['title'],$res[$i]['parent_id']);
         }
         return $res;
     }

@@ -113,10 +113,10 @@ class ContestController extends BaseController
 
         $condition['contest_sn'] = $contest_sn;
 
-
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);//赛事名单列表
-
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);//获取系、年级、班级
+
+//        my_print($contestorder->title);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);//筛选的条件
@@ -138,27 +138,52 @@ class ContestController extends BaseController
     //添加赛事人员
     public function user()
     {
+        if($_GET['contest_sn']){
+            $_SESSION['contest_sn'] = $_GET['contest_sn'];
+        }
+        $contest_sn = $_SESSION['contest_sn'];
+        $contest = new ContestModel();
+        $parent_id = $contest->where(array('contest_sn'=>$contest_sn))->getField('parent_id');
+
         $uid = $_SESSION['user']['id'];
-
-        $user = new UserModel();
-
         $condition = $_GET;//筛选条件
 
-        $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0),$current=$_GET['current']);
+        if($parent_id > 0){
+            //补考 全部不合格学生的名单
+            $contestorder = new ContestOrderModel();
+            $condition = makeCondition($condition,$uid,$contest_sn);
+            $condition['up_standard'] = 0;
+            $res = $contestorder->contestList($condition,$current=$_GET['current']);
+            $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
-        $deptInfo = $user->getDept($uid);//获取系别
-        $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
-        $classInfo = $user->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
+            $this->assign('_list',$res);
+            $this->assign('condition', $condition);
 
-        $this->assign('_list', $res);
-        $this->assign('condition', $condition);
-        $this->assign('deptInfo', $deptInfo);
-        $this->assign('gradeInfo', $gradeInfo);
-        $this->assign('classInfo', $classInfo);
+            $this->assign('deptInfo', $studentInfo['dept']);
+            $this->assign('gradeInfo', $studentInfo['grade']);
+            $this->assign('classInfo', $studentInfo['class']);
 
-        $this->assign('totalNum',$user->totalNum);//总页数
-        $this->assign('pageSize',$user->pageSize);//每页数
-        $this->assign('current',$user->current);//第几页
+            $this->assign('totalNum',$contestorder->totalNum);//总页数
+            $this->assign('pageSize',$contestorder->pageSize);//每页数
+            $this->assign('current',$contestorder->current);//第几页
+        }else{//非补考  所有学生的名单
+            $user = new UserModel();
+            $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0),$current=$_GET['current']);
+
+            $deptInfo = $user->getDept($uid);//获取系别
+            $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
+            $classInfo = $user->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
+
+            $this->assign('_list', $res);
+            $this->assign('condition', $condition);
+            $this->assign('deptInfo', $deptInfo);
+            $this->assign('gradeInfo', $gradeInfo);
+            $this->assign('classInfo', $classInfo);
+
+            $this->assign('totalNum',$user->totalNum);//总页数
+            $this->assign('pageSize',$user->pageSize);//每页数
+            $this->assign('current',$user->current);//第几页
+        }
 
         $this->display();
     }

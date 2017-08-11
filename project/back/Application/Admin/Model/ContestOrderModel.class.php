@@ -134,7 +134,7 @@ class ContestOrderModel extends Model{
 
         $contest = new ContestModel();
         $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
-            ->field('title,pass_score_male,pass_score_female,status')
+            ->field('parent_id,title,pass_score_male,pass_score_female,status')
             ->find();
 
         $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
@@ -148,7 +148,7 @@ class ContestOrderModel extends Model{
             }
             $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
         }
-        $this->title = $res_contest['title'];
+        $this->title = $contest->getTitle($res_contest['title'],$res_contest['parent_id']);// ;
         $this->status = $res_contest['status'];
 
         return $res;
@@ -225,16 +225,29 @@ class ContestOrderModel extends Model{
             $res['from_id'] = $_SESSION['user']['id'];
             $res['from_name'] = $_SESSION['user']['id'];
         }
-        if(!$contest->add($res)){
+        $this->startTrans();//开启事物
+        $uid = $contest->add($res);//生成一条新赛事
+        if(!$uid){
             $this->error = '补考赛事生成失败';
             return false;
         }
 
         $map['contest_order_id'] = array('in',$ids);
         $map['contest_sn'] = $contest_sn;
-        $b = $this->where($map)->setInc('makeup');
-        if(!$b) return false;
-        else return true;
+
+        $res_users = $this->where($map)
+            ->field("{$res['contest_sn']} as contest_sn, customer_id,user_id,name,studentId,sex,dept,grade,class,length,mode")
+            ->select();
+
+        $b = $this->addAll($res_users);//补考人员名单
+
+        if(!$b){
+            $this->rollback();
+            return false;
+        }else{
+            $this->commit();
+            return true;
+        }
     }
 
     //获取赛事名单  圈数、终点endMachine放到List中

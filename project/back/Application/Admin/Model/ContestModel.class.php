@@ -76,12 +76,10 @@ class ContestModel extends Model{
                     $res['button'] = '开始';
                     $res['click'] = 1;//可点击
                     $res['url'] = 'contestClick';//"{:U(url)}";
-//                    $res['url'] = "{:U('contestClick')}";//"{:U(url)}";
                 }else{
                     $res['button'] = '进入';
                     $res['click'] = 1;//可点击
                     $res['url'] = ($status==2)?'sign':'score';
-//                    $res['url'] = ($status==2)?'"{:U(sign)}"':'"{:U(score)}"';
                 }
             }
         }

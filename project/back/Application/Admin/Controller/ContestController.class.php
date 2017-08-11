@@ -63,7 +63,7 @@ class ContestController extends BaseController
         if($_POST)
         {
             $contest = new ContestModel();
-            if($_POST['contest_sn']){
+            if($_POST['contest_id']){
                 //对赛事信息进行修改
                 $contest->editContest($_POST);
 
@@ -73,7 +73,7 @@ class ContestController extends BaseController
                 //添加一场赛事
                 $data = $contest->fillData($_POST);//填充数据
 
-                if($contest->add($data))
+                if($uid = $contest->add($data))
                 {
                     $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
                     $this->redirect('user');
@@ -81,7 +81,6 @@ class ContestController extends BaseController
                     exit('fail');
                 }
             }
-
         }
         else
         {
@@ -92,7 +91,6 @@ class ContestController extends BaseController
     //赛事人员名单
     public function info()
     {
-        $contest = new ContestModel();
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
@@ -107,6 +105,7 @@ class ContestController extends BaseController
             $ids = $_POST;
             $ids = $ids['id'];
 
+            $contest = new ContestModel();
             $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
             $b = $contestorder->addUser($ids,$contest_sn,$res_length);
             if(!$b) exit('fail');
@@ -114,12 +113,10 @@ class ContestController extends BaseController
 
         $condition['contest_sn'] = $contest_sn;
 
-        $res_contest = $contest->where(array('contest_sn'=>$contest_sn))->field('status,end_time')->find();
-        $res_contest = ContestState($res_contest);
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);//赛事名单列表
 
-        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);//获取系、年级、班级
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);//筛选的条件
@@ -129,7 +126,8 @@ class ContestController extends BaseController
         $this->assign('classInfo', $studentInfo['class']);
 
         $this->assign('title',$contestorder->title);//标题
-        $this->assign('contestInfo',$res_contest);//赛事信息 未开始(可以添加和删除用户) 和 其他情况
+        $this->assign('status',$contestorder->status);//赛事状态
+
         $this->assign('totalNum',$contestorder->totalNum);//总页数
         $this->assign('pageSize',$contestorder->pageSize);//每页数
         $this->assign('current',$contestorder->current);//第几页
@@ -146,7 +144,7 @@ class ContestController extends BaseController
 
         $condition = $_GET;//筛选条件
 
-        $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0));
+        $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0),$current=$_GET['current']);
 
         $deptInfo = $user->getDept($uid);//获取系别
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
@@ -157,6 +155,10 @@ class ContestController extends BaseController
         $this->assign('deptInfo', $deptInfo);
         $this->assign('gradeInfo', $gradeInfo);
         $this->assign('classInfo', $classInfo);
+
+        $this->assign('totalNum',$user->totalNum);//总页数
+        $this->assign('pageSize',$user->pageSize);//每页数
+        $this->assign('current',$user->current);//第几页
 
         $this->display();
     }
@@ -332,7 +334,9 @@ class ContestController extends BaseController
         $condition['contest_sn'] = $contest_sn;
         $condition['confirm'] = 0;
 
-        $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);
+        $condition = makeCondition($condition,$uid,$contest_sn);//列表筛选条件
+        $condition['up_standard'] = 0;
+        $res = $contestorder->contestList($condition,$current=$_GET['current']);
 
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 

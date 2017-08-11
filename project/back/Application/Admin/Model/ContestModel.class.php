@@ -52,39 +52,70 @@ class ContestModel extends Model{
      * $end_time 赛事结束时间
      * $status  赛事状态
     */
-    public function getButtonProperty($end_time,$status)
+    public function getButtonProperty($end_time,$status,$contest_sn)
     {
         $res = array();
 
-        if($status == 4)//完成 （如需要补考，可从名单页面中进行）
-        {
+        $sql_count = "select count(*) as count from contest_order WHERE contest_sn='$contest_sn'";
+        $res_count = $this->query($sql_count);
+
+        if($res_count[0]['count'] < 1){//名单中没有用户
             $res['button'] = '开始';
             $res['click'] = 0;//不可点击
             $res['url'] = '';
-        }
-        else//未完成
-        {
-            if($end_time<NOW_TIME)//过期
+        }else{
+            if($status == 4)//完成 （如需要补考，可从名单页面中进行）
             {
                 $res['button'] = '开始';
                 $res['click'] = 0;//不可点击
                 $res['url'] = '';
             }
-            else
+            else//未完成
             {
-                if($status == 1){
+                if($end_time<NOW_TIME)//过期
+                {
                     $res['button'] = '开始';
-                    $res['click'] = 1;//可点击
-                    $res['url'] = 'contestClick';//"{:U(url)}";
-                }else{
-                    $res['button'] = '进入';
-                    $res['click'] = 1;//可点击
-                    $res['url'] = ($status==2)?'sign':'score';
+                    $res['click'] = 0;//不可点击
+                    $res['url'] = '';
+                }
+                else
+                {
+                    if($status == 1){
+                        $res['button'] = '开始';
+                        $res['click'] = 1;//可点击
+                        $res['url'] = 'contestClick';//"{:U(url)}";
+                    }else{
+                        $res['button'] = '进入';
+                        $res['click'] = 1;//可点击
+                        $res['url'] = ($status==2)?'sign':'score';
+                    }
                 }
             }
         }
 
+
+
         return $res;
+    }
+
+    /**获取达标成绩
+     * $sex 性别
+     * $time    性别
+    */
+    public function getContestStandard($contest_sn,$user_id,$time)
+    {
+        $sql = "select sex from user WHERE user_id='$user_id'";
+        $res_user = $this->query($sql);
+        $sex = $res_user[0]['sex'];
+
+        $condition = array('contest_sn'=>$contest_sn);
+        $res_contest = $this->where($condition)->field('pass_score_male,pass_score_female')->find();
+
+        if($sex == 1) $pass_score = $res_contest['pass_score_male'];
+        else $pass_score = $res_contest['pass_score_female'];
+
+        if($time>0 && $time<=$pass_score) return true;//成绩合格
+        return false;//不合格
     }
 
     //按钮操作 type:edit编辑 delete删除
@@ -166,23 +197,17 @@ class ContestModel extends Model{
         $condition['customer_id'] = $uid;
 
         $res = $this->where($condition)
-            ->field('contest_sn,parent_id,title,begin_time,end_time,status')
+            ->field('contest_id,contest_sn,parent_id,title,begin_time,end_time,status')
             ->order('add_time desc')
             ->select();
 
         for($i=0,$len=count($res);$i<$len;$i++)
         {
-            $res_button = $this->getButtonProperty($res[$i]['end_time'],$res[$i]['status']);//获取按钮属性
+            $res_button = $this->getButtonProperty($res[$i]['end_time'],$res[$i]['status'],$res[$i]['contest_sn']);//获取按钮属性
             $res_status = $this->statusProperty($res[$i]['end_time'],$res[$i]['status']);//获取状态
 
-//            $res[$i] = buttonProperty($res[$i]);
             $res[$i] = array_merge($res[$i],$res_button,$res_status);
         }
-//        my_print($res);
-//        exit();
-
-//        $res = ContestState($res);
-
         return $res;
     }
 

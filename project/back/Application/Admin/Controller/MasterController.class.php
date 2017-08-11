@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 
 
+use Admin\Model\ContestModel;
 use Admin\Model\ContestOrderModel;
 use Admin\Model\UserModel;
 use Think\Controller;
@@ -68,6 +69,11 @@ class MasterController extends Controller{
     public function addContest()
     {
         $data = $_POST;
+
+        $contest = new ContestModel();
+        $result = $contest->getContestStandard($data['contest_sn'],$data['user_id'],$data['time']);//判断是否合格
+        if($result) $data['up_standard'] = 1;//合格
+        else $data['up_standard'] = 0;//不合格
 
         $contestOrder = new ContestOrderModel();
         $b = $contestOrder->updateContest($data);

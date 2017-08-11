@@ -197,24 +197,20 @@
                     <td>{$vo.dept}</td>
                     <td>{$vo.grade}</td>
                     <td>{$vo.class}</td>
-                    <td>
-                        <if condition="$vo['sex'] eq 1">男
-                            <else/>女
-                        </if>
-                    </td>
-                    <if condition="$contestInfo['valid'] eq 1">
+                    <td><if condition="$vo['sex'] eq 1">男<else/>女</if></td>
+
+                    <if condition="$status eq 1">
                         <td><a onclick="return confirm('确定删除?');" href="{:U('delete',array('id'=>$vo['contest_order_id']))}" style="color: #006600">删除</a></td>
                         <else />
                     </if>
-
                 </tr>
             </volist>
-            <if condition="$contestInfo['valid'] eq 1">
+            <if condition="$status eq 1">
                 <td colspan="11" class="text-center"> <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击继续添加学生</a> </td>
                 <else />
             </if>
             <else/>
-            <if condition="$contestInfo['valid'] eq 1">
+            <if condition="$status eq 1">
                 <td colspan="11" class="text-center"> aOh! 暂时还没有内容! <a href="{:U('user',array('contest_sn'=>$contest_sn))}" style="color: red">点击添加学生</a> </td>
                 <else />
             </if>

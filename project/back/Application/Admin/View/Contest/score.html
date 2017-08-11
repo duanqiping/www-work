@@ -160,16 +160,14 @@
                             <thead>
                             <tr>
                                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-                                <th class="">UID</th>
-                                <th class="">赛事编号</th>
                                 <th class="">学生姓名</th>
                                 <th class="">学号</th>
                                 <th class="">系别</th>
                                 <th class="">年级</th>
                                 <th class="">班级</th>
                                 <th class="">性别</th>
-                                <th class="">成绩(秒)</th>
                                 <th class="">达标成绩(秒)</th>
+                                <th class="">成绩(秒)</th>
                                 <th class="">成绩</th>
 
                             </tr>
@@ -179,26 +177,15 @@
                                 <volist name="_list" id="vo" key="k">
                                     <tr>
                                         <td><input class="ids" type="checkbox" name="id[]" value="{$vo.contest_order_id}" /></td>
-                                        <td>{$vo.contest_order_id} </td>
-                                        <td>{$vo.contest_sn}</td>
                                         <td>{$vo.name}</td>
                                         <td>{$vo.studentId}</td>
                                         <td>{$vo.dept}</td>
                                         <td>{$vo.grade}</td>
                                         <td>{$vo.class}</td>
-                                        <td>
-                                            <if condition="$vo['sex'] eq 1">男
-                                                <else/>女
-                                            </if>
-                                        </td>
+                                        <td><if condition="$vo['sex'] eq 1">男<else/>女</if></td>
+                                        <td>{$vo.pass_score}</td>
                                         <th class="">{$vo.time}</th>
-                                        <td>
-                                            {$vo.pass_score}
-                                        </td>
-                                        <td>
-                                            {$vo.achieve}
-                                        </td>
-
+                                        <td>{$vo.achieve}</td>
                                     </tr>
                                 </volist>
                                 <else/>

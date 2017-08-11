@@ -15,12 +15,43 @@ class ContestOrderModel extends Model{
 
     protected $tableName = 'contest_order';
     public $title;//赛事标题
+    public $status;//赛事状态
+
     public $onAchieve = 0;//合格人数
     public $outAchieve = 0;//不合格人数
 
     public $totalNum=0;//总记录条数
     public $pageSize=15;//每页的条数
     public $current = 1;//当前页
+
+    /**成绩状态 合格 未签到、没成绩、不合格
+     * $sign 是否签到
+     * $time    成绩
+     * $pass_score  达标成绩
+    */
+    public function scoreStatus($sign,$time,$pass_score)
+    {
+        $achieve = '';
+        if($sign != 1)
+        {
+            $achieve = '未签到';
+            $this->outAchieve += 1;
+        }
+        else
+        {
+            if($time <= $pass_score && $time>0){
+                $achieve = '合格';
+                $this->onAchieve += 1;
+            }else if($time == 0){
+                $achieve = '无成绩';
+                $this->outAchieve += 1;
+            }else if($time > $pass_score){
+                $achieve = '不合格';
+                $this->outAchieve += 1;
+            }
+        }
+        return $achieve;
+    }
 
     public function _list($condition,$field)
     {
@@ -44,7 +75,6 @@ class ContestOrderModel extends Model{
         return true;
     }
 
-
     //更新用户成绩
     public function updateContest($data)
     {
@@ -66,12 +96,12 @@ class ContestOrderModel extends Model{
         $user->execute($sql);
 
         $data['update'] = NOW_TIME;
+        $data['makeup'] = $data['is_again'];
 
         unset($data['customer_id']);
         unset($data['contest_sn']);
         unset($data['user_id']);
-
-
+        unset($data['is_again']);
 
         $b = $this->where($condition)->save($data);
 
@@ -100,13 +130,14 @@ class ContestOrderModel extends Model{
         $this->current = $page;
 
         $offset = ($page-1)*$this->pageSize;
-        $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
         $this->totalNum = $this->where($condition)->count();
 
         $contest = new ContestModel();
         $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
-            ->field('title,pass_score_male,pass_score_female')
+            ->field('title,pass_score_male,pass_score_female,status')
             ->find();
+
+        $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
 
         for($i=0,$len=count($res);$i<$len;$i++)
         {
@@ -115,21 +146,10 @@ class ContestOrderModel extends Model{
             }else{
                 $res[$i]['pass_score'] = $res_contest['pass_score_female'];
             }
-            if($res[$i]['sign'] != 1)
-            {
-                $res[$i]['achieve'] = '未签到';
-                $this->outAchieve += 1;
-            }else{
-                if($res[$i]['time'] <= $res[$i]['pass_score'] && $res[$i]['time']>0){
-                    $res[$i]['achieve'] = '合格';
-                    $this->onAchieve += 1;
-                }else{
-                    $res[$i]['achieve'] = '不合格';
-                    $this->outAchieve += 1;
-                }
-            }
+            $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
         }
         $this->title = $res_contest['title'];
+        $this->status = $res_contest['status'];
 
         return $res;
     }
@@ -167,6 +187,7 @@ class ContestOrderModel extends Model{
             if($count<1){
                 $v['length'] = ($v['sex']==1)?$res_length['length_male']:$res_length['length_female'];
                 $v['contest_sn'] = $contest_sn;
+                $v['add_time'] = NOW_TIME;
 
                 $result = $this->add($v);
 
@@ -194,6 +215,8 @@ class ContestOrderModel extends Model{
         $res['begin_time'] = strtotime($s[0]);
         $res['end_time'] = strtotime($s[1]);
         $res['add_time'] = NOW_TIME;
+        $res['contest_sn'] = $contest->createContestSn();
+
         if($_SESSION['user']['grade'] == 3){
             $res['from_id'] = $_SESSION['user']['id'];
             $res['from_name'] = '学校管理员';

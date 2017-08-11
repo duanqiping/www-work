@@ -162,7 +162,7 @@
                     <input type="reset" value="重置" class="btn btn-primary">
 
                     <if condition="$contestInfo['contest_sn']">
-                        <input type="hidden" value="{$contestInfo['contest_sn']}" name="contest_sn" />
+                        <input type="hidden" value="{$contestInfo['contest_id']}" name="contest_id" />
                         <input type="submit" value="确认修改" class="btn btn-success">
                         <else />
                         <input type="submit" value="下一步" class="btn btn-success">
@@ -431,12 +431,15 @@
         {
             var indexurl = window.location.href;
 
-            jumpUrl = indexurl.replace(/index.html/, url);
+            var url_res = indexurl.split('Contest/index');
+            indexurl = url_res[0];
 
+            jumpUrl = indexurl+'/contest/'+url;
+//            jumpUrl = indexurl.replace(/index.html/, url);
             if(status == 1){
-                location.href = jumpUrl+"/contest_sn/"+sn+"/type/"+2;//location.href实现客户端页面的跳转
+                location.href = jumpUrl+"/contest_sn/"+sn+"/type/"+2;//跳转并发送准备考试指令
             }else{
-                location.href = jumpUrl+"/contest_sn/"+sn;
+                location.href = jumpUrl+"/contest_sn/"+sn;//紧跳转
             }
         }
     </script>

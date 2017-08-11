@@ -168,8 +168,8 @@
                                 <th class="">年级</th>
                                 <th class="">班级</th>
                                 <th class="">性别</th>
-                                <th class="">成绩(秒)</th>
                                 <th class="">达标成绩(秒)</th>
+                                <th class="">成绩(秒)</th>
                                 <th class="">是否合格</th>
 
                             </tr>
@@ -186,19 +186,10 @@
                                         <td>{$vo.dept}</td>
                                         <td>{$vo.grade}</td>
                                         <td>{$vo.class}</td>
-                                        <td>
-                                            <if condition="$vo['sex'] eq 1">男
-                                                <else/>女
-                                            </if>
-                                        </td>
+                                        <td><if condition="$vo['sex'] eq 1">男<else/>女</if></td>
+                                        <td>{$vo.pass_score}</td>
                                         <th class="">{$vo.time}</th>
-                                        <td>
-                                            {$vo.pass_score}
-                                        </td>
-                                        <td>
-                                            {$vo.achieve}
-                                        </td>
-
+                                        <td>{$vo.achieve}</td>
                                     </tr>
                                 </volist>
                                 <else/>

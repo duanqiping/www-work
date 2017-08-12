@@ -49,6 +49,8 @@ class ContestController extends BaseController
 
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 
+//        my_print($list);
+
         $this->assign('_list', $list);
         $this->assign('nowContest', $nowContest);
         $this->assign('conflictContest', $conflictContest);

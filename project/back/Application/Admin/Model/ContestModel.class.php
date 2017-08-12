@@ -48,7 +48,7 @@ class ContestModel extends Model{
         return $res;
     }
 
-    /**获取按钮属性
+    /**获取开始按钮属性
      * $end_time 赛事结束时间
      * $status  赛事状态
     */

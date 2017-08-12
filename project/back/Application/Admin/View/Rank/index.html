@@ -50,6 +50,80 @@
     <div class="x_content">
 
     <p>刷新 可查看最新排名。</p>
+    <div id="year2">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>年份：</a>
+            </li>
+            <li role="presentation"><a>2017</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="month2">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>月排行榜：</a>
+            </li>
+            <li role="presentation"><a>1</a>
+            </li>
+            <li role="presentation"><a>2</a>
+            </li>
+            <li role="presentation"><a>3</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="week2">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>周排行榜：</a>
+            </li>
+
+            <li role="presentation"><a>1</a>
+            </li>
+            <li role="presentation"><a>2</a>
+            </li>
+            <li role="presentation"><a>3</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>田径：</a>
+        </li>
+        <li role="presentation"><a>单圈历史最佳</a>
+        </li>
+        <li role="presentation"><a>400</a>
+        </li>
+        <li role="presentation"><a>800</a>
+        </li>
+        <li role="presentation"><a>1200</a>
+        </li>
+        <li role="presentation"><a>1600</a>
+        </li>
+        <li role="presentation"><a>2000</a>
+        </li>
+    </ul>
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><a>马拉松排行榜：</a>
+        </li>
+        <li role="presentation"><a>四分之一马拉松</a>
+        </li>
+        <li role="presentation"><a>二分之一马拉松</a>
+        </li>
+        <li role="presentation"><a>全程马拉松</a>
+        </li>
+    </ul>
+
+    <form method="post" action="{:U()}">
+        <div>
+            <ul class="nav nav-pills" id="selectId" role="tablist">
+                <li role="presentation"><a>已选条件：</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <input type="submit" value="搜索">
+        </div>
+    </form>
 
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation"><a>排行筛选：</a>
@@ -181,5 +255,32 @@
 <block name="script">
     <script type="text/javascript">
         var rankUrl = "{:U('index')}"; // merchant.js 中使用
+
+        var i = 1; //年
+        var j = 1; //月
+        var k = 1; //周
+        $("#year2 li a").click(function(){
+            var year = $(this).text();
+            if(i<2){
+//                $("#selectId").append('<li role="presentation"><a>'+year+'</a></li>');
+                $("#selectId").append('年：<input style="width:50px;border:none" type="text" name="year" value='+year+'>');
+            }
+            i++;
+        });
+
+        $("#month2 li a").click(function(){
+            var month = $(this).text();
+            if(j<2){
+                $("#selectId").append('月：<input style="width:50px;border:none" type="text" name="month" value='+month+'>');
+            }
+            j++;
+        });
+        $("#week2 li a").click(function(){
+            var week = $(this).text();
+            if(k<2){
+                $("#selectId").append('周：<input style="width:50px;border:none" type="text" name="month" value='+week+'>');
+            }
+            k++;
+        });
     </script>
 </block>

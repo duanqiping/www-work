@@ -16,6 +16,8 @@ class ContestOrderModel extends Model{
     protected $tableName = 'contest_order';
     public $title;//赛事标题
     public $status;//赛事状态
+    public $valid = 1;//1有效期 0过期
+    public $isFather = 0;//1有补考 0没有补考
 
     public $onAchieve = 0;//合格人数
     public $outAchieve = 0;//不合格人数
@@ -134,8 +136,20 @@ class ContestOrderModel extends Model{
 
         $contest = new ContestModel();
         $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
-            ->field('parent_id,title,pass_score_male,pass_score_female,status')
+            ->field('contest_id,parent_id,title,pass_score_male,pass_score_female,end_time,status')
             ->find();
+
+        if($res_contest['end_time']<NOW_TIME){
+            $this->valid = 0;//过期
+        }
+
+        //判断状态完成的赛事是否存在补考
+        if($res_contest['status'] == 4){
+            $count = $contest->where(array('parent_id'=>$res_contest['contest_id']))->count();
+
+            if($count>0) $this->isFather = 1;//存在补考
+            else $this->isFather = 0;//不存在
+        }
 
         $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
 
@@ -148,7 +162,6 @@ class ContestOrderModel extends Model{
             }
             $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
         }
-        $this->title = $contest->getTitle($res_contest['title'],$res_contest['parent_id']);// ;
         $this->status = $res_contest['status'];
 
         return $res;

@@ -401,7 +401,8 @@
             </td>
             <td>
                 <if condition="$vo['status'] eq 4">
-                    <a href="{:U('makeUp',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                    <a href="{:U('makeUp',array('contest_sn'=>$vo['contest_sn'],'isFather'=>$vo['isFather']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
+                    <!--<a href="{:U('makeUp',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>-->
                     <else/>
                     <a href="{:U('info',array('contest_sn'=>$vo['contest_sn']))}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 名单 </a>
                 </if>

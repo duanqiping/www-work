@@ -23,10 +23,10 @@ class ContestModel extends Model{
      * $title 赛事标题
      * $parent_id  赛事父级id
     */
-    public function getTitle($title,$parent_id)
-    {
-        return ($parent_id != 0)?$title.'(补考)':$title;
-    }
+//    public function getTitle($title,$parent_id)
+//    {
+//        return ($parent_id != 0)?$title.'(补考)':$title;
+//    }
 
     /**获取状态属性
     */

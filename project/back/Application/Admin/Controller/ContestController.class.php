@@ -118,8 +118,6 @@ class ContestController extends BaseController
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);//赛事名单列表
         $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);//获取系、年级、班级
 
-//        my_print($contestorder->title);
-
         $this->assign('_list',$res);
         $this->assign('condition', $condition);//筛选的条件
 
@@ -129,6 +127,7 @@ class ContestController extends BaseController
 
         $this->assign('title',$contestorder->title);//标题
         $this->assign('status',$contestorder->status);//赛事状态
+        $this->assign('valid',$contestorder->valid);//是否过期
 
         $this->assign('totalNum',$contestorder->totalNum);//总页数
         $this->assign('pageSize',$contestorder->pageSize);//每页数
@@ -377,6 +376,7 @@ class ContestController extends BaseController
         
         $this->assign('title',$contestorder->title);
         $this->assign('outAchieve',$contestorder->outAchieve);
+        $this->assign('isFather',$contestorder->isFather);
 
         $this->assign('totalNum',$contestorder->totalNum);//总页数
         $this->assign('pageSize',$contestorder->pageSize);//每页数

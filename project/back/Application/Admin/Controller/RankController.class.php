@@ -27,7 +27,8 @@ class RankController extends Controller{
         $customer_id = $_SESSION['user']['id'];
 
         $rank = new RankMongoModel();
-        $data = $rank->getScoreRank($customer_id,$flag,$cycles,$page,$pageSize);
+//        $data = $rank->getScoreRank($customer_id,$flag,$cycles,$page,$pageSize);
+        $data = $rank->getScoreRank2($customer_id,$flag='month',$cycles,$page,$pageSize,$year=2017,$month=8,$week=1);
 
         if($flag == 'single'){
             $rankName = '单圈最佳成绩';

@@ -9,6 +9,7 @@
 namespace Admin\Model;
 
 
+use Admin\Logic\Time;
 use Think\Model\MongoModel;
 
 class RanKMongoModel extends MongoModel{
@@ -21,13 +22,7 @@ class RanKMongoModel extends MongoModel{
 
     protected $connection = 'DB_CONFIG1';
 
-//    protected $connection = array(
-//        'db_type' => 'mongo',
-//        'db_user' => '',//用户名(没有留空)
-//        'db_pwd' => '',//密码（没有留空）
-//        'db_host' => '127.0.0.1',//数据库地址
-//        'db_port' => '27017',//数据库端口 默认27017
-//    );
+
     protected $_idType = self::TYPE_INT; //参考手册
     protected $_autoinc = true;//参考手册
 
@@ -199,18 +194,6 @@ class RanKMongoModel extends MongoModel{
         return true;
     }
 
-//    //时间判断
-//    function rankChoiceRule($flag)
-//    {
-//        if($flag == 'year'){
-//            return  date("Y-m-d H:i:s",mktime(0,0,0,1,1,date("Y", time()))) ;//本年起始时间
-//        }else if($flag == 'month'){
-//            return  date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))) ;//本月起始时间
-//        }else{
-//            return  date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-date("w"),date("Y"))) ;//本周起始时间(从周日开始)
-//        }
-//    }
-
     //获取单圈最佳成绩
     public function bestScore($grade)
     {
@@ -265,6 +248,7 @@ class RanKMongoModel extends MongoModel{
         }
         $offset = ($page-1)*$pageSize;
 
+        //历史单圈最佳成绩排行
         if($flag == 'single'){
             $condition['customer_id'] = $customer_id;
             $res = $this->table($tableName)
@@ -273,7 +257,9 @@ class RanKMongoModel extends MongoModel{
                 ->order('time')
                 ->limit($offset,$pageSize)
                 ->select();
-        }else if($flag == 'marathon'){
+        }
+        //马拉松成绩排行
+        else if($flag == 'marathon'){
             $condition['customer_id'] = $customer_id;
             $condition['cycles'] = intval($cycles);
             $res = $this->table($tableName)
@@ -282,10 +268,86 @@ class RanKMongoModel extends MongoModel{
                 ->order('time')
                 ->limit($offset,$pageSize)
                 ->select();
-        }else{
+        }
+        //周月年排行
+        else{
             $condition['cycles'] = intval($cycles);
-//            $condition['add_time'] = array('gt',intval(strtotime($this->rankChoiceRule($flag))));
             $condition['add_time'] = array('gt',intval(getTimeBegin($flag) ));
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,cycles,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }
+
+        if(!$res) return array();
+        $res = array_values($res);
+
+        $user = new UserModel();
+        $res = $user->getUserInfoFromRank($res);
+
+        return $res;
+    }
+
+    //获取单圈最佳成绩排行
+    public function getScoreRank2($customer_id,$flag,$cycles,$page,$pageSize,$year,$month,$week)
+    {
+        if($flag == 'single'){
+            $tableName = 'rank_single';
+        }else if($flag == 'marathon'){
+            $tableName = 'rank_marathon';
+        }else {
+            if($flag == 'year'){
+                $field = 'rank_y_table';
+            }
+            else if($flag == 'month'){
+                $field = 'rank_m_table';
+            }
+            else{
+                $field = 'rank_w_table';
+            }
+            $customer = new CustomerModel();
+            $res = $customer->where(array('customer_id'=>$customer_id))->field($field)->find();
+            $tableName = $res[$field];
+        }
+
+        if(($page<1)||($pageSize<1)){
+            $page = 1;
+            $pageSize = 20;
+        }
+        $offset = ($page-1)*$pageSize;
+
+        //历史单圈最佳成绩排行
+        if($flag == 'single'){
+            $condition['customer_id'] = $customer_id;
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }
+        //马拉松成绩排行
+        else if($flag == 'marathon'){
+            $condition['customer_id'] = $customer_id;
+            $condition['cycles'] = intval($cycles);
+            $res = $this->table($tableName)
+                ->where($condition)
+                ->field('user_id,customer_id,score_id,time,add_time,length')
+                ->order('time')
+                ->limit($offset,$pageSize)
+                ->select();
+        }
+        //周月年排行
+        else{
+            $time = new Time();
+            if($flag = 'month') $date_res = $time->monthDay($year,$month);
+            else if($flag = 'year') $date_res = $time->yearDay($year);
+            else $date_res = $time->weekday($year,$week);
+
+            $condition['add_time'] = array('between',$date_res);
+            $condition['cycles'] = intval($cycles);
             $res = $this->table($tableName)
                 ->where($condition)
                 ->field('user_id,customer_id,score_id,cycles,time,add_time,length')

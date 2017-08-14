@@ -130,6 +130,7 @@ class ContestModel extends Model{
                 ->field('contest_sn,title,length_male,length_female,pass_score_male,pass_score_female,content,begin_time,end_time')
                 ->find();
             if($res){
+                //将 达标成绩由秒的形式  转换成为分秒的形式
                 $res['pass_score_male'] = str_pad(floor($res['pass_score_male']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_male']%60),2,0,STR_PAD_LEFT);
                 $res['pass_score_female'] = str_pad(floor($res['pass_score_female']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_female']%60),2,0,STR_PAD_LEFT);
 

@@ -3,6 +3,7 @@
 <block name="head">
     <script src="__JS__/jquery-2.0.3.min.js"></script>
     <script src="__JS__/linkage.js"></script>
+    <script src="__JS__/rank.js"></script>
 </block>
 
 <block name="body">
@@ -56,6 +57,8 @@
             </li>
             <li role="presentation"><a>2017</a>
             </li>
+            <li role="presentation"><a>2018</a>
+            </li>
         </ul>
     </div>
 
@@ -69,6 +72,17 @@
             </li>
             <li role="presentation"><a>3</a>
             </li>
+            <li role="presentation"><a>4</a>
+            </li>
+            <li role="presentation"><a>5</a>
+            </li>
+            <li role="presentation"><a>6</a>
+            </li>
+            <li role="presentation"><a>7</a>
+            </li>
+            <li role="presentation"><a>8</a>
+            </li>
+
         </ul>
     </div>
 
@@ -81,27 +95,44 @@
             </li>
             <li role="presentation"><a>2</a>
             </li>
-            <li role="presentation"><a>3</a>
+            <li role="presentation"><a>4</a>
+            </li>
+            <li role="presentation"><a>5</a>
+            </li>
+            <li role="presentation"><a>6</a>
+            </li>
+            <li role="presentation"><a>7</a>
+            </li>
+            <li role="presentation"><a>8</a>
+            </li>
+            <li role="presentation"><a>9</a>
+            </li>
+            <li role="presentation"><a>10</a>
             </li>
         </ul>
     </div>
-
-    <ul class="nav nav-pills" role="tablist">
-        <li role="presentation"><a>田径：</a>
-        </li>
-        <li role="presentation"><a>单圈历史最佳</a>
-        </li>
-        <li role="presentation"><a>400</a>
-        </li>
-        <li role="presentation"><a>800</a>
-        </li>
-        <li role="presentation"><a>1200</a>
-        </li>
-        <li role="presentation"><a>1600</a>
-        </li>
-        <li role="presentation"><a>2000</a>
-        </li>
-    </ul>
+    <div id="length">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>田径：</a>
+            </li>
+            <li role="presentation"><a>400</a>
+            </li>
+            <li role="presentation"><a>800</a>
+            </li>
+            <li role="presentation"><a>1200</a>
+            </li>
+            <li role="presentation"><a>1600</a>
+            </li>
+            <li role="presentation"><a>2000</a>
+            </li>
+        </ul>
+    </div>
+    <div id="single2">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>单圈历史最佳</a>
+            </li>
+        </ul>
+    </div>
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation"><a>马拉松排行榜：</a>
         </li>
@@ -113,17 +144,13 @@
         </li>
     </ul>
 
-    <form method="post" action="{:U()}">
-        <div>
-            <ul class="nav nav-pills" id="selectId" role="tablist">
-                <li role="presentation"><a>已选条件：</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <input type="submit" value="搜索">
-        </div>
-    </form>
+    <!--筛选的条件-->
+    <div id="selectCondition">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation"><a>搜索</a>
+            </li>
+        </ul>
+    </div>
 
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation"><a>排行筛选：</a>
@@ -256,31 +283,7 @@
     <script type="text/javascript">
         var rankUrl = "{:U('index')}"; // merchant.js 中使用
 
-        var i = 1; //年
-        var j = 1; //月
-        var k = 1; //周
-        $("#year2 li a").click(function(){
-            var year = $(this).text();
-            if(i<2){
-//                $("#selectId").append('<li role="presentation"><a>'+year+'</a></li>');
-                $("#selectId").append('年：<input style="width:50px;border:none" type="text" name="year" value='+year+'>');
-            }
-            i++;
-        });
+        var getRank = "{:U('getRank')}";
 
-        $("#month2 li a").click(function(){
-            var month = $(this).text();
-            if(j<2){
-                $("#selectId").append('月：<input style="width:50px;border:none" type="text" name="month" value='+month+'>');
-            }
-            j++;
-        });
-        $("#week2 li a").click(function(){
-            var week = $(this).text();
-            if(k<2){
-                $("#selectId").append('周：<input style="width:50px;border:none" type="text" name="month" value='+week+'>');
-            }
-            k++;
-        });
     </script>
 </block>

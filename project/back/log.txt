@@ -1,0 +1,14 @@
+year->2017month->8length->1200
+
+year->2018week->2length->1200
+
+year->2018week->2length->1200
+
+year->2018week->2length->1200
+
+year->2017week->2length->800
+
+year->2017week->10length->800
+year->2017week->10length->1200
+year->2018week->10length->1200
+year->2017week->4length->800

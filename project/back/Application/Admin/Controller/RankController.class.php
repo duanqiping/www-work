@@ -27,8 +27,8 @@ class RankController extends Controller{
         $customer_id = $_SESSION['user']['id'];
 
         $rank = new RankMongoModel();
-//        $data = $rank->getScoreRank($customer_id,$flag,$cycles,$page,$pageSize);
-        $data = $rank->getScoreRank2($customer_id,$flag='month',$cycles,$page,$pageSize,$year=2017,$month=8,$week=1);
+        $data = $rank->getScoreRank($customer_id,$flag,$cycles,$page,$pageSize);
+//        $data = $rank->getScoreRank2($customer_id,$flag='month',$cycles,$page,$pageSize,$year=2017,$month=8,$week=1);
 
         if($flag == 'single'){
             $rankName = '单圈最佳成绩';
@@ -49,5 +49,43 @@ class RankController extends Controller{
         $this->assign('_list',$data);
         $this->assign('rankName',$rankName);
         $this->display();
+    }
+
+    public function getRank()
+    {
+        $page = 1;
+        $pageSize = 10;
+
+        $string = '';
+        $condition = $_GET;
+        foreach($condition as $k=>$v){
+            $string .=$k.'->'.$v;
+        }
+        file_put_contents('log.txt',$string."\n",FILE_APPEND );
+        $customer_id = $_SESSION['user']['id'];
+
+        $cycles = $condition['length']/400;
+        $year = $condition['year'];
+        $month = $condition['month'];
+        $week = $condition['week'];
+
+        if($month){
+            $flag='month';
+        }else if($week){
+            $flag='week';
+        }else{
+            $flag='year';
+        }
+
+
+        $year = 2017;
+        $month = 8;
+        $cycles = 2;
+        $flag = 'month';
+
+        $rank = new RankMongoModel();
+        $data = $rank->getScoreRank2($customer_id,$flag,$cycles,$page,$pageSize,$year,$month,$week);
+
+        echo json_encode($data);
     }
 } 

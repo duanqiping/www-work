@@ -76,12 +76,10 @@ class RankController extends Controller{
         }else{
             $flag='year';
         }
-
-
-        $year = 2017;
-        $month = 8;
-        $cycles = 2;
-        $flag = 'month';
+//        $year = 2017;
+//        $month = 8;
+//        $cycles = 2;
+//        $flag = 'month';
 
         $rank = new RankMongoModel();
         $data = $rank->getScoreRank2($customer_id,$flag,$cycles,$page,$pageSize,$year,$month,$week);

@@ -53,7 +53,6 @@
     });
 
     $("#selectCondition li a").click(function(){
-
         var condition = {};
 
         var year = $('#select_year').text();
@@ -63,26 +62,29 @@
 
         var reg = /[1-9][0-9]*/g;
         year = year.match(reg);
-        //alert(year[0]);
         if(year) condition.year = year[0];
         month = month.match(reg);
         if(month) condition.month = month[0];
         week = week.match(reg);
         if(week) condition.week = week[0];
-
         if(length) condition.length = length;
 
         console.log(condition);
-        //alert(condition);
-
         $.getJSON(getRank, condition, function(data) {
+
             $.each(data, function(i, item) {
                 if(item){
-                    alert(item["name"]);
+                    tbody = "<tr><td>" + item["name"] + "</td><td>" + item["studentId"] + "</td><td>" + item["dept"] + "</td><td>"+ item["grade"] +
+                    "</td><td>"+ item["class"] + "</td><td>" + item["time"] + "</td><td>" + item["add_time"] + "</td><td>" + (i+1) + "</td></tr>";
+
+                    $("#rank_table  tbody").append(tbody);
                 }else{
                     alert('添加失败');
                 }
+
             });
+
+            $(".right_col").css('min-height', $('.container.body').height());
         });
     });
 });

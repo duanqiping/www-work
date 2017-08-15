@@ -83,7 +83,6 @@
                 }
 
             });
-
             $(".right_col").css('min-height', $('.container.body').height());
         });
     });

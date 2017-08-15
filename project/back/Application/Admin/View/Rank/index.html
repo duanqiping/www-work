@@ -66,23 +66,10 @@
         <ul class="nav nav-pills" role="tablist">
             <li role="presentation"><a>月排行榜：</a>
             </li>
-            <li role="presentation"><a>1</a>
-            </li>
-            <li role="presentation"><a>2</a>
-            </li>
-            <li role="presentation"><a>3</a>
-            </li>
-            <li role="presentation"><a>4</a>
-            </li>
-            <li role="presentation"><a>5</a>
-            </li>
-            <li role="presentation"><a>6</a>
-            </li>
-            <li role="presentation"><a>7</a>
-            </li>
-            <li role="presentation"><a>8</a>
-            </li>
-
+            <volist name="month" id="vo" key="k">
+                <li role="presentation"><a>{$vo}</a>
+                </li>
+            </volist>
         </ul>
     </div>
 
@@ -90,25 +77,10 @@
         <ul class="nav nav-pills" role="tablist">
             <li role="presentation"><a>周排行榜：</a>
             </li>
-
-            <li role="presentation"><a>1</a>
-            </li>
-            <li role="presentation"><a>2</a>
-            </li>
-            <li role="presentation"><a>4</a>
-            </li>
-            <li role="presentation"><a>5</a>
-            </li>
-            <li role="presentation"><a>6</a>
-            </li>
-            <li role="presentation"><a>7</a>
-            </li>
-            <li role="presentation"><a>8</a>
-            </li>
-            <li role="presentation"><a>9</a>
-            </li>
-            <li role="presentation"><a>10</a>
-            </li>
+            <volist name="week" id="vo" key="k">
+                <li role="presentation"><a>{$vo}</a>
+                </li>
+            </volist>
         </ul>
     </div>
     <div id="length">
@@ -152,84 +124,84 @@
         </ul>
     </div>
 
-    <ul class="nav nav-pills" role="tablist">
-        <li role="presentation"><a>排行筛选：</a>
-        </li>
+    <!--<ul class="nav nav-pills" role="tablist">-->
+        <!--<li role="presentation"><a>排行筛选：</a>-->
+        <!--</li>-->
 
-        <li role="presentation" class="dropdown">
-            <a  href="{:U('index',array('flag'=>'single'))}" class="dropdown-toggle">
-               单圈最佳排行
-            </a>
-        </li>
+        <!--<li role="presentation" class="dropdown">-->
+            <!--<a  href="{:U('index',array('flag'=>'single'))}" class="dropdown-toggle">-->
+               <!--单圈最佳排行-->
+            <!--</a>-->
+        <!--</li>-->
 
-        <!--系别-->
-        <li role="presentation" class="dropdown">
-            <a  href="#" class="dropdown-toggle">
-                    <select id="week" name="cycles" style="border:none;">
-                        <!--<OPTGROUP LABEL="周排行">-->
-                        <option>周排行</option>
-                        <option>1圈</option>
-                        <option>2圈</option>
-                        <option>3圈</option>
-                        <option>4圈</option>
-                        <option>5圈</option>
-                    </select>
-            </a>
-        </li>
+        <!--&lt;!&ndash;系别&ndash;&gt;-->
+        <!--<li role="presentation" class="dropdown">-->
+            <!--<a  href="#" class="dropdown-toggle">-->
+                    <!--<select id="week" name="cycles" style="border:none;">-->
+                        <!--&lt;!&ndash;<OPTGROUP LABEL="周排行">&ndash;&gt;-->
+                        <!--<option>周排行</option>-->
+                        <!--<option>1圈</option>-->
+                        <!--<option>2圈</option>-->
+                        <!--<option>3圈</option>-->
+                        <!--<option>4圈</option>-->
+                        <!--<option>5圈</option>-->
+                    <!--</select>-->
+            <!--</a>-->
+        <!--</li>-->
 
-        <li role="presentation" class="dropdown">
-            <a  href="#" class="dropdown-toggle">
-                <select id="month"  name="cycles" style="border:none;">
-                    <!--<OPTGROUP LABEL="周排行">-->
-                    <option>月排行</option>
-                    <option>1圈</option>
-                    <option>2圈</option>
-                    <option>3圈</option>
-                    <option>4圈</option>
-                    <option>5圈</option>
-                </select>
+        <!--<li role="presentation" class="dropdown">-->
+            <!--<a  href="#" class="dropdown-toggle">-->
+                <!--<select id="month"  name="cycles" style="border:none;">-->
+                    <!--&lt;!&ndash;<OPTGROUP LABEL="周排行">&ndash;&gt;-->
+                    <!--<option>月排行</option>-->
+                    <!--<option>1圈</option>-->
+                    <!--<option>2圈</option>-->
+                    <!--<option>3圈</option>-->
+                    <!--<option>4圈</option>-->
+                    <!--<option>5圈</option>-->
+                <!--</select>-->
 
-            </a>
-        </li>
+            <!--</a>-->
+        <!--</li>-->
 
-        <li role="presentation" class="dropdown">
-            <a  href="#" class="dropdown-toggle">
-                <select id="year" name="cycles" style="border:none;">
-                    <!--<OPTGROUP LABEL="周排行">-->
-                    <option>年排行</option>
-                    <option>1圈</option>
-                    <option>2圈</option>
-                    <option>3圈</option>
-                    <option>4圈</option>
-                    <option>5圈</option>
-                </select>
+        <!--<li role="presentation" class="dropdown">-->
+            <!--<a  href="#" class="dropdown-toggle">-->
+                <!--<select id="year" name="cycles" style="border:none;">-->
+                    <!--&lt;!&ndash;<OPTGROUP LABEL="周排行">&ndash;&gt;-->
+                    <!--<option>年排行</option>-->
+                    <!--<option>1圈</option>-->
+                    <!--<option>2圈</option>-->
+                    <!--<option>3圈</option>-->
+                    <!--<option>4圈</option>-->
+                    <!--<option>5圈</option>-->
+                <!--</select>-->
 
-            </a>
-        </li>
+            <!--</a>-->
+        <!--</li>-->
 
-        <li role="presentation" class="dropdown">
-            <a  href="#" class="dropdown-toggle">
-                <select id="marathon" name="cycles" style="border:none;">
-                    <!--<OPTGROUP LABEL="周排行">-->
-                    <option>马拉松排行</option>
-                    <option>四分之一程马拉松</option>
-                    <option>半程马拉松</option>
-                    <option>全程马拉松</option>
-                </select>
-            </a>
-        </li>
+        <!--<li role="presentation" class="dropdown">-->
+            <!--<a  href="#" class="dropdown-toggle">-->
+                <!--<select id="marathon" name="cycles" style="border:none;">-->
+                    <!--&lt;!&ndash;<OPTGROUP LABEL="周排行">&ndash;&gt;-->
+                    <!--<option>马拉松排行</option>-->
+                    <!--<option>四分之一程马拉松</option>-->
+                    <!--<option>半程马拉松</option>-->
+                    <!--<option>全程马拉松</option>-->
+                <!--</select>-->
+            <!--</a>-->
+        <!--</li>-->
 
-    </ul>
+    <!--</ul>-->
 
-    <ul class="nav nav-pills" role="tablist">
-        <li role="presentation"><a>已选排行：</a>
-        </li>
-        <li role="presentation" class="dropdown" >
-            <a class="dropdown-toggle">
-               <span style="color: red">{$rankName}  排行榜</span>
-            </a>
-        </li>
-    </ul>
+    <!--<ul class="nav nav-pills" role="tablist">-->
+        <!--<li role="presentation"><a>已选排行：</a>-->
+        <!--</li>-->
+        <!--<li role="presentation" class="dropdown" >-->
+            <!--<a class="dropdown-toggle">-->
+               <!--<span style="color: red">{$rankName}  排行榜</span>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
 
     <!-- start project list -->
     <div class="table-responsive">

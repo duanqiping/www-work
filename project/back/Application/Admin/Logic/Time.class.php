@@ -40,7 +40,9 @@ class Time {
         if (date('Y',$weekday['end'])!=$year){
             $weekday['end'] = $year_end;
         }
-        return $weekday;
+        $array_week[] = $weekday['start'];
+        $array_week[] = $weekday['end'];
+        return $array_week;
     }
 
     /**

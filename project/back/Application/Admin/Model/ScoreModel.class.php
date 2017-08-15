@@ -90,7 +90,7 @@ class ScoreModel extends MongoModel{
     }
 
     //录入平时成绩
-    public function insert($data,$rankInfo)
+    public function insert($data,$rankInfo,$customer_id)
     {
         //更新用户表的累计长度
         $user = new UserModel();
@@ -120,7 +120,7 @@ class ScoreModel extends MongoModel{
         $data['score_id'] = $b;
 //        $rankModel = new RankModel();
         $rankModel = new RanKMongoModel();
-        $rankModel->dealWithSolve($rankInfo,$data,$length,$scoreInfo);
+        $rankModel->dealWithSolve($rankInfo,$data,$length,$scoreInfo,$customer_id);
         return true;
 
     }

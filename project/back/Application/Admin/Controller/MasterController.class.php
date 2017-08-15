@@ -54,10 +54,11 @@ class MasterController extends Controller{
             ->find();
         if(!$rankInfo) sendError('fail');
 
+        $customer_id = $data['customer_id'];
         unset($data['customer_id']);
 
         $score = new ScoreModel();
-        $b = $score->insert($data,$rankInfo);
+        $b = $score->insert($data,$rankInfo,$customer_id);
         if($b){
             sendSuccess('success');
         }else{

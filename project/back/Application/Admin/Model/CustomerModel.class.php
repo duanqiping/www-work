@@ -39,10 +39,10 @@ class CustomerModel extends ConsumerHandleModel
         $data_score = $score->UserInfo($grade);//当周活跃量 当月活跃量
 
         $rank = new RanKMongoModel();
-        $best = $rank->bestScore($grade);//单圈最佳成绩
+        $best_res = $rank->bestScore($grade);//单圈最佳成绩(前5名)
 
         $data = array_merge($data,$data_user,$data_score);
-        $data['best_single'] = $best;
+        $data['best_single'] = $best_res;
 
         return $data;
     }

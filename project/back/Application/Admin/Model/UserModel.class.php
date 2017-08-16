@@ -17,11 +17,6 @@ class UserModel extends Model{
     public $pageSize=15;//每页的条数
     public $current = 1;//当前页
 
-    public function test()
-    {
-        return 'hello';
-    }
-
     //系别
     public function getDept($uid)
     {

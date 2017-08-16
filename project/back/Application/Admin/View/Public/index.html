@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-clock-o"></i> 单圈最佳纪录</span>
-                <div class="count">{$data['best_single']}</div>
+                <div class="count">{$data['best_single'][0]['time']}</div>
                 <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> 提升比例</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -113,6 +113,137 @@
 
         </div>
         <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>体育星探 <small>天赋运动员</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">换一批</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <ul class="list-unstyled msg_list">
+                        <li>
+                            <a>
+                        <span class="image">
+                          <img src="__IMAGES__/img.jpg" alt="img">
+                        </span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          最近一次活得优秀记录运动项目：挑战3000米  跑步，成绩为： 00:05:11:586。该运动者以较低年龄获得成绩优秀，值得称赞。
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                        <span class="image">
+                          <img src="__IMAGES__/img.jpg" alt="img">
+                        </span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          最近一次活得优秀记录运动项目：自由1200米  跑步，成绩为： 00:05:11:586。该运动者以稳定的速度获得成绩优秀，值得称赞。
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                        <span class="image">
+                          <img src="__IMAGES__/img.jpg" alt="img">
+                        </span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                        <span class="image">
+                          <img src="__IMAGES__/img.jpg" alt="img">
+                        </span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
+                        </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>单圈排行榜 <small>单一跑道</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">当前跑道名称</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <ul class="list-unstyled msg_list">
+                        <notempty name="single_res">
+                            <volist name="single_res" id="vo" key="k">
+                                <li>
+                                    <a>
+                                <span class="image">
+                                  <img src="__IMAGES__/img.jpg" alt="img">
+                                </span>
+                                <span>
+                                  <span>{$vo.name}</span>
+                                  <span class="time">{$now_time-$vo['add_time']|date=" H:i:s",###} ago</span>
+                                  <!--<span class="time">{$vo['add_time']-$vo['add_time']}</span>-->
+                                </span>
+                                <span class="message">
+                                  以{$vo.time}的单圈成绩于{$vo.add_time|date="Y-m-d H:i:s",###}打破上海大学记录。相比上一记录提升00:00:00:171。
+                                </span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <else/>
+                                <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                        </notempty>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     </div>
     <!-- /page content -->

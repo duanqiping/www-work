@@ -234,9 +234,10 @@ class RanKMongoModel extends MongoModel{
             $condition['customer_id'] = array('in',$customer_ids);
         }
 
-        $min_res  = $this->table('rank_single')->where($condition)->field('time')->order('time')->limit(1)->select();
+        $min_res  = $this->table('rank_single')->where($condition)->field('name,time,add_time')->order('time')->limit(5)->select();
         $min_res = array_values($min_res);
-        $minScore = $min_res[0]['time'];
+//        $minScore = $min_res[0]['time'];
+        $minScore = $min_res;
 
         return $minScore;
     }

@@ -27,6 +27,8 @@ class PublicController extends \Think\Controller{
         $data = $customer->homeInfo();
 
         $this->assign('data',$data);
+        $this->assign('single_res',$data['best_single']);//单圈前5名记录
+        $this->assign('now_time',NOW_TIME);//单圈前5名记录
 
         $this->display();
     }

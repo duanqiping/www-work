@@ -346,11 +346,13 @@ class RanKMongoModel extends MongoModel{
         }
         //马拉松成绩排行
         else if($flag == 'marathon'){
-            $cycles = $condition_select['length']/400;
+            if($condition_select['marathon'] == '四分之一马拉松') $cycles=26;
+            else if($condition_select['marathon'] == '二分之一马拉松') $cycles=52;
+            else $cycles=105;
 
             $condition['customer_id'] = $customer_id;
             $condition['cycles'] = intval($cycles);
-            $field = 'user_id,customer_id,score_id,time,add_time,length';
+            $field = 'user_id,customer_id,score_id,time,add_time';
         }
         //周月年排行
         else{

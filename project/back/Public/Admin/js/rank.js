@@ -2,6 +2,7 @@
 ;$(function(){
     $("#year2 li a").click(function(){
         $('#select_single').remove();
+        $('#select_marathon').remove();
 
         var year = $(this).text();
         var year2 = $('#select_year').text();
@@ -15,6 +16,7 @@
 
     $("#month2 li a").click(function(){
         $('#select_single').remove();
+        $('#select_marathon').remove();
 
         var month = $(this).text();
         var month2 = $('#select_month').text();
@@ -32,6 +34,7 @@
     });
     $("#week2 li a").click(function(){
         $('#select_single').remove();
+        $('#select_marathon').remove();
 
         var week = $(this).text();
         var week2 = $('#select_week').text();
@@ -49,6 +52,7 @@
     });
     $("#length li a").click(function(){
         $('#select_single').remove();
+        $('#select_marathon').remove();
 
         var length = $(this).text();
         var length2 = $('#select_length').text();
@@ -65,6 +69,7 @@
         $('#select_month').remove();
         $('#select_week').remove();
         $('#select_length').remove();
+        $('#select_marathon').remove();
 
         var single = $(this).text();
         var single2 = $('#select_single').text();
@@ -73,27 +78,49 @@
             $("#selectCondition ul").append('<li role="presentation"><a id="select_single" style="color: red">'+single+'</a></li>');
         }else{
         }
-    })
+    });
+    $("#marathon2 li a").click(function(){
+
+        $('#select_year').remove();
+        $('#select_month').remove();
+        $('#select_week').remove();
+        $('#select_length').remove();
+        $('#select_single').remove();
+
+        var marathon = $(this).text();
+        var marathon2 = $('#select_marathon').text();
+
+        if(!marathon2){
+            $("#selectCondition ul").append('<li role="presentation"><a id="select_marathon" style="color: red">'+marathon+'</a></li>');
+        }else{
+            $("#select_marathon").text(marathon);
+        }
+    });
 
     //点击搜索
     $("#selectCondition li a").click(function(){
         var condition = {};//参数自定义
 
+        var year = $('#select_year').text();//获取所选年份
+        var reg = /[1-9][0-9]*/g;//取出数字正则
+        year = year.match(reg);
+        if(year) condition.year = year[0];
+
         var single = $('#select_single').text();//获取周历史最佳
+        var marathon = $('#select_marathon').text();//获取马拉松成绩
         if(single)
         {
             condition.single = single;
+        }else if(marathon)
+        {
+            condition.marathon = marathon;
         }
         else
         {
-            var year = $('#select_year').text();//获取所选年份
             var month = $('#select_month').text();//获取所选月份
             var week = $('#select_week').text();//获取所选周份
             var length = $('#select_length').text();//获取所选长度
 
-            var reg = /[1-9][0-9]*/g;//取出数字正则
-            year = year.match(reg);
-            if(year) condition.year = year[0];
             month = month.match(reg);
             if(month) condition.month = month[0];
             week = week.match(reg);
@@ -106,10 +133,15 @@
 
             $("#rank_table  tbody tr").remove();//移除之前的内容
 
+            var newDate = new Date();
             $.each(data, function(i, item) {
                 if(item){
+
+                    var add_time = item["add_time"];
+                    newDate.setTime(add_time * 1000);//将时间戳转化程年月日形式
+
                     tbody = "<tr><td>" + item["name"] + "</td><td>" + item["studentId"] + "</td><td>" + item["dept"] + "</td><td>"+ item["grade"] +
-                    "</td><td>"+ item["class"] + "</td><td>" + item["time"] + "</td><td>" + item["add_time"] + "</td><td>" + (i+1) + "</td></tr>";
+                    "</td><td>"+ item["class"] + "</td><td>" + item["time"] + "</td><td>" + newDate.format('Y-m-d H:i:s') + "</td><td>" + (i+1) + "</td></tr>";
 
                     $("#rank_table  tbody").append(tbody);
                 }

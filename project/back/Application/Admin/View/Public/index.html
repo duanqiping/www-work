@@ -226,11 +226,11 @@
                                 </span>
                                 <span>
                                   <span>{$vo.name}</span>
-                                  <span class="time">{$now_time-$vo['add_time']|date=" H:i:s",###} ago</span>
+                                  <span class="time">{$vo.time_ago} ago</span>
                                   <!--<span class="time">{$vo['add_time']-$vo['add_time']}</span>-->
                                 </span>
                                 <span class="message">
-                                  以{$vo.time}的单圈成绩于{$vo.add_time|date="Y-m-d H:i:s",###}打破上海大学记录。相比上一记录提升00:00:00:171。
+                                  以{$vo.time}的单圈成绩于{$vo.add_time|date="Y-m-d H:i:s",###}打破{$Think.session.user.name}记录。
                                 </span>
                                     </a>
                                 </li>

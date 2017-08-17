@@ -236,6 +236,23 @@ class RanKMongoModel extends MongoModel{
 
         $min_res  = $this->table('rank_single')->where($condition)->field('name,time,add_time')->order('time')->limit(5)->select();
         $min_res = array_values($min_res);
+        //计算出这记录是多久前更新的
+        for($i=0,$len=count($min_res);$i<$len;$i++){
+            $time_ago = NOW_TIME-$min_res[$i]['add_time'];
+
+            $time_day = floor($time_ago/(24*3600));//天数
+            $time_hour =floor( ($time_ago%(3600*24)) /( 3600) );//小时
+            $time_m =floor( ($time_ago%(3600)) / 60 );//分钟
+            $time_s =floor( ($time_ago%(3600)) % 60 );//秒
+
+            if($time_day>0) {$string = $time_day.'天'.$time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+            else if($time_day==0 && $time_hour>0) {$string = $time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+            else if($time_hour==0 && $time_m>0) {$string = $time_m.'分'.$time_s.'秒';}
+            else{ $string = $time_s.'秒';}
+
+            $min_res[$i]['time_ago'] = $string;
+        }
+
 //        $minScore = $min_res[0]['time'];
         $minScore = $min_res;
 

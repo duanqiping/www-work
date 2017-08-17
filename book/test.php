@@ -2,58 +2,26 @@
 
 date_default_timezone_set("Asia/Shanghai");
 
-function getTimeBegin($year,$time_flag,$num)
-{
-    if($time_flag == 'week'){
-        //$begin_time = mktime(0,0,0,date('m'),date('d')-date('w'),date('Y')); //当周起始时间
-        $begin_time = mktime(0,0,0,date('m'),date('d')-date('w'),date('Y')); //当周起始时间
-    }else if($time_flag == 'month'){
-        //$begin_time = mktime(0,0,0,date('m'),1,date('Y')); //当月起始时间
-        $begin_time = mktime(0,0,0,$num,1,$year); //当月起始时间
-    }else if($time_flag == 'year'){
-        //$begin_time =  mktime(0,0,0,1,1,date('Y')-1);//当年起始时间
-        $begin_time =  mktime(0,0,0,1,1,2017);//当年起始时间
-    }else{
-        return false;
-    }
-    return $begin_time;
-}
+$time = 25*3600+4820;
 
-function getMonth($year,$month)
-{
-	$date = date("$year-$month");
-		
-	$firstDay = $weekday['start'] = date('Y-m-01', strtotime($date));
-	$weekday['end'] =  date('Y-m-d 23:59:59', strtotime("$firstDay +1 month -1 day"));
-	
-	$weekday['start'] = strtotime($weekday['start']);
-	$weekday['end'] = strtotime($weekday['end']);
-	
-	return $weekday;
-}
+$time_day = floor($time/(24*3600));//天数
 
-function yearDay($year)
-    {
-        $yearday = array();
-        $date = date("$year");
+$time_hour =floor( ($time%(3600*24)) /( 3600) );//小时 //1220
 
-        $firstDay = $weekday['start'] = date("$year-01-01", strtotime($date));
 
-        $end =  date('Y-m-d 23:59:59', strtotime("$firstDay +12 month -1 day"));
+$time_m =floor( ($time%(3600)) / 60 );//分钟
 
-        $yearday[] = strtotime($firstDay);
-        $yearday[] = strtotime($end);
-
-        return $yearday;
-    }
+$time_s =floor( ($time%(3600)) % 60 );//秒
 
 
 
-//echo getTimeBegin($year=2017,$flag='month',$num = 5);
+var_dump($time);
+var_dump($time_day);
+var_dump($time_hour);
 
-var_dump(getMonth(2016,8));
-var_dump(yearDay(2015));
+var_dump($time_m);
 
+var_dump($time_s);
 
 
 

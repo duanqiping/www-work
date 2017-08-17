@@ -135,62 +135,26 @@
                 </div>
                 <div class="x_content">
                     <ul class="list-unstyled msg_list">
-                        <li>
-                            <a>
-                        <span class="image">
-                          <img src="__IMAGES__/img.jpg" alt="img">
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          最近一次活得优秀记录运动项目：挑战3000米  跑步，成绩为： 00:05:11:586。该运动者以较低年龄获得成绩优秀，值得称赞。
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                        <span class="image">
-                          <img src="__IMAGES__/img.jpg" alt="img">
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          最近一次活得优秀记录运动项目：自由1200米  跑步，成绩为： 00:05:11:586。该运动者以稳定的速度获得成绩优秀，值得称赞。
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                        <span class="image">
-                          <img src="__IMAGES__/img.jpg" alt="img">
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                        <span class="image">
-                          <img src="__IMAGES__/img.jpg" alt="img">
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                            </a>
-                        </li>
+                        <notempty name="record_message">
+                            <volist name="record_message" id="vo" key="k">
+                                <li>
+                                    <a>
+                                <span class="image">
+                                  <img src="__IMAGES__/img.jpg" alt="img">
+                                </span>
+                                <span>
+                                  <span>{$vo.name}</span>
+                                  <span class="time">{$vo.time_ago} 前</span>
+                                </span>
+                                <span class="message">
+                                  最近一次活得优秀记录运动项目：挑战{$vo.length}米  跑步，成绩为： {$vo.time}秒。
+                                </span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <else/>
+                            <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                        </notempty>
                     </ul>
                 </div>
             </div>
@@ -226,7 +190,7 @@
                                 </span>
                                 <span>
                                   <span>{$vo.name}</span>
-                                  <span class="time">{$vo.time_ago} ago</span>
+                                  <span class="time">{$vo.time_ago} 前</span>
                                   <!--<span class="time">{$vo['add_time']-$vo['add_time']}</span>-->
                                 </span>
                                 <span class="message">

@@ -96,4 +96,24 @@ class Time {
 
         return $yearday;
     }
+
+    /**获取更新时间
+     * $add_time 生成时间
+    */
+    public function updateTime($add_time)
+    {
+        $time_ago = NOW_TIME-$add_time;
+
+        $time_day = floor($time_ago/(24*3600));//天数
+        $time_hour =floor( ($time_ago%(3600*24)) /( 3600) );//小时
+        $time_m =floor( ($time_ago%(3600)) / 60 );//分钟
+        $time_s =floor( ($time_ago%(3600)) % 60 );//秒
+
+        if($time_day>0) {$string = $time_day.'天'.$time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+        else if($time_day==0 && $time_hour>0) {$string = $time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+        else if($time_hour==0 && $time_m>0) {$string = $time_m.'分'.$time_s.'秒';}
+        else{ $string = $time_s.'秒';}
+
+        return $string;
+    }
 } 

@@ -28,7 +28,9 @@ class PublicController extends \Think\Controller{
 
         $this->assign('data',$data);
         $this->assign('single_res',$data['best_single']);//单圈前5名记录
-        $this->assign('now_time',NOW_TIME);//单圈前5名记录
+        $this->assign('record_message',$data['record_message']);//破记录的最近5条信息
+
+//        my_print($data['record_message']);
 
         $this->display();
     }

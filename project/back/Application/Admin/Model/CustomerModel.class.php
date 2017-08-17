@@ -41,8 +41,12 @@ class CustomerModel extends ConsumerHandleModel
         $rank = new RanKMongoModel();
         $best_res = $rank->bestScore($grade);//单圈最佳成绩(前5名)
 
+        $recordMessage = new RecordMessageModel();
+        $record_message = $recordMessage->getRecordMessage($_SESSION['user']['id']);////获取破记录的 前5条消息
+
         $data = array_merge($data,$data_user,$data_score);
         $data['best_single'] = $best_res;
+        $data['record_message'] = $record_message;
 
         return $data;
     }

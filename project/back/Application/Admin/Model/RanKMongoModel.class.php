@@ -20,6 +20,9 @@ class RanKMongoModel extends MongoModel{
 
     protected $trueTableName = '';
 
+    protected $customer_id;//客户id
+    protected $length;//客户跑道长度
+
     protected $connection = 'DB_CONFIG1';
 
 
@@ -45,8 +48,33 @@ class RanKMongoModel extends MongoModel{
         return $flag;
     }
 
+    //年排行榜中 成绩破记录 生成一条消息
+    public function recordMessage($cycles,$all_time,$table,$user_id,$name)
+    {
+        $map['cycles'] = $cycles;
+        $map['time'] = array('lt',$all_time);
+        $count =$this->table($table)->where($map)->count();
+        if($count < 1){//突破了记录
+            $recordMessage = M('recordMessage');
+            $data = array(
+                'length'=>$cycles*($this->length),
+                'time'=>$all_time,
+                'user_id'=>$user_id,
+                'name'=>$name,
+                'customer_id'=>$this->customer_id,
+                'add_time'=>NOW_TIME,
+            );
+            $recordMessage->add($data);
+        }
+        return;
+    }
+
+    //周月年成绩处理
     public function dealWithSolve($table_info,$data,$length,$scoreInfo,$customer_id)
     {
+        $this->customer_id = $customer_id;
+        $this->length = $length;
+
         $all_time = 0;
         $cycles = count($scoreInfo);
         foreach($scoreInfo as $k=>$v){
@@ -66,8 +94,6 @@ class RanKMongoModel extends MongoModel{
             'studentId' =>$data['studentId'],
             'name' =>$data['name'],
         );
-
-        //是否 启用事物， 感觉不合适
 
         //单圈最佳成绩
         $b = $this->singleSolve($data,$customer_id);
@@ -140,6 +166,7 @@ class RanKMongoModel extends MongoModel{
             //查询是否有当年当月当周记录
             if($k == 'rank_y_table'){
                 $timeflag = 'year';
+                if($cycles>2)$this->recordMessage($cycles,$all_time,$v,$add_info['user_id'],$add_info['name']);//判断是否成绩有无突破记录，有则生成一条消息
             }else if($k == 'rank_m_table'){
                 $timeflag = 'month';
             }else{
@@ -148,7 +175,6 @@ class RanKMongoModel extends MongoModel{
 
             $condition['user_id'] = $data['user_id'];
             $condition['cycles'] = $cycles;
-//            $condition['add_time'] = array('gt',strtotime($this->rankChoiceRule($timeflag)));
             $condition['add_time'] = array('gt',getTimeBegin($timeflag));
 
             $res =$this->table($v)->where($condition)->field('time,add_time')->find();
@@ -236,27 +262,13 @@ class RanKMongoModel extends MongoModel{
 
         $min_res  = $this->table('rank_single')->where($condition)->field('name,time,add_time')->order('time')->limit(5)->select();
         $min_res = array_values($min_res);
+
+        $time = new Time();
         //计算出这记录是多久前更新的
         for($i=0,$len=count($min_res);$i<$len;$i++){
-            $time_ago = NOW_TIME-$min_res[$i]['add_time'];
-
-            $time_day = floor($time_ago/(24*3600));//天数
-            $time_hour =floor( ($time_ago%(3600*24)) /( 3600) );//小时
-            $time_m =floor( ($time_ago%(3600)) / 60 );//分钟
-            $time_s =floor( ($time_ago%(3600)) % 60 );//秒
-
-            if($time_day>0) {$string = $time_day.'天'.$time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
-            else if($time_day==0 && $time_hour>0) {$string = $time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
-            else if($time_hour==0 && $time_m>0) {$string = $time_m.'分'.$time_s.'秒';}
-            else{ $string = $time_s.'秒';}
-
-            $min_res[$i]['time_ago'] = $string;
+            $min_res[$i]['time_ago'] = $time->updateTime($min_res[$i]['add_time']);
         }
-
-//        $minScore = $min_res[0]['time'];
-        $minScore = $min_res;
-
-        return $minScore;
+        return $min_res;
     }
 
     //获取单圈最佳成绩排行
@@ -329,7 +341,7 @@ class RanKMongoModel extends MongoModel{
         return $res;
     }
 
-    //获取单圈最佳成绩排行
+    //获取最佳成绩排行
     public function getScoreRank2($customer_id,$condition_select)
     {
         $pageSize = 10;

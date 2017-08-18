@@ -61,16 +61,6 @@ class AdminModel extends ConsumerHandleModel
         /* 添加用户 */
         if ($consumerHandleModel->create ( $data )) {
             $uid = $consumerHandleModel->table($consumerHandleModel->tableName)->add ();
-
-            if($consumerHandleModel instanceof CustomerModel){
-                //创建关联表（成绩表、排行表）
-                if(!$consumerHandleModel->createScoreAndRankTable2($data))
-                {
-                    $consumerHandleModel->where(array('customer_id'=>$uid))->delete();
-                    return false;
-                }
-            }
-
             return $uid ? $uid : 0; // 0-未知错误，大于0-注册成功
         } else {
             return $this->getError (); // 错误详情见自动验证注释

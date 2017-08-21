@@ -19,12 +19,36 @@ class ContestController extends BaseController
     //创建考试\赛事
     public function index()
     {
+        $contestInfo = I('get.');//赛事编辑的信息（clickOperate）
+
         $uid = $_SESSION['user']['id'];
 
         $contest = new ContestModel();
         $contestOrder = new ContestOrderModel();
 
+        $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
+        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
+        $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
+
+        $res = $contest->getContestInfo($uid);//获取赛事列表
+
+        $list = $contestOrder->getContestNum($res);//获取赛事名单人数
+
+        $this->assign('_list', $list);
+        $this->assign('nowContest', $nowContest);
+        $this->assign('conflictContest', $conflictContest);
+        $this->assign('soonContest', $soonContest);
+
+        $this->assign('contestInfo', $contestInfo);
+
+        $this->display();
+    }
+
+    //赛事按钮操作
+    public function clickOperate()
+    {
         //按钮操作 编辑 删除
+        $contest = new ContestModel();
         $result = $contest->clickOperate($get = I('get.'));
         if(!$result){
             exit($contest->getError());
@@ -35,28 +59,11 @@ class ContestController extends BaseController
             }else if($result == 2){
                 //delete
                 unset($get);
-                $this->redirect('index');
             }
             else{
             }
         }
-
-        $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
-        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
-        $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
-
-        $res = $contest->getContestInfo($uid);//获取赛事列表
-
-        $list = $contestOrder->getContestNum($res);//获取赛事名单人数
-
-//        my_print($list);
-
-        $this->assign('_list', $list);
-        $this->assign('nowContest', $nowContest);
-        $this->assign('conflictContest', $conflictContest);
-        $this->assign('soonContest', $soonContest);
-
-        $this->display();
+        $this->redirect('index',$result);
     }
 
     //添加一场赛事

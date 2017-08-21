@@ -233,7 +233,7 @@ class ContestModel extends Model{
     public function fillData($data)
     {
         $data['customer_id'] = $_SESSION['user']['id'];
-        $data['contest_sn'] = $this->createContestSn();
+        $data['contest_sn'] = $this->createContestSn();//生成考试编码
 
         $s = explode('-',$data['reservation-time']);
         unset($data['reservation-time']);

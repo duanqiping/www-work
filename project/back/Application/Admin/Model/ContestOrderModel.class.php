@@ -249,9 +249,12 @@ class ContestOrderModel extends Model{
         $map['contest_order_id'] = array('in',$ids);
         $map['contest_sn'] = $contest_sn;
 
+        $add_time = NOW_TIME;
         $res_users = $this->where($map)
-            ->field("{$res['contest_sn']} as contest_sn, customer_id,user_id,name,studentId,sex,dept,grade,class,length,mode")
+            ->field("{$res['contest_sn']} as contest_sn,$add_time as add_time, customer_id,user_id,name,studentId,sex,dept,grade,class,length,mode")
             ->select();
+
+//        my_print($res_users);
 
         $b = $this->addAll($res_users);//补考人员名单
 

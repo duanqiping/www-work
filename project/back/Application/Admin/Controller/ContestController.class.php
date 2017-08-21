@@ -53,39 +53,36 @@ class ContestController extends BaseController
         if(!$result){
             exit($contest->getError());
         }else{
-            //edit
-            if(is_array($result)){
-                $this->assign('contestInfo', $result);//赛事的详细信息
+            if(is_array($result)){//edit
+                $this->redirect('index',$result);
             }else if($result == 2){
-                //delete
-                unset($get);
-            }
-            else{
+                unset($get); //delete
+                $this->redirect('index');
             }
         }
-        $this->redirect('index',$result);
     }
 
-    //添加一场赛事
+    //添加或编辑一场赛事
     public function add()
     {
-        if($_POST)
+        $data = I('post.');
+        if($data)
         {
             $contest = new ContestModel();
-            if($_POST['contest_id']){
+            if($data['contest_id']){
                 //对赛事信息进行修改
-                $contest->editContest($_POST);
+                $contest->editContest($data);
 
                 $this->redirect('index');
             }
             else{
                 //添加一场赛事
-                $data = $contest->fillData($_POST);//填充数据
+                $data = $contest->fillData($data);//填充数据
 
                 if($uid = $contest->add($data))
                 {
                     $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
-                    $this->redirect('user');
+                    $this->redirect('user',array('contest_sn'=>$data['contest_sn']));
                 }else{
                     exit('fail');
                 }
@@ -103,22 +100,11 @@ class ContestController extends BaseController
         $contestorder = new ContestOrderModel();
 
         $uid = $_SESSION['user']['id'];
-        $condition = $_GET;//筛选条件
 
-        if($_GET['contest_sn']){
-            $_SESSION['contest_sn'] = $_GET['contest_sn'];
-        }
-        $contest_sn = $_SESSION['contest_sn'];
+        $condition = I('get.');//筛选条件
 
-        if($_POST){
-            $ids = $_POST;
-            $ids = $ids['id'];
-
-            $contest = new ContestModel();
-            $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
-            $b = $contestorder->addUser($ids,$contest_sn,$res_length);
-            if(!$b) exit('fail');
-        }
+        if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
+        $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
 
         $condition['contest_sn'] = $contest_sn;
 
@@ -143,25 +129,27 @@ class ContestController extends BaseController
         $this->display('info');
     }
 
-    //添加赛事人员
+    //学校名单列表
     public function user()
     {
-        if($_GET['contest_sn']){
-            $_SESSION['contest_sn'] = $_GET['contest_sn'];
-        }
-        $contest_sn = $_SESSION['contest_sn'];
+        $uid = $_SESSION['user']['id'];
+
+        if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
+        $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
+
         $contest = new ContestModel();
         $parent_id = $contest->where(array('contest_sn'=>$contest_sn))->getField('parent_id');
 
-        $uid = $_SESSION['user']['id'];
-        $condition = $_GET;//筛选条件
+        $condition = I('get.');//筛选条件
 
         if($parent_id > 0){
             //补考 全部不合格学生的名单
+            $contest_sn = $contest->where(array('contest_id'=>$parent_id))->getField('contest_sn');//获取父订单的赛事id号
+
             $contestorder = new ContestOrderModel();
             $condition = makeCondition($condition,$uid,$contest_sn);
             $condition['up_standard'] = 0;
-            $res = $contestorder->contestList($condition,$current=$_GET['current']);
+            $res = $contestorder->contestList($condition,$current=$condition['current']);
             $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
             $this->assign('_list',$res);
@@ -194,6 +182,26 @@ class ContestController extends BaseController
         }
 
         $this->display();
+    }
+
+    //添加赛事人员
+    public function addUser()
+    {
+        $data = I('post.');
+        $contest_sn = $_SESSION['contest_sn'];
+        if($data){
+
+            $ids = $data['id'];
+
+            $contest = new ContestModel();
+            $contestorder = new ContestOrderModel();
+            $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
+            $b = $contestorder->addUser($ids,$contest_sn,$res_length);
+            if(!$b) exit('fail');
+            else $this->redirect('info',array(array('contest_sn'=>$contest_sn)));
+        }else{
+            $this->redirect('user',array(array('contest_sn'=>$contest_sn)));
+        }
     }
 
     //删除赛事人员

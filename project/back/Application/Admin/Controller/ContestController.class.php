@@ -25,7 +25,7 @@ class ContestController extends BaseController
         $contestOrder = new ContestOrderModel();
 
         //按钮操作 编辑 删除
-        $result = $contest->clickOperate($_GET);
+        $result = $contest->clickOperate($get = I('get.'));
         if(!$result){
             exit($contest->getError());
         }else{
@@ -34,7 +34,7 @@ class ContestController extends BaseController
                 $this->assign('contestInfo', $result);//赛事的详细信息
             }else if($result == 2){
                 //delete
-                unset($_GET);
+                unset($get);
                 $this->redirect('index');
             }
             else{

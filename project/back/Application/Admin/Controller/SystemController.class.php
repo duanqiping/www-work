@@ -25,6 +25,8 @@ class SystemController extends Controller{
     {
         $data = I('post.');
 
+        my_print($data);
+
         $flag = $data['flag'];
         unset($data['flag']);
 
@@ -44,5 +46,34 @@ class SystemController extends Controller{
         }else{
             echo $consumer->getError();
         }
+    }
+
+    //添加系
+    public function addDept()
+    {
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        file_put_contents('log.txt',$dept."\n",FILE_APPEND );
+
+        $collectdept = M('collegeDept');
+        $count = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->count();
+        if($count>0){
+            echo json_encode(array('msg'=>'该系别已经存在,无需再次添加'));
+        }else{
+            $collectdept->add(array('customer_id'=>$customer_id,'dept_name'=>$dept,'add_time'=>NOW_TIME));
+            echo json_encode(array('msg'=>'添加成功'));
+        }
+    }
+    //获取系别
+    public function getDept()
+    {
+        $customer_id = $_SESSION['user']['id'];
+
+        $collectdept = M('collegeDept');
+        $dept_res = $collectdept->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
+//        my_print($dept_res);
+        echo json_encode($dept_res);
+
     }
 } 

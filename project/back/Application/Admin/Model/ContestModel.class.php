@@ -162,6 +162,7 @@ class ContestModel extends Model{
         $condition = array();
         $condition['begin_time'] = array('lt',NOW_TIME);//开始时间小于当前时间
         $condition['end_time'] = array('gt',NOW_TIME);//结束时间大于当前时间
+        $condition['status'] = array('in',array('1','2','3'));//赛事状态
         $res = $this->where($condition)->field('parent_id,contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
         $res = $res[0];
         return $res;

@@ -25,7 +25,7 @@ class ContestController extends BaseController
             unset($contestInfo['begin_time']);
             unset($contestInfo['end_time']);
         }
-        
+
         $uid = $_SESSION['user']['id'];
 
         $contest = new ContestModel();
@@ -55,8 +55,7 @@ class ContestController extends BaseController
         //按钮操作 编辑 删除
         $contest = new ContestModel();
         $result = $contest->clickOperate($get = I('get.'));
-//        var_dump($result);
-//        my_print($result);
+
         if(!$result){
             exit($contest->getError());
         }else{

@@ -134,10 +134,6 @@ class ContestModel extends Model{
                 $res['pass_score_male'] = str_pad(floor($res['pass_score_male']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_male']%60),2,0,STR_PAD_LEFT);
                 $res['pass_score_female'] = str_pad(floor($res['pass_score_female']/60),2,0,STR_PAD_LEFT).'-'.str_pad(floor($res['pass_score_female']%60),2,0,STR_PAD_LEFT);
 
-                $res['reservation-time'] = date('d/m/Y H:i',$res['begin_time']).' - '.date('d/m/Y H:i',$res['end_time']);
-
-                unset($res['begin_time']);
-                unset($res['end_time']);
                 return $res;
             }else{
                 $this->error = '未查到该赛事信息';

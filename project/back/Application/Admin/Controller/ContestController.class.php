@@ -20,7 +20,12 @@ class ContestController extends BaseController
     public function index()
     {
         $contestInfo = I('get.');//赛事编辑的信息（clickOperate）
-
+        if($contestInfo){
+            $contestInfo['reservation-time'] = date('d/m/Y H:i',$contestInfo['begin_time']).' - '.date('d/m/Y H:i',$contestInfo['end_time']);
+            unset($contestInfo['begin_time']);
+            unset($contestInfo['end_time']);
+        }
+        
         $uid = $_SESSION['user']['id'];
 
         $contest = new ContestModel();
@@ -50,6 +55,8 @@ class ContestController extends BaseController
         //按钮操作 编辑 删除
         $contest = new ContestModel();
         $result = $contest->clickOperate($get = I('get.'));
+//        var_dump($result);
+//        my_print($result);
         if(!$result){
             exit($contest->getError());
         }else{

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>class 与 style绑定</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<div class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+</div>
+
+<div v-bind:class="classObject"></div>
+
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '.static',
+        data: {
+            isActive: true,
+            hasError: false,
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        },
+
+        computed: {
+            // a computed getter
+            reversedMessage: function () {
+                // `this` points to the vm instance
+                return this.message.split('').reverse().join('')
+            },
+            now: function () {
+                return Date.now();//精确到毫秒
+            }
+        }
+
+    });
+</script>
+</html>

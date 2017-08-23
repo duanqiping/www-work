@@ -1,0 +1,172 @@
+<extend name="Public/base2" />
+
+<block name="head">
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+    <script src="__JS__/system.js"></script>
+</block>
+
+<block name="body">
+<div class="">
+<div class="page-title">
+    <div class="title_left">
+        <h3>系统管理 <small>专业体育数据统计系统</small></h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入关键字">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+
+
+
+<div class="col-md-12">
+
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2><i class="fa fa-bars"></i> 客户信息管理 </h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation"><a>客户筛选：</a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        <if condition="$customerInfo['province']">{$customerInfo.province}<else/>省份未定义</if>
+                    </a>
+
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        <if condition="$customerInfo['city']">{$customerInfo.city}<else/>市区未定义</if>
+                    </a>
+
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        <if condition="$customerInfo['type'] eq 1">学校<else/>体育馆</if>
+                    </a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        {$customerInfo.name}
+                    </a>
+                </li>
+            </ul>
+            <if condition="$customerInfo['school_type'] eq 1">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="dropdown">
+                        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系别
+                        </a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a>
+                            <select name="dept" id="deptId" style="border:none;">
+                            </select>
+                        </a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a>
+                            <input type="text" name="dept" id="dept"><button id="add_dept">新增</button>
+                        </a>
+                    </li>
+                </ul>
+                <else/>
+            </if>
+
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">年级
+                    </a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a>
+                        <select name="grade" id="gradeId" style="border:none;">
+                        </select>
+                    </a>
+                </li>
+                <li role="presentation" class="dropdown" id="div_grade">
+                    <a>
+                        <input type="text" name="grade" id="grade"><button id="add_grade">添加年级</button>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">班级
+                    </a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a>
+                        <select name="class" id="classId" style="border:none;">
+                        </select>
+                    </a>
+                </li>
+                <li role="presentation" class="dropdown" id="div_class">
+                    <a>
+                        <input type="text" name="class" id="class"><button id="add_class">添加班级</button>
+                    </a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                    <div class="col-md-6 col-xs-12">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--</div>-->
+</div>
+</div>
+</div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        var school_type = "{$customerInfo.school_type}";//学校类型
+
+        var addDept = "{:U('addDept')}";//添加系别路由
+        var getDept = "{:U('getDept')}";//获取系别路由
+
+        var addGrade = "{:U('addGrade')}";//添加年级路由
+        var getGrade = "{:U('getGrade')}";//获取年级路由
+
+        var addClass = "{:U('addClass')}";//添加班级路由
+        var getClass = "{:U('getClass')}";//获取班级路由
+    </script>
+</block>
+
+

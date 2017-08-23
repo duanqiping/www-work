@@ -15,8 +15,21 @@ use Admin\Model\ConsumerHandleModel;
 //系统管理控制器
 class SystemController extends Controller{
 
+    //创建账号
     public function index()
     {
+        $this->display();
+    }
+    //信息管理
+    public function info()
+    {
+        $customer_id = $_SESSION['user']['id'];
+
+        $customer = D('customer');
+        $res = $customer->where(array('customer_id'=>$customer_id))->field('name,province,city,type,school_type')->find();
+
+        $this->assign('customerInfo',$res);
+
         $this->display();
     }
 
@@ -24,8 +37,6 @@ class SystemController extends Controller{
     public function add()
     {
         $data = I('post.');
-
-        my_print($data);
 
         $flag = $data['flag'];
         unset($data['flag']);
@@ -48,27 +59,23 @@ class SystemController extends Controller{
         }
     }
 
-    //添加系
+    //添加系别
     public function addDept()
     {
         $dept = I('get.dept');
+        $school_type = I('get.school_type');
+
         $customer_id = $_SESSION['user']['id'];
 
-        file_put_contents('log.txt',$dept."\n",FILE_APPEND );
-
-        $collectdept = D('collegeDept');
-        $count = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->count();
-        if($count>0){
-            echo json_encode(array('msg'=>'该系别已经存在,无需再次添加'));
+        $collectdept = D('schoolInfo');
+        if($collectdept->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'school_type'=>$school_type))){
+            $b = $collectdept->add();
+            if($b) $msg = "添加成功";
+            else $msg = "服务器错误";
         }else{
-//            if($collectdept->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'add_time'=>NOW_TIME))){
-//
-//            }else{
-//
-//            }
-            $collectdept->add(array('customer_id'=>$customer_id,'dept_name'=>$dept,'add_time'=>NOW_TIME));
-            echo json_encode(array('msg'=>'添加成功'));
+            $msg = $collectdept->getError();
         }
+        echo json_encode(array('msg'=>$msg));
     }
 
     //获取系别
@@ -76,9 +83,10 @@ class SystemController extends Controller{
     {
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = M('collegeDept');
-        $dept_res = $collectdept->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
-//        my_print($dept_res);
+        $schoolInfo = D('schoolInfo');
+        $dept_res = $schoolInfo->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
+//        echo $schoolInfo->_sql();
+//        exit();
         echo json_encode($dept_res);
     }
 
@@ -87,19 +95,41 @@ class SystemController extends Controller{
     {
         $grade = I('get.grade');
         $dept = I('get.dept');
+        $school_type = I('get.school_type');
+
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = M('collegeDept');
-        $grade_num = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
+        $condition = array();
+        $condition['customer_id'] = $customer_id;
+        if($dept) $condition['dept_name'] = $dept;
 
-        file_put_contents('log.txt',$grade.'--'.$dept.$grade_num."\n",FILE_APPEND );
+        $schoolInfo = D('schoolInfo');
+        $grade_num = $schoolInfo->where($condition)->getField('grade_num');
 
-        if($grade_num>0){
-            echo json_encode(array('msg'=>'年级已经添加,无需再次添加'));
-        }else{
-            $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save(array('grade_num'=>$grade));
-            echo json_encode(array('msg'=>'添加成功'));
+        //中小学
+        if($grade_num == null){
+            if($schoolInfo->create(array('customer_id'=>$customer_id,'grade_num'=>$grade,'school_type'=>$school_type))){
+                $b = $schoolInfo->add();
+                if($b) $msg="添加成功";
+                else $msg="服务器错误";
+            }else{
+                $msg = $schoolInfo->getError();
+            }
         }
+        else if($grade_num>0){
+            $msg = '年级已经添加,无需再次添加';
+        }
+        //大学
+        else{
+            if($schoolInfo->create(array('grade_num'=>$grade))){
+                $b = $schoolInfo->where($condition)->save();
+                if($b) $msg="添加成功";
+                else $msg="服务器错误";
+            }else{
+                $msg = $schoolInfo->getError();
+            }
+        }
+        echo json_encode(array('msg'=>$msg));
     }
 
     //获取年级
@@ -108,9 +138,8 @@ class SystemController extends Controller{
         $dept = I('get.dept');
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = M('collegeDept');
-        $grade_num = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
-        file_put_contents('log.txt',$dept.'-1111-'.$grade_num."\n",FILE_APPEND );
+        $schoolInfo = D('schoolInfo');
+        $grade_num = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
 
         echo json_encode(array('grade'=>$grade_num));
     }
@@ -122,10 +151,15 @@ class SystemController extends Controller{
         $dept = I('get.dept');
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = M('collegeDept');
-        $class_list = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
+        $schoolInfo = D('schoolInfo');
+        $condition = array();
+        $condition['customer_id'] = $customer_id;
+        if($dept) $condition['dept_name'] = $dept;
 
-        file_put_contents('log.txt',$class.'--'.$dept.$class_list."\n",FILE_APPEND );
+        $class_list = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
+
+//        file_put_contents('log.txt',$class.'--'.$dept.$class_list."\n",FILE_APPEND );
+        file_put_contents('log.txt',$class_list."0000"."\n",FILE_APPEND );
 
         //首次添加班级
         if(!$class_list){
@@ -142,15 +176,24 @@ class SystemController extends Controller{
                 echo json_encode(array('msg'=>'该班级已经存在，无需再次添加'));
                 exit();
             }
-            $array = array_merge($array,array($class));
+
+            array_push($array,$class);
         }
         $array = json_encode($array);
-        $b = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save(array('class_list'=>$array));
-        if($b){
-            echo json_encode(array('msg'=>'添加成功'));
-        }else{
-            echo json_encode(array('msg'=>'添加失败'));
+        file_put_contents('log.txt',$class_list."1111".$class."\n",FILE_APPEND );
+        if($schoolInfo->create(array('class_list'=>$array)))
+        {
+            $b = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save();
+            if($b){
+                $msg = '添加成功';
+            }else{
+                $msg = '服务器错误';
+            }
+        }else
+        {
+            $msg = $schoolInfo->getError();
         }
+        echo json_encode(array('msg'=>$msg));
     }
 
     //获取班级
@@ -159,8 +202,14 @@ class SystemController extends Controller{
         $dept = I('get.dept');
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = M('collegeDept');
-        $class_list = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
+        $schoolInfo = D('schoolInfo');
+        $condition = array();
+        $condition['customer_id'] = $customer_id;
+        if($dept) $condition['dept_name'] = $dept;
+
+        $class_list = $schoolInfo->where($condition)->getField('class_list');
+
+        file_put_contents('log.txt',$class_list."2222"."\n",FILE_APPEND );
 
         echo $class_list;
     }

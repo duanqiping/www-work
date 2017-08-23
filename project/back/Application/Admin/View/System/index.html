@@ -56,21 +56,6 @@
 <div class="x_content">
 
     <div class="" role="tabpanel" data-example-id="togglable-tabs">
-
-        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-            <li role="presentation" class="active"><a href="" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">活动报名字段自定义</a>
-            </li>
-        </ul>
-        <ul  class="nav nav-tabs bar_tabs" role="tablist">
-            <li  class="nav nav-pills" ><a>昵称</a>
-            </li>
-            <li  class="nav nav-pills"><a>真实姓名</a>
-            </li>
-            <li  class="nav nav-pills"><a>头像</a>
-            </li>
-            <li  class="nav nav-pills"><a>出生年月</a>
-            </li>
-        </ul>
         <ul class="nav nav-pills" role="tablist">
             <li role="presentation"><a>客户筛选：</a>
             </li>
@@ -99,6 +84,10 @@
         </ul>
         <ul class="nav nav-pills" role="tablist">
             <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系别
+                </a>
+            </li>
+            <li role="presentation" class="dropdown">
                 <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <select name="dept" id="deptId" style="border:none;">
                     </select>
@@ -109,6 +98,25 @@
                     <input type="text" name="dept" id="dept"><button id="add_dept">新增</button>
                 </a>
             </li>
+        </ul>
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">年级
+                </a>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <select name="grade" id="gradeId" style="border:none;">
+                    </select>
+                </a>
+            </li>
+            <!--<div style="display: none" id="div_grade">-->
+                <li role="presentation" class="dropdown" id="div_grade">
+                    <a>
+                        <input type="text" name="grade" id="grade"><button id="add_grade">添加年级</button>
+                    </a>
+                </li>
+            <!--</div>-->
         </ul>
         <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -271,6 +279,9 @@
     <script type="text/javascript">
         var addDept = "{:U('addDept')}";
         var getDept = "{:U('getDept')}";
+
+        var addGrade = "{:U('addGrade')}";
+        var getGrade = "{:U('getGrade')}";
     </script>
 </block>
 

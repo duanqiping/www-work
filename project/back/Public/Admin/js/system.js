@@ -1,6 +1,10 @@
 //dom加载完成后执行的js
 ;$(function(){
-    getSection();
+    getDepts();//获取系别
+
+    $("#deptId").change(function(){
+        getGrades();//获取年级
+    });
 
     $("#customer_type").change(function(){
        var customer_type = $(this).val();
@@ -12,6 +16,41 @@
             $(".school").show();
         }
     });
+
+    $("#add_grade").click(function(){
+        //var grade = $("#grade").val();
+
+        $.getJSON(addGrade, {"grade":$("#grade").val(),'dept':$("#deptId").val()}, function(data) {
+
+            $.each(data, function(i, item) {
+                if(item){
+                    alert(item);
+                }
+            });
+        });
+        $("#grade").val('');//置空输入框
+        getGrades()();
+    });
+
+    function getGrades()
+    {
+        $("#gradeId").empty();
+        $("#div_grade").hide();
+        $.getJSON(getGrade,{"dept":$("#deptId").val()}, function(data) {
+
+            $.each(data, function(i, item) {
+
+                if(item != 0){
+                    for(var j=1;j<=item;j++){
+                        $("<option></option>").text(j).appendTo($("#gradeId"));
+                    }
+                }else{
+                    $("#div_grade").show();
+                }
+            });
+        });
+    }
+
     $("#add_dept").click(function(){
         var dept = $("#dept").val();
 
@@ -23,12 +62,11 @@
                 }
             });
         });
-        $("#dept").val('');
+        $("#dept").val('');//置空输入框
     });
-
-    function getSection()
+    function getDepts()
     {
-        $("<option></option>").text('系别').appendTo($("#deptId"));
+        $("#div_grade").hide();
         $.getJSON(getDept, function(data) {
 
             $.each(data, function(i, item) {

@@ -65,6 +65,7 @@ class SystemController extends Controller{
             echo json_encode(array('msg'=>'添加成功'));
         }
     }
+
     //获取系别
     public function getDept()
     {
@@ -74,6 +75,38 @@ class SystemController extends Controller{
         $dept_res = $collectdept->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
 //        my_print($dept_res);
         echo json_encode($dept_res);
+    }
 
+    //添加年级
+    public function addGrade()
+    {
+        $grade = I('get.grade');
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $collectdept = M('collegeDept');
+        $grade_num = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
+
+        file_put_contents('log.txt',$grade.'--'.$dept.$grade_num."\n",FILE_APPEND );
+
+        if($grade_num>0){
+            echo json_encode(array('msg'=>'年级已经添加,无需再次添加'));
+        }else{
+            $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save(array('grade_num'=>$grade));
+            echo json_encode(array('msg'=>'添加成功'));
+        }
+    }
+
+    //获取年级
+    public function getGrade()
+    {
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $collectdept = M('collegeDept');
+        $grade_num = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
+        file_put_contents('log.txt',$dept.'-1111-'.$grade_num."\n",FILE_APPEND );
+
+        echo json_encode(array('grade'=>$grade_num));
     }
 } 

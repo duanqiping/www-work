@@ -4,6 +4,7 @@
 
     $("#deptId").change(function(){
         getGrades();//获取年级
+        getClasses();//获取班级
     });
 
     $("#customer_type").change(function(){
@@ -16,6 +17,39 @@
             $(".school").show();
         }
     });
+    //添加班级
+    $("#add_class").click(function(){
+        //var grade = $("#grade").val();
+        //alert($("#class").val());
+
+        $.getJSON(addClass, {"class":$("#class").val(),'dept':$("#deptId").val()}, function(data) {
+
+            $.each(data, function(i, item) {
+                if(item){
+                    alert(item);
+                }
+            });
+        });
+        $("#class").val('');//置空输入框
+        getClasses();
+    });
+    //获取班级
+    function getClasses()
+    {
+        $("#classId").empty();
+        //$("#div_grade").hide();
+        $.getJSON(getClass,{"dept":$("#deptId").val()}, function(data) {
+
+            $.each(data, function(i, item) {
+
+                if(item){
+                    $("<option></option>").text(item).appendTo($("#classId"));
+                }else{
+                    //$("#div_grade").show();
+                }
+            });
+        });
+    }
 
     $("#add_grade").click(function(){
         //var grade = $("#grade").val();
@@ -63,15 +97,16 @@
             });
         });
         $("#dept").val('');//置空输入框
+        getDepts();
     });
     function getDepts()
     {
+        $("#deptId").empty();
         $("#div_grade").hide();
         $.getJSON(getDept, function(data) {
 
             $.each(data, function(i, item) {
                 if(item){
-                    //$("<option></option>").val(item['dept_name']).text(item['dept_name']).appendTo($("#deptId"));
                     $("<option></option>").text(item['dept_name']).appendTo($("#deptId"));
                 }
             });

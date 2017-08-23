@@ -83,12 +83,12 @@
             </li>
         </ul>
         <ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class="dropdown">
+            <li class="dropdown">
                 <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系别
                 </a>
             </li>
             <li role="presentation" class="dropdown">
-                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a>
                     <select name="dept" id="deptId" style="border:none;">
                     </select>
                 </a>
@@ -105,18 +105,33 @@
                 </a>
             </li>
             <li role="presentation" class="dropdown">
-                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a>
                     <select name="grade" id="gradeId" style="border:none;">
                     </select>
                 </a>
             </li>
-            <!--<div style="display: none" id="div_grade">-->
-                <li role="presentation" class="dropdown" id="div_grade">
-                    <a>
-                        <input type="text" name="grade" id="grade"><button id="add_grade">添加年级</button>
-                    </a>
-                </li>
-            <!--</div>-->
+            <li role="presentation" class="dropdown" id="div_grade">
+                <a>
+                    <input type="text" name="grade" id="grade"><button id="add_grade">添加年级</button>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">班级
+                </a>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a>
+                    <select name="class" id="classId" style="border:none;">
+                    </select>
+                </a>
+            </li>
+            <li role="presentation" class="dropdown" id="div_class">
+                <a>
+                    <input type="text" name="class" id="class"><button id="add_class">添加班级</button>
+                </a>
+            </li>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -277,11 +292,14 @@
 
 <block name="script">
     <script type="text/javascript">
-        var addDept = "{:U('addDept')}";
-        var getDept = "{:U('getDept')}";
+        var addDept = "{:U('addDept')}";//添加系别路由
+        var getDept = "{:U('getDept')}";//获取系别路由
 
-        var addGrade = "{:U('addGrade')}";
-        var getGrade = "{:U('getGrade')}";
+        var addGrade = "{:U('addGrade')}";//添加年级路由
+        var getGrade = "{:U('getGrade')}";//获取年级路由
+
+        var addClass = "{:U('addClass')}";//添加班级路由
+        var getClass = "{:U('getClass')}";//获取班级路由
     </script>
 </block>
 

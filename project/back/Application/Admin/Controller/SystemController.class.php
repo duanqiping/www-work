@@ -56,11 +56,16 @@ class SystemController extends Controller{
 
         file_put_contents('log.txt',$dept."\n",FILE_APPEND );
 
-        $collectdept = M('collegeDept');
+        $collectdept = D('collegeDept');
         $count = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->count();
         if($count>0){
             echo json_encode(array('msg'=>'该系别已经存在,无需再次添加'));
         }else{
+//            if($collectdept->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'add_time'=>NOW_TIME))){
+//
+//            }else{
+//
+//            }
             $collectdept->add(array('customer_id'=>$customer_id,'dept_name'=>$dept,'add_time'=>NOW_TIME));
             echo json_encode(array('msg'=>'添加成功'));
         }
@@ -108,5 +113,55 @@ class SystemController extends Controller{
         file_put_contents('log.txt',$dept.'-1111-'.$grade_num."\n",FILE_APPEND );
 
         echo json_encode(array('grade'=>$grade_num));
+    }
+
+    //添加班级
+    public function addClass()
+    {
+        $class = I('get.class');
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $collectdept = M('collegeDept');
+        $class_list = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
+
+        file_put_contents('log.txt',$class.'--'.$dept.$class_list."\n",FILE_APPEND );
+
+        //首次添加班级
+        if(!$class_list){
+            $array = array($class);
+        }else{
+            //往json后面添加班级
+            $array = json_decode($class_list);
+            $flag = false;
+            for($i=0,$len=count($array);$i<$len;$i++)
+            {
+                if($array[$i] == $class){$flag = true;break;}
+            }
+            if($flag){
+                echo json_encode(array('msg'=>'该班级已经存在，无需再次添加'));
+                exit();
+            }
+            $array = array_merge($array,array($class));
+        }
+        $array = json_encode($array);
+        $b = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save(array('class_list'=>$array));
+        if($b){
+            echo json_encode(array('msg'=>'添加成功'));
+        }else{
+            echo json_encode(array('msg'=>'添加失败'));
+        }
+    }
+
+    //获取班级
+    public function getClass()
+    {
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $collectdept = M('collegeDept');
+        $class_list = $collectdept->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
+
+        echo $class_list;
     }
 } 

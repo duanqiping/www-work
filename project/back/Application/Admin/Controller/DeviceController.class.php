@@ -72,7 +72,7 @@ class DeviceController extends Controller{
         $this->display();
     }
 
-    //ajax 添加设备
+    //ajax 添加设备(该操作只能有系统后台管理员操作)
     public function addDevice()
     {
         $customer_id = $_GET['customer_id'];

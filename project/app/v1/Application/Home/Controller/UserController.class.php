@@ -112,8 +112,8 @@ class UserController extends BaseController{
     //登陆
     public function login()
     {
-        $mobile = $_POST['mobile'];
-        $passwd = $_POST['passwd'];
+        $mobile = I('post.mobile');
+        $passwd = I('post.passwd');
 
         is_mobile_legal($mobile);
 
@@ -168,7 +168,7 @@ class UserController extends BaseController{
 
         if(IS_POST)
         {
-            $data = $_POST;
+            $data = I("post.");
             $user = new UserModel();
             if ($user->where(array('user_id'=>session('user_id')))->save($data)) //更新用户信息
             {

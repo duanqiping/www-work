@@ -67,14 +67,17 @@ class SystemController extends Controller{
 
         $customer_id = $_SESSION['user']['id'];
 
-        $collectdept = D('schoolInfo');
-        if($collectdept->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'school_type'=>$school_type))){
-            $b = $collectdept->add();
+        $schoolInfo = D('schoolInfo');
+        if($schoolInfo->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'school_type'=>$school_type))){
+            $b = $schoolInfo->add();
             if($b) $msg = "添加成功";
             else $msg = "服务器错误";
         }else{
-            $msg = $collectdept->getError();
+            $msg = $schoolInfo->getError();
         }
+//        $dept_res = $schoolInfo->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
+//        file_put_contents('log.txt',json_encode($dept_res)."11111"."\n",FILE_APPEND );
+
         echo json_encode(array('msg'=>$msg));
     }
 
@@ -85,8 +88,9 @@ class SystemController extends Controller{
 
         $schoolInfo = D('schoolInfo');
         $dept_res = $schoolInfo->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
-//        echo $schoolInfo->_sql();
-//        exit();
+
+//        file_put_contents('log.txt',json_encode($dept_res)."2222"."\n",FILE_APPEND );
+
         echo json_encode($dept_res);
     }
 
@@ -159,7 +163,7 @@ class SystemController extends Controller{
         $class_list = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('class_list');
 
 //        file_put_contents('log.txt',$class.'--'.$dept.$class_list."\n",FILE_APPEND );
-        file_put_contents('log.txt',$class_list."0000"."\n",FILE_APPEND );
+//        file_put_contents('log.txt',$class_list."0000"."\n",FILE_APPEND );
 
         //首次添加班级
         if(!$class_list){
@@ -180,7 +184,7 @@ class SystemController extends Controller{
             array_push($array,$class);
         }
         $array = json_encode($array);
-        file_put_contents('log.txt',$class_list."1111".$class."\n",FILE_APPEND );
+//        file_put_contents('log.txt',$class_list."1111".$class."\n",FILE_APPEND );
         if($schoolInfo->create(array('class_list'=>$array)))
         {
             $b = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->save();
@@ -209,7 +213,7 @@ class SystemController extends Controller{
 
         $class_list = $schoolInfo->where($condition)->getField('class_list');
 
-        file_put_contents('log.txt',$class_list."2222"."\n",FILE_APPEND );
+//        file_put_contents('log.txt',$class_list."2222"."\n",FILE_APPEND );
 
         echo $class_list;
     }

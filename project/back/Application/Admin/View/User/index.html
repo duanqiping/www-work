@@ -7,6 +7,7 @@
     <script src="__JS__/jquery-2.0.3.min.js"></script>
     <script src="__JS__/linkage.js"></script>
     <script src="__JS__/common.js"></script>
+    <script src="__JS__/user.js"></script>
     <script src="__VENDOR__/pagination/jquery.pagination.js"></script>
 </block>
 
@@ -88,36 +89,30 @@
                                 </label>
                                 <ul class="nav nav-pills" role="tablist">
                                     <!--系别-->
-                                    <li role="presentation" class="dropdown"><a>系别</a></li>
-                                    <li role="presentation" class="dropdown">
-                                        <a  href="#" class="dropdown-toggle">
-                                            <select name="dept" style="border:none;">
-                                                <option>物理系</option>
-                                                <option>数学系</option>
-                                                <option>计算机系</option>
-                                            </select>
-                                        </a>
-                                    </li>
+                                    <if condition="$customerInfo['school_type'] eq 1">
+                                        <li role="presentation" class="dropdown"><a>系别</a></li>
+                                        <li role="presentation" class="dropdown">
+                                            <a>
+                                                <select name="dept" id="deptId2" style="border:none;">
+                                                </select>
+                                            </a>
+                                        </li>
+                                        <else/>
+                                    </if>
+
                                     <!--年级-->
                                     <li role="presentation" class="dropdown"><a>年级</a></li>
                                     <li role="presentation" class="dropdown">
-                                        <a  href="#" class="dropdown-toggle">
-                                            <select name="grade" style="border:none;">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
+                                        <a>
+                                            <select name="grade" id="gradeId2" style="border:none;">
                                             </select>
                                         </a>
                                     </li>
                                     <!--班级-->
                                     <li role="presentation" class="dropdown"><a>班级</a></li>
                                     <li role="presentation" class="dropdown">
-                                        <a  href="#" class="dropdown-toggle">
-                                            <select name="class" style="border:none;">
-                                                <option>信息一班</option>
-                                                <option>信息二班</option>
-                                                <option>信息三班</option>
+                                        <a>
+                                            <select name="class" id="classId2" style="border:none;">
                                             </select>
                                         </a>
                                     </li>
@@ -299,6 +294,17 @@
 
 <block name="script">
     <script type="text/javascript">
+        var school_type = "{$customerInfo.school_type}";//学校类型
+
+        var addDept = "{:U('addDept')}";//添加系别路由
+        var getDept = "{:U('getDept')}";//获取系别路由
+
+        var addGrade = "{:U('addGrade')}";//添加年级路由
+        var getGrade = "{:U('getGrade')}";//获取年级路由
+
+        var addClass = "{:U('addClass')}";//添加班级路由
+        var getClass = "{:U('getClass')}";//获取班级路由
+
         var indexurl = "{:U()}";
 
         $('.M-box1').pagination({

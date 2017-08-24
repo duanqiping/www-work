@@ -23,11 +23,16 @@ class UserController extends Controller{
 
         $user = new UserModel();
 
+        $customer = D('customer');
+        $school_res = $customer->where(array('customer_id'=>$uid))->field('name,province,city,type,school_type')->find();
+
         $res = $user->_list(makeCondition($condition,$uid,$contest_sn=0),$current=$_GET['current']);
 
         $deptInfo = $user->getDept($uid);//获取系别
         $gradeInfo = $user->getGrade($uid,$condition['dept']);//获取年级
         $classInfo = $user->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
+
+        $this->assign('customerInfo',$school_res);
 
         $this->assign('_list', $res);
         $this->assign('condition', $condition);
@@ -87,5 +92,49 @@ class UserController extends Controller{
         }
 
         $this->redirect('index');
+    }
+
+    //获取系别
+    public function getDept()
+    {
+        $customer_id = $_SESSION['user']['id'];
+
+        $schoolInfo = D('schoolInfo');
+        $dept_res = $schoolInfo->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
+//        echo $schoolInfo->_sql();
+//        exit();
+        echo json_encode($dept_res);
+    }
+
+    //获取年级
+    public function getGrade()
+    {
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $schoolInfo = D('schoolInfo');
+        $grade_num = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
+
+//        file_put_contents('log.txt',$grade_num."0000"."\n",FILE_APPEND );
+
+        echo json_encode(array('grade'=>$grade_num));
+    }
+
+    //获取班级
+    public function getClass()
+    {
+        $dept = I('get.dept');
+        $customer_id = $_SESSION['user']['id'];
+
+        $schoolInfo = D('schoolInfo');
+        $condition = array();
+        $condition['customer_id'] = $customer_id;
+        if($dept) $condition['dept_name'] = $dept;
+
+        $class_list = $schoolInfo->where($condition)->getField('class_list');
+
+//        file_put_contents('log.txt',$schoolInfo->_sql()."\n",FILE_APPEND );
+
+        echo $class_list;
     }
 } 

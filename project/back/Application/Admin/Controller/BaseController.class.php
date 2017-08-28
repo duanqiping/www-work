@@ -8,15 +8,18 @@
 
 namespace Admin\Controller;
 
-
-//use Think\Controller;
 use Admin\Model\ConsumerHandleModel;
 use Admin\Model\UserModel;
 
 class BaseController extends \Think\Controller
 {
+    protected $uid;//管理员id 或 代理商id 或 学校管理员id 或 老师id
     protected $error_info;
     protected $flag;
+
+    function _initialize(){
+        $this->uid = $_SESSION['user']['id'];
+    }
 
     //获取用户model
     public static function  getInstance($flag)

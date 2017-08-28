@@ -95,7 +95,7 @@
     <else />
 </if>
 <div id="step-1">
-    <form class="form-horizontal form-label-left" action="{:U()}" method="post">
+    <form class="form-horizontal form-label-left" action="{:U('add')}" method="post">
 
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">选择问题设备 <span class="required">*</span>
@@ -643,6 +643,9 @@
     <script type="text/javascript">
 
         var index = "{$_list[0]['status']}";
+        if(index == 4){
+            index = 1;
+        }
         init_SmartWizard();
 
     </script>

@@ -12,18 +12,12 @@ namespace Admin\Controller;
 use Admin\Model\DeviceOrderModel;
 use Think\Controller;
 
-use Admin\Model\CustomerModel;
-
-class WoController extends Controller{
-
+class WoController extends BaseController{
     //工单首页
     public function index()
     {
         $deviceOrder=  new DeviceOrderModel();
-        if($_POST){
-            $deviceOrder->insertData($_POST);
-        }
-
+        
         $selectCondition = $deviceOrder->selectCondition();//筛选条件
         $fillInfo = $deviceOrder->getCustomerFillData();//获取客户的填写数据（适用于客户查看）
         $list = $deviceOrder->_list($status = 0);
@@ -34,6 +28,22 @@ class WoController extends Controller{
         $this->assign('grade',$_SESSION['user']['grade']);
 
         $this->display();
+    }
+    //新增一条工单
+    public function add()
+    {
+        $data = I('post.');
+        if($data){
+            $deviceOrder=  D('deviceOrder');
+            $result = $deviceOrder->insertData($data,$this->uid);
+            if(!$result){
+                exit('跳转到错误页面');
+            }else{
+                $this->redirect('index');
+            }
+        }else{
+            $this->redirect('index');
+        }
     }
 
     //查询工单

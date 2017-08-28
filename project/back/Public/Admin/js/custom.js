@@ -1794,16 +1794,18 @@ if (typeof NProgress != 'undefined') {
         }
 	   
 	   /* SMART WIZARD */
-		
 		function init_SmartWizard() {
 			
 			if( typeof ($.fn.smartWizard) === 'undefined'){ return; }
 			console.log('init_SmartWizard');
 
+            /* 这段代码属于 后来新增代码*/
             var com = $('#wizard').smartWizard();
             for (var i  = 1; i < index; i ++) {
                 com.data('smartWizard').buttons.next.click();
             }
+            /*结束*/
+
 			$('#wizard_verticle').smartWizard({
 			  transitionEffect: 'slide'
 			});

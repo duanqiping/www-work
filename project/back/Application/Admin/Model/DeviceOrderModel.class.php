@@ -108,11 +108,9 @@ class DeviceOrderModel extends Model{
         }
     }
 
-    //生成工单
-    public function insertData($data)
+    //创建工单(只能由老师 或 学校管理员创建)
+    public function insertData($data,$uid)
     {
-        $uid = $_SESSION['user']['id'];
-
         //查询是否有处理中的工单 有则直接返回
         $map['customer_id'] = $uid;
         $map['status'] = array('in',array(1,2,3));
@@ -125,7 +123,7 @@ class DeviceOrderModel extends Model{
         $res_customer = $customer->where($condition_customer)->field('customer_id,name,customer_addr')->find();
 
         $add_data = array(
-            'order_sn' => get_order_sn($res_customer['customer_id']),
+            'order_sn' => get_order_sn($res_customer['customer_id']),//工单号
             'customer_id' => $res_customer['customer_id'],
             'customer_name' => $res_customer['name'],
             'customer_addr' => $res_customer['customer_addr'],

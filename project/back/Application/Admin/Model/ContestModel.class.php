@@ -153,37 +153,41 @@ class ContestModel extends Model{
     }
 
     //正在进行
-    public function contestSelectNow()
+    public function contestSelectNow($uid)
     {
         $condition = array();
         $condition['begin_time'] = array('lt',NOW_TIME);//开始时间小于当前时间
         $condition['end_time'] = array('gt',NOW_TIME);//结束时间大于当前时间
         $condition['status'] = array('in',array('1','2','3'));//赛事状态
-        $res = $this->where($condition)->field('parent_id,contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
+        $condition['customer_id'] = $uid;
+        $res = $this->where($condition)->field('contest_id,parent_id,contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
         $res = $res[0];
         return $res;
     }
 
     //冲突中
-    public function contestSelectConflict($nowContest)
+    public function contestSelectConflict($uid,$nowContest)
     {
         if(!$nowContest) return array();
 
         $end_time = $nowContest['end_time'];
         $begin_time = $nowContest['begin_time'];
 
-        $condition['begin_time'] = array('lt',$end_time);
         $condition['begin_time'] = array('gt',$begin_time);
+        $condition['customer_id'] = $uid;
+        $condition['contest_id'] = array('NEQ',$nowContest['contest_id']);
 
         $res = $this->where($condition)->field('contest_sn,title')->order('begin_time')->limit(1)->select();
+
         return $res;
     }
 
     //即将开始的考试
-    public function contestSelectSoon()
+    public function contestSelectSoon($uid)
     {
         //开始时间大于当前时间 开始时间小于当前时间+3天的时间
         $condition['begin_time'] = array('between',array(NOW_TIME,NOW_TIME+3600*24*3));
+        $condition['customer_id'] = $uid;
 
         $res = $this->where($condition)->field('contest_sn,title,begin_time')->order('begin_time')->limit(2)->select();
         return $res;

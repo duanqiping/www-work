@@ -26,16 +26,14 @@ class ContestController extends BaseController
             unset($contestInfo['end_time']);
         }
 
-        $uid = $_SESSION['user']['id'];
-
         $contest = new ContestModel();
         $contestOrder = new ContestOrderModel();
 
-        $nowContest = $contest->contestSelectNow();//正在进行赛事 一维
-        $conflictContest = $contest->contestSelectConflict($nowContest);//冲突中赛事 二维数组
-        $soonContest = $contest->contestSelectSoon();//即将开始赛事 二维数组
+        $nowContest = $contest->contestSelectNow($this->uid);//正在进行赛事 一维
+        $conflictContest = $contest->contestSelectConflict($this->uid,$nowContest);//冲突中赛事 二维数组
+        $soonContest = $contest->contestSelectSoon($this->uid);//即将开始赛事 二维数组
 
-        $res = $contest->getContestInfo($uid);//获取赛事列表
+        $res = $contest->getContestInfo($this->uid);//获取赛事列表
 
         $list = $contestOrder->getContestNum($res);//获取赛事名单人数
 

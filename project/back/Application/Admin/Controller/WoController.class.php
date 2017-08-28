@@ -18,7 +18,15 @@ class WoController extends BaseController
     //工单首页
     public function index()
     {
-        $deviceOrder=  new DeviceOrderModel();
+        $deviceOrder = D('deviceOrder');
+
+        if($id = I('get.id'))
+        {
+            $selectInfo = $deviceOrder->where(array('device_order_id'=>$id))
+                ->field('device_order_id id,order_sn,status')
+                ->find();
+            $this->assign('selectInfo',$selectInfo);
+        }
 
         $list = $deviceOrder->_list($status = 0,$this->uid,$this->grade);//工单列表
         $fillInfo = $deviceOrder->getCustomerFillData($this->grade);//获取客户的填写数据（适用于客户查看）
@@ -32,6 +40,7 @@ class WoController extends BaseController
 
         $this->display();
     }
+
     //新增一条工单
     public function add()
     {

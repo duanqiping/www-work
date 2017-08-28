@@ -12,20 +12,23 @@ namespace Admin\Controller;
 use Admin\Model\DeviceOrderModel;
 use Think\Controller;
 
-class WoController extends BaseController{
+class WoController extends BaseController
+{
+
     //工单首页
     public function index()
     {
         $deviceOrder=  new DeviceOrderModel();
-        
-        $selectCondition = $deviceOrder->selectCondition();//筛选条件
-        $fillInfo = $deviceOrder->getCustomerFillData();//获取客户的填写数据（适用于客户查看）
-        $list = $deviceOrder->_list($status = 0);
 
-        $this->assign('fillData',$fillInfo);
+        $list = $deviceOrder->_list($status = 0,$this->uid,$this->grade);//工单列表
+        $fillInfo = $deviceOrder->getCustomerFillData($this->grade);//获取客户的填写数据（适用于客户查看）
+        $selectCondition = $deviceOrder->selectCondition($this->uid,$this->grade);//区域筛选数组，用于填充页面
+
         $this->assign('_list',$list);
+        $this->assign('fillData',$fillInfo);
         $this->assign('selectCondition',$selectCondition);
-        $this->assign('grade',$_SESSION['user']['grade']);
+
+        $this->assign('grade',$this->grade);
 
         $this->display();
     }
@@ -51,7 +54,7 @@ class WoController extends BaseController{
     {
         $status = $_GET['status'];
         $agent = new DeviceOrderModel();
-        $res = $agent->_list($status);
+        $res = $agent->_list($status,$this->uid,$this->grade);
 
         $this->assign('_list',$res);
         $this->display('inHand');
@@ -104,7 +107,7 @@ class WoController extends BaseController{
         }
 
         $deviceorder = new DeviceOrderModel();
-        if(!$deviceorder->insertData($desc)){
+        if(!$deviceorder->insertData($desc,$this->uid)){
             $this->assign('info',$deviceorder->getError());
             $this->display('device');
         }else{

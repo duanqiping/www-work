@@ -22,12 +22,10 @@ class DeviceOrderModel extends Model{
     );
 
     //筛选条件 省份 城市 类型 客户
-    public function selectCondition()
+    public function selectCondition($uid,$grade)
     {
         $selectConditon = array();
 
-        $grade = $_SESSION['user']['grade'];
-        $uid = $_SESSION['user']['id'];
         if($grade == 1){
             $selectConditon['province'] = '省份';
             $selectConditon['city'] = '城市';
@@ -57,11 +55,8 @@ class DeviceOrderModel extends Model{
 
     //系统后台 代理商 客户
     //工单列表 $status 1待处理 2处理中 3处理完成 4客户确认完成
-    public function _list($status)
+    public function _list($status,$uid,$grade)
     {
-        $grade = $_SESSION['user']['grade'];
-        $uid = $_SESSION['user']['id'];
-
         $condition = array();
 
         if($grade == 3 || $grade == 4){
@@ -93,10 +88,8 @@ class DeviceOrderModel extends Model{
     }
 
     //获取客户的填写信息
-    public function getCustomerFillData()
+    public function getCustomerFillData($grade)
     {
-        $grade = $_SESSION['user']['grade'];
-
         if($grade == 3 || $grade == 4){
             $condition['customer_id'] = $_SESSION['user']['id'];
             $condition['status'] = array('in',array(1,2,3));

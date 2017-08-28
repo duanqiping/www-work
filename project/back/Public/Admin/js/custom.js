@@ -1800,13 +1800,8 @@ if (typeof NProgress != 'undefined') {
 			if( typeof ($.fn.smartWizard) === 'undefined'){ return; }
 			console.log('init_SmartWizard');
 
-            //alert(index);
-            //var index = 1;
-            if(!index){
-                var index = 0;
-            }
             var com = $('#wizard').smartWizard();
-            for (var i  = 0; i < index; i ++) {
+            for (var i  = 1; i < index; i ++) {
                 com.data('smartWizard').buttons.next.click();
             }
 			$('#wizard_verticle').smartWizard({

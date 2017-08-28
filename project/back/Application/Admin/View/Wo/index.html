@@ -515,17 +515,6 @@
                 {$selectCondition['name']}
             </if>
         </a>
-        <!--<ul id="menu3" class="dropdown-menu animated fadeInDown" role="menu" aria-labelledby="drop6">-->
-            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海复旦大学</a>-->
-            <!--</li>-->
-            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">上海交通大学</a>-->
-            <!--</li>-->
-            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">南翔社区运动场</a>-->
-            <!--</li>-->
-            <!--<li role="presentation" class="divider"></li>-->
-            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">不限</a>-->
-            <!--</li>-->
-        <!--</ul>-->
     </li>
 </ul>
 
@@ -653,14 +642,8 @@
 
     <script type="text/javascript">
 
-//        var index = 0;
-//        var grade = "{$grade}";
-//
-//        if(grade < 3){
-//             index = 1;
-//        }else{
-//             index = 2;
-//        }
+        var index = "{$_list[0]['status']}";
+        init_SmartWizard();
 
     </script>
 </block>

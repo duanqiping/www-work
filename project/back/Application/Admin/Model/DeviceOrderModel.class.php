@@ -89,10 +89,6 @@ class DeviceOrderModel extends Model{
             ->field($field)
             ->order($order)
             ->select();
-
-//        echo $this->_sql();
-//        exit();
-
         return $res;
     }
 
@@ -143,10 +139,6 @@ class DeviceOrderModel extends Model{
             'contact_mobile' => $data['mobile'],
             'type' => $data['type'],
         );
-//        print_r($add_data);
-//        $this->add($add_data);
-//        echo $this->_sql();
-//        exit();
 
         if($id = $this->add($add_data)){
             return $id;
@@ -174,15 +166,13 @@ class DeviceOrderModel extends Model{
 
         $condition_device['device_order_id']=$data['id'];
         $b = $this->where($condition_device)->save($update_data);
-//        echo $this->_sql();
-//        exit();
+
         if(!$b){
             return false;
         }else{
             return true;
         }
 
-        exit();
     }
 
     //查看是否有待处理或处理中的工单

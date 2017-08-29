@@ -1800,6 +1800,9 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_SmartWizard');
 
             /* 这段代码属于 后来新增代码*/
+            if(!index){
+                var index = 1;
+            }
             var com = $('#wizard').smartWizard();
             for (var i  = 1; i < index; i ++) {
                 com.data('smartWizard').buttons.next.click();

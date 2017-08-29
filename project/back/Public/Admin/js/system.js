@@ -1,8 +1,6 @@
 //dom加载完成后执行的js
 ;$(function(){
 
-    //alert(school_type);
-
     if(school_type == 1){
         getDepts();//获取系别 (大学)
     }else{
@@ -16,7 +14,12 @@
     });
 
     $("#customer_type").change(function(){
+
+        alert(111111111222222222222);
+
        var customer_type = $(this).val();
+
+        alert(customer_type);
 
         if(customer_type == 2){
             $(".school").hide();

@@ -20,6 +20,7 @@ class SystemController extends Controller{
     {
         $this->display();
     }
+
     //信息管理
     public function info()
     {

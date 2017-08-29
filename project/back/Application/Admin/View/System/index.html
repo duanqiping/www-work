@@ -2,7 +2,6 @@
 
 <block name="head">
     <script src="__JS__/jquery-2.0.3.min.js"></script>
-    <script src="__JS__/system.js"></script>
 </block>
 
 <block name="body">
@@ -56,136 +55,137 @@
     </div>
 
     <div class="x_content">
-    </div>
-    <div  class="tab-content">
-    <div role="tabpanel" class="tab-pane fade active in"  aria-labelledby="home-tab">
-        <div class="col-md-6 col-xs-12">
-            <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
+        <div  class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in"  aria-labelledby="home-tab">
+                <div class="col-md-6 col-xs-12">
+                    <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
 
-                <div class="form-group">
-                    <center><label >创建账号</label></center>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">账号<span class="required">*</span></label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input type="text" name="account" class="form-control" placeholder="手机号">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">密码<span class="required">*</span></label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input type="password" name="passwd" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="name" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">身份 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <select name="flag">
-                            <option value="3">客户</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">省份 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="province" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">城市 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="city" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">地址 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="customer_addr" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">设备个数 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="device_num" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">类型 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <div>
-                            <select name="type" id="customer_type">
-                                <option value="1">学校</option>
-                                <option value="2">体育管</option>
-                            </select>
-
-                            <div class="school">
-                                大学<input type="radio" name="school_type" value="1" checked="checked">
-                                中学<input type="radio" name="school_type" value="2">
-                                小学<input type="radio" name="school_type" value="3">
+                        <div class="form-group">
+                            <center><label >创建账号</label></center>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">账号<span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" name="account" class="form-control" placeholder="手机号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">密码<span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="password" name="passwd" class="form-control">
                             </div>
                         </div>
 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">赛道长度 <span class="required">*</span>
-                    </label>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="name" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">身份 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select name="flag">
+                                    <option value="3">客户</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">省份 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="province" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">城市 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="city" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">地址 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="customer_addr" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">设备个数 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="device_num" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">类型 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div>
+                                    <select name="type" id="customer_type">
+                                        <option value="1">学校</option>
+                                        <option value="2">体育管</option>
+                                    </select>
 
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <select name="length">
-                            <option value="200">200</option>
-                            <option value="400">400</option>
-                            <option value="800">800</option>
-                        </select>
-                        <!--<input name="length" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">-->
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">经度 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="longitude_y" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">纬度 <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input name="latitude_x" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
+                                    <div class="school">
+                                        大学<input type="radio" name="school_type" value="1" checked="checked">
+                                        中学<input type="radio" name="school_type" value="2">
+                                        小学<input type="radio" name="school_type" value="3">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">赛道长度 <span class="required">*</span>
+                            </label>
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select name="length">
+                                    <option value="200">200</option>
+                                    <option value="400">400</option>
+                                    <option value="800">800</option>
+                                </select>
+                                <!--<input name="length" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">经度 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="longitude_y" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">纬度 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input name="latitude_x" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                <input type="reset" value="重置" class="btn btn-primary">
+                                <input type="submit" value="确认创建" class="btn btn-success">
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
 
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                        <input type="reset" value="重置" class="btn btn-primary">
-                        <input type="submit" value="确认创建" class="btn btn-success">
-                    </div>
+                <div class="col-md-6 col-xs-12">
+
                 </div>
-
-            </form>
-        </div>
-
-        <div class="col-md-6 col-xs-12">
+            </div>
 
         </div>
     </div>
 
-    </div>
 </div>
 </div>
 </div>
@@ -194,6 +194,16 @@
 
 <block name="script">
     <script type="text/javascript">
+        $("#customer_type").change(function(){
+            var customer_type = $(this).val();
+
+            if(customer_type == 2){
+                $(".school").hide();
+                $(".school input").attr("checked",false);
+            }else{
+                $(".school").show();
+            }
+        });
     </script>
 </block>
 

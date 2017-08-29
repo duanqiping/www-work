@@ -9,6 +9,7 @@
 namespace Admin\Model;
 
 
+use Admin\Logic\Time;
 use Think\Model\MongoModel;
 
 //成绩表
@@ -67,7 +68,7 @@ class ScoreModel extends MongoModel{
     }
 
     //成绩列表
-    public function _list($condition,$page)
+    public function _list($condition,$page,$uid)
     {
         if($page<1)$page=1;
         $offset = ($page-1)*$this->pageSize;
@@ -75,13 +76,38 @@ class ScoreModel extends MongoModel{
 
         unset($condition['customer_id']);
 
-        $res = $this->table('z_score_34695')
+        $customer = new CustomerModel();
+        //获取对应的成绩表
+        $socre_table = $customer->where(array('customer_id'=>$uid))->getField('score_table');
+
+        $sql = 'db.'."$socre_table".'.group({
+                    key:{user_id:true,flag:true},//分组条件
+                    initial:{num:0},
+                    $reduce:function(doc,prev){
+                    prev.num++
+                    }
+                    }); ';
+        $res = $this->mongoCode($sql);
+//        my_print($res);
+
+//        condition:
+//        {
+//            $where:function()
+//            {
+//                return this.add_time>'."$begin_time".' && this.add_time<'."$end_time".';//查询条件
+//            }
+//        }
+
+
+
+        $res = $this->table($socre_table)
             ->where($condition)
             ->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')
             ->limit($offset,$this->pageSize)
+//            ->order('add_time desc')
             ->select();
 
-        $this->totalNum = $this->table('z_score_34695')->where($condition)->count();
+        $this->totalNum = $this->table($socre_table)->where($condition)->count();
 
         //对成绩信息进行分组统计和排序
         $result = $this->scoreAccount($res);
@@ -193,6 +219,7 @@ class ScoreModel extends MongoModel{
 
         $s = array();//把统计好的数据进行合并
         $sort = array();
+        $time = new Time();
         for($i=0,$len=count($data_group);$i<$len;$i++){
             $s[$i] = end($data_group[$i]);
             $s[$i]['cycles'] = count($data_group[$i]);
@@ -200,6 +227,8 @@ class ScoreModel extends MongoModel{
             for($j=0,$lenj=count($data_group[$i]);$j<$lenj;$j++){
                 $s[$i]['sum_time'] += $data_group[$i][$j]['time'];
             }
+            $s[$i]['sum_time'] = $time->timeChange($s[$i]['sum_time']);
+
             $sort[$i] = $s[$i]['add_time'];
         }
         array_multisort($sort,SORT_DESC,$s);

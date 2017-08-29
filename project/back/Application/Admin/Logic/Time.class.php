@@ -116,4 +116,21 @@ class Time {
 
         return $string;
     }
+    /**
+     * 时间转换
+     */
+    public function timeChange($time)
+    {
+        $time_day = floor($time/(24*3600));//天数
+        $time_hour =floor( ($time%(3600*24)) /( 3600) );//小时
+        $time_m =floor( ($time%(3600)) / 60 );//分钟
+        $time_s =floor( ($time%(3600)) % 60 );//秒
+
+        if($time_day>0) {$string = $time_day.'天'.$time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+        else if($time_day==0 && $time_hour>0) {$string = $time_hour.'小时'.$time_m.'分'.$time_s.'秒';}
+        else if($time_hour==0 && $time_m>0) {$string = $time_m.'分'.$time_s.'秒';}
+        else{ $string = $time_s.'秒';}
+
+        return $string;
+    }
 } 

@@ -27,11 +27,10 @@ class CustomerModel extends ConsumerHandleModel
     );
 
     //首页信息
-    public  function homeInfo()
+    //$grade 1系统 2代理商 3客户 4老师
+    public  function homeInfo($uid,$grade)
     {
         $data = array();
-
-        $grade = $_SESSION['user']['grade'];//身份 1系统 2代理商 3客户 4老师
 
         $data_user = $this->mainInfo($grade);//用户量 累计最长距离
 
@@ -42,7 +41,7 @@ class CustomerModel extends ConsumerHandleModel
         $best_res = $rank->bestScore($grade);//单圈最佳成绩(前5名)
 
         $recordMessage = new RecordMessageModel();
-        $record_message = $recordMessage->getRecordMessage($_SESSION['user']['id']);////获取破记录的 前5条消息
+        $record_message = $recordMessage->getRecordMessage($uid);////获取破记录的 前5条消息
 
         $data = array_merge($data,$data_user,$data_score);
         $data['best_single'] = $best_res;

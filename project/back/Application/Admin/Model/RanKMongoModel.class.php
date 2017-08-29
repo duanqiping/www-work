@@ -263,11 +263,11 @@ class RanKMongoModel extends MongoModel{
         $min_res  = $this->table('rank_single')->where($condition)->field('name,time,add_time')->order('time')->limit(5)->select();
         $min_res = array_values($min_res);
 
-        $time = new Time();
-        //计算出这记录是多久前更新的
-        for($i=0,$len=count($min_res);$i<$len;$i++){
-            $min_res[$i]['time_ago'] = $time->updateTime($min_res[$i]['add_time']);
-        }
+//        $time = new Time();
+//        //计算出这记录是多久前更新的
+//        for($i=0,$len=count($min_res);$i<$len;$i++){
+//            $min_res[$i]['time_ago'] = $time->updateTime($min_res[$i]['add_time']);
+//        }
         return $min_res;
     }
 

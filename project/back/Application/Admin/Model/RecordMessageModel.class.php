@@ -20,11 +20,11 @@ class RecordMessageModel extends Model{
         $condition['customer_id'] = $customer_id;
         $res = $this->where($condition)->field('length,time,user_id,name,add_time')->order('add_time desc')->limit(5)->select();
 
-        $time = new Time();
-        for($i=0,$len=count($res);$i<$len;$i++)
-        {
-            $res[$i]['time_ago'] = $time->updateTime($res[$i]['add_time']);
-        }
+//        $time = new Time();
+//        for($i=0,$len=count($res);$i<$len;$i++)
+//        {
+//            $res[$i]['time_ago'] = $time->updateTime($res[$i]['add_time']);
+//        }
         return $res;
     }
 } 

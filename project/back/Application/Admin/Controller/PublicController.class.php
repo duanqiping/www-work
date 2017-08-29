@@ -13,7 +13,7 @@ use Think\Model;
 use Admin\Model\ConsumerHandleModel;
 use Admin\Model\CustomerModel;
 
-class PublicController extends \Think\Controller{
+class PublicController extends BaseController{
 
     //获取用户model
     public static function  getInstance($flag)
@@ -24,7 +24,7 @@ class PublicController extends \Think\Controller{
     public function index()
     {
         $customer = new CustomerModel();
-        $data = $customer->homeInfo();
+        $data = $customer->homeInfo($this->uid,$this->grade);
 
         $this->assign('data',$data);
         $this->assign('single_res',$data['best_single']);//单圈前5名记录

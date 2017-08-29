@@ -13,13 +13,12 @@ use Admin\Model\ContestOrderModel;
 use Admin\Model\ScoreModel;
 use Think\Controller;
 
-class ScoreController extends Controller{
+//成绩管理控制器
+class ScoreController extends BaseController{
 
     public function index()
     {
         $res = array();
-
-        $uid = $_SESSION['user']['id'];
 
         $type = $_GET['type']?$_GET['type']:'平时成绩';
         unset($_GET['type']);
@@ -32,7 +31,7 @@ class ScoreController extends Controller{
             $studentInfo['grade'] = $score->getGrade($condition['dept']);//获取年级
             $studentInfo['class'] = $score->getClass($condition['dept'],$condition['grade']);//获取班级
 
-            $res = $score->_list(makeCondition($condition,$uid,$contest_sn = 0),$current=$_GET['current']);
+            $res = $score->_list(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current'],$this->uid);
 
             $this->assign('totalNum',$score->totalNum);//总页数
             $this->assign('pageSize',$score->pageSize);//每页数
@@ -43,8 +42,7 @@ class ScoreController extends Controller{
 
             $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
 
-//            $res = $contestorder->contestList2(makeCondition($condition,$uid,$contest_sn = 0));
-            $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn = 0),$current=$_GET['current']);
+            $res = $contestorder->contestList(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current']);
 
             $this->assign('totalNum',$contestorder->totalNum);//总页数
             $this->assign('pageSize',$contestorder->pageSize);//每页数

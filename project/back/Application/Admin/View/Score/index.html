@@ -212,11 +212,13 @@
                                             <if condition="$condition['type'] eq '平时成绩'">
                                                 <th>{$vo.cycles}</th>
                                                 <td>{$vo.sum_time}</td>
+                                                <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
                                                 <else/>
                                                 <th>{$vo.title}</th>
                                                 <th>{$vo.time}</th>
+                                                <td>{$vo.update|date="Y-m-d H:i:s",###}</td>
                                             </if>
-                                            <td>{$vo.update|date="Y-m-d H:i:s",###}</td>
+
 
                                         </tr>
                                     </volist>

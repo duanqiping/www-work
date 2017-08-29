@@ -144,7 +144,8 @@
                                 </span>
                                 <span>
                                   <span>{$vo.name}</span>
-                                  <span class="time">{$vo.time_ago} 前</span>
+                                  <!--<span class="time">{$vo.time_ago} 前</span>-->
+                                  <span class="time">{$vo.add_time|date="Y-m-d H:i:s",###}</span>
                                 </span>
                                 <span class="message">
                                   最近一次活得优秀记录运动项目：挑战{$vo.length}米  跑步，成绩为： {$vo.time}秒。
@@ -190,7 +191,7 @@
                                 </span>
                                 <span>
                                   <span>{$vo.name}</span>
-                                  <span class="time">{$vo.time_ago} 前</span>
+                                  <span class="time">{$vo.add_time|date="Y-m-d H:i:s",###}</span>
                                   <!--<span class="time">{$vo['add_time']-$vo['add_time']}</span>-->
                                 </span>
                                 <span class="message">

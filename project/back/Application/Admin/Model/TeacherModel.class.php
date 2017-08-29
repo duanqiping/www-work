@@ -43,6 +43,7 @@ class TeacherModel extends ConsumerHandleModel
     public function makeData($data)
     {
         //生成自己的code
+        $data['customer_id'] = $_SESSION['user']['id'];
         $b = true;
 
         if(!$b){

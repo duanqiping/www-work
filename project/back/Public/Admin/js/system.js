@@ -13,21 +13,6 @@
         getClasses();//获取班级
     });
 
-    $("#customer_type").change(function(){
-
-        alert(111111111222222222222);
-
-       var customer_type = $(this).val();
-
-        alert(customer_type);
-
-        if(customer_type == 2){
-            $(".school").hide();
-            $(".school input").attr("checked",false);
-        }else{
-            $(".school").show();
-        }
-    });
     //添加班级
     $("#add_class").click(function(){
         var classObj = $("#class");

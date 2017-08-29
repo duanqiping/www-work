@@ -13,21 +13,21 @@ use Think\Controller;
 use Admin\Model\ConsumerHandleModel;
 
 //系统管理控制器
-class SystemController extends Controller{
+class SystemController extends BaseController{
 
     //创建账号
     public function index()
     {
+        $this->assign('grade',$this->grade);
+
         $this->display();
     }
 
     //信息管理
     public function info()
     {
-        $customer_id = $_SESSION['user']['id'];
-
         $customer = D('customer');
-        $res = $customer->where(array('customer_id'=>$customer_id))->field('name,province,city,type,school_type')->find();
+        $res = $customer->where(array('customer_id'=>$this->uid))->field('name,province,city,type,school_type')->find();
 
         $this->assign('customerInfo',$res);
 

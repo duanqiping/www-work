@@ -44,7 +44,9 @@ class UserController extends BaseController
     public function bind()
     {
         $customer = D('customer');
-        $school_res = $customer->where(array('customer_id'=>$this->uid))->field('name,province,city,type,school_type')->find();
+        $school_res = $customer->where(array('customer_id'=>$this->uid))
+            ->field('name,province,city,type,school_type')
+            ->find();
 
         $this->assign('customerInfo',$school_res);
 

@@ -1,0 +1,161 @@
+<extend name="Public/base2" />
+
+<block name="head">
+
+    <script src="__JS__/jquery-2.0.3.min.js"></script>
+    <script src="__JS__/user.js"></script>
+</block>
+
+<block name="body">
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>用户管理</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入关键字">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">搜索</button>
+            </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="x_panel">
+<div class="x_title">
+    <h2>手环绑定 <small>实时用户监控</small></h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+            </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+
+<div class="x_content">
+
+    <div id="myTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+            <div class="col-md-6 col-xs-12">
+                <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">手环编码</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" name="code"  class="form-control" placeholder="数字编码">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input name="name" class="date-picker form-control col-md-7 col-xs-12" placeholder="真实姓名" required="required" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">学号
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input name="studentId"  class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        </label>
+                        <ul class="nav nav-pills" role="tablist">
+                            <!--系别-->
+                            <if condition="$customerInfo['school_type'] eq 1">
+                                <li role="presentation" class="dropdown"><a>系别</a></li>
+                                <li role="presentation" class="dropdown">
+                                    <a>
+                                        <select name="dept" id="deptId2" style="border:none;">
+                                        </select>
+                                    </a>
+                                </li>
+                                <else/>
+                            </if>
+
+                            <!--年级-->
+                            <li role="presentation" class="dropdown"><a>年级</a></li>
+                            <li role="presentation" class="dropdown">
+                                <a>
+                                    <select name="grade" id="gradeId2" style="border:none;">
+                                    </select>
+                                </a>
+                            </li>
+                            <!--班级-->
+                            <li role="presentation" class="dropdown"><a>班级</a></li>
+                            <li role="presentation" class="dropdown">
+                                <a>
+                                    <select name="class" id="classId2" style="border:none;">
+                                    </select>
+                                </a>
+                            </li>
+                            <!--性别-->
+                            <li role="presentation" class="dropdown">
+                                <a href="#" class="dropdown-toggle">
+                                    <select name="sex" style="border:none;">
+                                        <option>男</option>
+                                        <option>女</option>
+                                    </select>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                            <input type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="添加" class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        var school_type = "{$customerInfo.school_type}";//学校类型
+
+        var addDept = "{:U('addDept')}";//添加系别路由
+        var getDept = "{:U('getDept')}";//获取系别路由
+
+        var addGrade = "{:U('addGrade')}";//添加年级路由
+        var getGrade = "{:U('getGrade')}";//获取年级路由
+
+        var addClass = "{:U('addClass')}";//添加班级路由
+        var getClass = "{:U('getClass')}";//获取班级路由
+
+        var indexurl = "{:U()}";
+
+    </script>
+
+</block>

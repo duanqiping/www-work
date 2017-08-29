@@ -1,13 +1,11 @@
 <extend name="Public/base2" />
 
 <block name="head">
-    <!--<link href="__VENDOR__/pagination/css/common.css" rel="stylesheet">-->
     <link href="__VENDOR__/pagination/css/pagination.css" rel="stylesheet">
 
     <script src="__JS__/jquery-2.0.3.min.js"></script>
     <script src="__JS__/linkage.js"></script>
     <script src="__JS__/common.js"></script>
-    <script src="__JS__/user.js"></script>
     <script src="__VENDOR__/pagination/jquery.pagination.js"></script>
 </block>
 
@@ -54,99 +52,6 @@
 </div>
 
 <div class="x_content">
-
-    <div class="x_content">
-
-        <ul class="nav nav-pills" role="tablist">
-            <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                    <div class="col-md-6 col-xs-12">
-                        <form class="form-horizontal form-label-left input_mask" action="{:U('add')}" method="post">
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">手环编码</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="code"  class="form-control" placeholder="数字编码">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名
-                                </label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input name="name" class="date-picker form-control col-md-7 col-xs-12" placeholder="真实姓名" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">学号
-                                </label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input name="studentId"  class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                </label>
-                                <ul class="nav nav-pills" role="tablist">
-                                    <!--系别-->
-                                    <if condition="$customerInfo['school_type'] eq 1">
-                                        <li role="presentation" class="dropdown"><a>系别</a></li>
-                                        <li role="presentation" class="dropdown">
-                                            <a>
-                                                <select name="dept" id="deptId2" style="border:none;">
-                                                </select>
-                                            </a>
-                                        </li>
-                                        <else/>
-                                    </if>
-
-                                    <!--年级-->
-                                    <li role="presentation" class="dropdown"><a>年级</a></li>
-                                    <li role="presentation" class="dropdown">
-                                        <a>
-                                            <select name="grade" id="gradeId2" style="border:none;">
-                                            </select>
-                                        </a>
-                                    </li>
-                                    <!--班级-->
-                                    <li role="presentation" class="dropdown"><a>班级</a></li>
-                                    <li role="presentation" class="dropdown">
-                                        <a>
-                                            <select name="class" id="classId2" style="border:none;">
-                                            </select>
-                                        </a>
-                                    </li>
-                                    <!--性别-->
-                                    <li role="presentation" class="dropdown">
-                                        <a href="#" class="dropdown-toggle">
-                                            <select name="sex" style="border:none;">
-                                                <option>男</option>
-                                                <option>女</option>
-                                            </select>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                                        <input type="reset" value="重置" class="btn btn-primary">
-                                        <input type="submit" value="添加" class="btn btn-success">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                    </div>
-                </div>
-            </div>
-        </ul>
-
-
-
     <ul class="nav nav-pills" role="tablist">
             <li role="presentation"><a>用户筛选：</a>
             </li>
@@ -237,54 +142,53 @@
             </li>
         </ul>
 
-        <form action="{:U('')}" method="post">
-            <!-- start project list -->
-            <div class="table-responsive">
-                <table class="table table-striped projects">
-                    <thead>
-                    <tr>
-                        <!--<th style="width: 1%">UID</th>-->
-                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-                        <th class="">姓名</th>
-                        <th class="">学号</th>
-                        <th class="">性别</th>
-                        <th class="">系别</th>
-                        <th class="">年级</th>
-                        <th class="">班级</th>
-                        <th class="">手环绑定</th>
-                        <!--<th style="width: 20%">#Edit</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <notempty name="_list">
-                        <volist name="_list" id="vo" key="k">
-                            <tr>
-                                <td><input class="ids" type="checkbox" name="id[]" value="{$vo.user_id}" /></td>
-                                <td>{$vo.name} </td>
-                                <td>{$vo.studentId}</td>
-                                <td>
-                                    <if condition="$vo['sex'] eq 1">男
-                                        <else/>女
-                                    </if>
-                                </td>
-                                <td>{$vo.dept}</td>
-                                <td>{$vo.grade}</td>
-                                <td>{$vo.class}</td>
-                                <td><if condition="$vo['device_id']">是<else/>否</if></td>
-                            </tr>
-                        </volist>
-                        <else/>
-                        <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
-                    </notempty>
-                    </tbody>
-                </table>
-                <!-- end project list -->
-            </div>
-        </form>
-        <ul class="nav nav-pills" role="tablist">
-            <div class="M-box1"></div>
-        </ul>
-    </div>
+    <form action="{:U('')}" method="post">
+        <!-- start project list -->
+        <div class="table-responsive">
+            <table class="table table-striped projects">
+                <thead>
+                <tr>
+                    <!--<th style="width: 1%">UID</th>-->
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">姓名</th>
+                    <th class="">学号</th>
+                    <th class="">性别</th>
+                    <th class="">系别</th>
+                    <th class="">年级</th>
+                    <th class="">班级</th>
+                    <th class="">手环绑定</th>
+                    <!--<th style="width: 20%">#Edit</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo" key="k">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.user_id}" /></td>
+                            <td>{$vo.name} </td>
+                            <td>{$vo.studentId}</td>
+                            <td>
+                                <if condition="$vo['sex'] eq 1">男
+                                    <else/>女
+                                </if>
+                            </td>
+                            <td>{$vo.dept}</td>
+                            <td>{$vo.grade}</td>
+                            <td>{$vo.class}</td>
+                            <td><if condition="$vo['device_id']">是<else/>否</if></td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+                </notempty>
+                </tbody>
+            </table>
+            <!-- end project list -->
+        </div>
+    </form>
+    <ul class="nav nav-pills" role="tablist">
+        <div class="M-box1"></div>
+    </ul>
 </div>
 </div>
 </div>
@@ -294,16 +198,6 @@
 
 <block name="script">
     <script type="text/javascript">
-        var school_type = "{$customerInfo.school_type}";//学校类型
-
-        var addDept = "{:U('addDept')}";//添加系别路由
-        var getDept = "{:U('getDept')}";//获取系别路由
-
-        var addGrade = "{:U('addGrade')}";//添加年级路由
-        var getGrade = "{:U('getGrade')}";//获取年级路由
-
-        var addClass = "{:U('addClass')}";//添加班级路由
-        var getClass = "{:U('getClass')}";//获取班级路由
 
         var indexurl = "{:U()}";
 

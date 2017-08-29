@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 
 use Admin\Model\ContestOrderModel;
+use Admin\Model\CustomerModel;
 use Admin\Model\ScoreModel;
 use Think\Controller;
 
@@ -27,11 +28,16 @@ class ScoreController extends BaseController{
         $studentInfo = array();
         if($type == '平时成绩'){
             $score=  new ScoreModel();
-            $studentInfo['dept'] = $score->getDept();//获取系别
-            $studentInfo['grade'] = $score->getGrade($condition['dept']);//获取年级
-            $studentInfo['class'] = $score->getClass($condition['dept'],$condition['grade']);//获取班级
+            $customer = new CustomerModel();
 
-            $res = $score->_list(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current'],$this->uid);
+            $socre_table = $customer->where(array('customer_id'=>$this->uid))->getField('score_table');//获取对应的成绩表
+
+
+            $studentInfo['dept'] = $score->getDept($socre_table);//获取系别
+            $studentInfo['grade'] = $score->getGrade($socre_table,$condition['dept']);//获取年级
+            $studentInfo['class'] = $score->getClass($socre_table,$condition['dept'],$condition['grade']);//获取班级
+
+            $res = $score->_list(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current'],$socre_table);
 
             $this->assign('totalNum',$score->totalNum);//总页数
             $this->assign('pageSize',$score->pageSize);//每页数

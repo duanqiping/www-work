@@ -19,7 +19,7 @@ class ScoreModel extends MongoModel{
     const Day = 'day';
 
     public $totalNum=0;//总记录条数
-    public $pageSize=15;//每页的条数
+    public $pageSize=10;//每页的条数
     public $current = 1;//当前页
 
     protected $dbName='score';//（要连接的数据库名称）
@@ -68,7 +68,7 @@ class ScoreModel extends MongoModel{
     }
 
     //成绩列表
-    public function _list($condition,$page,$uid)
+    public function _list($condition,$page,$socre_table)
     {
         if($page<1)$page=1;
         $offset = ($page-1)*$this->pageSize;
@@ -76,43 +76,75 @@ class ScoreModel extends MongoModel{
 
         unset($condition['customer_id']);
 
-        $customer = new CustomerModel();
-        //获取对应的成绩表
-        $socre_table = $customer->where(array('customer_id'=>$uid))->getField('score_table');
 
+        //分组查询的条件
+        $condition_string = '';
+        if(!$condition) $condition_string = true;
+        foreach($condition as $k=>$v){
+            if($v == end($condition))
+            {
+                $condition_string .= 'this.'.$k.'=='."'$v'";
+            }
+            else{
+                $condition_string .= 'this.'.$k.'=='."'$v'".' && ';
+            }
+        }
+
+        //分组条件 user_id和flag两者确定一次成绩
         $sql = 'db.'."$socre_table".'.group({
-                    key:{user_id:true,flag:true},//分组条件
+                    key:{user_id:true,flag:true},
                     initial:{num:0},
                     $reduce:function(doc,prev){
-                    prev.num++
-                    }
+                        prev.num++
+                    },
+                    condition:{$where:function(){
+                        return '.$condition_string.';
+                        }
+                        }
                     }); ';
-        $res = $this->mongoCode($sql);
-//        my_print($res);
-
-//        condition:
-//        {
-//            $where:function()
-//            {
-//                return this.add_time>'."$begin_time".' && this.add_time<'."$end_time".';//查询条件
-//            }
-//        }
 
 
+        $res_total = $this->mongoCode($sql);//统计查询条件下的成绩
+        $res_total = array_reverse($res_total);//使成绩倒序
+        $this->totalNum = count($res_total);//统计成绩次数
 
-        $res = $this->table($socre_table)
-            ->where($condition)
-            ->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')
-            ->limit($offset,$this->pageSize)
-//            ->order('add_time desc')
-            ->select();
+        /*pageSize 分页大小
+            $offset 偏移量
+         * */
+        $res = array();
+        for($i=0;$i<$this->pageSize;$i++)
+        {
+            $condition_list = array();
+            $condition_list['user_id'] = $res_total[$offset+$i]['user_id'];
+            $condition_list['flag'] = $res_total[$offset+$i]['flag'];
 
-        $this->totalNum = $this->table($socre_table)->where($condition)->count();
+            $res1 = $this->table($socre_table)
+                ->where($condition_list)
+                ->field('flag,user_id,name,studentId,sex,dept,grade,class,time,add_time')
+                ->select();
+            if(!$res1) break;
+            $res[$i] = $res1;
+        }
+
+        $s = array();//把统计好的数据进行合并
+        $time = new Time();
+        for($i=0,$len=count($res);$i<$len;$i++){
+            $s[$i] = end($res[$i]);
+            $s[$i]['cycles'] = count($res[$i]);//圈数合并
+            $s[$i]['sum_time'] = 0;//一次成绩的总时间
+
+            $res[$i] = array_values($res[$i]);
+            for($j=0,$lenj=count($res[$i]);$j<$lenj;$j++){
+                $s[$i]['sum_time'] += $res[$i][$j]['time'];
+            }
+            $s[$i]['sum_time'] = $time->timeChange($s[$i]['sum_time']);
+        }
+
 
         //对成绩信息进行分组统计和排序
-        $result = $this->scoreAccount($res);
+        //$result = $this->scoreAccount($res);
 
-        return $result;
+        return $s;
     }
 
     //录入平时成绩
@@ -196,6 +228,7 @@ class ScoreModel extends MongoModel{
         return $data;
     }
 
+    // 该函数已经废弃
     //对成绩信息进行分组统计和排序  user_id和flag判断一次成绩
     public function scoreAccount($res)
     {
@@ -236,15 +269,8 @@ class ScoreModel extends MongoModel{
         return $s;
     }
 
-    //获取系、年级、班级
-    public function getStudentInfo()
+    public function getDept($score_table)
     {
-
-    }
-
-    public function getDept()
-    {
-        $score_table = 'z_score_34695';
         $sql = 'db.'."$score_table".'.group({
                     key:{dept:true},//分组条件
                     initial:{num:0},
@@ -256,11 +282,10 @@ class ScoreModel extends MongoModel{
 
         return $res;
     }
-    public function getGrade($dept)
+    public function getGrade($socre_table,$dept)
     {
         if(!$dept) return array();
-        $score_table = 'z_score_34695';
-        $sql = 'db.'."$score_table".'.group({
+        $sql = 'db.'."$socre_table".'.group({
                     key:{grade:true},//分组条件
                     initial:{num:0},
                     $reduce:function(doc,prev){
@@ -274,11 +299,10 @@ class ScoreModel extends MongoModel{
         $res = $this->mongoCode($sql);
         return $res?$res:array();
     }
-    public function getClass($dept,$grade)
+    public function getClass($socre_table,$dept,$grade)
     {
         if(!$dept || !$grade) return array();
-        $score_table = 'z_score_34695';
-        $sql = 'db.'."$score_table".'.group({
+        $sql = 'db.'."$socre_table".'.group({
                     key:{class:true},//分组条件
                     initial:{num:0},
                     $reduce:function(doc,prev){

@@ -20,11 +20,7 @@ class ContestController extends BaseController
     public function index()
     {
         $contestInfo = I('get.');//赛事编辑的信息（clickOperate）
-        if($contestInfo){
-            $contestInfo['reservation-time'] = date('d/m/Y H:i',$contestInfo['begin_time']).' - '.date('d/m/Y H:i',$contestInfo['end_time']);
-            unset($contestInfo['begin_time']);
-            unset($contestInfo['end_time']);
-        }
+        if($contestInfo)$contestInfo = reservationTime($contestInfo);
 
         $contest = new ContestModel();
         $contestOrder = new ContestOrderModel();
@@ -41,13 +37,12 @@ class ContestController extends BaseController
         $this->assign('nowContest', $nowContest);
         $this->assign('conflictContest', $conflictContest);
         $this->assign('soonContest', $soonContest);
-
         $this->assign('contestInfo', $contestInfo);
 
         $this->display();
     }
 
-    //赛事按钮操作
+    //赛事按钮(删除和编辑)操作
     public function clickOperate()
     {
         //按钮操作 编辑 删除

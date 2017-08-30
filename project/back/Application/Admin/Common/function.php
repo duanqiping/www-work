@@ -81,3 +81,14 @@ function ScoreTimeExplode($time)
     $time = $s[0]*60+$s[1];
     return $time;
 }
+
+//考核时间处理
+//将开始时间 和 结束时间合并在一起
+function reservationTime($data)
+{
+    $data['reservation-time'] = date('d/m/Y H:i',$data['begin_time']).' - '.date('d/m/Y H:i',$data['end_time']);
+    unset($data['begin_time']);
+    unset($data['end_time']);
+
+    return $data;
+}

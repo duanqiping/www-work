@@ -13,23 +13,23 @@ use Think\Controller;
 use Admin\Model\CustomerModel;
 use Admin\Model\DeviceMsModel;
 
-class DeviceController extends Controller{
+class DeviceController extends BaseController{
 
     //设备管理主页
     public function index()
     {
         $select_condition = array();//筛选条件
 
-        $grade = $_SESSION['user']['grade'];
-        $uid = $_SESSION['user']['id'];
+        $grade = $this->grade;
+        $customer_id = $this->customer_id;
 
         if($grade == 3 || $grade==4){
             $customer = new CustomerModel();
-            $res = $customer->where(array('customer_id'=>$uid))->field('province,city,name,grade')->find();
+            $res = $customer->where(array('customer_id'=>$customer_id))->field('province,city,name,grade')->find();
             $this->assign('info',$res);//客户信息
         }else if($grade == 2){
             $agent = new AgentModel();
-            $res = $agent->where(array('agent_id'=>$uid))->field('parent_id,province,city')->find();
+            $res = $agent->where(array('agent_id'=>$this->uid))->field('parent_id,province,city')->find();
             $this->assign('info',$res);//客户信息
         }
 
@@ -57,13 +57,10 @@ class DeviceController extends Controller{
         $this->assign('name',$_GET['name']);//客户名
         $this->assign('type',$_GET['type']);//类别
 
-//        var_dump($devicems->getCustomerId($_GET['name']));
-//        exit();
-
         $this->assign('customer_id',$devicems->getCustomerId($_GET['name']));
         $this->assign('grade',$grade);
         if($grade == 2){
-            $this->assign('agent_id',$_SESSION['user']['id']);
+            $this->assign('agent_id',$this->uid);
         }else if($grade == 1){
             $this->assign('agent_id',0);
         }

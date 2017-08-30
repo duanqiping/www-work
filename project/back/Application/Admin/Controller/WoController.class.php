@@ -28,9 +28,9 @@ class WoController extends BaseController
             $this->assign('selectInfo',$selectInfo);
         }
 
-        $list = $deviceOrder->_list($status = 0,$this->uid,$this->grade);//工单列表
+        $list = $deviceOrder->_list($status = 0,$this->customer_id,$this->grade);//工单列表
         $fillInfo = $deviceOrder->getCustomerFillData($this->grade);//获取客户的填写数据（适用于客户查看）
-        $selectCondition = $deviceOrder->selectCondition($this->uid,$this->grade);//区域筛选数组，用于填充页面
+        $selectCondition = $deviceOrder->selectCondition($this->customer_id,$this->grade);//区域筛选数组，用于填充页面
 
         $this->assign('_list',$list);
         $this->assign('fillData',$fillInfo);
@@ -47,7 +47,7 @@ class WoController extends BaseController
         $data = I('post.');
         if($data){
             $deviceOrder=  D('deviceOrder');
-            $result = $deviceOrder->insertData($data,$this->uid);
+            $result = $deviceOrder->insertData($data,$this->customer_id);
             if(!$result){
                 exit('跳转到错误页面');
             }else{
@@ -63,7 +63,7 @@ class WoController extends BaseController
     {
         $status = $_GET['status'];
         $agent = new DeviceOrderModel();
-        $res = $agent->_list($status,$this->uid,$this->grade);
+        $res = $agent->_list($status,$this->customer_id,$this->grade);
 
         $this->assign('_list',$res);
         $this->display('inHand');
@@ -116,7 +116,7 @@ class WoController extends BaseController
         }
 
         $deviceorder = new DeviceOrderModel();
-        if(!$deviceorder->insertData($desc,$this->uid)){
+        if(!$deviceorder->insertData($desc,$this->customer_id)){
             $this->assign('info',$deviceorder->getError());
             $this->display('device');
         }else{

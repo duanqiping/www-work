@@ -19,7 +19,7 @@ class ScoreModel extends MongoModel{
     const Day = 'day';
 
     public $totalNum=0;//总记录条数
-    public $pageSize=10;//每页的条数
+    public $pageSize=15;//每页的条数
     public $current = 1;//当前页
 
     protected $dbName='score';//（要连接的数据库名称）

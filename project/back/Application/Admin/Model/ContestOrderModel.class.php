@@ -9,6 +9,7 @@
 namespace Admin\Model;
 
 
+use Admin\Logic\Time;
 use Think\Model;
 
 class ContestOrderModel extends Model{
@@ -153,6 +154,7 @@ class ContestOrderModel extends Model{
 
         $res = $this->where($condition)->field('*')->limit($offset,$this->pageSize)->select();
 
+        $time = new Time();
         for($i=0,$len=count($res);$i<$len;$i++)
         {
             if($res[$i]['sex'] == 1){
@@ -160,6 +162,7 @@ class ContestOrderModel extends Model{
             }else{
                 $res[$i]['pass_score'] = $res_contest['pass_score_female'];
             }
+            $res[$i]['time'] = $time->timeChange($res[$i]['time']);
             $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
         }
         $this->status = $res_contest['status'];
@@ -306,19 +309,31 @@ class ContestOrderModel extends Model{
         return $data;
     }
 
+    //1某次赛事考试 和 2所有赛事考试
     //获取系、年级、班级
-    public function getStudentInfo($condition,$contest_sn)
+    public function getStudentInfo($condition,$uid,$contest_sn=0)
     {
         $studentInfo = array();
-        $studentInfo['dept'] = $this->where(array('contest_sn'=>$contest_sn))
+        $condition_query = array();//查询条件
+        $condition_query['customer_id'] = $uid;//客户id
+        if($contest_sn)$condition_query['contest_sn'] = $contest_sn;//考试赛事编码
+
+        //查询出系别
+        $studentInfo['dept'] = $this->where($condition_query)
             ->field('dept')
             ->group('dept')
             ->select();
-        $studentInfo['grade'] = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$condition['dept']))
+
+        //查询出年级
+        $condition_query['dept'] = $condition['dept'];
+        $studentInfo['grade'] = $this->where($condition_query)
             ->field('grade')
             ->group('grade')
             ->select();
-        $studentInfo['class'] = $this->where(array('contest_sn'=>$contest_sn,'dept'=>$condition['dept'],'grade'=>$condition['grade']))
+
+        //查询出班级
+        $condition_query['grade'] = $condition['grade'];
+        $studentInfo['class'] = $this->where(array('customer_id'=>$uid,'dept'=>$condition['dept'],'grade'=>$condition['grade']))
             ->field('class')
             ->group('class')
             ->select();

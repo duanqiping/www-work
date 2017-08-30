@@ -103,7 +103,7 @@ class ContestController extends BaseController
     {
         $contestorder = new ContestOrderModel();
 
-        $uid = $_SESSION['user']['id'];
+        $uid = $this->uid;
 
         $condition = I('get.');//筛选条件
 
@@ -113,7 +113,7 @@ class ContestController extends BaseController
         $condition['contest_sn'] = $contest_sn;
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);//赛事名单列表
-        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);//获取系、年级、班级
+        $studentInfo = $contestorder->getStudentInfo($condition,$uid,$contest_sn);//获取系、年级、班级
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);//筛选的条件
@@ -136,7 +136,7 @@ class ContestController extends BaseController
     //学校名单列表
     public function user()
     {
-        $uid = $_SESSION['user']['id'];
+        $uid = $this->uid;
 
         if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
         $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
@@ -154,7 +154,7 @@ class ContestController extends BaseController
             $condition = makeCondition($condition,$uid,$contest_sn);
             $condition['up_standard'] = 0;
             $res = $contestorder->contestList($condition,$current=$condition['current']);
-            $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+            $studentInfo = $contestorder->getStudentInfo($condition,$uid,$contest_sn);
 
             $this->assign('_list',$res);
             $this->assign('condition', $condition);
@@ -233,7 +233,7 @@ class ContestController extends BaseController
     {
         $contestorder = new ContestOrderModel();
 
-        $uid = $_SESSION['user']['id'];
+        $uid = $this->uid;
 
         $condition = $_GET;//筛选条件
 
@@ -245,7 +245,7 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);
 
-        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+        $studentInfo = $contestorder->getStudentInfo($condition,$uid,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
@@ -320,7 +320,7 @@ class ContestController extends BaseController
     {
         $contestorder = new ContestOrderModel();
 
-        $uid = $_SESSION['user']['id'];
+        $uid = $this->uid;
 
         $condition = $_GET;//筛选条件
 
@@ -333,7 +333,7 @@ class ContestController extends BaseController
 
         $res = $contestorder->contestList(makeCondition($condition,$uid,$contest_sn),$current=$_GET['current']);
 
-        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+        $studentInfo = $contestorder->getStudentInfo($condition,$uid,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
@@ -357,7 +357,7 @@ class ContestController extends BaseController
     {
         $contestorder = new ContestOrderModel();
 
-        $uid = $_SESSION['user']['id'];
+        $uid = $this->uid;
 
         $condition = $_GET;//筛选条件
         if($_GET['contest_sn']){
@@ -384,7 +384,7 @@ class ContestController extends BaseController
         $condition['up_standard'] = 0;
         $res = $contestorder->contestList($condition,$current=$_GET['current']);
 
-        $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+        $studentInfo = $contestorder->getStudentInfo($condition,$uid,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);

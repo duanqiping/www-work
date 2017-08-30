@@ -43,10 +43,9 @@ class ScoreController extends BaseController{
             $this->assign('pageSize',$score->pageSize);//每页数
             $this->assign('current',$score->current);//第几页
         }else if($type == '考试\赛事成绩'){
-            $contest_sn = $_SESSION['contest_sn'];
-            $contestorder = new ContestOrderModel();
 
-            $studentInfo = $contestorder->getStudentInfo($condition,$contest_sn);
+            $contestorder = new ContestOrderModel();
+            $studentInfo = $contestorder->getStudentInfo($condition,$this->uid);//获取系、年级、班级
 
             $res = $contestorder->contestList(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current']);
 

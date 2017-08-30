@@ -148,8 +148,8 @@
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <!--<img src="__IMAGES__/img.jpg" alt="">代老师-->
                         <img src="__IMAGES__/img.jpg" alt="">
-                        <if condition="$_SESSION['user']['grade'] lt 3 ">{$Think.session.user.name}
-                            <else /> 学校管理员
+                        <if condition="$_SESSION['user']['grade'] eq 3 ">学校管理员
+                            <else /> {$Think.session.user.name}
                         </if>
                         <span class=" fa fa-angle-down"></span>
                     </a>

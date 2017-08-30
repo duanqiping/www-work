@@ -12,7 +12,7 @@ namespace Admin\Controller;
 use Admin\Model\RanKMongoModel;
 use Think\Controller;
 
-class RankController extends Controller{
+class RankController extends BaseController{
     public function index()
     {
 //        $page = 1;
@@ -67,7 +67,7 @@ class RankController extends Controller{
             $string .=$k.'->'.$v;
         }
         file_put_contents('log.txt',$string."\n",FILE_APPEND );
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $rank = new RankMongoModel();
         $data = $rank->getScoreRank2($customer_id,$condition);

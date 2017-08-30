@@ -242,13 +242,12 @@ class RanKMongoModel extends MongoModel{
     }
 
     //获取单圈最佳成绩
-    public function bestScore($grade)
+    public function bestScore($uid,$customer_id,$grade)
     {
         $condition = array();
-        $uid = $_SESSION['user']['id'];
 
         if($grade == 3 || $grade == 4){
-            $condition['customer_id'] = $uid;
+            $condition['customer_id'] = $customer_id;
 
         }else if($grade == 2){
             $customer = new CustomerModel();

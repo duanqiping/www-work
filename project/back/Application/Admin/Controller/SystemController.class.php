@@ -27,7 +27,7 @@ class SystemController extends BaseController{
     public function info()
     {
         $customer = D('customer');
-        $res = $customer->where(array('customer_id'=>$this->uid))->field('name,province,city,type,school_type')->find();
+        $res = $customer->where(array('customer_id'=>$this->customer_id))->field('name,province,city,type,school_type')->find();
 
         $this->assign('customerInfo',$res);
 
@@ -66,7 +66,7 @@ class SystemController extends BaseController{
         $dept = I('get.dept');
         $school_type = I('get.school_type');
 
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $schoolInfo = D('schoolInfo');
         if($schoolInfo->create(array('customer_id'=>$customer_id,'dept_name'=>$dept,'school_type'=>$school_type))){
@@ -85,7 +85,7 @@ class SystemController extends BaseController{
     //获取系别
     public function getDept()
     {
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $schoolInfo = D('schoolInfo');
         $dept_res = $schoolInfo->where(array('customer_id'=>$customer_id))->field('dept_name')->select();
@@ -102,7 +102,7 @@ class SystemController extends BaseController{
         $dept = I('get.dept');
         $school_type = I('get.school_type');
 
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $condition = array();
         $condition['customer_id'] = $customer_id;
@@ -141,7 +141,7 @@ class SystemController extends BaseController{
     public function getGrade()
     {
         $dept = I('get.dept');
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $schoolInfo = D('schoolInfo');
         $grade_num = $schoolInfo->where(array('customer_id'=>$customer_id,'dept_name'=>$dept))->getField('grade_num');
@@ -154,7 +154,7 @@ class SystemController extends BaseController{
     {
         $class = I('get.class');
         $dept = I('get.dept');
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $schoolInfo = D('schoolInfo');
         $condition = array();
@@ -205,7 +205,7 @@ class SystemController extends BaseController{
     public function getClass()
     {
         $dept = I('get.dept');
-        $customer_id = $_SESSION['user']['id'];
+        $customer_id = $this->customer_id;
 
         $schoolInfo = D('schoolInfo');
         $condition = array();

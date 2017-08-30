@@ -188,10 +188,10 @@ class ScoreModel extends MongoModel{
     //月跑步公里数 （上个月总公里数）
     //用户时间段统计 （上个月 上午8-10  晚上6-11点）
     //持续运动量（一个月 有20天都在跑，平均每天运动量400米）
-    public function UserInfo($grade)
+    public function UserInfo($uid,$customer_id,$grade)
     {
         $data = array();
-        $uid = $_SESSION['user']['id'];
+
         $count_week = 0;//当周活跃用户量
         $count_month = 0;//当月活跃用户量
         $count_week_cycles = 0;//当周 总圈数
@@ -199,7 +199,7 @@ class ScoreModel extends MongoModel{
         $customer = new CustomerModel();
 
         if($grade==3 || $grade==4){
-            $res_customer = $customer->where(array('customer_id'=>$uid))->field('score_table')->find();
+            $res_customer = $customer->where(array('customer_id'=>$customer_id))->field('score_table')->find();
             $score_table = $res_customer['score_table'];
 
             $count_week  = $this->activeUserNum($score_table,ScoreModel::Week);//当周活跃用户量

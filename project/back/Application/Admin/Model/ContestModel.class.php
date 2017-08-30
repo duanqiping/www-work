@@ -160,7 +160,10 @@ class ContestModel extends Model{
         $condition['end_time'] = array('gt',NOW_TIME);//结束时间大于当前时间
         $condition['status'] = array('in',array('1','2','3'));//赛事状态
         $condition['customer_id'] = $uid;
-        $res = $this->where($condition)->field('contest_id,parent_id,contest_sn,title,begin_time,end_time')->order('begin_time')->limit(1)->select();
+        $res = $this->where($condition)->field('contest_id,parent_id,contest_sn,title,begin_time,end_time')
+            ->order('begin_time')
+            ->limit(1)
+            ->select();
         $res = $res[0];
         return $res;
     }
@@ -206,7 +209,7 @@ class ContestModel extends Model{
 
         for($i=0,$len=count($res);$i<$len;$i++)
         {
-            $res_button = $this->getButtonProperty($res[$i]['end_time'],$res[$i]['status'],$res[$i]['contest_sn']);//获取按钮属性
+            $res_button = $this->getButtonProperty($res[$i]['end_time'],$res[$i]['status'],$res[$i]['contest_sn']);//获取开始按钮属性
             $res_status = $this->statusProperty($res[$i]['end_time'],$res[$i]['status']);//获取状态
 
             $res[$i] = array_merge($res[$i],$res_button,$res_status);
@@ -231,9 +234,9 @@ class ContestModel extends Model{
     }
 
     //填充数据
-    public function fillData($data)
+    public function fillData($data,$uid,$grade)
     {
-        $data['customer_id'] = $_SESSION['user']['id'];
+        $data['customer_id'] = $uid;
         $data['contest_sn'] = $this->createContestSn();//生成考试编码
 
         $s = explode('-',$data['reservation-time']);
@@ -247,13 +250,13 @@ class ContestModel extends Model{
 
         $data['add_time'] = NOW_TIME;
 
-        if($_SESSION['user']['grade'] == 3){
-            $data['from_id'] = $_SESSION['user']['id'];
+        if($grade == 3){
+            $data['from_id'] = $uid;
             $data['from_name'] = '学校管理员';
         }
-        else{
-            $data['from_id'] = $_SESSION['user']['id'];
-            $data['from_name'] = $_SESSION['user']['id'];
+        else if($grade == 4){
+            $data['from_id'] = $uid;
+            $data['from_name'] = $_SESSION['user']['name'];
         }
         return $data;
     }

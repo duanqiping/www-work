@@ -28,20 +28,20 @@ class CustomerModel extends ConsumerHandleModel
 
     //首页信息
     //$grade 1系统 2代理商 3客户 4老师
-    public  function homeInfo($uid,$grade)
+    public  function homeInfo($uid,$customer_id,$grade)
     {
         $data = array();
 
-        $data_user = $this->mainInfo($grade);//用户量 累计最长距离
+        $data_user = $this->mainInfo($uid,$customer_id,$grade);//用户量 累计最长距离
 
         $score = new ScoreModel();
-        $data_score = $score->UserInfo($grade);//当周活跃量 当月活跃量
+        $data_score = $score->UserInfo($uid,$customer_id,$grade);//当周活跃量 当月活跃量
 
         $rank = new RanKMongoModel();
-        $best_res = $rank->bestScore($grade);//单圈最佳成绩(前5名)
+        $best_res = $rank->bestScore($uid,$customer_id,$grade);//单圈最佳成绩(前5名)
 
         $recordMessage = new RecordMessageModel();
-        $record_message = $recordMessage->getRecordMessage($uid);////获取破记录的 前5条消息
+        $record_message = $recordMessage->getRecordMessage($customer_id);////获取破记录的 前5条消息
 
         $data = array_merge($data,$data_user,$data_score);
         $data['best_single'] = $best_res;
@@ -84,11 +84,10 @@ class CustomerModel extends ConsumerHandleModel
     }
 
     //客户概述信息
-    public function mainInfo($grade)
+    public function mainInfo($uid,$customer_id,$grade)
     {
         $data = array();
 
-        $uid = $_SESSION['user']['id'];
         $condition = array();
 
         $user = new UserModel();
@@ -98,7 +97,7 @@ class CustomerModel extends ConsumerHandleModel
 
         //客户、老师
         if($grade == 3 || $grade == 4){
-            $condition['customer_id'] = $uid;
+            $condition['customer_id'] = $customer_id;
         }else if($grade == 2){
             //筛选出 所有学校
             $customer_infos = $this->where(array('agent_id'=>$uid))->field('customer_id')->select();

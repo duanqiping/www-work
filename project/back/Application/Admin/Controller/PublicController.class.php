@@ -24,13 +24,12 @@ class PublicController extends BaseController{
     public function index()
     {
         $customer = new CustomerModel();
-        $data = $customer->homeInfo($this->uid,$this->grade);
+//        $data = $customer->homeInfo($this->uid,$this->grade);
+        $data = $customer->homeInfo($this->uid,$this->customer_id,$this->grade);
 
         $this->assign('data',$data);
         $this->assign('single_res',$data['best_single']);//单圈前5名记录
         $this->assign('record_message',$data['record_message']);//破记录的最近5条信息
-
-//        my_print($data['record_message']);
 
         $this->display();
     }

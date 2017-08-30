@@ -16,7 +16,7 @@ class UserController extends BaseController
     //用户管理首页
     public function index()
     {
-        $uid = $this->uid;
+        $uid = $this->customer_id;
         $condition = $_GET?$_GET:array();
 
         $user = D('user');

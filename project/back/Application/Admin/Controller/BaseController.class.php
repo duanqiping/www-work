@@ -9,12 +9,14 @@
 namespace Admin\Controller;
 
 use Admin\Model\ConsumerHandleModel;
+use Admin\Model\TeacherModel;
 use Admin\Model\UserModel;
 
 class BaseController extends \Think\Controller
 {
     protected $uid;//管理员id 或 代理商id 或 学校管理员id 或 老师id
     protected $grade;//上述身份的grade权限级别
+    protected $customer_id;//客户id
 
     protected $error_info;
     protected $flag;
@@ -23,6 +25,16 @@ class BaseController extends \Think\Controller
     function _initialize(){
         $this->uid = $_SESSION['user']['id'];
         $this->grade = $_SESSION['user']['grade'];
+
+        //客户
+        if($this->grade == 3){
+            $this->customer_id = $this->uid;
+        }
+        //老师
+        else if($this->grade == 4){
+            $teacher = D('teacher');
+            $this->customer_id = $teacher->where(array('teacher_id'=>$this->uid))->getField('customer_id');
+        }
     }
 
     //获取用户model

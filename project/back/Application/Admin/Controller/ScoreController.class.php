@@ -21,6 +21,8 @@ class ScoreController extends BaseController{
     {
         $res = array();
 
+        $customer_id = $this->customer_id;
+
         $type = $_GET['type']?$_GET['type']:'平时成绩';
         unset($_GET['type']);
         $condition = $_GET;//筛选条件
@@ -30,7 +32,7 @@ class ScoreController extends BaseController{
             $score=  new ScoreModel();
             $customer = new CustomerModel();
 
-            $socre_table = $customer->where(array('customer_id'=>$this->uid))->getField('score_table');//获取对应的成绩表
+            $socre_table = $customer->where(array('customer_id'=>$customer_id))->getField('score_table');//获取对应的成绩表
 
 
             $studentInfo['dept'] = $score->getDept($socre_table);//获取系别
@@ -45,9 +47,9 @@ class ScoreController extends BaseController{
         }else if($type == '考试\赛事成绩'){
 
             $contestorder = new ContestOrderModel();
-            $studentInfo = $contestorder->getStudentInfo($condition,$this->uid);//获取系、年级、班级
+            $studentInfo = $contestorder->getStudentInfo($condition,$customer_id);//获取系、年级、班级
 
-            $res = $contestorder->contestList(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current']);
+            $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn = 0),$current=$_GET['current']);
 
             $this->assign('totalNum',$contestorder->totalNum);//总页数
             $this->assign('pageSize',$contestorder->pageSize);//每页数

@@ -71,7 +71,7 @@ class ContestController extends BaseController
             $contest = new ContestModel();
             if($data['contest_id']){
                 //对赛事信息进行修改
-                $contest->editContest($data);
+                $contest->editContest($data,$this->customer_id,$this->grade);
 
                 $this->redirect('index');
             }
@@ -84,7 +84,7 @@ class ContestController extends BaseController
                     $_SESSION['contest_sn'] = $data['contest_sn'];//保存到session中
                     $this->redirect('user',array('contest_sn'=>$data['contest_sn']));
                 }else{
-                    exit('fail');
+                    exit('服务器错误');
                 }
             }
         }

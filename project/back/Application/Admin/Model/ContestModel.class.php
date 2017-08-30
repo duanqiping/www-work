@@ -262,7 +262,7 @@ class ContestModel extends Model{
     }
 
     //赛事重新编辑
-    public function editContest($data)
+    public function editContest($data,$customer_id,$grade)
     {
         $s = explode('-',$data['reservation-time']);
 
@@ -272,13 +272,13 @@ class ContestModel extends Model{
         unset($data['reservation-time']);
         $data['begin_time'] = strtotime($s[0]);
         $data['end_time'] = strtotime($s[1]);
-        if($_SESSION['user']['grade'] == 3){
-            $data['from_id'] = $_SESSION['user']['id'];
+        if($grade == 3){
+            $data['from_id'] = $customer_id;
             $data['from_name'] = '学校管理员';
         }
         else{
             $data['from_id'] = $_SESSION['user']['id'];
-            $data['from_name'] = $_SESSION['user']['id'];
+            $data['from_name'] = $_SESSION['user']['name'];
         }
         $this->where(array('contest_sn'=>$data['contest_sn']))->save($data);
         return true;

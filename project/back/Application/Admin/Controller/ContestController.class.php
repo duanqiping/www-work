@@ -323,7 +323,7 @@ class ContestController extends BaseController
 
         $condition = makeCondition($condition,$customer_id,$contest_sn);//列表筛选条件
         $condition['up_standard'] = 0;
-        $res = $contestorder->contestList($condition,$current=I('get.current'));
+        $res = $contestorder->contestList2($condition);
 
         $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);
 

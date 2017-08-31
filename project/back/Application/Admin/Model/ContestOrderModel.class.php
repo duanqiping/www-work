@@ -170,11 +170,41 @@ class ContestOrderModel extends Model{
         return $res;
     }
 
-    //赛事名单列表
+    //赛事名单列表 不分页
     public function contestList2($condition)
     {
-        $condition['time'] = array('gt',0);
+        $contest = new ContestModel();
+        $res_contest = $contest->where(array('contest_sn'=>$_SESSION['contest_sn']))
+            ->field('contest_id,parent_id,title,pass_score_male,pass_score_female,end_time,status')
+            ->find();
+
+        if($res_contest['end_time']<NOW_TIME){
+            $this->valid = 0;//过期
+        }
+
+        //判断状态完成的赛事是否存在补考
+        if($res_contest['status'] == 4){
+            $count = $contest->where(array('parent_id'=>$res_contest['contest_id']))->count();
+
+            if($count>0) $this->isFather = 1;//存在补考
+            else $this->isFather = 0;//不存在
+        }
+
         $res = $this->where($condition)->field('*')->select();
+
+        $time = new Time();
+        for($i=0,$len=count($res);$i<$len;$i++)
+        {
+            if($res[$i]['sex'] == 1){
+                $res[$i]['pass_score'] = $res_contest['pass_score_male'];
+            }else{
+                $res[$i]['pass_score'] = $res_contest['pass_score_female'];
+            }
+            $res[$i]['time'] = $time->timeChange($res[$i]['time']);//将时间转换成 天 时 分秒形式
+            $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
+        }
+        $this->status = $res_contest['status'];
+
         return $res;
     }
 

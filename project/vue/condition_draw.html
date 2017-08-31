@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="vue.js"></script>
+    <script src="jquery-2.0.3.min.js"></script>
+</head>
+<body>
+
+<div id="app-2">
+    <h1 v-if="ok">Yes</h1>
+    <h1 v-else>No</h1>
+</div>
+
+
+<div id="app-3">
+<template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+    </template>
+</div>
+
+<div id="app-4">
+    <div v-if="ok > 0.5">
+        Now you see me
+    </div>
+    <div v-else>
+        Now you don't
+    </div>
+</div>
+
+<div id="app-5">
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+</div>
+
+<div id="app-6">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+    </template>
+    <br/>
+
+    <input id="loginType" type="submit" value="username || email" >
+    <!--<button id="loginType" onclick="changeType()">Toggle login type</button>-->
+</div>
+
+
+</body>
+<script type="text/javascript">
+//    var  loginType = 'email';
+
+//    function changeType()
+//    {
+//        if(loginType == 'username')
+//        {
+//            loginType = 'email';
+//        }else{
+//            loginType = 'username';
+//        }
+//    }
+
+    var app6 = new Vue({
+        el: '#app-6',
+        data: {
+            loginType: $("#loginType").val()
+        }
+    });
+
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            type: 'B'
+        }
+    });
+
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            ok: Math.random()
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            ok: true
+        }
+    });
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            ok: true
+        }
+    })
+</script>
+</html>

@@ -13,8 +13,29 @@
 
 <div v-bind:class="classObject"></div>
 
+<div id="com">
+    <my-component class="baz boo"></my-component>
+</div>
+
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+
+
 </body>
 <script type="text/javascript">
+
+
+    new Vue({
+        // ...
+        el: '#com',
+        components: {
+            // <my-component> 将只在父模板可用
+            'my-component': Child
+        }
+    });
+
+    Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    });
     var vm = new Vue({
         el: '.static',
         data: {

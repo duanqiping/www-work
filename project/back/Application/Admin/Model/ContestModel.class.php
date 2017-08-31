@@ -141,7 +141,6 @@ class ContestModel extends Model{
             }
         }else if($type == 'delete'){
             $contest_sn = $getInfo['contest_sn'];
-//            $b = $this->where(array('contest_sn'=>$contest_sn))->delete();
             $b = $this->where(array('contest_sn'=>$contest_sn))->setField('is_show',0);
             if($b){
                 return 2;

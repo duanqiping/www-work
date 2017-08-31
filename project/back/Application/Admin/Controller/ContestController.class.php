@@ -23,8 +23,8 @@ class ContestController extends BaseController
         $contestInfo = I('get.');//赛事编辑的信息（clickOperate）
         if($contestInfo)$contestInfo = reservationTime($contestInfo);
 
-        $contest = new ContestModel();
-        $contestOrder = new ContestOrderModel();
+        $contest = D('contest');
+        $contestOrder = D('contestOrder');
 
         $nowContest = $contest->contestSelectNow($customer_id);//正在进行赛事 一维
         $conflictContest = $contest->contestSelectConflict($customer_id,$nowContest);//冲突中赛事 二维数组
@@ -47,7 +47,7 @@ class ContestController extends BaseController
     public function clickOperate()
     {
         //按钮操作 编辑 删除
-        $contest = new ContestModel();
+        $contest = D('contest');
         $result = $contest->clickOperate($get = I('get.'));
 
         if(!$result){
@@ -68,7 +68,7 @@ class ContestController extends BaseController
         $data = I('post.');
         if($data)
         {
-            $contest = new ContestModel();
+            $contest = D('contest');
             if($data['contest_id']){
                 //对赛事信息进行修改
                 $contest->editContest($data,$this->customer_id,$this->grade);
@@ -103,28 +103,20 @@ class ContestController extends BaseController
 
         $condition = I('get.');//筛选条件
 
-        if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
-        $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
+        $contest_sn = getContestSn();//获取赛事编码
 
-        $condition['contest_sn'] = $contest_sn;
-
-        $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn),$current=$_GET['current']);//赛事名单列表
+        $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn),$current=$condition['current']);//赛事名单列表
         $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);//获取系、年级、班级
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);//筛选的条件
 
-        $this->assign('deptInfo', $studentInfo['dept']);
-        $this->assign('gradeInfo', $studentInfo['grade']);
-        $this->assign('classInfo', $studentInfo['class']);
-
         $this->assign('title',$contestorder->title);//标题
         $this->assign('status',$contestorder->status);//赛事状态
         $this->assign('valid',$contestorder->valid);//是否过期
 
-        $this->assign('totalNum',$contestorder->totalNum);//总页数
-        $this->assign('pageSize',$contestorder->pageSize);//每页数
-        $this->assign('current',$contestorder->current);//第几页
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);//assign 系、年级、班级
+        $this->assignPageInfo($contestorder->totalNum,$contestorder->pageSize,$contestorder->current);//assign 总页数、每页数、第几页
 
         $this->display('info');
     }
@@ -134,8 +126,7 @@ class ContestController extends BaseController
     {
         $customer_id = $this->customer_id;
 
-        if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
-        $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
+        $contest_sn = getContestSn();//获取赛事编码
 
         $contest = new ContestModel();
         $parent_id = $contest->where(array('contest_sn'=>$contest_sn))->getField('parent_id');
@@ -152,34 +143,24 @@ class ContestController extends BaseController
             $res = $contestorder->contestList($condition,$current=$condition['current']);
             $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);
 
-            $this->assign('_list',$res);
-            $this->assign('condition', $condition);
+            $totalNum = $contestorder->totalNum;$pageSize = $contestorder->pageSize;$current = $contestorder->current;
 
-            $this->assign('deptInfo', $studentInfo['dept']);
-            $this->assign('gradeInfo', $studentInfo['grade']);
-            $this->assign('classInfo', $studentInfo['class']);
-
-            $this->assign('totalNum',$contestorder->totalNum);//总页数
-            $this->assign('pageSize',$contestorder->pageSize);//每页数
-            $this->assign('current',$contestorder->current);//第几页
         }else{//非补考  所有学生的名单
             $user = new UserModel();
             $res = $user->_list(makeCondition($condition,$customer_id,$contest_sn=0),$current=$_GET['current']);
 
-            $deptInfo = $user->getDept($customer_id);//获取系别
-            $gradeInfo = $user->getGrade($customer_id,$condition['dept']);//获取年级
-            $classInfo = $user->getClass($customer_id,$condition['dept'],$condition['grade']);//获取班级
+            $studentInfo = array();
+            $studentInfo['dept'] = $user->getDept($customer_id);//获取系别
+            $studentInfo['grade'] = $user->getGrade($customer_id,$condition['dept']);//获取年级
+            $studentInfo['class'] = $user->getClass($customer_id,$condition['dept'],$condition['grade']);//获取班级
 
-            $this->assign('_list', $res);
-            $this->assign('condition', $condition);
-            $this->assign('deptInfo', $deptInfo);
-            $this->assign('gradeInfo', $gradeInfo);
-            $this->assign('classInfo', $classInfo);
-
-            $this->assign('totalNum',$user->totalNum);//总页数
-            $this->assign('pageSize',$user->pageSize);//每页数
-            $this->assign('current',$user->current);//第几页
+            $totalNum = $user->totalNum;$pageSize = $user->pageSize;$current = $user->current;
         }
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);//assign 系、年级、班级
+        $this->assignPageInfo($totalNum,$pageSize,$current);//assign 总页数、每页数、第几页
 
         $this->display();
     }
@@ -193,8 +174,8 @@ class ContestController extends BaseController
 
             $ids = $data['id'];
 
-            $contest = new ContestModel();
-            $contestorder = new ContestOrderModel();
+            $contest = D('contest');
+            $contestorder = D('contestOrder');
             $res_length = $contest->where(array('contest_sn'=>$contest_sn))->field('length_male,length_female')->find();
             $b = $contestorder->addUser($ids,$contest_sn,$res_length);
             if(!$b) exit('fail');
@@ -217,7 +198,7 @@ class ContestController extends BaseController
             exit('id获取失败');
         }
 
-        $contestOrder = new ContestOrderModel();
+        $contestOrder = D('contestOrder');
         $result = $contestOrder->where($condition)->delete();
 
         if(!$result) exit('服务器错误');
@@ -233,11 +214,7 @@ class ContestController extends BaseController
 
         $condition = $_GET;//筛选条件
 
-        if($_GET['contest_sn']){
-            $_SESSION['contest_sn'] = $_GET['contest_sn'];
-        }
-        $contest_sn = $_SESSION['contest_sn'];
-        $condition['contest_sn'] = $contest_sn;
+        $contest_sn = getContestSn();
 
         $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn),$current=$_GET['current']);
 
@@ -245,16 +222,10 @@ class ContestController extends BaseController
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
-
-        $this->assign('deptInfo', $studentInfo['dept']);
-        $this->assign('gradeInfo', $studentInfo['grade']);
-        $this->assign('classInfo', $studentInfo['class']);
-
         $this->assign('title', $contestorder->title);
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);
+        $this->assignPageInfo($contestorder->totalNum,$contestorder->pageSize,$contestorder->current);
 
-        $this->assign('totalNum',$contestorder->totalNum);//总页数
-        $this->assign('pageSize',$contestorder->pageSize);//每页数
-        $this->assign('current',$contestorder->current);//第几页
 
         $this->display();
     }
@@ -318,32 +289,22 @@ class ContestController extends BaseController
 
         $customer_id = $this->customer_id;
 
-        $condition = $_GET;//筛选条件
+        $condition = I('get.');//筛选条件
 
-        if($_GET['contest_sn']){
-            $_SESSION['contest_sn'] = $_GET['contest_sn'];
-        }
-        $contest_sn = $_SESSION['contest_sn'];
+        $contest_sn = getContestSn();
 
-        $condition['contest_sn'] = $contest_sn;
-
-        $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn),$current=$_GET['current']);
+        $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn),$current=$condition['current']);
 
         $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);
 
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
-
-        $this->assign('deptInfo', $studentInfo['dept']);
-        $this->assign('gradeInfo', $studentInfo['grade']);
-        $this->assign('classInfo', $studentInfo['class']);
-
         $this->assign('title',$contestorder->title);
         $this->assign('outAchieve',$contestorder->outAchieve);
 
-        $this->assign('totalNum',$contestorder->totalNum);//总页数
-        $this->assign('pageSize',$contestorder->pageSize);//每页数
-        $this->assign('current',$contestorder->current);//第几页
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);
+        $this->assignPageInfo($contestorder->totalNum,$contestorder->pageSize,$contestorder->current);
+
 
         $this->display();
     }
@@ -355,14 +316,37 @@ class ContestController extends BaseController
 
         $customer_id = $this->customer_id;
 
-        $condition = $_GET;//筛选条件
-        if($_GET['contest_sn']){
-            $_SESSION['contest_sn'] = $_GET['contest_sn'];
-        }
-        if($_POST){
-            $ids = $_POST;
-            $ids = $ids['id'];
-            $reservationtime = $_POST['reservation-time'];
+        $condition = I('get.');//筛选条件
+        $contest_sn = getContestSn();
+
+        $condition['confirm'] = 0;
+
+        $condition = makeCondition($condition,$customer_id,$contest_sn);//列表筛选条件
+        $condition['up_standard'] = 0;
+        $res = $contestorder->contestList($condition,$current=I('get.current'));
+
+        $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);
+
+        $this->assign('_list',$res);
+        $this->assign('condition', $condition);
+
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);
+        $this->assignPageInfo($contestorder->totalNum,$contestorder->pageSize,$contestorder->current);
+
+        $this->assign('title',$contestorder->title);
+        $this->assign('outAchieve',$contestorder->outAchieve);
+        $this->assign('isFather',$contestorder->isFather);
+
+        $this->display();
+    }
+
+    //添加补考人员
+    public function addMakeUp()
+    {
+        $contestorder = new ContestOrderModel();
+        if($data = I('post.')){
+            $ids = $data['id'];
+            $reservationtime = $data['reservation-time'];
 
             //创建补考 和 补考赛事名单
             $b = $contestorder->makeUpStudent($ids,$_SESSION['contest_sn'],$reservationtime);
@@ -371,33 +355,6 @@ class ContestController extends BaseController
                 $this->redirect('index');
             }
         }
-        $contest_sn = $_SESSION['contest_sn'];
-
-        $condition['contest_sn'] = $contest_sn;
-        $condition['confirm'] = 0;
-
-        $condition = makeCondition($condition,$customer_id,$contest_sn);//列表筛选条件
-        $condition['up_standard'] = 0;
-        $res = $contestorder->contestList($condition,$current=$_GET['current']);
-
-        $studentInfo = $contestorder->getStudentInfo($condition,$customer_id,$contest_sn);
-
-        $this->assign('_list',$res);
-        $this->assign('condition', $condition);
-
-        $this->assign('deptInfo', $studentInfo['dept']);
-        $this->assign('gradeInfo', $studentInfo['grade']);
-        $this->assign('classInfo', $studentInfo['class']);
-        
-        $this->assign('title',$contestorder->title);
-        $this->assign('outAchieve',$contestorder->outAchieve);
-        $this->assign('isFather',$contestorder->isFather);
-
-        $this->assign('totalNum',$contestorder->totalNum);//总页数
-        $this->assign('pageSize',$contestorder->pageSize);//每页数
-        $this->assign('current',$contestorder->current);//第几页
-
-        $this->display();
     }
 
     //获取系别

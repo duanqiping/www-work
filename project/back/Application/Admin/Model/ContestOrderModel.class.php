@@ -162,7 +162,7 @@ class ContestOrderModel extends Model{
             }else{
                 $res[$i]['pass_score'] = $res_contest['pass_score_female'];
             }
-            $res[$i]['time'] = $time->timeChange($res[$i]['time']);
+            $res[$i]['time'] = $time->timeChange($res[$i]['time']);//将时间转换成 天 时 分秒形式
             $res[$i]['achieve'] = $this->scoreStatus($res[$i]['sign'],$res[$i]['time'],$res[$i]['pass_score']);//成绩状态
         }
         $this->status = $res_contest['status'];
@@ -244,6 +244,7 @@ class ContestOrderModel extends Model{
         }
         $this->startTrans();//开启事物
         $uid = $contest->add($res);//生成一条新赛事
+
         if(!$uid){
             $this->error = '补考赛事生成失败';
             return false;
@@ -256,8 +257,6 @@ class ContestOrderModel extends Model{
         $res_users = $this->where($map)
             ->field("{$res['contest_sn']} as contest_sn,$add_time as add_time, customer_id,user_id,name,studentId,sex,dept,grade,class,length,mode")
             ->select();
-
-//        my_print($res_users);
 
         $b = $this->addAll($res_users);//补考人员名单
 

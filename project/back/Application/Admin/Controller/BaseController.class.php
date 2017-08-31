@@ -43,21 +43,19 @@ class BaseController extends \Think\Controller
         return  ConsumerHandleModel::getInstance($flag);
     }
 
-    //获取学校 系、年级、班级筛选条件
-    public function selectCondition(&$model,$condition,$uid,$content_sn='')
+    //输出学校客户信息
+    public function assignSchoolInfo($depts,$grades,$classes)
     {
-
-        $studentInfo = array();
-        if($model instanceof UserModel){
-            $studentInfo['deptInfo'] = $model->getDept($uid);//获取系别
-//            $res2 = $model->getDept($uid);//获取系别  打印东西为空
-
-            my_print($studentInfo);
-            $studentInfo['gradeInfo'] = $model->getGrade($uid,$condition['dept']);//获取年级
-            $studentInfo['classInfo'] = $model->getClass($uid,$condition['dept'],$condition['grade']);//获取班级
-        }
-
-        return $studentInfo;
+        $this->assign('deptInfo', $depts);//系别
+        $this->assign('gradeInfo', $grades);//年级
+        $this->assign('classInfo', $classes);//班级
+    }
+    //输出分页信息
+    public function assignPageInfo($totalNum,$pageSize,$current)
+    {
+        $this->assign('totalNum',$totalNum);//总页数
+        $this->assign('pageSize',$pageSize);//每页数
+        $this->assign('current',$current);//第几页
     }
 
     //是否为管理员登陆

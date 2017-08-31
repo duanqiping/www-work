@@ -38,7 +38,7 @@ function getTimeBegin($time_flag)
     return $begin_time;
 }
 
-//筛选条件
+//筛选条件 处理
 function makeCondition($data,$uid,$contest_sn)
 {
     $condition = array();
@@ -91,4 +91,13 @@ function reservationTime($data)
     unset($data['end_time']);
 
     return $data;
+}
+
+//获取 contest_sn
+function getContestSn()
+{
+    if(I('get.contest_sn')) $_SESSION['contest_sn']=I('get.contest_sn');
+    $contest_sn = $_SESSION['contest_sn']?$_SESSION['contest_sn']:I('get.contest_sn');
+
+    return $contest_sn;
 }

@@ -38,12 +38,7 @@ class MasterController extends Controller{
     //录入成绩(平时训练 单圈单圈录入)
     public function add()
     {
-//        foreach($_POST as $k=>$v){
-//            file_put_contents('log.txt',$k.'--'.$v."\n",FILE_APPEND );
-//        }
-//        sendSuccess('success');
-
-        $data = $_POST;
+        $data = I('post.');
         $data['begin_time'] = intval($data['begin_time']);
         $data['end_time'] = intval($data['end_time']);
         $data['time'] = intval($data['time']);
@@ -69,7 +64,7 @@ class MasterController extends Controller{
     //录入 比赛\赛事 成绩
     public function addContest()
     {
-        $data = $_POST;
+        $data = I('post.');
 
         $contest = new ContestModel();
         $result = $contest->getContestStandard($data['contest_sn'],$data['user_id'],$data['time']);//判断是否合格
@@ -90,8 +85,8 @@ class MasterController extends Controller{
     public function getContestScore()
     {
         $condition = array();
-        $condition['customer_id'] = $customer = $_GET['customer_id'];
-        $condition['contest_sn'] = $contest_sn = $_GET['contest_sn'];
+        $condition['customer_id'] = $customer = I('get.customer_id');
+        $condition['contest_sn'] = $contest_sn = I('get.contest_sn');
         $condition['time'] = array('gt',0);
 
         $score = new ContestOrderModel();
@@ -123,7 +118,7 @@ class MasterController extends Controller{
     //返回用户名
     public function getUserInfo()
     {
-        $code = $_GET['code'];
+        $code = I('get.code');//手环编码
 
         $user = new UserModel();
         $res = $user->getUserName($code);
@@ -138,11 +133,12 @@ class MasterController extends Controller{
     public function getContest()
     {
         $condition = array();
-        $contest_sn = $_GET['contest_sn'];
-        $customer_id = $_GET['customer_id'];
 
-        $condition['contest_sn'] = $_GET['contest_sn'];
-        $condition['customer_id'] = $_GET['customer_id'];
+        $contest_sn = I('get.contest_sn');
+        $customer_id = I('get.customer_id');
+
+        $condition['contest_sn'] = $contest_sn;
+        $condition['customer_id'] = $customer_id;
 
         $contestOrder = new ContestOrderModel();
         $res = $contestOrder->getContestOrder($contest_sn,$customer_id);

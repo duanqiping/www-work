@@ -36,14 +36,13 @@ class DeviceController extends BaseController{
         $devicems = new DeviceMsModel();
 
         $condition = $devicems->condition($_GET);
-        if($_GET){
-            $select_condition['city'] = $_GET['city'];
-            $select_condition['type'] = $_GET['type'];
-            $select_condition['name'] = $_GET['name'];
-        }
 
         $condition_string = '';
-        if($_GET){
+        if($get = I('get.')){
+            $select_condition['city'] = $get['city'];
+            $select_condition['type'] = $get['type'];
+            $select_condition['name'] = $get['name'];
+
             foreach($_GET as $v){
                 $condition_string .=' '.$v;
             }
@@ -53,11 +52,11 @@ class DeviceController extends BaseController{
 
         $this->assign('_list',$data);
         $this->assign('condition_string',$condition_string);
-        $this->assign('city',$_GET['city']);//城市名
-        $this->assign('name',$_GET['name']);//客户名
-        $this->assign('type',$_GET['type']);//类别
+        $this->assign('city',$get['city']);//城市名
+        $this->assign('name',$get['name']);//客户名
+        $this->assign('type',$get['type']);//类别
 
-        $this->assign('customer_id',$devicems->getCustomerId($_GET['name']));
+        $this->assign('customer_id',$devicems->getCustomerId($get['name']));
         $this->assign('grade',$grade);
         if($grade == 2){
             $this->assign('agent_id',$this->uid);
@@ -72,9 +71,10 @@ class DeviceController extends BaseController{
     //ajax 添加设备(该操作只能有系统后台管理员操作)
     public function addDevice()
     {
-        $customer_id = $_GET['customer_id'];
-        $agent_id = $_GET['agent_id'];
-        $DeviceNum = $_GET['DeviceNum'];
+        $get = I('get.');
+        $customer_id = $get['customer_id'];
+        $agent_id = $get['agent_id'];
+        $DeviceNum = $get['DeviceNum'];
 
         file_put_contents('log.txt',$customer_id.'--'.$DeviceNum.'--'.$agent_id."\n",FILE_APPEND );
 
@@ -90,12 +90,10 @@ class DeviceController extends BaseController{
         $province = $_GET['province'];
 
         $s= new AgentModel();
-//        $condition['parent_id'] = $_SESSION['user']['id'];
         $condition['province'] = $province;
 
         $list = $s->field('agent_id,city')->where($condition)->select();
 
-//        file_put_contents('log.txt',$province.$s->_sql()."\n",FILE_APPEND );
         echo json_encode($list);
     }
 
@@ -108,7 +106,6 @@ class DeviceController extends BaseController{
 
         if($type == '学校') $condition['type'] = 1;
         else $condition['type'] = 2;
-//        file_put_contents('log.txt',$type."--111\n",FILE_APPEND );
 
         $list = $s->field('customer_id,name')->where($condition)->select();
 //        file_put_contents('log.txt',$s->_sql()."\n",FILE_APPEND );

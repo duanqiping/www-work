@@ -62,7 +62,7 @@ class RankController extends BaseController{
     public function getRank()
     {
         $string = '';
-        $condition = $_GET;
+        $condition = I('get.');
         foreach($condition as $k=>$v){
             $string .=$k.'->'.$v;
         }

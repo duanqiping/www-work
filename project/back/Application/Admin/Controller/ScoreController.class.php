@@ -19,13 +19,12 @@ class ScoreController extends BaseController{
 
     public function index()
     {
-        $res = array();
-
         $customer_id = $this->customer_id;
 
-        $type = $_GET['type']?$_GET['type']:'平时成绩';
-        unset($_GET['type']);
-        $condition = $_GET;//筛选条件
+        $condition = I('get.');//筛选条件
+
+        $type = I('get.type')?I('get.type'):'平时成绩';
+        unset($condition['type']);
 
         $studentInfo = array();
         if($type == '平时成绩'){
@@ -34,26 +33,21 @@ class ScoreController extends BaseController{
 
             $socre_table = $customer->where(array('customer_id'=>$customer_id))->getField('score_table');//获取对应的成绩表
 
-
             $studentInfo['dept'] = $score->getDept($socre_table);//获取系别
             $studentInfo['grade'] = $score->getGrade($socre_table,$condition['dept']);//获取年级
             $studentInfo['class'] = $score->getClass($socre_table,$condition['dept'],$condition['grade']);//获取班级
 
             $res = $score->_list(makeCondition($condition,$this->uid,$contest_sn = 0),$current=$_GET['current'],$socre_table);
 
-            $this->assign('totalNum',$score->totalNum);//总页数
-            $this->assign('pageSize',$score->pageSize);//每页数
-            $this->assign('current',$score->current);//第几页
-        }else if($type == '考试\赛事成绩'){
+            $totalNum = $score->totalNum;$pageSize=$score->pageSize;$current=$score->current;
+        }else{
 
             $contestorder = new ContestOrderModel();
             $studentInfo = $contestorder->getStudentInfo($condition,$customer_id);//获取系、年级、班级
 
             $res = $contestorder->contestList(makeCondition($condition,$customer_id,$contest_sn = 0),$current=$_GET['current']);
 
-            $this->assign('totalNum',$contestorder->totalNum);//总页数
-            $this->assign('pageSize',$contestorder->pageSize);//每页数
-            $this->assign('current',$contestorder->current);//第几页
+            $totalNum = $contestorder->totalNum;$pageSize=$contestorder->pageSize;$current=$contestorder->current;
         }
 
         $condition['type'] = $type;
@@ -61,9 +55,8 @@ class ScoreController extends BaseController{
         $this->assign('_list',$res);
         $this->assign('condition', $condition);
 
-        $this->assign('deptInfo', $studentInfo['dept']);
-        $this->assign('gradeInfo', $studentInfo['grade']);
-        $this->assign('classInfo', $studentInfo['class']);
+        $this->assignSchoolInfo($studentInfo['dept'],$studentInfo['grade'],$studentInfo['class']);
+        $this->assignPageInfo($totalNum,$pageSize,$current);
 
         $this->display();
     }

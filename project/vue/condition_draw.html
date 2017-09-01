@@ -57,29 +57,30 @@
     </template>
     <br/>
 
-    <input id="loginType" type="submit" value="username || email" >
-    <!--<button id="loginType" onclick="changeType()">Toggle login type</button>-->
+    <input id="loginType" type="submit" v-bind:name="loginType"  v-on:click="changeType" value="Toggle login type" >
+
+    <h1 v-show="ok">Hello!</h1>
 </div>
 
 
 </body>
 <script type="text/javascript">
-//    var  loginType = 'email';
-
-//    function changeType()
-//    {
-//        if(loginType == 'username')
-//        {
-//            loginType = 'email';
-//        }else{
-//            loginType = 'username';
-//        }
-//    }
 
     var app6 = new Vue({
         el: '#app-6',
         data: {
-            loginType: $("#loginType").val()
+            loginType: 'email',
+            ok:false
+        },
+        methods: {
+            changeType: function () {
+                if(this.loginType == 'username')
+                {
+                    this.loginType = 'email';
+                }else{
+                    this.loginType = 'username';
+                }
+            }
         }
     });
 
